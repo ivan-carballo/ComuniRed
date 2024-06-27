@@ -7,7 +7,7 @@ import { sha256 } from 'js-sha256';
 
 
 
-function Analisis() {
+function ComuniWall() {
 
 
 
@@ -16,7 +16,7 @@ function Analisis() {
     return (
         <div id='index-cuerpo'>
             <Navbar />
-            <h2>Analisis</h2>
+            <h2>ComuniWall</h2>
 
 
 
@@ -28,5 +28,5 @@ function Analisis() {
 
 
 export {
-    Analisis
+    ComuniWall
 }

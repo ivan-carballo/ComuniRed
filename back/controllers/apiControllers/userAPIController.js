@@ -1,36 +1,36 @@
-import Controller from "../controllers/Controller.js";
+import userController from "../controllers/userController.js";
 
 const getAll = async(req,res)=>{
-    const propiedad = await propiedadController.getAll();
+    const propiedad = await userController.getAll();
     res.json({data:propiedad})
 }
 
 const getById = async (req,res) =>{
     const id = req.params.id
-    const propiedad = await propiedadController.getById(id);
+    const propiedad = await userController.getById(id);
     res.json({data:propiedad});
 }
 
 const getByProperty=async(req,res)=>{
     const {property,value}=req.query;
-    const propiedad = await propiedadController.getByProperty(property,value);
+    const propiedad = await userController.getByProperty(property,value);
     res.json({data:propiedad})
 }
 
 const create = async(req,res)=>{
-    const propiedad = await propiedadController.create(req.body);
+    const propiedad = await userController.create(req.body);
     res.json({data:propiedad})
 }
 
 const update = async(req,res)=>{
     const id = eq.params.id;
-    const propiedad = await propiedadController.update(id,req.body);
+    const propiedad = await userController.update(id,req.body);
     res.json({data:propiedad})
 }
 
 const remove = async(req,res)=>{
     const id = req.params.id;
-    const propiedad = await propiedadController.remove(id);
+    const propiedad = await userController.remove(id);
     res.json({data:propiedad})
 }
 

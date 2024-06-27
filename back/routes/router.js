@@ -4,11 +4,11 @@ const router  =  Router();
 
 
 
-import Router from "./Router.js";
+import userRouter from "./userRouter.js";
 
 
 
-router.use("/", Router);
+router.use("/user", userRouter);
 
 
 

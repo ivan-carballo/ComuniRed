@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
 
 
-async function getDato() {
-  let dato = await fetch(`${API_URL}/dato`);
+async function getUser() {
+  let dato = await fetch(`${API_URL}/user`);
   dato = await dato.json();
   return (dato)
 }
 
 
-async function getDatoByID(id) {
+async function getUserByID(id) {
   let dato = await fetch(`${API_URL}/${id}`);
   dato = await dato.json();
   return (dato)
@@ -16,8 +16,8 @@ async function getDatoByID(id) {
 
 
 
-async function datoCreate(data) {
-    fetch(`${API_URL}`, data)
+async function UserCreate(data) {
+    fetch(`${API_URL}/user`, data)
     .then(data => {
         if (!data.ok) {
           throw Error(data.status);
@@ -33,7 +33,7 @@ async function datoCreate(data) {
 
 
 
-  async function datoDelete(id) {
+  async function userDelete(id) {
     try {
       const response = await fetch(`${API_URL}/remove/${id}`, {
         method: 'POST',
@@ -43,18 +43,18 @@ async function datoCreate(data) {
       });
   
       if (!response.ok) {
-        throw new Error(`Error al eliminar la dato (HTTP ${response.status})`);
+        throw new Error(`Error al eliminar el user (HTTP ${response.status})`);
       }
   
       const result = await response.json();
-      console.log('dato eliminada:', result);
+      console.log('user eliminada:', result);
     } catch (error) {
-      console.error('Error al eliminar la dato:', error);
+      console.error('Error al eliminar el user:', error);
     }
   }
 
 
-  async function datoUpdate(id, data) {
+  async function userUpdate(id, data) {
     fetch(`${API_URL}/update/${id}`, data)
     .then(data => {
         if (!data.ok) {
@@ -72,9 +72,9 @@ async function datoCreate(data) {
 
 
   export {
-    getDato,
-    getDatoByID,
-    datoCreate,
-    datoDelete,
-    datoUpdate
+    getUser,
+    getUserByID,
+    UserCreate,
+    userDelete,
+    userUpdate
   }

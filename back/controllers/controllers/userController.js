@@ -1,9 +1,9 @@
-import Model from "../../models/Model.js";
+import userModel from "../../models/userModel.js";
 
 
 const getAll = async(userId=null)=> {
     try {
-            const datos = await Model.find();
+            const datos = await userModel.find();
             return datos;
     } catch (error) {
         console.error(error);
@@ -13,7 +13,7 @@ const getAll = async(userId=null)=> {
 
 const getById = async(id) =>{
     try {
-            const datos = await Model.findById(id);
+            const datos = await userModel.findById(id);
             return datos;
     } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ const getById = async(id) =>{
 
 const getByProperty = async(property,value) =>{
     try {
-            const datos = await Model.find({[property]:value})
+            const datos = await userModel.find({[property]:value})
             return datos;
     } catch (error) {
         return null;
@@ -33,7 +33,7 @@ const getByProperty = async(property,value) =>{
 
 const create = async(data) =>{
     try {
-        const datos = await Model.create(data);
+        const datos = await userModel.create(data);
         return datos;
     } catch (error) {
         console.error(error); 
@@ -43,8 +43,8 @@ const create = async(data) =>{
 
 const update = async(id,data) =>{
     try {
-        const olddatos = await Model.findByIdAndUpdate(id,data);
-        const datos = await Model.findById(id);
+        const olddatos = await userModel.findByIdAndUpdate(id,data);
+        const datos = await userModel.findById(id);
         console.log("datos",datos);
         return datos;
     } catch (error) {
@@ -55,7 +55,7 @@ const update = async(id,data) =>{
 
 const remove = async(id) =>{
     try {
-        const datos = await Model.findByIdAndDelete(id);
+        const datos = await userModel.findByIdAndDelete(id);
         return datos;
     } catch (error) {
         console.error(error);

@@ -1,39 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Root } from './root.jsx'
-import { Escaner } from "./pages/escaner.jsx";
+import { ComuniWall } from "./pages/comuniwall.jsx";
 import { Login } from "./pages/login.jsx";
-import { Analisis } from "./pages/analisis.jsx";
 
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      //element: <Root />,
-      children: [
+  
         {
           path: "/",
-          element: <Root />
-        },
-
-        {
-          path: "/escaner",
-          element: <Escaner />
-        },
-
-        {
-          path: "/analisis",
-          element: <Analisis />
-        },
-
-        {
-          path: "/login",
           element: <Login />
         },
 
+        {
+          path: "/comuniwall",
+          element: <ComuniWall />
+        },
 
-      ]
-    }    
-  ]);
+      ]);
 
 
 export default router;
