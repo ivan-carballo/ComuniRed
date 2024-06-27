@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import { API_URL } from "./API.js"
 
 
 async function getUser() {
@@ -16,7 +16,7 @@ async function getUserByID(id) {
 
 
 
-async function UserCreate(data) {
+async function userCreate(data) {
     fetch(`${API_URL}/user`, data)
     .then(data => {
         if (!data.ok) {
@@ -74,7 +74,7 @@ async function UserCreate(data) {
   export {
     getUser,
     getUserByID,
-    UserCreate,
+    userCreate,
     userDelete,
     userUpdate
   }

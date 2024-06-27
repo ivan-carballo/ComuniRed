@@ -1,13 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { getUser } from "../../api/userAPI";
 
 
 
 function LoginForm() {
 
 
-    async function validar() {
-        // Aqui para comprobar credenciales y loguearse
+    async function validar(e) {
+        const formRuta = e.target.form
+        const formEmail = formRuta[0].value
+        const formPassword = formRuta[1].value
     }
 
 

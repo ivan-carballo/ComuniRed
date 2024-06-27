@@ -2,8 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/mongo.js";
 import router from "./routes/router.js";
-import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "../swagger.json" assert { type: 'json' };
 import cors from "cors"
 
 
@@ -15,8 +13,6 @@ app.use(cors())
 app.use(express.json()); 
 
 connectDB();
-
-app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 app.use(express.static("public")); // permite mostrar archivos en la carpeta public
 
