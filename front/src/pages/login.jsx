@@ -4,13 +4,25 @@ import Cookies from 'js-cookie';
 import { sha256 } from 'js-sha256';
 import '../saas/login.scss'
 
-
+import { LoginForm } from "../componentes/login/login.jsx";
+import { RegisterForm } from "../componentes/login/register.jsx";
 
 
 
 function Login() {
+    const [form, setForm] = useState(<RegisterForm />)
+    const [buttonValue, setButtonValue] = useState('Login')
 
 
+    async function cambiarForm(e) {
+        if (e.target.value === 'Login') {
+            setForm(<LoginForm />) 
+            setButtonValue('Register')
+        } else {
+            setForm(<RegisterForm />) 
+            setButtonValue('Login')
+        }
+    }
 
 
 
@@ -24,7 +36,9 @@ function Login() {
 
             <h3>¡Regístrate ahora y forma parte de la comunidad de ComuniRed!</h3>
 
+            <input type="button" value={buttonValue} onClick={cambiarForm} />
 
+            {form}
 
 
 
