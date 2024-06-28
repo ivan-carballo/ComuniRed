@@ -9,9 +9,30 @@ function LoginForm() {
 
 
     async function validar(e) {
+        const delete_formEmail = document.getElementById('login-email')
+        const delete_formPassword = document.getElementById('login-password')
+
         const formRuta = e.target.form
         const formEmail = formRuta[0].value
         const formPassword = formRuta[1].value
+
+        const userAll = await getUser()
+
+        const userFilter = userAll.data.filter((data) => data.email === formEmail)
+
+        if (formEmail.length < 1 || formPassword.length < 1) {
+            setAviso('Debe rellenar todos los campos para poder iniciar sesion')
+        } else if (userFilter.length == 1) {
+            // El email coincide
+            // Ahora hay que revisar la contraseña
+        } else if (userFilter.length == 0) {
+            setAviso('El email no esta registrado en nuestro sistema')
+            delete_formPassword.value = ''
+        } else {
+            setAviso('Ha ocurrido un error inesperado, recargue la pagina y vuelva a intentarlo')
+            delete_formEmail.value = ''
+            delete_formPassword.value = ''
+        }
     }
 
 
@@ -20,8 +41,8 @@ function LoginForm() {
             <div id='form-completo'>
                 <h5>{aviso}</h5>
                 <form id='form'>
-                    <input type="email" placeholder='Email' name="" id="" />
-                    <input type="password" placeholder='Password' name="" id="" />
+                    <input type="email" placeholder='Email' id="login-email" />
+                    <input type="password" placeholder='Password' id="login-password" />
                     <input type="button" value="Login" onClick={validar} />
                 </form>
             </div>
