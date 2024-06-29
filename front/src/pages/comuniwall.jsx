@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
-import Cookies from 'js-cookie';
-import { sha256 } from 'js-sha256';
+import { useNavigate } from "react-router-dom";
+import { activeLogin } from '../funciones/activeLogin.js'
 
 
 
 
 
 function ComuniWall() {
+    const navigate = useNavigate();
 
 
+    
+    setInterval(() => {
+        activeLogin
+    }, 60000);
 
 
 
