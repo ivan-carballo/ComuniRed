@@ -27,3 +27,13 @@ app.use("/", router);
 app.listen(CONTAINER_PORT ,()=>{
     console.log("Aplicacion en marcha en el puerto "+process.env.APP_PORT);
 })
+
+/*
+
+Estructura para decodificar el token
+
+    const token = req.headers.authorization.split(' ')[1]
+    const decoded - jwt.verify(token, secretKey)
+    const userID = decoded.userID
+
+*/

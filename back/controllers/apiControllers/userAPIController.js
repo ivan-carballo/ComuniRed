@@ -33,7 +33,7 @@ const login = async(req,res)=> {
     const userFind = await userController.getByProperty('email', datos.email)
 
     const payload = {'userID': userFind[0]._id, 'username':userFind[0].username, 'pass':userFind[0].password}
-    const token = jwt.sign({username: userFind[0].username}, 'JWT_KEY', {expiresIn: '1h'})
+    const token = jwt.sign({username: userFind[0].username}, 'JWT_KEY', {expiresIn: '1m'})
     res.json({data:token});
 }
 

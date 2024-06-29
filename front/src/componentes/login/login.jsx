@@ -37,7 +37,7 @@ function LoginForm() {
                     body: JSON.stringify(userArrayLogin),
                     };   
                     
-                    const userCrear = await login(data)  
+                    const userLogin = await login(data) 
 
             } else {
                 setAviso('Su email y/o contraseña no son correctas')

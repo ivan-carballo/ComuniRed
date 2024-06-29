@@ -1,4 +1,5 @@
 import { API_URL } from "./API.js"
+import { guardarToken, obtenerToken } from "../funciones/token.js";
 
 
 async function getUser() {
@@ -24,9 +25,9 @@ async function userCreate(data) {
          }
          return data.json();
         }).then(update => {
-        console.log(update);
+        //console.log(update);
         }).catch(e => {
-        console.log(e);
+        //console.log(e);
         });
   }
 
@@ -40,9 +41,10 @@ async function userCreate(data) {
          }
          return data.json();
         }).then(update => {
-        console.log(update);
+        //console.log(update);
+        guardarToken(update.data)
         }).catch(e => {
-        console.log(e);
+        //console.log(e);
         });
   }
 
