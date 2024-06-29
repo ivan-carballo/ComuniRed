@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import Cookies from 'js-cookie';
 import { sha256 } from 'js-sha256';
+import { obtenerToken } from "../funciones/token.js";
 import '../saas/login.scss'
 
 import { LoginForm } from "../componentes/login/login.jsx";

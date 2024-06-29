@@ -1,5 +1,5 @@
 function guardarToken(token) {
-    document.cookie = `token=${token}; path=/; secure; samesite=strict;`;
+    document.cookie = `token=${token}; expires=${new Date(new Date().getTime() + 30 * 60 * 1000).toUTCString()}; path=/; secure; samesite=strict;`;
   }
   
 function obtenerToken() {
@@ -9,16 +9,14 @@ for (let cookie of cookies) {
     const [name, value] = cookie.trim().split('=');
     
     if (name === 'token') {
-    return value;
+        return value;
     }
 }
 
-return null;
+    return null;
 }
   
-  guardarToken('miToken123');
-  
-  const token = obtenerToken();
+
   
 export {
     guardarToken, 
