@@ -6,15 +6,13 @@ import { Navigate } from "react-router-dom";
 
 
 
-
-
-function ComuniWall() {
+function UserPerfil() {
     const navigate = useNavigate()
 
     const [recarga, setRecarga] = useState(false)
 
 
-    
+
 
     useEffect(() => {
         if (recarga) {
@@ -34,22 +32,16 @@ function ComuniWall() {
 
 
 
-
-
+    
     return (
-        <div id='index-cuerpo'>
+        <>
             <Navbar />
-            <h2>ComuniWall</h2>
-
-
-
-        </div>
+            <h1>Perfil de usuario</h1>
+        </>
     )
 }
 
 
-
-
 export {
-    ComuniWall
+    UserPerfil
 }
