@@ -13,12 +13,21 @@ function UserPerfil() {
 
 
 
+    comprobacionToken()
+    async function comprobacionToken() {
+        const comprobarToken = await obtenerToken()
+        if (comprobarToken == null) {
+            navigate('/')
+        }
+    }
+    
 
     useEffect(() => {
         if (recarga) {
             const token = obtenerToken()
 
             if (token === null) {
+                document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
                 navigate("/")
             }
             setRecarga(false)
