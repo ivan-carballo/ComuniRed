@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
-import { activeLogin } from '../funciones/activeLogin.js'
+import { obtenerToken } from "../funciones/token.js";
 
 
 
 
 
 function ComuniWall() {
-    const navigate = useNavigate();
 
 
     
     setInterval(() => {
-        activeLogin
+        const token = obtenerToken()
+
+        if (token === null) {
+            navigate("/")
+        }
     }, 60000);
 
 

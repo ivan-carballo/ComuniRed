@@ -23,6 +23,7 @@ const Navbar = () => {
         <div id='navbar-global'>
             <nav>
                     <NavLink to="/comuniwall" className='link'>ComuniWall</NavLink>
+                    <NavLink to="/user" className='link'>Perfil</NavLink>
                     <NavLink to="/" className='link' onClick={logout}>Logout</NavLink>
             </nav>
             <Outlet />
