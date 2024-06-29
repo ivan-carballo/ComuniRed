@@ -25,7 +25,7 @@ function LoginForm() {
             setAviso('Debe rellenar todos los campos para poder iniciar sesion')
         } else if (userFilter.length == 1) {
 
-            //if (userFilter[0].password === sha256(formPassword)) {
+            if (userFilter[0].password === sha256(formPassword)) {
 
                 const userArrayLogin = {'email':formEmail}
 
@@ -37,11 +37,11 @@ function LoginForm() {
                     body: JSON.stringify(userArrayLogin),
                     };   
                     
-                    const userCrear = await login(data)    
+                    const userCrear = await login(data)  
 
-           // } else {
-          //      setAviso('Su email y/o contraseña no son correctas')
-            //}
+            } else {
+                setAviso('Su email y/o contraseña no son correctas')
+            }
 
         } else if (userFilter.length == 0) {
             setAviso('Su email y/o contraseña no son correctas')

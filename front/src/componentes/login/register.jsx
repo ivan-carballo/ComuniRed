@@ -1,4 +1,5 @@
 import React from "react";
+import sha256 from 'js-sha256'
 import { useState, useEffect, useContext } from "react";
 import { getUser, userCreate } from "../../api/userAPI";
 
@@ -23,8 +24,6 @@ function RegisterForm() {
         const usersAll = await getUser()
         const emailFiltrar = usersAll.data.filter((data) => data.email === formEmail)
         const userFiltrar = usersAll.data.filter((data) => data.username === formUsername)
-        //const emailFiltrar = ''
-        //const userFiltrar = ''
 
         if (formUsername.length < 1 || formEmail.length < 1 || formPassword.length < 1 || formRepeatPassword.length < 1) {
             setAviso('Debes rellenar todos los campos')
@@ -47,7 +46,7 @@ function RegisterForm() {
         } else {
             setAviso('Su usuario ha sido creado correctamente')
             
-            const userArrayNew = {'username':formUsername, 'email':formEmail, 'password':formPassword, 'role':'user'}
+            const userArrayNew = {'username':formUsername, 'email':formEmail, 'password':sha256(formPassword), 'role':'user'}
 
             const data = {
                 method: 'POST',
