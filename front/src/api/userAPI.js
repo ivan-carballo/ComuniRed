@@ -9,7 +9,7 @@ async function getUser() {
 
 
 async function getUserByID(id) {
-  let dato = await fetch(`${API_URL}/${id}`);
+  let dato = await fetch(`${API_URL}/user/${id}`);
   dato = await dato.json();
   return (dato)
 }
@@ -31,11 +31,26 @@ async function userCreate(data) {
   }
 
 
+  
+  async function login(data) {
+    fetch(`${API_URL}/user/login`, data)
+    .then(data => {
+        if (!data.ok) {
+          throw Error(data.status);
+         }
+         return data.json();
+        }).then(update => {
+        console.log(update);
+        }).catch(e => {
+        console.log(e);
+        });
+  }
+
 
 
   async function userDelete(id) {
     try {
-      const response = await fetch(`${API_URL}/remove/${id}`, {
+      const response = await fetch(`${API_URL}/user/remove/${id}`, {
         method: 'POST',
         headers: { 
           'Content-type': 'application/json'
@@ -55,7 +70,7 @@ async function userCreate(data) {
 
 
   async function userUpdate(id, data) {
-    fetch(`${API_URL}/update/${id}`, data)
+    fetch(`${API_URL}/user/update/${id}`, data)
     .then(data => {
         if (!data.ok) {
           throw Error(data.status);
@@ -75,6 +90,7 @@ async function userCreate(data) {
     getUser,
     getUserByID,
     userCreate,
+    login,
     userDelete,
     userUpdate
   }

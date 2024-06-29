@@ -1,4 +1,9 @@
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
 import userController from "../controllers/userController.js";
+
+dotenv.config();
+
 
 const getAll = async(req,res)=>{
     const propiedad = await userController.getAll();
@@ -22,6 +27,16 @@ const create = async(req,res)=>{
     res.json({data:propiedad})
 }
 
+const login = async(req,res)=> {
+    const datos = req.body;
+    
+    const userFind = await userController.getByProperty('email', datos.email)
+
+    const payload = {'userID': userFind[0]._id, 'username':userFind[0].username, 'pass':userFind[0].password}
+    const token = jwt.sign({username: userFind[0].username}, 'JWT_KEY', {expiresIn: '1h'})
+    res.json({data:token});
+}
+
 const update = async(req,res)=>{
     const id = eq.params.id;
     const propiedad = await userController.update(id,req.body);
@@ -39,6 +54,7 @@ export default{
     getById,
     getByProperty,
     create,
+    login,
     update,
     remove
 }

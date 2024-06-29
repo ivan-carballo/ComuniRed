@@ -10,6 +10,7 @@ router.post("/",userAPIController.create);
 router.post("/find",userAPIController.getByProperty);
 router.post("/remove/:id",userAPIController.remove);
 router.post("/update/:id",userAPIController.update);
+router.post("/login", userAPIController.login);
 
 
 router.get("/",userAPIController.getAll);

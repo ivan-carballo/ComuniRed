@@ -1,6 +1,7 @@
 import React from "react";
+import { sha256 } from 'js-sha256'
 import { useState, useEffect } from "react";
-import { getUser } from "../../api/userAPI";
+import { getUser, login } from "../../api/userAPI";
 
 
 
@@ -23,10 +24,27 @@ function LoginForm() {
         if (formEmail.length < 1 || formPassword.length < 1) {
             setAviso('Debe rellenar todos los campos para poder iniciar sesion')
         } else if (userFilter.length == 1) {
-            // El email coincide
-            // Ahora hay que revisar la contraseña
+
+            //if (userFilter[0].password === sha256(formPassword)) {
+
+                const userArrayLogin = {'email':formEmail}
+
+                const data = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userArrayLogin),
+                    };   
+                    
+                    const userCrear = await login(data)    
+
+           // } else {
+          //      setAviso('Su email y/o contraseña no son correctas')
+            //}
+
         } else if (userFilter.length == 0) {
-            setAviso('El email no esta registrado en nuestro sistema')
+            setAviso('Su email y/o contraseña no son correctas')
             delete_formPassword.value = ''
         } else {
             setAviso('Ha ocurrido un error inesperado, recargue la pagina y vuelva a intentarlo')
