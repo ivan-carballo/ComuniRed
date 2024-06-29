@@ -2,10 +2,13 @@ import React from "react";
 import { sha256 } from 'js-sha256'
 import { useState, useEffect } from "react";
 import { getUser, login } from "../../api/userAPI";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 function LoginForm() {
+    const navigate = useNavigate();
     const [aviso, setAviso] = useState('')
 
 
@@ -38,6 +41,7 @@ function LoginForm() {
                     };   
                     
                     const userLogin = await login(data) 
+                    navigate('/comuniwall')
 
             } else {
                 setAviso('Su email y/o contraseña no son correctas')

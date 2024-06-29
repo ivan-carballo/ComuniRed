@@ -5,7 +5,7 @@ import { sha256 } from 'js-sha256';
 import { obtenerToken } from "../funciones/token.js";
 import '../saas/login.scss'
 
-import { LoginForm } from "../componentes/login/login.jsx";
+import { LoginForm } from "../componentes/login/iniciar.jsx";
 import { RegisterForm } from "../componentes/login/register.jsx";
 
 
