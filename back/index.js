@@ -33,7 +33,7 @@ app.listen(CONTAINER_PORT ,()=>{
 Estructura para decodificar el token
 
     const token = req.headers.authorization.split(' ')[1]
-    const decoded - jwt.verify(token, secretKey)
+    const decoded = jwt.verify(token, secretKey)
     const userID = decoded.userID
 
 */

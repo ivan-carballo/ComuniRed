@@ -16,6 +16,16 @@ const getById = async (req,res) =>{
     res.json({data:propiedad});
 }
 
+
+const getByToken = async (req,res) =>{
+    const token = req.body.token
+    //const decoded = jwt.verify(token, JWT_KEY)
+    //const userID = decoded.userID    
+    //const propiedad = await userController.getById(id);
+    //res.json({data:propiedad});
+    res.json({data:token})
+}
+
 const getByProperty=async(req,res)=>{
     const {property,value}=req.query;
     const propiedad = await userController.getByProperty(property,value);
@@ -52,6 +62,7 @@ const remove = async(req,res)=>{
 export default{
     getAll,
     getById,
+    getByToken,
     getByProperty,
     create,
     login,
