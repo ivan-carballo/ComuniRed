@@ -34,6 +34,10 @@ const userSchema  = new mongoose.Schema({
 
     dateban: {
         type: Date,
+    },
+
+    img: {
+        type: String,
     }
 
 

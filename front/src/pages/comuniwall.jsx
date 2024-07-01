@@ -3,6 +3,7 @@ import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
 import { Navigate } from "react-router-dom";
+import { NewPost } from "../componentes/index/post.jsx";
 
 
 
@@ -48,6 +49,8 @@ function ComuniWall() {
         <div id='index-cuerpo'>
             <Navbar />
             <h2>ComuniWall</h2>
+
+            <NewPost />
 
 
 
