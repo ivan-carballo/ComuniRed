@@ -9,10 +9,12 @@ const router  =  Router();
 
 
 import userRouter from "./userRouter.js";
+import postRouter from "./postRouter.js";
 
 
 
 router.use("/user", userRouter);
+router.use("/post", postRouter);
 
 
 
