@@ -1,3 +1,4 @@
+import '../../saas/index/post.scss'
 import { useState, useEffect } from "react";
 import { getPost } from "../../api/postAPI.js"
 

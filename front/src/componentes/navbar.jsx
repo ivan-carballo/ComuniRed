@@ -1,6 +1,9 @@
+import '../saas/navbar.scss'
+
 import { Outlet, NavLink, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
+import { FaHome, FaUserSlash, FaUserCircle } from 'react-icons/fa'
 
 
 
@@ -21,10 +24,10 @@ const Navbar = () => {
 
     return (
         <div id='navbar-global'>
-            <nav>
-                    <NavLink to="/comuniwall" className='link'>ComuniWall</NavLink>
-                    <NavLink to="/user" className='link'>Perfil</NavLink>
-                    <NavLink to="/" className='link' onClick={logout}>Logout</NavLink>
+            <nav id='navbar-links'>
+                    <NavLink to="/comuniwall" className='link' title='ComuniWall'><FaHome /></NavLink>
+                    <NavLink to="/user" className='link' title='Perfil'><FaUserCircle /></NavLink>
+                    <NavLink to="/" className='link' title='Cerrar sesion' onClick={logout}><FaUserSlash/></NavLink>
             </nav>
             <Outlet />
         </div>
