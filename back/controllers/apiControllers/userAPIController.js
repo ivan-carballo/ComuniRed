@@ -1,8 +1,12 @@
+import express from "express";
+import cors from "cors"
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
 import userController from "../controllers/userController.js";
 
 dotenv.config();
+const app = express();
+app.use(cors())
 
 
 const getAll = async(req,res)=>{
@@ -18,13 +22,22 @@ const getById = async (req,res) =>{
 
 
 
-const getByToken = async (req,res) =>{
+/* const getByToken = async (req,res) =>{
     const token = await req.body.token
     let arrayToken = token.split(",");
     arrayToken = token.split(".");
     let tokenPayload = JSON.parse(atob(arrayToken[1]));
-    res.json({data:tokenPayload.userID});
-}
+
+    const userID = await getById(tokenPayload.userID)
+
+    const arrayUser = {'id': userID._id,
+                        'username': userID.username,
+                        'img': userID.img
+    }
+
+    res.json({data:arrayUser});
+    console.log(arrayUser.username)
+} */
 
 
 
@@ -64,7 +77,7 @@ const remove = async(req,res)=>{
 export default{
     getAll,
     getById,
-    getByToken,
+    //getByToken,
     getByProperty,
     create,
     login,

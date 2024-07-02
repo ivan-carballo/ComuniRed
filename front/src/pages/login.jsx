@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import { Navbar } from "../componentes/navbar.jsx";
-import Cookies from 'js-cookie';
-import { sha256 } from 'js-sha256';
-import { obtenerToken } from "../funciones/token.js";
+import { useState } from "react";
+import Cookies from 'js-cookie'
 import '../saas/login.scss'
 
 import { LoginForm } from "../componentes/login/iniciar.jsx";
@@ -11,8 +8,11 @@ import { RegisterForm } from "../componentes/login/register.jsx";
 
 
 function Login() {
-    const [form, setForm] = useState(<RegisterForm />)
-    const [buttonValue, setButtonValue] = useState('Login')
+    const [form, setForm] = useState(<LoginForm />)
+    const [buttonValue, setButtonValue] = useState('Register')
+
+    Cookies.remove('id')
+    Cookies.remove('token')
 
 
     async function cambiarForm(e) {

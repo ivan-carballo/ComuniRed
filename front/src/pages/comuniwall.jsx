@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
-import { Navigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 import { NewPost } from "../componentes/index/post.jsx";
 
 
@@ -17,8 +17,8 @@ function ComuniWall() {
 
     comprobacionToken()
     async function comprobacionToken() {
-        const comprobarToken = await obtenerToken()
-        if (comprobarToken == null) {
+        const comprobarToken = obtenerToken()
+        if (comprobarToken === null) {
             navigate('/')
         }
     }
@@ -29,7 +29,7 @@ function ComuniWall() {
             const token = obtenerToken()
 
             if (token === null) {
-                document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+                Cookies.remove('token')
                 navigate("/")
             }
             setRecarga(false)

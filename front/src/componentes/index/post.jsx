@@ -1,52 +1,30 @@
 import '../../saas/index/post.scss'
+import { getUserByID } from '../../api/userAPI'
 import { useState, useEffect } from "react";
 import { obtenerToken } from '../../funciones/token';
-import { API_URL } from '../../api/API';
+import Cookies from 'js-cookie'
 
 
 function NewPost() {
     const [usernamePost, setUsernamePost] = useState('')
-
-
-
-
-
+    const [userIMG, setUserIMG] = useState('')
 
 
     useEffect(() => {
         userFind()
-        async function  userFind() {
-            const token = obtenerToken()
+        async function userFind() {
+            const userID = Cookies.get('id')
 
-            const userArrayToken = {'token':token}
+            const userByID = await getUserByID(userID)
 
-            const data = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userArrayToken),
-                };   
+            setUsernamePost(`Cuentanos tus divagaciones, ${userByID.data.username}`)
+            setUserIMG(userByID.data.img)
 
-            const userToken = await getUserByToken(data)
+            const img = document.getElementById('user-img')
+            img.src = userByID.data.img
 
-            async function getUserByToken(token) {
-                fetch(`${API_URL}/user/tk`, token)
-                .then(data => {
-                    if (!data.ok) {
-                    throw Error(data.status);
-                    }
-                    return data.json();
-                    }).then(update => {
-                    //console.log(update);
-                    }).catch(e => {
-                    //console.log(e);
-                    });
-            }
-
-            
         }
-    })
+    }) 
 
 
 
@@ -57,7 +35,7 @@ function NewPost() {
             <div id="newPost-div-form">
                     <form>
                         <div id="newPost-row-1">
-                            <img src="" alt="user-img" />
+                            <img alt="user-img" id='user-img' />
                             <input type="text" id="newPost-input" placeholder={usernamePost} />
                         </div>
                         <div id="newPost-row-2">

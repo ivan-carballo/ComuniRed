@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Root } from './root.jsx'
 import { ComuniWall } from "./pages/comuniwall.jsx";
 import { Login } from "./pages/login.jsx";
 import { UserPerfil } from "./pages/user.jsx";

@@ -1,7 +1,6 @@
 import { Outlet, NavLink, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
-import { sha256 } from 'js-sha256'
 
 
 
@@ -13,6 +12,7 @@ const Navbar = () => {
     
     async function logout() {
         document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+        Cookies.remove('id')
         navigate('/')
     }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { sha256 } from 'js-sha256'
+import Cookies from 'js-cookie'
 import { useState, useEffect } from "react";
 import { getUser, login } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
@@ -21,14 +22,15 @@ function LoginForm() {
         const formPassword = formRuta[1].value
 
         const userAll = await getUser()
-
         const userFilter = userAll.data.filter((data) => data.email === formEmail)
+
 
         if (formEmail.length < 1 || formPassword.length < 1) {
             setAviso('Debe rellenar todos los campos para poder iniciar sesion')
         } else if (userFilter.length == 1) {
 
             if (userFilter[0].password === sha256(formPassword)) {
+                Cookies.set('id', userFilter[0]._id, { sameSite: 'none', secure: true })
 
                 const userArrayLogin = {'email':formEmail}
 
@@ -41,7 +43,13 @@ function LoginForm() {
                     };   
                     
                     const userLogin = await login(data) 
-                    navigate('/comuniwall')
+
+                    setTimeout(() => {
+                        navigate('/comuniwall')
+                    }, 400);
+
+
+                    
 
             } else {
                 setAviso('Su email y/o contraseña no son correctas')

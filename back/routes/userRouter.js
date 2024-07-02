@@ -11,7 +11,7 @@ router.post("/find",userAPIController.getByProperty);
 router.post("/remove/:id",userAPIController.remove);
 router.post("/update/:id",userAPIController.update);
 router.post("/login", userAPIController.login);
-router.post("/tk",userAPIController.getByToken);
+//router.post("/tk",userAPIController.getByToken);
 
 
 router.get("/",userAPIController.getAll);
