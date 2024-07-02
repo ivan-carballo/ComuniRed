@@ -3,7 +3,8 @@ import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
 import Cookies from 'js-cookie'
-import { NewPost } from "../componentes/index/post.jsx";
+import { NewPost } from "../componentes/index/newPost.jsx";
+import { Post } from "../componentes/index/post.jsx"
 
 
 
@@ -51,6 +52,8 @@ function ComuniWall() {
             <h2>ComuniWall</h2>
 
             <NewPost />
+
+            <Post />
 
 
 

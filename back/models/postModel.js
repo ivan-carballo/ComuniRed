@@ -7,6 +7,11 @@ const userSchema  = new mongoose.Schema({
         required: true,
     },
 
+    username: {
+        type: String,
+        require: true
+    },
+
     date: {
         type: Date,
         default: Date.now()

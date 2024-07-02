@@ -1,7 +1,7 @@
 import { API_URL } from "./API.js"
 
 
-async function getpost() {
+async function getPost() {
   let dato = await fetch(`${API_URL}/post`);
   dato = await dato.json();
   return (dato)
@@ -73,7 +73,7 @@ async function postCreate(data) {
 
 
   export {
-    getpost,
+    getPost,
     getpostByID,
     postCreate,
     postDelete,
