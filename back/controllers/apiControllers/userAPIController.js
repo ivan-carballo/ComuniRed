@@ -17,13 +17,16 @@ const getById = async (req,res) =>{
 }
 
 
+
 const getByToken = async (req,res) =>{
     const token = await req.body.token
     let arrayToken = token.split(",");
     arrayToken = token.split(".");
     let tokenPayload = JSON.parse(atob(arrayToken[1]));
-    //res.json({data:tokenPayload});
+    res.json({data:tokenPayload.userID});
 }
+
+
 
 const getByProperty=async(req,res)=>{
     const {property,value}=req.query;

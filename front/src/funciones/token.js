@@ -1,5 +1,5 @@
 function guardarToken(token) {
-    document.cookie = `token=${token}; expires=${new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=strict;`;
+    document.cookie = `token=${token}; expires=${new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=none;`;
   }
   
 function obtenerToken() {

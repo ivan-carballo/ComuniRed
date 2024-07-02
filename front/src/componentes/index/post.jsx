@@ -5,22 +5,10 @@ import { API_URL } from '../../api/API';
 
 
 function NewPost() {
+    const [usernamePost, setUsernamePost] = useState('')
 
 
 
-    async function getUserByToken(token) {
-        fetch(`${API_URL}/user/tk`, token)
-        .then(data => {
-            if (!data.ok) {
-            throw Error(data.status);
-            }
-            return data.json();
-            }).then(update => {
-            //console.log(update);
-            }).catch(e => {
-            //console.log(e);
-            });
-    }
 
 
 
@@ -42,6 +30,20 @@ function NewPost() {
 
             const userToken = await getUserByToken(data)
 
+            async function getUserByToken(token) {
+                fetch(`${API_URL}/user/tk`, token)
+                .then(data => {
+                    if (!data.ok) {
+                    throw Error(data.status);
+                    }
+                    return data.json();
+                    }).then(update => {
+                    //console.log(update);
+                    }).catch(e => {
+                    //console.log(e);
+                    });
+            }
+
             
         }
     })
@@ -56,7 +58,7 @@ function NewPost() {
                     <form>
                         <div id="newPost-row-1">
                             <img src="" alt="user-img" />
-                            <input type="text" id="newPost-input" placeholder="Comparte tus pensamientos" />
+                            <input type="text" id="newPost-input" placeholder={usernamePost} />
                         </div>
                         <div id="newPost-row-2">
                             <input type="file" name="" id="" />
