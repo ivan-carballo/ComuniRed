@@ -18,12 +18,11 @@ const getById = async (req,res) =>{
 
 
 const getByToken = async (req,res) =>{
-    const token = req.body.token
-    //const decoded = jwt.verify(token, JWT_KEY)
-    //const userID = decoded.userID    
-    //const propiedad = await userController.getById(id);
-    //res.json({data:propiedad});
-    res.json({data:token})
+    const token = await req.body.token
+    let arrayToken = token.split(",");
+    arrayToken = token.split(".");
+    let tokenPayload = JSON.parse(atob(arrayToken[1]));
+    //res.json({data:tokenPayload});
 }
 
 const getByProperty=async(req,res)=>{
@@ -43,7 +42,7 @@ const login = async(req,res)=> {
     const userFind = await userController.getByProperty('email', datos.email)
 
     const payload = {'userID': userFind[0]._id, 'username':userFind[0].username, 'pass':userFind[0].password}
-    const token = jwt.sign({username: userFind[0].username}, 'JWT_KEY', {expiresIn: '1m'})
+    const token = jwt.sign(payload, 'JWT_KEY', {expiresIn: '1m'})
     res.json({data:token});
 }
 

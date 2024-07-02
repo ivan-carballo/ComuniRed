@@ -16,9 +16,9 @@ function NewPost() {
             }
             return data.json();
             }).then(update => {
-            console.log(update);
+            //console.log(update);
             }).catch(e => {
-            console.log(e);
+            //console.log(e);
             });
     }
 
