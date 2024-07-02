@@ -1,0 +1,19 @@
+@import '../color.scss';
+
+#newPost-body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    & > #newPost-div-form {
+        background-color: $background-divs;
+        width: fit-content;
+        padding: 15px;
+        border-radius: 15px;
+
+        & > #newPost-row-1 {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

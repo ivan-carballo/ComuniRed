@@ -1,4 +1,4 @@
-import '../../saas/index/post.scss'
+import '../../saas/index/newPost.scss'
 import { getUserByID } from '../../api/userAPI'
 import { postCreate } from '../../api/postAPI';
 import { useState, useEffect } from "react";

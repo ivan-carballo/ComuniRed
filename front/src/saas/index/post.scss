@@ -1,19 +1,8 @@
 @import '../color.scss';
 
-#newPost-body {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    & > #newPost-div-form {
-        background-color: $background-divs;
-        width: fit-content;
-        padding: 15px;
-        border-radius: 15px;
-
-        & > #newPost-row-1 {
-            display: flex;
-            justify-content: center;
-        }
-    }
+#post-div {
+    background-color: $background-divs;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 15px 0;
 }
