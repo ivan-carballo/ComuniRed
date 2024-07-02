@@ -1,5 +1,5 @@
 import '../../saas/index/post.scss'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getPost } from "../../api/postAPI.js"
 
 
@@ -18,10 +18,10 @@ function Post() {
                 AllPostData = AllPostData.data
                 AllPostData.reverse()
 
-                const allPostMap = await AllPostData.map((data) => 
+                const allPostMap = await AllPostData.map((data) =>
                     <div id='post-div' key={data._id}>
                         <h3>{data.username}</h3>
-                        <h4>{data.date}</h4>
+                        <h4>{data.dateString}</h4>
                         <p>{data.post}</p>
                     </div>
                 )

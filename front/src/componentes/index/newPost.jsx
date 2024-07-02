@@ -1,7 +1,8 @@
 import '../../saas/index/newPost.scss'
 import { getUserByID } from '../../api/userAPI'
 import { postCreate } from '../../api/postAPI';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
 
 
@@ -28,13 +29,15 @@ function NewPost() {
     async function enviarPost(e) {
         const postText = e.target.form[0].value
         const postIMG = e.target.form[1].files[0]
+        const postDate = await dateFormat(Date.now())
 
-        const arrayNewPost = {'userID': userID,
+        const arrayNewPost = await {'userID': userID,
                                 'post': postText,
                                 'img': postIMG,
-                                'username': username_data}
+                                'username': username_data,
+                                'dateString': postDate}
 
-        const dataNewPost = {
+        const dataNewPost = await {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

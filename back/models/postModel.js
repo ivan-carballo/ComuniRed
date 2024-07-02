@@ -13,6 +13,11 @@ const userSchema  = new mongoose.Schema({
     },
 
     date: {
+        type: String,
+        required: true
+    },
+
+    date: {
         type: Date,
         default: Date.now()
     },
