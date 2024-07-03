@@ -38,18 +38,10 @@ function NewPost() {
                                 'username': username_data,
                                 'dateString': postDate}
 
-        const dataNewPost = await {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-                body: JSON.stringify(arrayNewPost),
-            };
+        const sendNewPost = await postCreate(arrayNewPost)
 
-            const sendNewPost = await postCreate(dataNewPost)
-
-            const textareaDel = document.getElementById('newPost-input')
-            textareaDel.value = ''
+        const textareaDel = document.getElementById('newPost-input')
+        textareaDel.value = ''
 
     }
 

@@ -48,15 +48,7 @@ function RegisterForm() {
             
             const userArrayNew = {'username':formUsername, 'email':formEmail, 'password':sha256(formPassword), 'role':'user'}
 
-            const data = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userArrayNew),
-                };
-
-            const userCrear = await userCreate(data)
+            const userCrear = await userCreate(userArrayNew)
 
             const delete_formUsername = document.getElementById('register-username')
             const delete_formEmail = document.getElementById('register-email')

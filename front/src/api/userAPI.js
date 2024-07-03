@@ -17,19 +17,29 @@ async function getUserByID(id) {
 
 
 
+
 async function userCreate(data) {
-    fetch(`${API_URL}/user`, data)
-    .then(data => {
-        if (!data.ok) {
-          throw Error(data.status);
-         }
-         return data.json();
-        }).then(update => {
-        //console.log(update);
-        }).catch(e => {
-        //console.log(e);
-        });
+  try {
+    const response = await fetch(`${API_URL}/user`,
+      {
+        method: 'POST',
+        headers: { 
+          'Content-type': 'application/json',
+        },
+          body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al crear el user (HTTP ${response.status})`);
+    }
+
+    const result = await response.json();
+    console.log('user creado:', result);
+  } catch (error) {
+    console.error('Error al user el post:', error);
   }
+}
+  
 
 
   

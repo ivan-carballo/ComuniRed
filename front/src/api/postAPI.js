@@ -17,45 +17,76 @@ async function getpostByID(id) {
 
 
 async function postCreate(data) {
-    fetch(`${API_URL}/post`, data)
-    .then(data => {
-        if (!data.ok) {
-          throw Error(data.status);
-         }
-         return data.json();
-        }).then(create => {
-        //console.log(create);
-        }).catch(e => {
-        //console.log(e);
-        });
-  }
-
-
-
-
-
-  async function postDelete(id) {
-    try {
-      const response = await fetch(`${API_URL}/post/remove/${id}`, {
+  try {
+    const response = await fetch(`${API_URL}/post`,
+      {
         method: 'POST',
         headers: { 
-          'Content-type': 'application/json'
-        }
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error al eliminar el post (HTTP ${response.status})`);
-      }
-  
-      const result = await response.json();
-      //console.log('post eliminada:', result);
-    } catch (error) {
-      console.error('Error al eliminar el post:', error);
+          'Content-type': 'application/json',
+        },
+          body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al crear el post (HTTP ${response.status})`);
     }
+
+    const result = await response.json();
+    //console.log('post creado:', result);
+  } catch (error) {
+    console.error('Error al crear el post:', error);
   }
+}
 
 
-  async function postUpdate(id, data) {
+
+async function postUpdate(id, data) {
+  try {
+    const response = await fetch(`${API_URL}/post/update/${id}`,
+      {
+        method: 'POST',
+        headers: { 
+          'Content-type': 'application/json',
+        },
+          body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al actualizar el post (HTTP ${response.status})`);
+    }
+
+    const result = await response.json();
+    console.log('post actualizado:', result);
+  } catch (error) {
+    console.error('Error al actualizar el post:', error);
+  }
+}
+
+
+
+
+async function postDelete(id) {
+  try {
+    const response = await fetch(`${API_URL}/post/remove/${id}`, {
+      method: 'POST',
+      headers: { 
+        'Content-type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al eliminar el post (HTTP ${response.status})`);
+    }
+
+    const result = await response.json();
+    //console.log('post eliminada:', result);
+  } catch (error) {
+    console.error('Error al eliminar el post:', error);
+  }
+}
+
+
+/*   async function postUpdate(id, data) {
     fetch(`${API_URL}/post/update/${id}`, data)
     .then(data => {
         if (!data.ok) {
@@ -67,7 +98,7 @@ async function postCreate(data) {
         }).catch(e => {
         console.log(e);
         });
-  }
+  } */
 
 
 
