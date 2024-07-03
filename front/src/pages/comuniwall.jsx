@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
@@ -13,7 +14,10 @@ import { Post } from "../componentes/index/post.jsx"
 function ComuniWall() {
     const navigate = useNavigate()
 
-    const [recarga, setRecarga] = useState(false)
+    const [recarga, setRecarga] = useState(true)
+    const [recargaPost, setRecargaPost] = useState(true)
+    
+
 
 
     comprobacionToken()
@@ -52,8 +56,9 @@ function ComuniWall() {
             <h2>ComuniWall</h2>
 
             <NewPost />
-
             <Post />
+
+
 
 
 

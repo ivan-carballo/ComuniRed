@@ -46,7 +46,7 @@ function LoginForm() {
 
                     setTimeout(() => {
                         navigate('/comuniwall')
-                    }, 400);
+                    }, 300);
 
 
                     

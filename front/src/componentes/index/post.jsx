@@ -1,13 +1,21 @@
 import '../../saas/index/post.scss'
+import React from 'react';
+import Cookies from 'js-cookie'
 import { useState, useEffect, useContext } from "react";
-import { getPost } from "../../api/postAPI.js"
+import { getPost, postDelete } from "../../api/postAPI.js"
 
 
 function Post() {
+    const userID = Cookies.get('id')
+
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
 
     
+    async function RecargaPost() {
+        setRecarga(true)
+    }
+
 
     useEffect(() => {
         if(recarga) {
@@ -23,6 +31,7 @@ function Post() {
                         <h3>{data.username}</h3>
                         <h4>{data.dateString}</h4>
                         <p>{data.post}</p>
+                        {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
                     </div>
                 )
                 setData(allPostMap)
@@ -30,6 +39,11 @@ function Post() {
             }
         }
     }) 
+
+
+    async function deletePost(e) {
+        const deletePostAPI = await postDelete(e.target.id)
+    }
 
 
 
@@ -44,5 +58,5 @@ function Post() {
 
 
 export {
-    Post
+    Post,
 }

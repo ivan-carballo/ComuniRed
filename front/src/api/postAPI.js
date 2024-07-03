@@ -24,9 +24,9 @@ async function postCreate(data) {
          }
          return data.json();
         }).then(create => {
-        console.log(create);
+        //console.log(create);
         }).catch(e => {
-        console.log(e);
+        //console.log(e);
         });
   }
 
@@ -48,7 +48,7 @@ async function postCreate(data) {
       }
   
       const result = await response.json();
-      console.log('post eliminada:', result);
+      //console.log('post eliminada:', result);
     } catch (error) {
       console.error('Error al eliminar el post:', error);
     }

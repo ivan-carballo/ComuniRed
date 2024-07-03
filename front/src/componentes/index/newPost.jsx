@@ -1,6 +1,7 @@
 import '../../saas/index/newPost.scss'
 import { getUserByID } from '../../api/userAPI'
 import { postCreate } from '../../api/postAPI';
+import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
@@ -49,23 +50,6 @@ function NewPost() {
 
             const textareaDel = document.getElementById('newPost-input')
             textareaDel.value = ''
-
-/*         new Compressor(file, {
-            quality: 0,
-
-            success(result) {
-                const formData = new formData();
-
-                formData.append('file', result, result.name)
-
-                axios.post('/path/to/upload', formData).then(() => {
-                    console.log('upload success')
-                })
-            },
-            error(err) {
-                console.log(err.message)
-            },
-        }) */
 
     }
 
