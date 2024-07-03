@@ -6,10 +6,10 @@ import responseAPIController from "../controllers/apiControllers/responseAPICont
 const router  = Router();
 
 
-router.response("/",responseAPIController.create);
-router.response("/find",responseAPIController.getByProperty);
-router.response("/remove/:id",responseAPIController.remove);
-router.response("/update/:id",responseAPIController.update);
+router.post("/",responseAPIController.create);
+router.post("/find",responseAPIController.getByProperty);
+router.post("/remove/:id",responseAPIController.remove);
+router.post("/update/:id",responseAPIController.update);
 
 
 router.get("/",responseAPIController.getAll);

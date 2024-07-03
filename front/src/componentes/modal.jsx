@@ -1,4 +1,4 @@
-import "./scss/modal.scss"
+import "../saas/modal.scss"
 import PropTypes from 'prop-types';
 
 
