@@ -10,11 +10,13 @@ const router  =  Router();
 
 import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
+import responseRouter from "./responseRouter.js";
 
 
 
 router.use("/user", userRouter);
 router.use("/post", postRouter);
+router.use("/response", responseRouter);
 
 
 
