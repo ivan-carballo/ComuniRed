@@ -1,7 +1,10 @@
 @import '../color.scss';
 
 #newPost-body {
-    margin-top: 50px;
+    background-color: $background;
+    position: fixed;
+    padding-top: 30px;
+    padding-bottom: 15px;
     width: 100%;
     display: flex;
     justify-content: center;

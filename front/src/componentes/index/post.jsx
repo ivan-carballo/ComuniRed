@@ -9,13 +9,15 @@ import { getUserByID } from '../../api/userAPI.js';
 
 
 
+
 function Post() {
     const userID = Cookies.get('id')
 
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
-    
+
+   
 
     useEffect(() => {
         if(recarga) {
@@ -25,7 +27,9 @@ function Post() {
                 let AllPostData = await getPost()
                 AllPostData = AllPostData.data
                 AllPostData.reverse()
+
                 let getUserIMG = []
+                
                 for (let i = 0; AllPostData.length > i; i++) {
                     let getUserIDIMG = await getUserByID(AllPostData[i].userID)
                     getUserIMG.push(getUserIDIMG.data.img)
@@ -108,5 +112,5 @@ function Post() {
 
 
 export {
-    Post,
+    Post
 }

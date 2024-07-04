@@ -19,13 +19,15 @@ const Navbar = () => {
     async function activeLink_1(e) {
         let comuniwallID = document.getElementById('comuniwall')
         let userID = document.getElementById('user')
+
         comuniwallID.className = active
         userID.className = noActive
     }
 
     async function activeLink_2(e) {
         let comuniwallID = document.getElementById('comuniwall')
-        let userID = document.getElementById('user')    
+        let userID = document.getElementById('user') 
+        
         comuniwallID.className = noActive
         userID.className = active
     }

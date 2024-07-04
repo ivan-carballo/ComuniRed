@@ -1,5 +1,9 @@
 @import '../color.scss';
 
+#post-body {
+    margin-top: 300px;
+}
+
 #post-div {
     background-color: $background-divs;
     border-radius: 15px;
