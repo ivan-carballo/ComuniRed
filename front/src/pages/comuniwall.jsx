@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
 import Cookies from 'js-cookie'
-import { PostProvider } from '../funciones/postContext.jsx';
 import { NewPost } from "../componentes/index/newPost.jsx";
 import { Post } from "../componentes/index/post.jsx"
 
@@ -16,7 +15,6 @@ function ComuniWall() {
     const navigate = useNavigate()
 
     const [recarga, setRecarga] = useState(true)
-    const [recargaPost, setRecargaPost] = useState(true)
 
  
 
@@ -51,7 +49,6 @@ function ComuniWall() {
 
 
     return (
-        <PostProvider>
             <div id='index-cuerpo'>
                 <Navbar />
                 <h2>ComuniWall</h2>
@@ -60,7 +57,6 @@ function ComuniWall() {
                 <Post />
 
             </div>
-        </PostProvider>
     )
 }
 

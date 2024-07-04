@@ -1,10 +1,11 @@
 import '../../saas/index/post.scss'
 import React from 'react';
 import Cookies from 'js-cookie'
+import { dateFormat } from '../../funciones/fecha.js';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
-import { PostContext } from '../../funciones/postContext.jsx';
+import { getUserByID } from '../../api/userAPI.js';
 
 
 
@@ -14,9 +15,7 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
-
-    const { AllPostData } = useContext(PostContext);    
-
+    
 
     useEffect(() => {
         if(recarga) {
@@ -26,14 +25,24 @@ function Post() {
                 let AllPostData = await getPost()
                 AllPostData = AllPostData.data
                 AllPostData.reverse()
+                let getUserIMG = []
+                for (let i = 0; AllPostData.length > i; i++) {
+                    let getUserIDIMG = await getUserByID(AllPostData[i].userID)
+                    getUserIMG.push(getUserIDIMG.data.img)
+                }
 
-                const allPostMap = await AllPostData.map((data) =>
+                let count = 0
+
+                const allPostMap = await AllPostData.map((data) => 
                     <div id='post-div' key={data._id}>
+                        <img src={getUserIMG[count]} />                        
                         <h3>{data.username}</h3>
                         <h4>{data.dateString}</h4>
                         <p>{data.post}</p>
+                        <img src={data.img} />
                         <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                         {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
+                        {count++}
                     </div>
                 )
                 setData(allPostMap)
@@ -51,7 +60,16 @@ function Post() {
 
 
     async function responsePost(e) {
+        let userName = await getUserByID(Cookies.get('id'))
+
+        const postUser = userName.data.username
         const postOriginID = e.target.id
+        const postDate = await dateFormat(Date.now())
+        const postResponse = e.target
+
+        console.log(postResponse)
+
+        
     }
 
 
@@ -68,13 +86,12 @@ function Post() {
                 <Modal isOpen={true}>
 
                     <div id="completo">
-                        <h1>Responder a {response.username}</h1>
-                        <p>{response.post}</p>
+                        <p>Responder a {response.username}: {response.post}</p>
                         <textarea cols="25" rows="8"></textarea>
                     </div>
                     <div id="buttons">
                         <button onClick={close}>Cerrar</button>
-                        <button onClick={responsePost}>Responder</button>
+                        <button id={response._id} onClick={responsePost}>Responder</button>
                     </div>
 
                 </Modal>
