@@ -4,12 +4,16 @@ import { postCreate } from '../../api/postAPI';
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
+import { PostContext } from '../../funciones/postContext.jsx';
 import Cookies from 'js-cookie'
 
 
 function NewPost() {
     const [usernamePost, setUsernamePost] = useState('')
     const [userIMG, setUserIMG] = useState('')
+
+    const [mensaje, setMensaje] = useState('');
+    const { addPost } = useContext(PostContext);
 
     const userID = Cookies.get('id')
     let username_data = ''
@@ -40,9 +44,11 @@ function NewPost() {
 
         const sendNewPost = await postCreate(arrayNewPost)
 
+        addPost(mensaje);
+        setMensaje('');
+
         const textareaDel = document.getElementById('newPost-input')
         textareaDel.value = ''
-
     }
 
 

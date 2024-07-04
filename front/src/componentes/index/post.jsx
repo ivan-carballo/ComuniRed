@@ -4,6 +4,8 @@ import Cookies from 'js-cookie'
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
+import { PostContext } from '../../funciones/postContext.jsx';
+
 
 
 function Post() {
@@ -13,10 +15,7 @@ function Post() {
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
 
-    
-    async function RecargaPost() {
-        setRecarga(true)
-    }
+    const { AllPostData } = useContext(PostContext);    
 
 
     useEffect(() => {
@@ -33,7 +32,7 @@ function Post() {
                         <h3>{data.username}</h3>
                         <h4>{data.dateString}</h4>
                         <p>{data.post}</p>
-                        <input type="button" value="Responder" id={data._id} onClick={async () => {setResponse(data)}} />
+                        <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                         {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
                     </div>
                 )
@@ -44,8 +43,10 @@ function Post() {
     }, [recarga]);
 
 
+
     async function deletePost(e) {
         const deletePostAPI = await postDelete(e.target.id)
+        setRecarga(true)
     }
 
 
@@ -53,7 +54,8 @@ function Post() {
         const postOriginID = e.target.id
     }
 
-    async function cerrar() {
+
+    async function close() {
         setResponse(null)
     }
 
@@ -66,17 +68,21 @@ function Post() {
                 <Modal isOpen={true}>
 
                     <div id="completo">
-                        <h1>Aqui para enviar una response</h1>
-                        <p>{data}</p>
+                        <h1>Responder a {response.username}</h1>
+                        <p>{response.post}</p>
+                        <textarea cols="25" rows="8"></textarea>
                     </div>
                     <div id="buttons">
-                        <button onClick={cerrar}>Cerrar</button>
+                        <button onClick={close}>Cerrar</button>
+                        <button onClick={responsePost}>Responder</button>
                     </div>
 
                 </Modal>
             }
 
-            {data}
+            <div id="listPost">
+                {data}
+            </div>
         </div>
     )
 }
