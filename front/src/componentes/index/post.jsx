@@ -6,6 +6,7 @@ import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
+import { responseCreate } from '../../api/responseAPI.js';
 
 
 
@@ -17,6 +18,10 @@ function Post() {
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
 
+
+
+
+    
    
 
     useEffect(() => {
@@ -29,7 +34,7 @@ function Post() {
                 AllPostData.reverse()
 
                 let getUserIMG = []
-                
+
                 for (let i = 0; AllPostData.length > i; i++) {
                     let getUserIDIMG = await getUserByID(AllPostData[i].userID)
                     getUserIMG.push(getUserIDIMG.data.img)
@@ -57,10 +62,12 @@ function Post() {
 
 
 
+
     async function deletePost(e) {
         const deletePostAPI = await postDelete(e.target.id)
         setRecarga(true)
     }
+
 
 
     async function responsePost(e) {
@@ -69,17 +76,22 @@ function Post() {
         const postUser = userName.data.username
         const postOriginID = e.target.id
         const postDate = await dateFormat(Date.now())
-        const postResponse = e.target
+        const postResponse = e.target.offsetParent.children[0].lastChild.value
 
-        console.log(postResponse)
+        const arrayResponse = {'postID': postOriginID,
+                                'username': postUser,
+                                'dateString': postDate,
+                                'post': postResponse}
 
-        
+        const sendResponse = await responseCreate(arrayResponse)
+        console.log(sendResponse)
     }
 
 
     async function close() {
         setResponse(null)
     }
+
 
 
 
@@ -90,8 +102,12 @@ function Post() {
                 <Modal isOpen={true}>
 
                     <div id="completo">
-                        <p>Responder a {response.username}: {response.post}</p>
-                        <textarea cols="25" rows="8"></textarea>
+                        <img src="" />
+                        <p>Responder a {response.username}</p>
+                        <p>{response.post}</p>
+
+                        <img src="" />
+                        <textarea cols="25" rows="8" placeholder={`Escriba su respuesta`} />
                     </div>
                     <div id="buttons">
                         <button onClick={close}>Cerrar</button>

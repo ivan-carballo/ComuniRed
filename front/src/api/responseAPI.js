@@ -28,13 +28,13 @@ async function responseCreate(data) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error al crear el response (HTTP ${response.status})`);
+      throw new Error(`Error al crear el response 1 (HTTP ${response.status})`);
     }
 
     const result = await response.json();
-    //console.log('response creado:', result);
+    console.log('response creado:', result);
   } catch (error) {
-    console.error('Error al crear el response:', error);
+    console.error('Error al crear el response 2:', error);
   }
 }
 
