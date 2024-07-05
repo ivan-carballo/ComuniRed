@@ -19,9 +19,6 @@ function Post() {
     const [response, setResponse] = useState('')
 
 
-
-
-    
    
 
     useEffect(() => {
@@ -33,28 +30,34 @@ function Post() {
                 AllPostData = AllPostData.data
                 AllPostData.reverse()
 
-                let getUserIMG = []
+                let datosIMG = []
 
-                for (let i = 0; AllPostData.length > i; i++) {
-                    let getUserIDIMG = await getUserByID(AllPostData[i].userID)
-                    getUserIMG.push(getUserIDIMG.data.img)
+                const allPostIMG = await AllPostData.map( async (dataIMG) => {
+                    let userIMG = await getUserByID(dataIMG.userID)
+                    userIMG = userIMG.data.img
+                    dataIMG.userimg = userIMG
+                    datosIMG.push(dataIMG)
+                })
+
+                
+                setTimeout(() => {
+                    mapPost()
+                }, 500);
+
+                async function mapPost() {
+                    const allPostMap = await datosIMG.map((data) => 
+                        <div id='post-div' key={data._id}>
+                            <img src={data.userimg} />                        
+                            <h3>{data.username}</h3>
+                            <h4>{data.dateString}</h4>
+                            <p>{data.post}</p>
+                            <img src={data.img} />
+                            <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                            {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
+                        </div>
+                    )
+                    setData(allPostMap)
                 }
-
-                let count = 0
-
-                const allPostMap = await AllPostData.map((data) => 
-                    <div id='post-div' key={data._id}>
-                        <img src={getUserIMG[count]} />                        
-                        <h3>{data.username}</h3>
-                        <h4>{data.dateString}</h4>
-                        <p>{data.post}</p>
-                        <img src={data.img} />
-                        <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
-                        {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
-                        {count++}
-                    </div>
-                )
-                setData(allPostMap)
                 setRecarga(false)
             }
         }
@@ -84,7 +87,7 @@ function Post() {
                                 'post': postResponse}
 
         const sendResponse = await responseCreate(arrayResponse)
-        console.log(sendResponse)
+        setResponse(null)
     }
 
 

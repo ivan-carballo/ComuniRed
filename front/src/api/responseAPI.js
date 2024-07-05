@@ -20,7 +20,7 @@ async function responseCreate(data) {
   try {
     const response = await fetch(`${API_URL}/response`,
       {
-        method: 'response',
+        method: 'POST',
         headers: { 
           'Content-type': 'application/json',
         },
