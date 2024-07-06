@@ -6,7 +6,7 @@ import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { responseCreate } from '../../api/responseAPI.js';
+import { responseCreate, getPostByProperty } from '../../api/responseAPI.js';
 
 
 
@@ -17,6 +17,18 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
+
+
+    let sacarResponses = []
+
+
+    useEffect(() => {
+        prueba()
+        async function prueba() {
+            sacarResponses = await getPostByProperty('userID', '6687260a23c37e089fc62831')
+            console.log('klhjaskdjklajdlkjakldjssa   ' + sacarResponses.data[0].username)
+        }
+    })
 
 
    
@@ -39,10 +51,11 @@ function Post() {
                     datosIMG.push(dataIMG)
                 })
 
+
                 
                 setTimeout(() => {
                     mapPost()
-                }, 500);
+                }, 1500);
 
                 async function mapPost() {
                     const allPostMap = await datosIMG.map((data) => 

@@ -16,6 +16,34 @@ async function getresponseByID(id) {
 
 
 
+
+
+async function getPostByProperty(property, value) {
+  try {
+    const response = await fetch(`${API_URL}/response/find`,
+      {
+        method: 'POST',
+        headers: { 
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ property: value })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al buscar el response 1 (HTTP ${response.status})`);
+    }
+
+    const result = await response.json();
+    console.log('response buscado:', result);
+    return (result)
+  } catch (error) {
+    console.error('Error al buscar el response 2:', error);
+  }
+}
+
+
+
+
 async function responseCreate(data) {
   try {
     const response = await fetch(`${API_URL}/response`,
@@ -44,7 +72,7 @@ async function responseUpdate(id, data) {
   try {
     const response = await fetch(`${API_URL}/response/update/${id}`,
       {
-        method: 'response',
+        method: 'POST',
         headers: { 
           'Content-type': 'application/json',
         },
@@ -68,7 +96,7 @@ async function responseUpdate(id, data) {
 async function responseDelete(id) {
   try {
     const response = await fetch(`${API_URL}/response/remove/${id}`, {
-      method: 'response',
+      method: 'POST',
       headers: { 
         'Content-type': 'application/json'
       }
@@ -106,6 +134,7 @@ async function responseDelete(id) {
   export {
     getresponse,
     getresponseByID,
+    getPostByProperty,
     responseCreate,
     responseDelete,
     responseUpdate
