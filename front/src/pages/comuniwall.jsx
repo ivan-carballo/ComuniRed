@@ -49,14 +49,17 @@ function ComuniWall() {
 
 
     return (
-            <div id='index-cuerpo'>
-                <Navbar />
-                <h2>ComuniWall</h2>
+        <>
+            <Navbar />
 
+            <div id='comuniwall-body'>
+                
                 <NewPost />
                 <Post />
 
             </div>
+        </>
+            
     )
 }
 

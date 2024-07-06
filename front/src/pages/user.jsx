@@ -1,3 +1,5 @@
+import '../saas/user/user.scss'
+
 import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +47,10 @@ function UserPerfil() {
     return (
         <>
             <Navbar />
-            <h1>Perfil de usuario</h1>
+            <div id="user-body">
+                <h1>Perfil de usuario</h1>
+            </div>
+            
         </>
     )
 }

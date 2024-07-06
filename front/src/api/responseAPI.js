@@ -26,7 +26,7 @@ async function getPostByProperty(property, value) {
         headers: { 
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({ property: value })
+        body: JSON.stringify({ property, value })
     });
 
     if (!response.ok) {
@@ -34,7 +34,7 @@ async function getPostByProperty(property, value) {
     }
 
     const result = await response.json();
-    console.log('response buscado:', result);
+    //console.log('response buscado:', result);
     return (result)
   } catch (error) {
     console.error('Error al buscar el response 2:', error);

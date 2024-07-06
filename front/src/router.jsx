@@ -2,9 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { ComuniWall } from "./pages/comuniwall.jsx";
 import { Login } from "./pages/login.jsx";
 import { UserPerfil } from "./pages/user.jsx";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Options } from "./pages/options.jsx";
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 
 
@@ -26,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: <UserPerfil />
+  },
+
+  {
+    path: "/options",
+    element: <Options />
   }
 
 ]);

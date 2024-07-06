@@ -22,13 +22,13 @@ function Post() {
     let sacarResponses = []
 
 
-    useEffect(() => {
+/*     useEffect(() => {
         prueba()
         async function prueba() {
-            sacarResponses = await getPostByProperty('userID', '6687260a23c37e089fc62831')
+            sacarResponses = await getPostByProperty('postID', '6687260a23c37e089fc62831')
             console.log('klhjaskdjklajdlkjakldjssa   ' + sacarResponses.data[0].username)
         }
-    })
+    }) */
 
 
    
@@ -52,9 +52,18 @@ function Post() {
                 })
 
 
+                const allPostResponse = await allPostIMG.map( async (dataResponse) => {
+                    let userResponse = await getPostByProperty('postID', dataResponse._id)
+                    userResponse = userResponse.data
+                    dataResponse.response = userResponse
+                    datosIMG.push(dataResponse)
+                })
+
+
                 
                 setTimeout(() => {
                     mapPost()
+                    console.log(datosIMG)
                 }, 1500);
 
                 async function mapPost() {
