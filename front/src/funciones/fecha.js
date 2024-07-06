@@ -6,6 +6,12 @@ async function dateFormat(date) {
 }
 
 
+function parseDate(date) {
+    return new Date(date);
+}
+
+
 export {
-    dateFormat
+    dateFormat,
+    parseDate
 }

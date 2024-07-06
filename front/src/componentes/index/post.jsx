@@ -1,7 +1,7 @@
 import '../../saas/index/post.scss'
 import React from 'react';
 import Cookies from 'js-cookie'
-import { dateFormat } from '../../funciones/fecha.js';
+import { dateFormat, parseDate } from '../../funciones/fecha.js';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
@@ -22,15 +22,6 @@ function Post() {
     let sacarResponses = []
 
 
-/*     useEffect(() => {
-        prueba()
-        async function prueba() {
-            sacarResponses = await getPostByProperty('postID', '6687260a23c37e089fc62831')
-            console.log('klhjaskdjklajdlkjakldjssa   ' + sacarResponses.data[0].username)
-        }
-    }) */
-
-
    
 
     useEffect(() => {
@@ -39,8 +30,7 @@ function Post() {
             allPost()
             async function allPost() {
                 let AllPostData = await getPost()
-                AllPostData = AllPostData.data
-                AllPostData.reverse()
+                AllPostData = AllPostData.data.reverse()
 
                 let datosIMG = []
 
@@ -48,27 +38,24 @@ function Post() {
                     let userIMG = await getUserByID(dataIMG.userID)
                     userIMG = userIMG.data.img
                     dataIMG.userimg = userIMG
-                    datosIMG.push(dataIMG)
 
                     let userResponse = await getPostByProperty('postID', dataIMG._id)
-                    if (userResponse.data.length > 0) {
-                        userResponse = userResponse.data
-                        dataIMG.response = userResponse
-                        datosIMG.push(dataIMG)                      
-                    }
+                    dataIMG.responses = userResponse.data.length
+                    datosIMG.push(dataIMG)
+
                   
                 })
-
-
-
 
                 
                 setTimeout(() => {
                     mapPost()
-                    console.log(datosIMG)
                 }, 1500);
 
+
                 async function mapPost() {
+
+                    //datosIMG.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
                     const allPostMap = await datosIMG.map((data) => 
                         <div id='post-div' key={data._id}>
                             <img src={data.userimg} />                        
@@ -76,7 +63,8 @@ function Post() {
                             <h4>{data.dateString}</h4>
                             <p>{data.post}</p>
                             <img src={data.img} />
-                            <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                            <input type="button" value="Enviar respuesta" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                            <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={allResponse} />
                             {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
                         </div>
                     )
@@ -112,6 +100,11 @@ function Post() {
 
         const sendResponse = await responseCreate(arrayResponse)
         setResponse(null)
+    }
+
+
+    async function allResponse() {
+
     }
 
 
