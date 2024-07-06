@@ -49,15 +49,17 @@ function Post() {
                     userIMG = userIMG.data.img
                     dataIMG.userimg = userIMG
                     datosIMG.push(dataIMG)
+
+                    let userResponse = await getPostByProperty('postID', dataIMG._id)
+                    if (userResponse.data.length > 0) {
+                        userResponse = userResponse.data
+                        dataIMG.response = userResponse
+                        datosIMG.push(dataIMG)                      
+                    }
+                  
                 })
 
 
-                const allPostResponse = await allPostIMG.map( async (dataResponse) => {
-                    let userResponse = await getPostByProperty('postID', dataResponse._id)
-                    userResponse = userResponse.data
-                    dataResponse.response = userResponse
-                    datosIMG.push(dataResponse)
-                })
 
 
                 
