@@ -52,12 +52,9 @@ function ComuniWall() {
         <>
             <Navbar />
 
-            <div id='comuniwall-body'>
-                
-                <NewPost />
-                <Post />
+            <NewPost />
+            <Post />
 
-            </div>
         </>
             
     )
