@@ -1,4 +1,6 @@
 import '../../saas/index/post.scss'
+import '../../saas/index/viewAllResponse.scss'
+
 import React from 'react';
 import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js';
@@ -109,7 +111,7 @@ function Post() {
         if(allResponseArray.length > 0) {
             const allResponseMap = await allResponseArray.map((dataResponse) => 
                 <div id='response-div' key={dataResponse._id}>
-                    <p>{dataResponse.username}</p>
+                    <p>{dataResponse.username} - {dataResponse.dateString}</p>
                     <p>{dataResponse.post}</p>
                 </div>
             )
@@ -155,7 +157,7 @@ function Post() {
                     <div id="allResponse-completo">
                         {allResponse}
                     </div>
-                    <div id="buttons">
+                    <div id="allResponse-buttons">
                         <button onClick={close}>Cerrar</button>
                     </div>
                 </Modal>
