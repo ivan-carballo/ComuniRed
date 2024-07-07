@@ -58,10 +58,12 @@ function Post() {
                 async function mapPost() {
                     const allPostMap = await datosIMG.map((data) => 
                         <div id='post-div' key={data._id}>
-                            <img src={data.userimg} />                        
-                            <h3>{data.username}</h3>
-                            <h4>{data.dateString}</h4>
-                            <p>{data.post}</p>
+                            <div id="post-header">
+                                <img src={data.userimg} />                        
+                                <h2>{data.username}</h2>
+                            </div>
+                            <h5>{data.dateString}</h5>
+                            <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
                             <input type="button" value="Enviar respuesta" id={data._id} onClick={async ()=>{setResponse(data)}} />
                             <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
@@ -102,6 +104,7 @@ function Post() {
         setResponse(null)
         setRecarga(true)
     }
+
 
 
     async function ViewAllResponse(e) {

@@ -9,4 +9,19 @@
     border-radius: 15px;
     padding: 5px 10px;
     margin: 15px 0;
+
+    & > #post-header {
+        display: flex;
+        align-items: center;
+
+        & > img {
+            border-radius: 50%;
+            margin: 10px 25px 0 5px;
+            height: 100px;
+        }
+    }
+
+    & > #post-post {
+        text-align: justify;
+    }
 }
