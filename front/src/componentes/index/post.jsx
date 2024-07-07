@@ -1,7 +1,7 @@
 import '../../saas/index/post.scss'
 import React from 'react';
 import Cookies from 'js-cookie'
-import { dateFormat, parseDate } from '../../funciones/fecha.js';
+import { dateFormat } from '../../funciones/fecha.js';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
@@ -17,6 +17,7 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
+    const [allResponse, setAllResponse] = useState('')
 
 
     let sacarResponses = []
@@ -47,15 +48,12 @@ function Post() {
                 })
 
                 
-                setTimeout(() => {
-                    mapPost()
+                setTimeout(async () => {
+                    await mapPost()
                 }, 1500);
 
 
                 async function mapPost() {
-
-                    //datosIMG.sort((a, b) => parseDate(b.date) - parseDate(a.date));
-
                     const allPostMap = await datosIMG.map((data) => 
                         <div id='post-div' key={data._id}>
                             <img src={data.userimg} />                        
@@ -64,7 +62,7 @@ function Post() {
                             <p>{data.post}</p>
                             <img src={data.img} />
                             <input type="button" value="Enviar respuesta" id={data._id} onClick={async ()=>{setResponse(data)}} />
-                            <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={allResponse} />
+                            <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
                             {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
                         </div>
                     )
@@ -100,16 +98,29 @@ function Post() {
 
         const sendResponse = await responseCreate(arrayResponse)
         setResponse(null)
+        setRecarga(true)
     }
 
 
-    async function allResponse() {
+    async function ViewAllResponse(e) {
+        let allResponseArray = await getPostByProperty('postID', e.target.id)
+        allResponseArray = allResponseArray.data.reverse()
 
+        if(allResponseArray.length > 0) {
+            const allResponseMap = await allResponseArray.map((dataResponse) => 
+                <div id='response-div' key={dataResponse._id}>
+                    <p>{dataResponse.username}</p>
+                    <p>{dataResponse.post}</p>
+                </div>
+            )
+            setAllResponse(allResponseMap)
+        }
     }
 
 
     async function close() {
         setResponse(null)
+        setAllResponse(null)
     }
 
 
@@ -134,6 +145,19 @@ function Post() {
                         <button id={response._id} onClick={responsePost}>Responder</button>
                     </div>
 
+                </Modal>
+            }
+
+
+            {allResponse &&
+                <Modal isOpen={true}>
+
+                    <div id="allResponse-completo">
+                        {allResponse}
+                    </div>
+                    <div id="buttons">
+                        <button onClick={close}>Cerrar</button>
+                    </div>
                 </Modal>
             }
 
