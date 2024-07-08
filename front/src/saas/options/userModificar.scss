@@ -1,0 +1,27 @@
+@import '../color.scss';
+
+
+#userModificar-body {
+    border-top: 2px solid green;
+    margin-top: 50px;
+
+    & > #userModificar-rotulo {
+        text-align: center;
+    }
+
+    & > #userModificar-inputs {
+        display: flex;
+        flex-direction: column;
+
+        & > input {
+            margin: 5px 0;
+            border-radius: 15px;
+            padding: 2px 8px;
+        }
+
+        & > #userModificar-button {
+            cursor: pointer;
+            border: 0;
+        }
+    }
+}

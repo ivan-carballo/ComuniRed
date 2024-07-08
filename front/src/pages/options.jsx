@@ -4,6 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Navbar } from '../componentes/navbar'
 import { UserData } from '../componentes/options/userData';
+import { UserModificar } from '../componentes/options/userModificar';
 
 
 function Options() {
@@ -15,6 +16,7 @@ function Options() {
             <div id="options-body">            
                 <h1 id='rotulo'>Opciones de usuario</h1>
                 <UserData />
+                <UserModificar />
 
             </div>
         

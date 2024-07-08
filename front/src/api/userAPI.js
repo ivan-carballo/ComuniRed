@@ -36,7 +36,7 @@ async function userCreate(data) {
     const result = await response.json();
     console.log('user creado:', result);
   } catch (error) {
-    console.error('Error al user el post:', error);
+    console.error('Error al user el user:', error);
   }
 }
   
@@ -81,7 +81,7 @@ async function userCreate(data) {
   }
 
 
-  async function userUpdate(id, data) {
+/*   async function userUpdate(id, data) {
     fetch(`${API_URL}/user/update/${id}`, data)
     .then(data => {
         if (!data.ok) {
@@ -93,6 +93,29 @@ async function userCreate(data) {
         }).catch(e => {
         console.log(e);
         });
+  } */
+
+
+  async function userUpdate(id, data) {
+    try {
+      const response = fetch(`${API_URL}/user/update/${id}`,
+        {
+          method: 'POST',
+          headers: { 
+            'Content-type': 'application/json',
+          },
+            body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error al actualizar el user (HTTP ${response.status})`);
+      }
+  
+      const result = await response.json();
+      console.log('user actualizado:', result);
+    } catch (error) {
+      console.error('Error al actualizar el user:', error);
+    }
   }
 
 
