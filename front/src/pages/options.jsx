@@ -13,7 +13,7 @@ function Options() {
             <Navbar />
 
             <div id="options-body">            
-                <h1>Estas en opciones de usuario</h1>
+                <h1 id='rotulo'>Opciones de usuario</h1>
                 <UserData />
 
             </div>

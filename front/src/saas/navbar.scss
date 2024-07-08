@@ -1,9 +1,12 @@
+@import './color.scss';
+
 #navbar-global {
     position: fixed;
     top: 0px;
     left: 0;
     width: 100%;
-    background-color: rgb(160, 238, 157);
+    background-color: $background;
+    border-bottom: 2px solid green;
 
     & > #navbar-links {
         margin-top: 15px;
@@ -11,7 +14,7 @@
         justify-content: space-evenly;
 
         & > .activeSection {
-            color: rgb(11, 92, 11);
+            color: $navbar-icons;
             text-decoration: none;
             font-size:3.5rem;
         }
@@ -22,7 +25,7 @@
             font-size:3.5rem;
 
             &:hover{
-                color: rgb(11, 92, 11);
+                color: $navbar-icons;
             } 
         }
     }

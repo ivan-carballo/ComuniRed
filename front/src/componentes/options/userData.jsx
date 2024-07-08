@@ -1,4 +1,4 @@
-//import '../../saas/options/userData.scss'
+import '../../saas/options/userData.scss'
 
 import React from "react";
 import Cookies from 'js-cookie'
@@ -8,9 +8,11 @@ import { getUserByID } from '../../api/userAPI.js'
 
 function UserData() {
     const [data, setData] = useState([])
+    const [name, setName] = useState('')
 
     const userID = Cookies.get('id')
 
+    
     useEffect(() => {
         getUser()
         async function getUser() {
@@ -20,9 +22,20 @@ function UserData() {
     })
 
 
+
+ 
+
     return (
         <div id="userData-body">
-            <p>{data.username}</p>
+
+            <div id="userData-img">
+                <img src={data.img} />
+            </div>
+            <div id="userData-data">
+                <p>Nombre de usuario: {data.username}</p>
+                <p>Email: {data.email}</p>
+            </div>
+
         </div>
     )
 }

@@ -1,0 +1,18 @@
+#userData-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    & > #userData-img > img {
+        height: 80px;
+        border-radius: 50%;
+    }
+
+    & > #userData-data {
+        
+
+        & > p {
+            margin: 10px 0;
+        }
+    }
+}
