@@ -3,6 +3,7 @@ import '../saas/options/options.scss'
 import React from "react";
 import { useState, useEffect } from "react";
 import { Navbar } from '../componentes/navbar'
+import { UserData } from '../componentes/options/userData';
 
 
 function Options() {
@@ -13,6 +14,8 @@ function Options() {
 
             <div id="options-body">            
                 <h1>Estas en opciones de usuario</h1>
+                <UserData />
+
             </div>
         
         </>
