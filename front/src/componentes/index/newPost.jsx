@@ -52,13 +52,13 @@ function NewPost() {
     return (
         <div id='newPost-body'>
             <div id="newPost-div-form">
-                    <form>
+                    <form id='newPost-form'>
                         <div id="newPost-row-1">
                             <img src={userIMG} alt="user-img" id='user-img' />
-                            <textarea id="newPost-input" rows='4' cols='50' placeholder={usernamePost} />
+                            <textarea id="newPost-input" rows='5' cols='35' placeholder={usernamePost} />
                         </div>
                         <div id="newPost-row-2">
-                            <input type="file" name="" id="" />
+                            <input type="file" name="" id="" accept="image/*" capture="camera" />
                             <input type="button" id='newPost-button' value="Enviar" onClick={enviarPost} />
                         </div>
                     </form>

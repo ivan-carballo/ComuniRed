@@ -1,7 +1,7 @@
 @import '../color.scss';
 
 #post-body {
-    margin-top: 350px;
+    margin-top: 300px;
 }
 
 #post-div {
@@ -13,15 +13,27 @@
     & > #post-header {
         display: flex;
         align-items: center;
+        justify-content: center;
 
         & > img {
             border-radius: 50%;
-            margin: 10px 25px 0 5px;
+            margin: 10px 25px 0 0;
             height: 100px;
         }
     }
 
+    & > #post-date {
+        text-align: center;
+    }
+
     & > #post-post {
         text-align: justify;
+    }
+
+    & > #buttons-post {
+        display: flex;
+        justify-content: space-evenly;
+        padding-bottom: 15px;
+        margin-top: -10px;
     }
 }

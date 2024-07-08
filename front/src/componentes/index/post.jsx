@@ -62,12 +62,14 @@ function Post() {
                                 <img src={data.userimg} />                        
                                 <h2>{data.username}</h2>
                             </div>
-                            <h5>{data.dateString}</h5>
+                            <h5 id='post-date'>{data.dateString}</h5>
                             <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
-                            <input type="button" value="Enviar respuesta" id={data._id} onClick={async ()=>{setResponse(data)}} />
-                            <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
-                            {userID == data.userID ? <input type="button" value="Eliminar Post" id={data._id} onClick={deletePost} /> : <></>}
+                            <div id="buttons-post">
+                                <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                                <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
+                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>}
+                            </div>
                         </div>
                     )
                     setData(allPostMap)
