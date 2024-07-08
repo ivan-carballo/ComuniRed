@@ -25,4 +25,4 @@ Modal.propTypes = {
 
 export {
   Modal
-}
+} 

@@ -19,6 +19,7 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
+    const [allResponseID, setAllResponseID] = useState('')
     const [allResponse, setAllResponse] = useState('')
 
 
@@ -52,7 +53,7 @@ function Post() {
                 
                 setTimeout(async () => {
                     await mapPost()
-                }, 1500);
+                }, 1000);
 
 
                 async function mapPost() {
@@ -62,7 +63,7 @@ function Post() {
                                 <img src={data.userimg} />                        
                                 <h2>{data.username}</h2>
                             </div>
-                            <h5 id='post-date'>{data.dateString}</h5>
+                            <h4 id='post-date'>{data.dateString}</h4>
                             <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
                             <div id="buttons-post">
@@ -163,7 +164,8 @@ function Post() {
                         {allResponse}
                     </div>
                     <div id="allResponse-buttons">
-                        <button onClick={close}>Cerrar</button>
+                        <button className='allResponse-button' onClick={close}>Cerrar</button>
+                        {/* <button className='allResponse-button' id={allResponseID} onClick={responsePost}>Responder</button> */}
                     </div>
                 </Modal>
             }
