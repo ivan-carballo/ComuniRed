@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
 import { Navigate } from "react-router-dom";
 import { UserStadistic } from '../componentes/perfil/userStadistic.jsx';
+import { AllPostByUser } from '../componentes/perfil/userPost.jsx';
 
 
 
@@ -52,6 +53,7 @@ function UserPerfil() {
             <div id="user-body">
                 <h1>Perfil de usuario</h1>
                 <UserStadistic />
+                <AllPostByUser />
             </div>
             
         </>

@@ -5,7 +5,7 @@ import { getUserByID } from "../../api/userAPI.js";
 import { getPostByProperty } from '../../api/postAPI.js'
 import { getResponseByProperty } from '../../api/responseAPI.js'
 
-import '../../saas/options/userStadistic.scss'
+import '../../saas/perfil/userStadistic.scss'
 
 
 
@@ -31,7 +31,7 @@ function UserStadistic() {
             setUserResponse(userResponse.data.length)
         }
 
-    })
+    }, [])
 
 
 
