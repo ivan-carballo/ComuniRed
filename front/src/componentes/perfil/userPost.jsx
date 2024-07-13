@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useSyncExternalStore } from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { getPost, getPostByProperty } from '../../api/postAPI.js'
@@ -13,6 +13,8 @@ function AllPostByUser () {
     const [post, setPost] = useState()
     const [response, setResponse] = useState()
     const [show, setShow] = useState()
+    const [buttonResponse, setButtonResponse] = useState()
+    const [buttonPost, setButtonPost] = useState('active')
 
 
 
@@ -45,8 +47,9 @@ function AllPostByUser () {
 
             const responseMap = getResponse.map((data) => 
                 <div id="responseMap-div" key={data._id}>
-                    <p>{data.dateString}</p>
-                    <p>{data.post}</p>
+                    <p id='responseMap-date'>{data.dateString}</p>
+                    <p id='responseMap-response'>{data.post}</p>
+                    <input type="button" value="Eliminar respuesta" />
                 </div>
             )
             setResponse(responseMap)
@@ -55,21 +58,29 @@ function AllPostByUser () {
     }, [])
 
 
-    async function buttonPost() {
-        setShow(post)
+    async function buttonShow(e) {
+        const buttonValue = e.target.value
+
+        if (buttonValue === 'Posts') {
+            setShow(post)
+            setButtonPost('active')
+            setButtonResponse('')
+        } else {
+            setShow(response)
+            setButtonPost('')
+            setButtonResponse('active')
+        }
     }
 
-    async function buttonResponse() {
-        setShow(response)
-    }
+
 
 
     return (
         <>
 
             <div id="postByUser-buttons">
-                <input type="button" value="Posts" onClick={buttonPost} />
-                <input type="button" value="Respuestas" onClick={buttonResponse} />
+                <input type="button" value="Posts" id={buttonPost} onClick={buttonShow} />
+                <input type="button" value="Respuestas" id={buttonResponse} onClick={buttonShow} />
             </div>
         
             <div id="postByUser-body">
