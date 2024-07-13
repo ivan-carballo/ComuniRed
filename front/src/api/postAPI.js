@@ -16,6 +16,31 @@ async function getpostByID(id) {
 
 
 
+async function getPostByProperty(property, value) {
+  try {
+    const response = await fetch(`${API_URL}/post/find`,
+      {
+        method: 'POST',
+        headers: { 
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ property, value })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al buscar el post 1 (HTTP ${response.status})`);
+    }
+
+    const result = await response.json();
+    //console.log('post buscado:', result);
+    return (result)
+  } catch (error) {
+    console.error('Error al buscar el post 2:', error);
+  }
+}
+
+
+
 async function postCreate(data) {
   try {
     const response = await fetch(`${API_URL}/post`,
@@ -106,6 +131,7 @@ async function postDelete(id) {
   export {
     getPost,
     getpostByID,
+    getPostByProperty,
     postCreate,
     postDelete,
     postUpdate

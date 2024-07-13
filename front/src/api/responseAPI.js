@@ -18,7 +18,7 @@ async function getresponseByID(id) {
 
 
 
-async function getPostByProperty(property, value) {
+async function getResponseByProperty(property, value) {
   try {
     const response = await fetch(`${API_URL}/response/find`,
       {
@@ -114,19 +114,6 @@ async function responseDelete(id) {
 }
 
 
-/*   async function responseUpdate(id, data) {
-    fetch(`${API_URL}/response/update/${id}`, data)
-    .then(data => {
-        if (!data.ok) {
-          throw Error(data.status);
-         }
-         return data.json();
-        }).then(update => {
-        console.log(update);
-        }).catch(e => {
-        console.log(e);
-        });
-  } */
 
 
 
@@ -134,7 +121,7 @@ async function responseDelete(id) {
   export {
     getresponse,
     getresponseByID,
-    getPostByProperty,
+    getResponseByProperty,
     responseCreate,
     responseDelete,
     responseUpdate

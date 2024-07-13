@@ -8,7 +8,7 @@ import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { responseCreate, getPostByProperty } from '../../api/responseAPI.js';
+import { responseCreate, getResponseByProperty } from '../../api/responseAPI.js';
 
 
 
@@ -43,7 +43,7 @@ function Post() {
                     userIMG = userIMG.data.img
                     dataIMG.userimg = userIMG
 
-                    let userResponse = await getPostByProperty('postID', dataIMG._id)
+                    let userResponse = await getResponseByProperty('postID', dataIMG._id)
                     dataIMG.responses = userResponse.data.length
                     datosIMG.push(dataIMG)
 
@@ -111,7 +111,7 @@ function Post() {
 
 
     async function ViewAllResponse(e) {
-        let allResponseArray = await getPostByProperty('postID', e.target.id)
+        let allResponseArray = await getResponseByProperty('postID', e.target.id)
         allResponseArray = allResponseArray.data.reverse()
 
         if(allResponseArray.length > 0) {
