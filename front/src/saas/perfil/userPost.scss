@@ -1,0 +1,60 @@
+@import '../color.scss';
+
+#postByUser-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+
+    & > input {
+        cursor: pointer;
+        border-radius: 15px;
+        padding: 5px 15px;
+        border: 0;
+        font-size: 1.2rem;
+        font-weight: 650;
+    }
+}
+
+
+#postByUser-body {
+
+    & > #postMap-div {
+        background-color: $background-divs;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+        border-radius: 25px;
+
+        & > #postMap-date {
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        & > #postMap-post {
+            background-color: $background-text;
+            text-align: justify;
+            border-radius: 15px;
+            padding: 10px;
+            width: 85%;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        & > #postMap-buttons {
+            width: 95%;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 10px 0;
+
+            & > input {
+                cursor: pointer;
+                border: 0;
+                font-weight: 600;
+                border-radius: 15px;
+                padding: 3px 10px;
+            }
+        }
+    }
+}

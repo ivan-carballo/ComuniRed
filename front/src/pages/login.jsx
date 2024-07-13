@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import '../saas/login.scss'
 
@@ -11,8 +11,12 @@ function Login() {
     const [form, setForm] = useState(<LoginForm />)
     const [buttonValue, setButtonValue] = useState('Register')
 
-    Cookies.remove('id')
-    Cookies.remove('token')
+
+    useEffect(() => {
+        Cookies.remove('id')
+        Cookies.remove('token')
+    })
+
 
 
     async function cambiarForm(e) {

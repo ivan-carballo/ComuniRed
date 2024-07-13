@@ -51,7 +51,6 @@ function UserPerfil() {
         <>
             <Navbar />
             <div id="user-body">
-                <h1>Perfil de usuario</h1>
                 <UserStadistic />
                 <AllPostByUser />
             </div>

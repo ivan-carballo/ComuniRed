@@ -37,8 +37,7 @@ function UserStadistic() {
 
     return (
         <div id="userStadistic-body">
-            <p>Nº posts: {userPost}</p>        
-            <p>Nº respuestas: {userResponse}</p>
+            <p>Nº posts: {userPost} - Nº respuestas: {userResponse}</p>
         </div>
     )
 }

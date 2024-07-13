@@ -18,7 +18,7 @@ async function getpostByID(id) {
 
 async function getPostByProperty(property, value) {
   try {
-    const response = await fetch(`${API_URL}/post/find`,
+    const post = await fetch(`${API_URL}/post/find`,
       {
         method: 'POST',
         headers: { 
@@ -27,11 +27,11 @@ async function getPostByProperty(property, value) {
         body: JSON.stringify({ property, value })
     });
 
-    if (!response.ok) {
-      throw new Error(`Error al buscar el post 1 (HTTP ${response.status})`);
+    if (!post.ok) {
+      throw new Error(`Error al buscar el post 1 (HTTP ${post.status})`);
     }
 
-    const result = await response.json();
+    const result = await post.json();
     //console.log('post buscado:', result);
     return (result)
   } catch (error) {
