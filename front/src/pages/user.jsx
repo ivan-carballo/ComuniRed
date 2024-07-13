@@ -7,6 +7,7 @@ import { obtenerToken } from "../funciones/token.js";
 import { Navigate } from "react-router-dom";
 import { UserStadistic } from '../componentes/perfil/userStadistic.jsx';
 import { AllPostByUser } from '../componentes/perfil/userPost.jsx';
+import { AllResponseByUser } from '../componentes/perfil/userResponse.jsx';
 
 
 
@@ -15,6 +16,10 @@ function UserPerfil() {
     const navigate = useNavigate()
 
     const [recarga, setRecarga] = useState(false)
+    const [show, setShow] = useState(<AllPostByUser />)
+    const [buttonResponse, setButtonResponse] = useState()
+    const [buttonPost, setButtonPost] = useState('active')
+
 
 
 
@@ -44,15 +49,39 @@ function UserPerfil() {
     }, 60000);
 
 
+    
+
+    async function buttonShow(e) {
+        const buttonValue = e.target.value
+
+        if (buttonValue === 'Posts') {
+            setShow(<AllPostByUser />)
+            setButtonPost('active')
+            setButtonResponse('')
+        } else {
+            setShow(<AllResponseByUser />)
+            setButtonPost('')
+            setButtonResponse('active')
+        }
+    }
 
 
     
     return (
         <>
             <Navbar />
+
             <div id="user-body">
+
                 <UserStadistic />
-                <AllPostByUser />
+
+            <div id="postByUser-buttons">
+                <input type="button" value="Posts" id={buttonPost} onClick={buttonShow} />
+                <input type="button" value="Respuestas" id={buttonResponse} onClick={buttonShow} />
+            </div>
+
+                {show}
+
             </div>
             
         </>

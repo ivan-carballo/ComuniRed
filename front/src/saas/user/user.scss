@@ -1,5 +1,28 @@
 @import '../color.scss';
 
+
+#postByUser-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+
+    & > input {
+        cursor: pointer;
+        border-radius: 15px;
+        padding: 5px 15px;
+        border: 0;
+        font-size: 1.2rem;
+        font-weight: 650;
+    }
+
+    & > #active {
+        background-color: $button-active;
+        color: beige;
+    }
+}
+
+
+
 #user-body {
     margin-top: 100px;
 }
