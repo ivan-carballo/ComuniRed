@@ -5,6 +5,8 @@ import { Navbar } from "../componentes/navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { obtenerToken } from "../funciones/token.js";
 import { Navigate } from "react-router-dom";
+import { UserStadistic } from '../componentes/perfil/userStadistic.jsx';
+
 
 
 
@@ -49,6 +51,7 @@ function UserPerfil() {
             <Navbar />
             <div id="user-body">
                 <h1>Perfil de usuario</h1>
+                <UserStadistic />
             </div>
             
         </>
