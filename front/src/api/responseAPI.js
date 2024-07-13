@@ -107,7 +107,7 @@ async function responseDelete(id) {
     }
 
     const result = await response.json();
-    //console.log('response eliminada:', result);
+    console.log('response eliminada:', result);
   } catch (error) {
     console.error('Error al eliminar el response:', error);
   }
