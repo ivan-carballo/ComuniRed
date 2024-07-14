@@ -2,6 +2,7 @@ import React, { useSyncExternalStore } from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { getPost, getPostByProperty, postDelete } from '../../api/postAPI.js'
+import { getResponseByProperty, responseDelete } from "../../api/responseAPI.js";
 import { getUserByID } from '../../api/userAPI.js'
 
 import '../../saas/perfil/userPost.scss'
@@ -10,7 +11,6 @@ import '../../saas/perfil/userPost.scss'
 
 function AllPostByUser () {
     const [reboot, setReboot] = useState(true)
-    const [post, setPost] = useState()
     const [show, setShow] = useState()
 
 
@@ -31,13 +31,11 @@ function AllPostByUser () {
                         <p id='postMap-post'>{data.post}</p>
                         <div id="postMap-buttons">
                             <input type="button" value="Ver respuestas" />
-                            <input type="button" value="Eliminar" id={data._id} onClick={postDelete} />
+                            <input type="button" value="Eliminar" id={data._id} onClick={postDel} />
                         </div>
                     </div>
                 )
-                setPost(postMap)
                 setShow(postMap)
-
             }
         }
         setReboot(false)
@@ -45,8 +43,17 @@ function AllPostByUser () {
 
 
 
-    async function postDelete(e) {
+    async function postDel(e) {
         const postID = await e.target.id
+
+        let getResponseByPost = await getResponseByProperty('postID', postID)
+        getResponseByPost = await getResponseByPost.data
+
+        for (let i = 0; getResponseByPost.length > i; i++) {
+            const responseID = await getResponseByPost[i]._id
+            const responseRemove = await responseDelete(responseID)
+        }
+
         const postRemove = await postDelete(postID)
         setReboot(true)
     }

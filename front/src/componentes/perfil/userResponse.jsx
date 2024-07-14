@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { getResponseByProperty, responseDelete } from '../../api/responseAPI.js'
 import { getUserByID } from '../../api/userAPI.js'
+import { UserStadistic } from "./userStadistic.jsx";
 
 import '../../saas/perfil/userPost.scss'
 
@@ -10,7 +11,6 @@ import '../../saas/perfil/userPost.scss'
 
 function AllResponseByUser () {
     const [reboot, setReboot] = useState(true)
-    const [response, setResponse] = useState()
     const [show, setShow] = useState()
 
 
@@ -31,10 +31,9 @@ function AllResponseByUser () {
                     <div id="responseMap-div" key={data._id}>
                         <p id='responseMap-date'>{data.dateString}</p>
                         <p id='responseMap-response'>{data.post}</p>
-                        <input type="button" value="Eliminar respuesta" id={data._id} onClick={responseDelete} />
+                        <input type="button" value="Eliminar respuesta" id={data._id} onClick={responseDel} />
                     </div>
                 )
-                setResponse(responseMap)
                 setShow(responseMap)
             }
         }
@@ -42,7 +41,7 @@ function AllResponseByUser () {
     }, [reboot])
 
 
-    async function responseDelete(e) {
+    async function responseDel(e) {
         const responseID = await e.target.id
         const responseRemove = await responseDelete(responseID)
         setReboot(true)
