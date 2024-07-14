@@ -84,9 +84,9 @@ function AllPostByUser () {
         
         const responseMap = getResponseByPost.map((data) => 
             <div id="responseMap-div" key={data._id}>
+                <h2>{data.username}</h2>
                 <p>{data.dateString}</p>
-                <p>{data.username}</p>
-                <p>{data.post}</p>
+                <p id='reponseMap-post'>{data.post}</p>
             </div>
         )
 
@@ -120,7 +120,6 @@ function AllPostByUser () {
                     </div>
                     <div id="allResponse-buttons">
                         <button className='allResponse-button' onClick={close}>Cerrar</button>
-                        {/* <button className='allResponse-button' id={allResponseID} onClick={responsePost}>Responder</button> */}
                     </div>
 
                     </Modal>
