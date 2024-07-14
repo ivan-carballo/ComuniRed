@@ -46,14 +46,12 @@ function Post() {
                     let userResponse = await getResponseByProperty('postID', dataIMG._id)
                     dataIMG.responses = userResponse.data.length
                     datosIMG.push(dataIMG)
-
-                  
                 })
 
                 
                 setTimeout(async () => {
                     await mapPost()
-                }, 1000);
+                }, 1200);
 
 
                 async function mapPost() {

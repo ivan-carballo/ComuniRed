@@ -27,12 +27,22 @@ function AllPostByUser () {
                 let getPost = await getPostByProperty('userID', userID)
                 getPost = getPost.data.reverse()
 
-                const postMap = getPost.map((data) => 
+                let getPostArray = []
+
+                for (let i = 0; getPost.length > i; i++) {
+                    let numberResponses = await getResponseByProperty('postID', getPost[i]._id)
+                    numberResponses = numberResponses.data.length
+                    getPost[i].responses = numberResponses
+                    getPostArray.push(getPost[i])
+                }
+
+
+                const postMap = getPostArray.map((data) => 
                     <div id='postMap-div' key={data._id}>
                         <p id='postMap-date'>{data.dateString}</p>
                         <p id='postMap-post'>{data.post}</p>
                         <div id="postMap-buttons">
-                            <input type="button" value="Ver respuestas" id={data._id} onClick={postShow} />
+                            <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={postShow} />
                             <input type="button" value="Eliminar" id={data._id} onClick={postDel} />
                         </div>
                     </div>
@@ -80,7 +90,7 @@ function AllPostByUser () {
             </div>
         )
 
-        setModalResponse(responseMap)
+        responseMap.length > 0 ? setModalResponse(responseMap) : setModalResponse(null)
     }
 
 
