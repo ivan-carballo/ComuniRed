@@ -59,7 +59,7 @@ function Post() {
                         <div id='post-div' key={data._id}>
                             <div id="post-header">
                                 <img src={data.userimg} />
-                                <a href={`/user/${data._id}`}>
+                                <a href={`/user/${data.userID}`}>
                                     <h2>{data.username}</h2>
                                 </a>
                             </div>

@@ -1,0 +1,39 @@
+@import '../color.scss';
+
+
+#perfilData-body {
+    border-bottom: solid 2px green;
+    padding-bottom: 5px;
+    position: fixed;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+
+    & > #perfilData-data {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        & > img {
+            width: 100px;
+        }
+
+        & > #perfilData-p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-items: center;
+
+            & > p {
+                margin: 0;
+            }
+    
+            & > #perfilData-user {
+                font-size: 1.8rem;
+                font-weight: 750;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

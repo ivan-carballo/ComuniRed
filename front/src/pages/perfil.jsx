@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
+import { PerfilData } from "../componentes/otherPerfil/perfilData";
 
 import '../saas/otherPerfil/perfil.scss'
 
@@ -15,7 +16,9 @@ function Perfil() {
             <Navbar />
         
             <div id="perfil-body">
-                <h2>{id}</h2>
+                
+                <PerfilData id={id} />
+
             </div>
         </>
     )

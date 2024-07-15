@@ -2,6 +2,7 @@ import React from "react";
 import sha256 from 'js-sha256'
 import { useState, useEffect, useContext } from "react";
 import { getUser, userCreate } from "../../api/userAPI";
+import { dateFormat } from "../../funciones/fecha.js";
 
 
 
@@ -20,6 +21,7 @@ function RegisterForm() {
         const formEmail = formRuta[1].value
         const formPassword = formRuta[2].value
         const formRepeatPassword = formRuta[3].value
+        const formDate = await dateFormat(Date.now())
 
         const usersAll = await getUser()
         const emailFiltrar = usersAll.data.filter((data) => data.email === formEmail)
@@ -46,7 +48,11 @@ function RegisterForm() {
         } else {
             setAviso('Su usuario ha sido creado correctamente')
             
-            const userArrayNew = {'username':formUsername, 'email':formEmail, 'password':sha256(formPassword), 'role':'user'}
+            const userArrayNew = {'username':formUsername, 
+                                'email':formEmail, 
+                                'password':sha256(formPassword), 
+                                'role':'user',
+                                'dateString': formDate}
 
             const userCrear = await userCreate(userArrayNew)
 
