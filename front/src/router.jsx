@@ -4,6 +4,7 @@ import { Login } from "./pages/login.jsx";
 import { UserPerfil } from "./pages/user.jsx";
 import { Perfil } from "./pages/perfil.jsx";
 import { Options } from "./pages/options.jsx";
+import { Response } from "./pages/response.jsx";
 import React from 'react';
 
 
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: "/user/:id",
     element: <Perfil />
+  },
+
+  {
+    path: "/response/:id",
+    element: <Response />
   }
 
 ]);

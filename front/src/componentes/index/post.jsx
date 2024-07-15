@@ -9,6 +9,7 @@ import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
 import { responseCreate, getResponseByProperty } from '../../api/responseAPI.js';
+import { Response } from '../../pages/response.jsx';
 
 
 
@@ -67,7 +68,10 @@ function Post() {
                             <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
                             <div id="buttons-post">
-                                <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                                <a href={`/response/${data._id}`}>
+                                    {/* <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} /> */}
+                                    <input type="button" value="Responder" id={data._id} />
+                                </a>
                                 <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
                                 {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>}
                             </div>

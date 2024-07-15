@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getUserByID } from "../../api/userAPI";
+import { getPostByProperty } from "../../api/postAPI";
 
 import '../../saas/otherPerfil/perfilData.scss'
 
@@ -9,6 +10,7 @@ function PerfilData({id}) {
     const [username, setUsername] = useState()
     const [perfilIMG, setPerfilIMG] = useState()
     const [date, setDate] = useState()
+    const [post, setPost] = useState()
 
 
     useEffect(() => {
@@ -22,9 +24,12 @@ function PerfilData({id}) {
             date = `${date[1]} ${date[2]}`
             date = date.charAt(0).toUpperCase() + date.slice(1).toLowerCase()
 
+            const getPostByUser = await getPostByProperty('userID', id)
+
             setUsername(getOtherUser.username)
             setPerfilIMG(getOtherUser.img)
             setDate(date)
+            setPost(getPostByUser.data.length)
 
         }
     })
@@ -38,7 +43,8 @@ function PerfilData({id}) {
                 <img src={perfilIMG} />
                 <div id="perfilData-p">
                     <p id='perfilData-user'>{username}</p>
-                    <p id='perfilData-date'>Usuario desde: {date}</p>
+                    <p id='perfilData-date'>Registrado: {date}</p>
+                    <p id='perfilData-post'>Nº post: {post}</p>
                 </div>
 
             </div>

@@ -23,10 +23,11 @@
 
     & > #getPost-post {
         margin: 5px 0;
-        text-align: justify;
+        text-align: center;
         background-color: $background-text;
         border-radius: 25px;
         padding: 8px 20px;
+        width: 90%;
     }
 
     & > #getPost-buttons {
