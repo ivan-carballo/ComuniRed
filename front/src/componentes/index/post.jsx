@@ -58,8 +58,10 @@ function Post() {
                     const allPostMap = await datosIMG.map((data) => 
                         <div id='post-div' key={data._id}>
                             <div id="post-header">
-                                <img src={data.userimg} />                        
-                                <h2>{data.username}</h2>
+                                <img src={data.userimg} />
+                                <a href={`/user/${data._id}`}>
+                                    <h2>{data.username}</h2>
+                                </a>
                             </div>
                             <h4 id='post-date'>{data.dateString}</h4>
                             <p id='post-post'>{data.post}</p>
