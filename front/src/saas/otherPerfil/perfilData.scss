@@ -2,10 +2,13 @@
 
 
 #perfilData-body {
+    background-color: $background;
     border-bottom: solid 2px green;
-    padding-bottom: 5px;
+    padding: 5px 0;
+    margin-top: -10px;
     position: fixed;
-    width: 95%;
+    width: 100%;
+    left: 0;
     display: flex;
     justify-content: center;
 
