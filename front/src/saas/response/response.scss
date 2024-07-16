@@ -72,8 +72,9 @@
         border-left: green 2px solid;
         border-bottom: green 2px solid;
         margin-top: 5px;
-        padding: 0 10px;
-        width: 85%;
+        margin-right: -5px;
+        padding: 0 5px;
+        width: 90%;
 
         & > #getResponse-div {
             background-color: $background-divs;
