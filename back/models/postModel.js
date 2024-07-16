@@ -24,6 +24,7 @@ const userSchema  = new mongoose.Schema({
 
     post: {
         type: String,
+        required: true,
     },
 
     img: {

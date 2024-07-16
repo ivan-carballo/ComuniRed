@@ -1,7 +1,60 @@
 @import '../color.scss';
 
+
+
 #post-body {
     margin-top: 235px;
+}
+
+
+
+#modalResponse-body {
+    background-color: $background-divs;
+    border-radius: 25px;
+    padding: 5px;
+
+    & > #modalResponse-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > #modalResponse-form-header {
+            border: solid 2px greenyellow;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        & > #modalResponse-form-response {
+            border: solid 2px aquamarine;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            & > textarea {
+                border-radius: 15px;
+                padding: 3px 10px;
+                border: 0;
+            }
+        }
+    }
+
+
+    & > #modalResponse-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 10px 0;
+
+        & > button {
+            border: 0;
+            border-radius: 15px;
+            padding: 3px 8px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    }
 }
 
 
@@ -57,6 +110,7 @@
         text-align: justify;
         border-radius: 15px;
         padding: 10px;
+        white-space: pre-wrap;
     }
 
     & > #buttons-post {

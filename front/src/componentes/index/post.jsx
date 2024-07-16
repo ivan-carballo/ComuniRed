@@ -1,5 +1,4 @@
 import '../../saas/index/post.scss'
-import '../../saas/index/viewAllResponse.scss'
 
 import React from 'react';
 import Cookies from 'js-cookie'
@@ -101,12 +100,12 @@ function Post() {
         const postUser = userName.data.username
         const postOriginID = e.target.id
         const postDate = await dateFormat(Date.now())
-        const postResponse = e.target.offsetParent.children[0].lastChild.value
+        const postResponse = document.getElementById('modalResponse-textarea')
 
         const arrayResponse = {'postID': postOriginID,
                                 'username': postUser,
                                 'dateString': postDate,
-                                'post': postResponse}
+                                'post': postResponse.value}
 
         const sendResponse = await responseCreate(arrayResponse)
         setResponse(null)
@@ -118,7 +117,6 @@ function Post() {
 
     async function close() {
         setResponse(null)
-        setAllResponse(null)
     }
 
 
@@ -130,17 +128,28 @@ function Post() {
             {response && 
                 <Modal isOpen={true}>
 
-                    <div id="completo">
-                        <img src="" />
-                        <p>Responder a {response.username}</p>
-                        <p>{response.post}</p>
+                    <div id="modalResponse-body">
 
-                        <img src="" />
-                        <textarea cols="25" rows="8" placeholder={`Escriba su respuesta`} />
-                    </div>
-                    <div id="buttons">
-                        <button onClick={close}>Cerrar</button>
-                        <button id={response._id} onClick={responsePost}>Responder</button>
+                        <div id="modalResponse-form">
+
+                            <div id="modalResponse-form-header">
+                                <img src="" />
+                                <p>Responder a {response.username}</p>
+                                <p>{response.post}</p>
+                            </div>
+
+                            <div id="modalResponse-form-response">
+                                <img src="" />
+                                <textarea id='modalResponse-textarea' cols="32" rows="10" placeholder='Escriba su respuesta' />
+                            </div>
+
+                        </div>
+
+                        <div id="modalResponse-buttons">
+                            <button onClick={close}>Cerrar</button>
+                            <button id={response._id} onClick={responsePost}>Enviar respuesta</button>
+                        </div>
+
                     </div>
 
                 </Modal>
