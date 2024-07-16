@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Navbar } from "../componentes/navbar";
+import { ResponseForm } from "../componentes/responseForm";
 import { useParams } from "react-router-dom";
 import { getpostByID } from "../api/postAPI";
 import { getResponseByProperty } from "../api/responseAPI";
 import { getUserByID } from "../api/userAPI";
 
-import '../saas/response.scss'
+import '../saas/response/response.scss'
 
 
 function Response() {
@@ -59,6 +60,10 @@ function Response() {
             <Navbar />
 
             <div id="response-body">
+
+                <div id="response-responseForm">
+                    <ResponseForm id={id} />
+                </div>
 
                 <div id="response-postPrincipal">
 

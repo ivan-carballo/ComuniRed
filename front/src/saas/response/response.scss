@@ -1,8 +1,14 @@
-@import './color.scss';
+@import '../color.scss';
 
 
 #response-body {
     margin-top: 100px;
+}
+
+
+
+#response-responseForm {
+    margin-bottom: 10px;
 }
 
 
@@ -67,7 +73,7 @@
         border-bottom: green 2px solid;
         margin-top: 5px;
         padding: 0 10px;
-        width: 80%;
+        width: 85%;
 
         & > #getResponse-div {
             background-color: $background-divs;
@@ -89,8 +95,8 @@
             & > #getResponse-div-post {
                 background-color: $background-text;
                 border-radius: 15px;
-                padding: 5px 10px;
-                margin: 0 10px 5px 10px;
+                padding: 5px;
+                margin: 0 5px;
             }
         }
     }
