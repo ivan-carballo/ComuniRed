@@ -13,20 +13,26 @@
         display: flex;
         justify-content: space-evenly;
 
-        & > .activeSection {
-            color: $navbar-icons;
-            text-decoration: none;
-            font-size:3rem;
-        }
-
         & > .link {
             color: rgb(8, 189, 8);
             text-decoration: none;
-            font-size:1.5rem;
+            font-size: 1.5rem;
 
             &:hover{
                 color: $navbar-icons;
             } 
+        }
+
+        
+        & > .notification {
+            color: red;
+            text-decoration: none;
+            font-size: 1.5rem;
+
+            & > :hover {
+                color: rgb(119, 0, 0);
+            }
+
         }
     }
 }
