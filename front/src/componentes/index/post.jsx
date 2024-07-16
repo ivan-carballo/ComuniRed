@@ -20,8 +20,6 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
-    const [allResponseID, setAllResponseID] = useState('')
-    const [allResponse, setAllResponse] = useState('')
 
 
     let sacarResponses = []
@@ -68,11 +66,12 @@ function Post() {
                             <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
                             <div id="buttons-post">
+                                <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                                
                                 <a href={`/response/${data._id}`}>
-                                    {/* <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} /> */}
-                                    <input type="button" value="Responder" id={data._id} />
+                                    <input type="button" value='Ver detalle' id={data._id} />
                                 </a>
-                                <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={ViewAllResponse} />
+
                                 {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>}
                             </div>
                         </div>
@@ -114,21 +113,6 @@ function Post() {
 
 
 
-    async function ViewAllResponse(e) {
-        let allResponseArray = await getResponseByProperty('postID', e.target.id)
-        allResponseArray = allResponseArray.data.reverse()
-
-        if(allResponseArray.length > 0) {
-            const allResponseMap = await allResponseArray.map((dataResponse) => 
-                <div id='response-div' key={dataResponse._id}>
-                    <p>{dataResponse.username} - {dataResponse.dateString}</p>
-                    <p>{dataResponse.post}</p>
-                </div>
-            )
-            setAllResponse(allResponseMap)
-        }
-    }
-
 
     async function close() {
         setResponse(null)
@@ -160,19 +144,6 @@ function Post() {
                 </Modal>
             }
 
-
-            {allResponse &&
-                <Modal isOpen={true}>
-
-                    <div id="allResponse-completo">
-                        {allResponse}
-                    </div>
-                    <div id="allResponse-buttons">
-                        <button className='allResponse-button' onClick={close}>Cerrar</button>
-                        {/* <button className='allResponse-button' id={allResponseID} onClick={responsePost}>Responder</button> */}
-                    </div>
-                </Modal>
-            }
 
             <div id="listPost">
                 {data}
