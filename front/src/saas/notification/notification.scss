@@ -4,3 +4,19 @@
 #notification-body {
     margin-top: 50px;
 }
+
+
+
+#notification-a {
+    text-decoration: none;
+}
+
+
+
+#notification-div {
+    background-color: $background-divs;
+    
+    & > p {
+        color: black;
+    }
+}
