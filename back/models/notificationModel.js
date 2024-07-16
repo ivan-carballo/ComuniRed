@@ -7,6 +7,11 @@ const userSchema  = new mongoose.Schema({
         required: true,
     },
 
+    userPrincipalID :{
+        type: String,
+        required: true,
+    },
+
     username: {
         type: String,
         require: true

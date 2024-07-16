@@ -16,6 +16,14 @@ const Navbar = () => {
     const [notification, setNotification] = useState(false)
 
 
+
+    useEffect(() => {
+        if (userID == null) {
+            logout()
+        }
+    }, [])
+
+    
    
     async function logout() {
         Cookies.remove('id')

@@ -53,13 +53,13 @@ async function notificationCreate(data) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error al crear el post (HTTP ${response.status})`);
+      throw new Error(`Error al crear la notificacion (HTTP ${response.status})`);
     }
 
     const result = await response.json();
-    console.log('post creado:', result);
+    console.log('Notificacion creada:', result);
   } catch (error) {
-    console.error('Error al crear el post:', error);
+    console.error('Error al crear la notificacion:', error);
   }
 }
 

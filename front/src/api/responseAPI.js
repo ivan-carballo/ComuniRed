@@ -1,5 +1,9 @@
 import { API_URL } from "./API.js"
 
+import { dateFormat } from '../funciones/fecha.js'
+import { notificationCreate } from "./notificationAPI.js";
+import { getpostByID } from "./postAPI.js";
+
 
 async function getresponse() {
   let dato = await fetch(`${API_URL}/response`);
@@ -44,6 +48,8 @@ async function getResponseByProperty(property, value) {
 
 
 
+
+
 async function responseCreate(data) {
   try {
     const response = await fetch(`${API_URL}/response`,
@@ -61,10 +67,29 @@ async function responseCreate(data) {
 
     const result = await response.json();
     console.log('response creado:', result);
+
+
+    const getPostID = await getpostByID(data.postID)
+
+    const notificationArray = {'postPrincipalID': data.postID,
+                            'username': data.username,
+                            'dateString': await dateFormat(Date.now()),
+                            'post': data.post,
+                            'userPrincipalID': getPostID.data.userID}
+  
+    const notificationSend = await notificationCreate(notificationArray)
+
+
   } catch (error) {
     console.error('Error al crear el response 2:', error);
   }
+
+
+  
 }
+
+
+
 
 
 
@@ -89,6 +114,9 @@ async function responseUpdate(id, data) {
     console.error('Error al actualizar el response:', error);
   }
 }
+
+
+
 
 
 
