@@ -10,6 +10,7 @@ import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
 import { responseCreate, getResponseByProperty } from '../../api/responseAPI.js';
 import { Response } from '../../pages/response.jsx';
+import { postRemove } from '../../funciones/postDelete.js';
 
 
 
@@ -87,7 +88,8 @@ function Post() {
 
 
     async function deletePost(e) {
-        const deletePostAPI = await postDelete(e.target.id)
+        const postID = e.target.id
+        const deletePostAPI = await postRemove(postID)
         setRecarga(true)
     }
 

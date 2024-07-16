@@ -32,7 +32,7 @@ async function getPostByProperty(property, value) {
     }
 
     const result = await post.json();
-    //console.log('post buscado:', result);
+    console.log('post buscado:', result);
     return (result)
   } catch (error) {
     console.error('Error al buscar el post 2:', error);
@@ -57,7 +57,7 @@ async function postCreate(data) {
     }
 
     const result = await response.json();
-    //console.log('post creado:', result);
+    console.log('post creado:', result);
   } catch (error) {
     console.error('Error al crear el post:', error);
   }
@@ -104,7 +104,7 @@ async function postDelete(id) {
     }
 
     const result = await response.json();
-    //console.log('post eliminada:', result);
+    console.log('post eliminada:', result);
   } catch (error) {
     console.error('Error al eliminar el post:', error);
   }

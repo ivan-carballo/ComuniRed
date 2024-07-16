@@ -34,7 +34,7 @@ async function getResponseByProperty(property, value) {
     }
 
     const result = await response.json();
-    //console.log('response buscado:', result);
+    console.log('response buscado:', result);
     return (result)
   } catch (error) {
     console.error('Error al buscar el response 2:', error);
