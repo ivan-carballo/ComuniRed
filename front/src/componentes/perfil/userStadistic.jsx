@@ -13,6 +13,7 @@ import '../../saas/perfil/userStadistic.scss'
 function UserStadistic() {
     const [userPost, setUserPost] = useState()
     const [userResponse, setUserResponse] = useState()
+    const [user, setUser] = useState()
 
 
     
@@ -23,6 +24,7 @@ function UserStadistic() {
 
             const userUsername = await getUserByID(userID)
             const username = userUsername.data.username
+            setUser(username)
 
             const userPost = await getPostByProperty('userID', userID)
             const userResponse = await getResponseByProperty('username', username)
@@ -37,6 +39,7 @@ function UserStadistic() {
 
     return (
         <div id="userStadistic-body">
+            <p id='userStadistic-welcome'>Bienvenido {user}</p>
             <p>Nº posts: {userPost} - Nº respuestas: {userResponse}</p>
         </div>
     )

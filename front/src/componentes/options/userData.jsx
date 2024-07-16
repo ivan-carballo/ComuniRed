@@ -31,6 +31,7 @@ function UserData() {
             <div id="userData-img">
                 <img src={data.img} />
             </div>
+            
             <div id="userData-data">
                 <p>Nombre de usuario: {data.username}</p>
                 <p>Email: {data.email}</p>

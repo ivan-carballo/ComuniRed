@@ -1,6 +1,11 @@
+@import '../color.scss';
+
+
+
 #userStadistic-body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     border-bottom: solid 2px green;
     margin-top: -10px;
     padding-bottom: 6px;
@@ -8,5 +13,13 @@
     & > p {
         font-size: 1.25rem;
         font-weight: 600;
+        margin: 5px;
+        padding: 2px;
+    }
+
+    & > #userStadistic-welcome {
+        letter-spacing: 2px;
+        font-size: 1.5rem;
+        color: $rotulo;
     }
 }

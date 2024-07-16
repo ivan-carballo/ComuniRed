@@ -51,7 +51,7 @@ function Post() {
                 
                 setTimeout(async () => {
                     await mapPost()
-                }, 1200);
+                }, 1000);
 
 
                 async function mapPost() {
@@ -59,11 +59,11 @@ function Post() {
                         <div id='post-div' key={data._id}>
                             <div id="post-header">
                                 <img src={data.userimg} />
-                                <a href={`/user/${data.userID}`}>
-                                    <h2>{data.username}</h2>
-                                </a>
+                                <div id="post-header-data">
+                                    <a href={`/user/${data.userID}`}> <h2>{data.username}</h2> </a>
+                                    <h4 id='post-date'>{data.dateString}</h4>
+                                </div>
                             </div>
-                            <h4 id='post-date'>{data.dateString}</h4>
                             <p id='post-post'>{data.post}</p>
                             <img src={data.img} />
                             <div id="buttons-post">

@@ -1,8 +1,10 @@
 @import '../color.scss';
 
 #post-body {
-    margin-top: 300px;
+    margin-top: 235px;
 }
+
+
 
 #post-div {
     background-color: $background-divs;
@@ -17,8 +19,32 @@
 
         & > img {
             border-radius: 50%;
-            margin: 10px 25px 0 0;
+            margin: 5px 5px 0 0;
             height: 100px;
+        }
+
+        & > #post-header-data {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            & > h5 {
+                margin: 0;
+            }
+
+            & > a {
+                text-decoration: none;
+                margin: 0;
+
+                & > h2 {
+                    letter-spacing: 2px;
+                    margin: 2px;
+                }
+            }
+
         }
     }
 
@@ -36,7 +62,7 @@
     & > #buttons-post {
         display: flex;
         justify-content: space-evenly;
-        padding-bottom: 15px;
-        margin-top: -10px;
+        padding-bottom: 5px;
+        margin-top: -20px;
     }
 }

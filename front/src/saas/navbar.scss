@@ -2,27 +2,27 @@
 
 #navbar-global {
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
     width: 100%;
     background-color: $background;
     border-bottom: 2px solid green;
 
     & > #navbar-links {
-        margin-top: 15px;
+        margin-top: 8px;
         display: flex;
         justify-content: space-evenly;
 
         & > .activeSection {
             color: $navbar-icons;
             text-decoration: none;
-            font-size:3.5rem;
+            font-size:3rem;
         }
 
         & > .link {
             color: rgb(8, 189, 8);
             text-decoration: none;
-            font-size:3.5rem;
+            font-size:1.5rem;
 
             &:hover{
                 color: $navbar-icons;

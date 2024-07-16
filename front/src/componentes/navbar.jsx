@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
-import { FaHome, FaUserSlash, FaUserCircle, FaCog } from 'react-icons/fa'
+import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell } from 'react-icons/fa'
 
 
 
