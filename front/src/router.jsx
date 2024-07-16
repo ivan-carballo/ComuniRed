@@ -5,6 +5,7 @@ import { UserPerfil } from "./pages/user.jsx";
 import { Perfil } from "./pages/perfil.jsx";
 import { Options } from "./pages/options.jsx";
 import { Response } from "./pages/response.jsx";
+import { Notification } from "./pages/notification.jsx";
 import React from 'react';
 
 
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
   {
     path: "/response/:id",
     element: <Response />
+  },
+
+  {
+    path: "/notification",
+    element: <Notification />
   }
 
 ]);

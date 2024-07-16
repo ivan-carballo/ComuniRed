@@ -29,9 +29,12 @@ const userSchema  = new mongoose.Schema({
 
     img: {
         type: String,
+    },
+
+    accept: {
+        type: Boolean,
+        default: 0,
     }
-
-
 
 
 })
