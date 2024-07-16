@@ -26,8 +26,8 @@ function OtherPost({id}) {
                     <p id='getPost-date'>{data.dateString}</p>
                     <p id='getPost-post'>{data.post}</p>
                     <div id="getPost-buttons">
-                        <input type="button" value="Responder" id={data._id} onClick={responsePost} />
-                        <input type="button" value="Ver respuestas" id={data._id} />
+                        <input className="getPost-buttons-input" type="button" value="Responder" id={data._id} onClick={responsePost} />
+                        <a href={`/response/${data._id}`}> <input className="getPost-buttons-input" type="button" value="Ver respuestas" id={data._id} /> </a>
                     </div>
                 </div>
             )
