@@ -2,13 +2,13 @@
 
 
 #search-body {
-    margin-top: 50px;
+    margin-top: 60px;
 
     & > #search-form {
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: solid 2px red;
+        border-bottom: solid green 2px;
 
         & > select {
             width: fit-content;
@@ -27,6 +27,95 @@
             width: 75%;
             text-align: center;
             margin: 15px 0;
+        }
+    }
+}
+
+
+#search-result {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > #userSearch-div {
+        background-color: $background-divs;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 25px;
+        width: 250px;
+        margin: 5px 0;
+        cursor: pointer;
+        
+        & > img {
+            border-radius: 50%;
+            width: 75px;
+            margin: 5px 0;
+        }
+
+        & > p {
+            background-color: $background-text;
+            border-radius: 15px;
+            padding: 5px 15px;
+            letter-spacing: 2px;
+            font-size: 1.25rem;
+        }
+    }
+
+
+
+
+
+
+    & > #postSearch-div {
+        background-color: $background-divs;
+        border-radius: 25px;
+        padding: 5px;
+        margin: 5px;
+        width: 315px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > #postSearch-post {
+            background-color: $background-text;
+            border-radius: 15px;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        & > p {
+            margin: 5px 0;
+        }
+    }
+
+
+
+
+
+
+    & > #responseSearch-div {
+        background-color: $background-divs;
+        border-radius: 25px;
+        margin: 5px 0;
+        padding: 5px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 315px;
+
+        & > #responseSearch-post {
+            background-color: $background-text;
+            border-radius: 15px;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        & > p {
+            margin: 5px 0;
         }
     }
 }

@@ -33,6 +33,7 @@ function Search() {
             if (userSearch.data.length > 0) {
                 const userMap = userSearch.data.map((data) => 
                     <div key={data._id} id="userSearch-div" onClick={async () => navigate(`/user/${data._id}`)}>
+                        <img src={data.img} />
                         <p>{data.username}</p>
                     </div>
                 )
@@ -46,8 +47,8 @@ function Search() {
             if (postSearch.data.length > 0) {
                 const postMap = postSearch.data.map((data) => 
                     <div key={data._id} id="postSearch-div" onClick={async () => navigate(`/response/${data._id}`)}>
-                        <p>{data.username}</p>
-                        <p>{data.post}</p>
+                        <p>{data.username} / {data.dateString}</p>
+                        <p id='postSearch-post'>{data.post}</p>
                     </div>
                 )
                 setData(postMap)
@@ -60,8 +61,8 @@ function Search() {
             if (responseSearch.data.length > 0) {
                 const responseMap = responseSearch.data.map((data) => 
                     <div key={data._id} id="responseSearch-div" onClick={async () => navigate(`/response/${data.postID}`)}>
-                        <p>{data.username}</p>
-                        <p>{data.post}</p>
+                        <p>{data.username} / {data.dateString}</p>
+                        <p id='responseSearch-post'>{data.post}</p>
                     </div>
                 )
                 setData(responseMap)
@@ -81,7 +82,6 @@ function Search() {
             <Navbar />
         
             <div id="search-body">
-                <h2>Estas en search</h2>
                 <div id="search-form">
                     <select>
                         <option value="user">Usuarios</option>
