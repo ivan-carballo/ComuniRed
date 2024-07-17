@@ -53,7 +53,7 @@ function Post() {
                 
                 setTimeout(async () => {
                     await mapPost()
-                }, 1000);
+                }, 500);
 
 
                 async function mapPost() {

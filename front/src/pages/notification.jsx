@@ -57,7 +57,11 @@ function Notification() {
         const notificacionPostPrincipal = await getNotificationByID(notificationID)
         const postPrincipalID = await notificacionPostPrincipal.data.postPrincipalID
 
-        const notificationRemove = await notificationDelete(notificationID)
+        const notificationAllByPost = await getNotificationByProperty('postPrincipalID', postPrincipalID)
+
+        for (let i = 0; notificationAllByPost.data.length > i; i++) {
+            const notificationRemove = await notificationDelete(notificationAllByPost.data[i]._id)
+        }
 
         navigate(`/response/${postPrincipalID}`)
     }
