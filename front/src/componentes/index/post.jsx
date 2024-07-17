@@ -3,6 +3,7 @@ import '../../saas/index/post.scss'
 import React from 'react';
 import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js';
+import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
@@ -16,6 +17,7 @@ import { postRemove } from '../../funciones/postDelete.js';
 
 
 function Post() {
+    const navigate = useNavigate()
     const userID = Cookies.get('id')
 
     const [recarga, setRecarga] = useState(true)
@@ -68,11 +70,7 @@ function Post() {
                             <img src={data.img} />
                             <div id="buttons-post">
                                 <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
-                                
-                                <a href={`/response/${data._id}`}>
-                                    <input type="button" value='Ver detalle' id={data._id} />
-                                </a>
-
+                                <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
                                 {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>}
                             </div>
                         </div>
