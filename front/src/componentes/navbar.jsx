@@ -14,6 +14,7 @@ const Navbar = () => {
     const userID = Cookies.get('id')
 
     const [notification, setNotification] = useState(false)
+    const [reboot, setReboot] = useState(true)
 
 
 
@@ -32,16 +33,22 @@ const Navbar = () => {
     }
 
 
+    setInterval(() => {
+        setReboot(true)
+    }, 10000);
+
 
 
     useEffect(() => {
-        alertNotification()
-        async function alertNotification() {
-            const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
-            getNotificationByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
+        if(reboot) {
+            alertNotification()
+            async function alertNotification() {
+                const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
+                getNotificationByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
+            }
         }
-
-    }, [])
+        setReboot(false)
+    }, [reboot])
 
 
 

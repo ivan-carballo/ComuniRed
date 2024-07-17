@@ -27,11 +27,10 @@ function Notification() {
             showNotification()
             async function showNotification() {
                 const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
+                const getNotificationByUserFilter = getNotificationByUser.data.filter((data) => data.userPrincipalID != userID)
                 
-                if (getNotificationByUser.data.reverse().length > 0) {
-                    const notificacionMap = getNotificationByUser.data.map((data) => 
-
-                        //<a id='notification-a' href={`/response/${data.postPrincipalID}`} key={data._id}>
+                if (getNotificationByUserFilter.reverse().length > 0) {
+                    const notificacionMap = getNotificationByUserFilter.data.map((data) => 
 
                             <div key={data._id} name={data._id} id="notification-div" onClick={notificationDetail}>
                                 <p id='notification-p-username' name={data._id}>{data.username}</p>
@@ -39,15 +38,14 @@ function Notification() {
                                 <p id='notification-p-post' name={data._id}>{data.post}</p>
                             </div>
 
-                        //</a>
-
                     )
                     setData(notificacionMap)
                 }
             }
+            setReboot(false)
         }
 
-        setReboot(false)
+        
     }, [reboot])
 
 
@@ -68,12 +66,28 @@ function Notification() {
 
 
 
+    
+    async function notificationView() {
+        const notificationRemoveAll = await getNotificationByProperty('userPrincipalID', userID)
+
+        for (let i = 0; notificationRemoveAll.data.length > i; i++) {
+            //const notificationRemoveLoop = notificationDelete(notificationRemoveAll.data[i]._id)
+        }
+
+        setReboot(true)
+    }
+
+
 
 
     return (
         <>
 
             <Navbar />
+
+            <div id="notification-readAll">
+                <input type="button" value="Marcar todas como vistas" onClick={notificationView} />
+            </div>
         
             <div id="notification-body">
 
