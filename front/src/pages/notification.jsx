@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
 import Cookies from 'js-cookie'
-import { getNotificationByProperty } from '../api/notificationAPI.js'
+import { getNotificationByID, getNotificationByProperty, notificationDelete } from '../api/notificationAPI.js'
+import { responseUpdate } from '../api/responseAPI.js'
 
 
 import '../saas/notification/notification.scss'
@@ -10,6 +12,7 @@ import '../saas/notification/notification.scss'
 
 
 function Notification() {
+    const navigate = useNavigate()
     const userID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
@@ -28,15 +31,15 @@ function Notification() {
                 if (getNotificationByUser.data.reverse().length > 0) {
                     const notificacionMap = getNotificationByUser.data.map((data) => 
 
-                        <a id='notification-a' href="http://" key={data._id}>
+                        //<a id='notification-a' href={`/response/${data.postPrincipalID}`} key={data._id}>
 
-                            <div key={data._id} id="notification-div">
-                                <p>{data.username}</p>
-                                <p>{data.dateString}</p>
-                                <p>{data.post}</p>
+                            <div key={data._id} name={data._id} id="notification-div" onClick={notificationDetail}>
+                                <p id='notification-p-username' name={data._id}>{data.username}</p>
+                                <p id='notification-p-date' name={data._id}>{data.dateString}</p>
+                                <p id='notification-p-post' name={data._id}>{data.post}</p>
                             </div>
 
-                        </a>
+                        //</a>
 
                     )
                     setData(notificacionMap)
@@ -46,6 +49,22 @@ function Notification() {
 
         setReboot(false)
     }, [reboot])
+
+
+
+
+    
+    async function notificationDetail(e) {
+        const notificationID = e.target.attributes.name.value
+        
+        const notificacionPostPrincipal = await getNotificationByID(notificationID)
+        const postPrincipalID = await notificacionPostPrincipal.data.postPrincipalID
+
+        const notificationRemove = await notificationDelete(notificationID)
+
+        navigate(`/response/${postPrincipalID}`)
+    }
+
 
 
 

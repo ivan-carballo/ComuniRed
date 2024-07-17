@@ -15,8 +15,31 @@
 
 #notification-div {
     background-color: $background-divs;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    padding: 3px 10px;
+    margin: 10px 0;
+    cursor: pointer;
     
     & > p {
         color: black;
+        margin: 2px 0;
+    }
+
+    & > #notification-p-username {
+        font-weight: 750;
+        letter-spacing: 2px;
+        font-size: 1.5rem;
+    }
+
+    & > #notification-p-post {
+        background-color: $background-text;
+        border-radius: 15px;
+        padding: 3px 10px;
+        margin: 10px 0;
+        white-space: pre-wrap;
     }
 }
