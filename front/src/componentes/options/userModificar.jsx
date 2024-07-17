@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
 import { getUser, userUpdate } from '../../api/userAPI.js'
+import ImageResizer from '../imageUpload.jsx';
 
 
 function UserModificar() {
@@ -24,7 +25,6 @@ function UserModificar() {
         const newEmail = e.target.parentElement.childNodes[1].value
         const newPassword = e.target.parentElement.childNodes[2].value
         const newRepeatPassword = e.target.parentElement.childNodes[3].value
-        const newIMG = e.target.parentElement.childNodes[4].value
 
         const usersAll = await getUser()
 
@@ -81,8 +81,9 @@ function UserModificar() {
                 <input type="email" placeholder='Email' name="email" />
                 <input type="password" placeholder='Password' name="password" />
                 <input type="password" placeholder='Repeat Password' name="repeatPassword" />
-                <input type="file" name="file"/>
+                <ImageResizer id={userCurrentID} page={'perfil'} />
                 <input type="button" id='userModificar-button' value="Modificar datos" onClick={sendNewData} />
+
             </div>
 
         </div>

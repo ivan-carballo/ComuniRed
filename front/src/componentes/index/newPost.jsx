@@ -4,6 +4,7 @@ import { postCreate } from '../../api/postAPI';
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
+import ImageUploader from '../imageUpload.jsx';
 import Cookies from 'js-cookie'
 
 
@@ -60,6 +61,8 @@ function NewPost() {
                         <div id="newPost-row-2">
                             <input type="file" name="" id="" accept="image/*" capture="camera" />
                             <input type="button" id='newPost-button' value="Enviar" onClick={enviarPost} />
+                        </div>
+                        <div id="newPost-image">
                         </div>
                     </form>
                 </div>
