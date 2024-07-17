@@ -95,7 +95,7 @@ async function userCreate(data) {
       });
   
       if (!response.ok) {
-        throw new Error(`Error al actualizar el user (HTTP ${response.status})`);
+        //throw new Error(`Error al actualizar el user (HTTP ${response.status})`);
       }
   
       const result = await response.json();

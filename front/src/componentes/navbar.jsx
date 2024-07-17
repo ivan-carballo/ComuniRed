@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
-import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell, FaChartBar } from 'react-icons/fa'
+import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell } from 'react-icons/fa'
 import { getNotificationByProperty } from '../api/notificationAPI';
 
 
@@ -18,10 +18,12 @@ const Navbar = () => {
 
 
 
+
     useEffect(() => {
         if (userID == null) {
             logout()
         }
+
     }, [])
 
 
