@@ -43,7 +43,7 @@ async function getResponseByProperty(property, value) {
     }
 
     const result = await response.json();
-    console.log('response buscado:', result);
+    //console.log('response buscado:', result);
     return (result)
   } catch (error) {
     console.error('Error al buscar el response 2:', error);
@@ -81,7 +81,8 @@ async function responseCreate(data) {
                             'username': data.username,
                             'dateString': await dateFormat(Date.now()),
                             'post': data.post,
-                            'userPrincipalID': getPostID.data.userID}
+                            'userPrincipalID': getPostID.data.userID,
+                            'responseID': result.data._id}
 
     if (userCurrentID != getPostID.data.userID) {
       const notificationSend = await notificationCreate(notificationArray)

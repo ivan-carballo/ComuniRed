@@ -12,6 +12,11 @@ const userSchema  = new mongoose.Schema({
         required: true,
     },
 
+    responseID: {
+        type: String,
+        required: true,
+    },
+
     username: {
         type: String,
         require: true

@@ -28,14 +28,14 @@ async function getNotificationByProperty(property, value) {
     });
 
     if (!post.ok) {
-      throw new Error(`Error al buscar el post 1 (HTTP ${post.status})`);
+      throw new Error(`Error al buscar la notificacion 1 (HTTP ${post.status})`);
     }
 
     const result = await post.json();
-    console.log('post buscado:', result);
+    //console.log('notificacion buscado:', result);
     return (result)
   } catch (error) {
-    console.error('Error al buscar el post 2:', error);
+    console.error('Error al buscar la notificacion 2:', error);
   }
 }
 

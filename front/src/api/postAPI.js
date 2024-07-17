@@ -32,7 +32,7 @@ async function getPostByProperty(property, value) {
     }
 
     const result = await post.json();
-    console.log('post buscado:', result);
+    //console.log('post buscado:', result);
     return (result)
   } catch (error) {
     console.error('Error al buscar el post 2:', error);
@@ -109,22 +109,6 @@ async function postDelete(id) {
     console.error('Error al eliminar el post:', error);
   }
 }
-
-
-/*   async function postUpdate(id, data) {
-    fetch(`${API_URL}/post/update/${id}`, data)
-    .then(data => {
-        if (!data.ok) {
-          throw Error(data.status);
-         }
-         return data.json();
-        }).then(update => {
-        console.log(update);
-        }).catch(e => {
-        console.log(e);
-        });
-  } */
-
 
 
 
