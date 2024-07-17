@@ -27,10 +27,9 @@ function Notification() {
             showNotification()
             async function showNotification() {
                 const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
-                const getNotificationByUserFilter = getNotificationByUser.data.filter((data) => data.userPrincipalID != userID)
                 
-                if (getNotificationByUserFilter.reverse().length > 0) {
-                    const notificacionMap = getNotificationByUserFilter.data.map((data) => 
+                if (getNotificationByUser.data.reverse().length > 0) {
+                    const notificacionMap = getNotificationByUser.data.map((data) => 
 
                             <div key={data._id} name={data._id} id="notification-div" onClick={notificationDetail}>
                                 <p id='notification-p-username' name={data._id}>{data.username}</p>
@@ -40,9 +39,9 @@ function Notification() {
 
                     )
                     setData(notificacionMap)
+                    setReboot(false)
                 }
             }
-            setReboot(false)
         }
 
         
@@ -71,10 +70,11 @@ function Notification() {
         const notificationRemoveAll = await getNotificationByProperty('userPrincipalID', userID)
 
         for (let i = 0; notificationRemoveAll.data.length > i; i++) {
-            //const notificationRemoveLoop = notificationDelete(notificationRemoveAll.data[i]._id)
+            const notificationRemoveLoop = notificationDelete(notificationRemoveAll.data[i]._id)
         }
 
         setReboot(true)
+        setData(null)
     }
 
 

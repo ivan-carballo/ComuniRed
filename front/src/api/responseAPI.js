@@ -8,8 +8,6 @@ import { getUserByID } from './userAPI.js'
 
 
 
-const userCurrentID = Cookies.get('id')
-
 
 
 async function getresponse() {
@@ -76,7 +74,7 @@ async function responseCreate(data) {
     const result = await response.json();
     console.log('response creado:', result);
 
-
+    const userCurrentID = Cookies.get('id')
     const getPostID = await getpostByID(data.postID)
 
     const notificationArray = {'postPrincipalID': data.postID,
