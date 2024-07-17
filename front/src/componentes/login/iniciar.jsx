@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getUser, login } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
 
+import '../../saas/login.scss'
 
 
 
@@ -68,7 +69,7 @@ function LoginForm() {
 
     return (
         <>
-            <div id='form-completo'>
+            <div id='loginForm-body'>
                 <h5>{aviso}</h5>
                 <form id='form'>
                     <input type="email" placeholder='Email' id="login-email" />

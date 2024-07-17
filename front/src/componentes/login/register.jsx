@@ -73,7 +73,7 @@ function RegisterForm() {
 
     return (
         <>
-            <div id='form-completo'>
+            <div id='registerForm-body'>
                 <h5>{aviso}</h5>
                 <form id='form'>
                     <input type="text" placeholder='Username' id='register-username' />
