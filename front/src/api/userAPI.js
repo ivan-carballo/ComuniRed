@@ -81,19 +81,6 @@ async function userCreate(data) {
   }
 
 
-/*   async function userUpdate(id, data) {
-    fetch(`${API_URL}/user/update/${id}`, data)
-    .then(data => {
-        if (!data.ok) {
-          throw Error(data.status);
-         }
-         return data.json();
-        }).then(update => {
-        console.log(update);
-        }).catch(e => {
-        console.log(e);
-        });
-  } */
 
 
   async function userUpdate(id, data) {

@@ -63,7 +63,7 @@ const login = async(req,res)=> {
 }
 
 const update = async(req,res)=>{
-    const id = eq.params.id;
+    const id = req.params.id;
     const propiedad = await userController.update(id,req.body);
     res.json({data:propiedad})
 }
