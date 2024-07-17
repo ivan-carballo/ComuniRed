@@ -39,10 +39,10 @@ function NewPost() {
                                 'username': username_data,
                                 'dateString': postDate}
 
-        //const sendNewPost = await postCreate(arrayNewPost)
+        const sendNewPost = await postCreate(arrayNewPost)
 
-        //const textareaDel = document.getElementById('newPost-input')
-        //textareaDel.value = ''
+        const textareaDel = document.getElementById('newPost-input')
+        textareaDel.value = ''
     }
 
 

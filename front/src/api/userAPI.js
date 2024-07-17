@@ -39,6 +39,31 @@ async function userCreate(data) {
     console.error('Error al user el user:', error);
   }
 }
+
+
+
+async function getUserByProperty(property, value) {
+  try {
+    const post = await fetch(`${API_URL}/user/find`,
+      {
+        method: 'POST',
+        headers: { 
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ property, value })
+    });
+
+    if (!post.ok) {
+      throw new Error(`Error al buscar el user 1 (HTTP ${post.status})`);
+    }
+
+    const result = await post.json();
+    //console.log('user buscado:', result);
+    return (result)
+  } catch (error) {
+    console.error('Error al buscar el user 2:', error);
+  }
+}
   
 
 
@@ -112,6 +137,7 @@ async function userCreate(data) {
     getUser,
     getUserByID,
     userCreate,
+    getUserByProperty,
     login,
     userDelete,
     userUpdate

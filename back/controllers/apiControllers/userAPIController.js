@@ -42,7 +42,7 @@ const getById = async (req,res) =>{
 
 
 const getByProperty=async(req,res)=>{
-    const {property,value}=req.query;
+    const {property,value}=req.body;
     const propiedad = await userController.getByProperty(property,value);
     res.json({data:propiedad})
 }

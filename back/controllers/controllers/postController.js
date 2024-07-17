@@ -30,7 +30,8 @@ const getById = async(id) =>{
 
 const getByProperty = async(property,value) =>{
     try {
-        const datos = await postModel.find({[property]:value})
+        const regex = new RegExp(value, 'i');
+        const datos = await postModel.find({[property]:regex})
         return datos;
     } catch (error) {
         return null;
