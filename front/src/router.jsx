@@ -6,6 +6,7 @@ import { Perfil } from "./pages/perfil.jsx";
 import { Options } from "./pages/options.jsx";
 import { Response } from "./pages/response.jsx";
 import { Notification } from "./pages/notification.jsx";
+import { Search } from './pages/search.jsx'
 import React from 'react';
 
 
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: <UserPerfil />
+  },
+
+  {
+    path: "/search",
+    element: <Search />
   },
 
   {

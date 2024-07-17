@@ -4,7 +4,7 @@ import { postCreate } from '../../api/postAPI';
 import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
-import ImageUploader from '../imageUpload.jsx';
+import ImageResizer from '../imageUpload.jsx';
 import Cookies from 'js-cookie'
 
 
@@ -30,19 +30,19 @@ function NewPost() {
 
     async function enviarPost(e) {
         const postText = e.target.form[0].value
-        const postIMG = e.target.form[1].files[0]
         const postDate = await dateFormat(Date.now())
+        const postIMG = e.target.form[1]
+
 
         const arrayNewPost = await {'userID': userID,
                                 'post': postText,
-                                'img': postIMG,
                                 'username': username_data,
                                 'dateString': postDate}
 
-        const sendNewPost = await postCreate(arrayNewPost)
+        //const sendNewPost = await postCreate(arrayNewPost)
 
-        const textareaDel = document.getElementById('newPost-input')
-        textareaDel.value = ''
+        //const textareaDel = document.getElementById('newPost-input')
+        //textareaDel.value = ''
     }
 
 
@@ -59,7 +59,8 @@ function NewPost() {
                             <textarea id="newPost-input" rows='5' cols='35' placeholder={usernamePost} />
                         </div>
                         <div id="newPost-row-2">
-                            <input type="file" name="" id="" accept="image/*" capture="camera" />
+                            {/* <ImageResizer page={'post'} id={''} img={postIMG} /> */}
+                            <input type="file" name="file" id="file" />
                             <input type="button" id='newPost-button' value="Enviar" onClick={enviarPost} />
                         </div>
                         <div id="newPost-image">
