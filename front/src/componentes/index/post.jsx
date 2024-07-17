@@ -7,7 +7,8 @@ import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { responseCreate, getResponseByProperty } from '../../api/responseAPI.js';
+import { responseCreate, getResponseByProperty, responseDelete } from '../../api/responseAPI.js';
+import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
 import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
 
@@ -88,6 +89,18 @@ function Post() {
 
     async function deletePost(e) {
         const postID = e.target.id
+
+        const responsebyPost = await getResponseByProperty('postID', postID)
+        const notificationByPost = await getNotificationByProperty('postPrincipalID', postID)
+
+        for (let i = 0; responsebyPost.data.length > i; i++) {
+            const responseRemoveLoop = await responseDelete(responsebyPost.data[i]._id)
+        }
+
+        for (let i = 0; notificationByPost.data.length > i; i++) {
+            const notificationRemoveLoop = await notificationDelete(notificationByPost.data[i]._id)
+        }
+
         const deletePostAPI = await postRemove(postID)
         setRecarga(true)
     }
