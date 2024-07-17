@@ -101,7 +101,7 @@ async function userCreate(data) {
       const result = await response.json();
       console.log('user actualizado:', result);
     } catch (error) {
-      console.error('Error al actualizar el user:', error);
+      //console.error('Error al actualizar el user:', error);
     }
   }
 
