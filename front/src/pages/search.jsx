@@ -1,3 +1,6 @@
+// Pagina para buscar usuarios, posts y respuestas
+
+
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,17 +20,22 @@ function Search() {
     const [data, setData] = useState()
 
 
-
+    // Funcion que se ejecuta cada vez que el input text cambia
     async function inputSearch(e) {
         setData(null)
+
+        // Sacar el valor de ambos inputs
         const formSelect = e.target.parentElement.childNodes[0].value
         const formInput = e.target.parentElement.childNodes[1].value
 
+        // Si el input text esta vacio que salga de la funcion en vez de sacar todo lo que haya en MongoDB
         if (formInput.length < 1) {
             return
         }
 
-        if (formSelect === 'user') {
+        // Condicional para las tres busquedas, usuarios, posts y respuestas
+        // Dentro de cada condicion hay una busqueda por propiedad y un metodo map para crear estructura en un useState y mostrarlo en el return
+        if (formSelect === 'user') { // Busqueda de usuarios
             const userSearch = await getUserByProperty('username', formInput)
 
             if (userSearch.data.length > 0) {
@@ -41,11 +49,11 @@ function Search() {
             }
 
 
-        } else if (formSelect === 'post') {
+        } else if (formSelect === 'post') { // Busqueda de posts
             const postSearch = await getPostByProperty('post', formInput)
 
             if (postSearch.data.length > 0) {
-                const postMap = postSearch.data.map((data) => 
+                const postMap = postSearch.data.reverse().map((data) => 
                     <div key={data._id} id="postSearch-div" onClick={async () => navigate(`/response/${data._id}`)}>
                         <p>{data.username} / {data.dateString}</p>
                         <p id='postSearch-post'>{data.post}</p>
@@ -56,11 +64,11 @@ function Search() {
             }
 
 
-        } else if (formSelect === 'response') {
+        } else if (formSelect === 'response') { // Busqueda de respuestas a posts
             const responseSearch = await getResponseByProperty('post', formInput)
 
             if (responseSearch.data.length > 0) {
-                const responseMap = responseSearch.data.map((data) => 
+                const responseMap = responseSearch.data.reverse().map((data) => 
                     <div key={data._id} id="responseSearch-div" onClick={async () => navigate(`/response/${data.postID}`)}>
                         <p>{data.username} / {data.dateString}</p>
                         <p id='responseSearch-post'>{data.post}</p>

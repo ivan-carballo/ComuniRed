@@ -60,7 +60,6 @@ const Navbar = () => {
             <nav id='navbar-links'>
                     <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
                     <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
-                    <NavLink to="/bookmark" id='bookmark' title='bookmark' className='link'><FaRegBookmark /></NavLink>
                     <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
                     <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>
                     {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>}

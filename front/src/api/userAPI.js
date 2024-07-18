@@ -1,3 +1,6 @@
+// Funciones de llamadas API hacia Backend para un CRUD de usuarios
+
+
 import { API_URL } from "./API.js"
 import { guardarToken, obtenerToken } from "../funciones/token.js";
 

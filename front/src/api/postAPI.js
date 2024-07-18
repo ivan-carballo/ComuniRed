@@ -1,3 +1,7 @@
+// Funciones de llamadas API hacia Backend para un CRUD de posts
+
+
+
 import { API_URL } from "./API.js"
 
 

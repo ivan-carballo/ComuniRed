@@ -12,7 +12,6 @@ import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
 import responseRouter from "./responseRouter.js";
 import notificationRouter from './notificationRouter.js'
-import bookmarkRouter from './bookmarkRouter.js'
 
 
 
@@ -20,7 +19,6 @@ router.use("/user", userRouter);
 router.use("/post", postRouter);
 router.use("/response", responseRouter);
 router.use("/notification", notificationRouter);
-router.use("/bookmark", bookmarkRouter);
 
 
 

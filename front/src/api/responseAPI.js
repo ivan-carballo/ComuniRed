@@ -1,3 +1,6 @@
+// Funciones de llamadas API hacia Backend para un CRUD de respuestas a posts
+
+
 import { API_URL } from "./API.js"
 
 import Cookies from 'js-cookie'
@@ -55,7 +58,7 @@ async function getResponseByProperty(property, value) {
 
 
 
-
+// Esta funcion es doble, por un lado guarda una respuesta y por otro guarda una notificacion, son dos guardados en dos tablas independientes
 async function responseCreate(data) {
   try {
     const response = await fetch(`${API_URL}/response`,
