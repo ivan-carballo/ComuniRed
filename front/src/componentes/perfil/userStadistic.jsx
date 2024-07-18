@@ -14,6 +14,7 @@ function UserStadistic() {
     const [userPost, setUserPost] = useState()
     const [userResponse, setUserResponse] = useState()
     const [user, setUser] = useState()
+    const [userIMG, setUserIMG] = useState()
 
 
     
@@ -25,6 +26,7 @@ function UserStadistic() {
             const userUsername = await getUserByID(userID)
             const username = userUsername.data.username
             setUser(username)
+            setUserIMG(userUsername.data.img)
 
             const userPost = await getPostByProperty('userID', userID)
             const userResponse = await getResponseByProperty('username', username)
@@ -39,7 +41,10 @@ function UserStadistic() {
 
     return (
         <div id="userStadistic-body">
-            <p id='userStadistic-welcome'>Bienvenido {user}</p>
+            <div id="userStadistic-header">
+                <p id='userStadistic-welcome'>Bienvenido {user}</p>
+                <img id='userStadistic-img' src={userIMG} />
+            </div>
             <p>Nº posts: {userPost} - Nº respuestas: {userResponse}</p>
         </div>
     )

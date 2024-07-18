@@ -29,6 +29,12 @@
             white-space: pre-wrap;
         }
 
+        & > #postMap-img {
+            width: 95%;
+            border-radius: 25px;
+            margin-top: 5px;
+        }
+
         & > #postMap-buttons {
             width: 95%;
             display: flex;
@@ -45,6 +51,8 @@
         }
     }
 }
+
+
 
 
 #postByUser-body {
@@ -72,6 +80,12 @@
             margin-top: 0;
             margin-bottom: 0;
             white-space: pre-wrap;
+        }
+
+        & > #responseMap-img {
+            border-radius: 25px;
+            width: 95%;
+            margin-top: 5px;
         }
 
         & > input {

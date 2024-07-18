@@ -4,7 +4,7 @@
 
 const ImageUpload = async (e) => {
     const file = e
-    const maxWidth = 350;
+    const maxWidth = 300;
     const maxHeight = undefined;
   
     try {

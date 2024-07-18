@@ -43,6 +43,7 @@ function AllPostByUser () {
                     <div id='postMap-div' key={data._id}>
                         <p id='postMap-date'>{data.dateString}</p>
                         <p id='postMap-post'>{data.post}</p>
+                        <img id='postMap-img' src={data.img} />
                         <div id="postMap-buttons">
                             <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={postShow} />
                             <input type="button" value="Eliminar" id={data._id} onClick={postDel} />

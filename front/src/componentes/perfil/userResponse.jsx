@@ -31,6 +31,7 @@ function AllResponseByUser () {
                     <div id="responseMap-div" key={data._id}>
                         <p id='responseMap-date'>{data.dateString}</p>
                         <p id='responseMap-response'>{data.post}</p>
+                        <img id='responseMap-img' src={data.img} />
                         <input type="button" value="Eliminar respuesta" id={data._id} onClick={responseDel} />
                     </div>
                 )

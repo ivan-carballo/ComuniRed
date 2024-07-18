@@ -5,11 +5,14 @@ import { dateFormat } from '../../funciones/fecha.js'
 import { getPostByProperty } from "../../api/postAPI";
 import { responseCreate } from '../../api/responseAPI.js'
 import { getUserByID } from "../../api/userAPI";
+import { useNavigate } from "react-router-dom";
 
 import '../../saas/otherPerfil/otherPost.scss'
 
 
 function OtherPost({id}) {
+    const navigate = useNavigate()
+
     const [data, setData] = useState()
 
     const userID = Cookies.get('id')
@@ -25,8 +28,9 @@ function OtherPost({id}) {
                 <div key={data._id} id="getPost-div">
                     <p id='getPost-date'>{data.dateString}</p>
                     <p id='getPost-post'>{data.post}</p>
+                    <img id='getPost-img' src={data.img} />
                     <div id="getPost-buttons">
-                        <a href={`/response/${data._id}`}> <input className="getPost-buttons-input" type="button" value="Ver detalles / Responder" id={data._id} /> </a>
+                    <input className="getPost-buttons-input" type="button" value="Ver detalles / Responder" id={data._id} onClick={async ()=>{navigate(`/response/${data._id}`)}} />
                     </div>
                 </div>
             )
