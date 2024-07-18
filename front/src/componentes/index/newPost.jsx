@@ -8,6 +8,7 @@ import Cookies from 'js-cookie'
 import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
+
 function NewPost() {
     const [usernamePost, setUsernamePost] = useState('')
     const [userIMG, setUserIMG] = useState('')
@@ -17,6 +18,7 @@ function NewPost() {
     let username_data = ''
 
 
+    // UseEffect a la carga del componente para traer los datos del usuario logueado y usarlos en el formulario
     useEffect(() => {
         userFind()
         async function userFind() {
