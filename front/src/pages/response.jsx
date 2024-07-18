@@ -23,6 +23,7 @@ function Response() {
     const [dateString, setDateString] = useState()
     const [postPrincipal, setPostPrincipal] = useState()
     const [userIMG, setUserIMG] = useState()
+    const [postIMG, setPostIMG] = useState()
     
 
     useEffect(() => {
@@ -34,6 +35,8 @@ function Response() {
                 setUsername(getPostPrincipal.data.username)
                 setDateString(getPostPrincipal.data.dateString)
                 setPostPrincipal(getPostPrincipal.data.post)
+                setPostIMG(getPostPrincipal.data.img)
+
                 setUserIMG(getUserPrincipal.data.img)
 
                 const userCurrentUsername = await getUserByID(userCurrentID)
@@ -43,8 +46,9 @@ function Response() {
                 const getResponseChildrenMap = await getResponseChildren.data.reverse().map((data) =>
                     <div key={data._id} id="getResponse-div">
                         <p id='getResponse-div-username'>{data.username}</p>
-                        <p>{data.dateString}</p>
+                        <p id='getResponse-div-date'>{data.dateString}</p>
                         <p id='getResponse-div-post'>{data.post}</p>
+                        <img id='getResponse-div-img' src={data.img} />
                         {userCurrentUsername.data.username === data.username ? <div id="getResponse-div-button"> <input type="button" value="Eliminar respuesta" id={data._id} onClick={responseDeleteByUser} /> </div> : <></>}
                     </div>
                 )
@@ -89,7 +93,7 @@ function Response() {
 
                     <div id="response-postPrincipal-header">
                         <div id="response-postPrincipal-header-img">
-                            <img src={userIMG} />
+                            <img id='postPrincipal-userIMG' src={userIMG} />
                         </div>
                         <div id="response-postPrincipal-header-userData">
                             <p id='userData-username'>{username}</p>
@@ -98,6 +102,7 @@ function Response() {
                     </div>
 
                     <p id='response-postPrincipal-post'>{postPrincipal}</p>
+                    <img id='response-postPrincipal-img' src={postIMG} />
                 </div>
 
 

@@ -42,7 +42,9 @@ function NewPost() {
         const sendNewPost = await postCreate(arrayNewPost)
 
         const textareaDel = document.getElementById('newPost-input')
+        const inputFileDel = document.getElementById('file')
         textareaDel.value = ''
+        inputFileDel.value = ''
     }
 
 

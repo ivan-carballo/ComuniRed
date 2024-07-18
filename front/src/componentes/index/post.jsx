@@ -67,7 +67,7 @@ function Post() {
                                 </div>
                             </div>
                             <p id='post-post'>{data.post}</p>
-                            <img src={data.img} />
+                            <img id='post-img' src={data.img} />
                             <div id="buttons-post">
                                 <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                                 <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
