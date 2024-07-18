@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema  = new mongoose.Schema({
+const responseSchema  = new mongoose.Schema({
 
     postID: {
         type: String,
@@ -36,6 +36,6 @@ const userSchema  = new mongoose.Schema({
 })
 
 
-const responseModel = mongoose.model("responses",userSchema);
+const responseModel = mongoose.model("responses",responseSchema);
 
 export default responseModel;

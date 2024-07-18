@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema  = new mongoose.Schema({
+const postSchema  = new mongoose.Schema({
 
     userID: {
         type: String,
@@ -37,6 +37,6 @@ const userSchema  = new mongoose.Schema({
 })
 
 
-const postModel = mongoose.model("posts",userSchema);
+const postModel = mongoose.model("posts",postSchema);
 
 export default postModel;

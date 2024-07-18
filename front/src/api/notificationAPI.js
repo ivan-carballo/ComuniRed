@@ -77,13 +77,13 @@ async function notificationUpdate(id, data) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error al actualizar el post (HTTP ${response.status})`);
+      throw new Error(`Error al actualizar la notificacion (HTTP ${response.status})`);
     }
 
     const result = await response.json();
     console.log('post actualizado:', result);
   } catch (error) {
-    console.error('Error al actualizar el post:', error);
+    console.error('Error al actualizar la notificacion:', error);
   }
 }
 
@@ -100,13 +100,13 @@ async function notificationDelete(id) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error al eliminar el post (HTTP ${response.status})`);
+      throw new Error(`Error al eliminar la notificacion (HTTP ${response.status})`);
     }
 
     const result = await response.json();
     console.log('post eliminada:', result);
   } catch (error) {
-    console.error('Error al eliminar el post:', error);
+    console.error('Error al eliminar la notificacion:', error);
   }
 }
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema  = new mongoose.Schema({
+const notificationSchema  = new mongoose.Schema({
 
     postPrincipalID: {
         type: String,
@@ -46,6 +46,6 @@ const userSchema  = new mongoose.Schema({
 })
 
 
-const notificationModel = mongoose.model("notifications",userSchema);
+const notificationModel = mongoose.model("notifications",notificationSchema);
 
 export default notificationModel;
