@@ -4,7 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
-import { getUser, userUpdate } from '../../api/userAPI.js'
+import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
 import ImageResizer from '../imageUpload.jsx';
 
 
@@ -12,6 +12,19 @@ function UserModificar() {
     const userCurrentID = Cookies.get('id')
 
     const [aviso, setAviso] = useState()
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+
+
+    useEffect(() => {
+        userData()
+        async function userData() {
+            const getUserData = await getUserByID(userCurrentID)
+            setUsername(getUserData.data.username)
+            setEmail(getUserData.data.email)
+        }
+    }, [])
+
 
 
     const regexUsername = /^[A-Za-z0-9]+$/
@@ -59,12 +72,18 @@ function UserModificar() {
                                     }
                 
                 const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
-
             }
         }
+    }
 
 
 
+    async function newUsername(e) {
+        setUsername(e.target.value)
+    }
+
+    async function newEmail(e) {
+        setEmail(e.target.value)
     }
 
 
@@ -77,8 +96,8 @@ function UserModificar() {
             <h3 id='userModificar-aviso'>{aviso}</h3>
 
             <div id="userModificar-inputs">
-                <input type="text" placeholder='Username' name="username" />
-                <input type="email" placeholder='Email' name="email" />
+                <input type="text" placeholder='Username' name="username" value={username} onChange={newUsername} />
+                <input type="email" placeholder='Email' name="email" value={email} onChange={newEmail} />
                 <input type="password" placeholder='Password' name="password" />
                 <input type="password" placeholder='Repeat Password' name="repeatPassword" />
                 <ImageResizer id={userCurrentID} page={'perfil'} />
