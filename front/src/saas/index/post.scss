@@ -19,18 +19,20 @@
         align-items: center;
 
         & > #modalResponse-form-header {
-            border: solid 2px greenyellow;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: -15px;
         }
 
         & > #modalResponse-form-response {
-            border: solid 2px aquamarine;
             display: flex;
             justify-content: center;
             width: 100%;
+            margin-bottom: 15px;
 
             & > textarea {
                 border-radius: 15px;

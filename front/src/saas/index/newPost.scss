@@ -1,11 +1,12 @@
 @import '../color.scss';
 
+
+
 #newPost-body {
     background-color: $background;
     position: fixed;
     top: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 0;
     left: 0;
     right: 0;
     width: 100%;
@@ -16,22 +17,33 @@
     & > #newPost-div-form {
         background-color: $background-divs;
         width: fit-content;
-        padding: 15px;
+        padding: 10px;
         border-radius: 15px;
 
-        & > #newPost-form > #newPost-row-1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        & > #newPost-form {
+        
+            & > #newPost-row-1 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
 
-            & > #user-img {
-                border-radius: 50%;
-                height: 75px;
+                & > #user-img {
+                    border-radius: 50%;
+                    height: 70px;
+                }
+
+                & > #newPost-input {
+                    border-radius: 15px;
+                    padding: 5px;
+                }
             }
 
-            & > #newPost-input {
-                border-radius: 15px;
-                padding: 5px;
+            & > #newPost-row-2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 5px;
             }
         }
     }

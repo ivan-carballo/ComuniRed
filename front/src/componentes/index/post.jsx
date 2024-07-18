@@ -8,10 +8,11 @@ import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
 import { getPost, postDelete } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { responseCreate, getResponseByProperty, responseDelete } from '../../api/responseAPI.js';
+import { getResponseByProperty, responseDelete, responseCreate } from '../../api/responseAPI.js';
 import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
 import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
+import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
 
@@ -112,15 +113,35 @@ function Post() {
         const postOriginID = e.target.id
         const postDate = await dateFormat(Date.now())
         const postResponse = document.getElementById('modalResponse-textarea')
+        const postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
 
-        const arrayResponse = {'postID': postOriginID,
-                                'username': postUser,
-                                'dateString': postDate,
-                                'post': postResponse.value}
 
-        const sendResponse = await responseCreate(arrayResponse)
-        setResponse(null)
-        setRecarga(true)
+        if (postIMG === undefined) {
+            const arrayResponse = {'postID': postOriginID,
+                'username': postUser,
+                'dateString': postDate,
+                'post': postResponse.value}
+
+            const sendResponse = await responseCreate(arrayResponse)
+            setResponse(null)
+            setRecarga(true)
+        } else {
+            const postIMGBase64 = await ImageUpload(postIMG)
+
+            const arrayResponse = {'postID': postOriginID,
+                'username': postUser,
+                'dateString': postDate,
+                'post': postResponse.value,
+                'img': postIMGBase64}
+
+            const sendResponse = await responseCreate(arrayResponse)
+            setResponse(null)
+            setRecarga(true)
+        }
+
+
+
+
     }
 
 
@@ -144,16 +165,17 @@ function Post() {
                         <div id="modalResponse-form">
 
                             <div id="modalResponse-form-header">
-                                <img src="" />
                                 <p>Responder a {response.username}</p>
-                                <p>{response.post}</p>
                             </div>
 
                             <div id="modalResponse-form-response">
-                                <img src="" />
-                                <textarea id='modalResponse-textarea' cols="32" rows="10" placeholder='Escriba su respuesta' />
+                                <textarea id='modalResponse-textarea' cols="35" rows="10" placeholder='Escriba su respuesta' />
                             </div>
 
+                        </div>
+
+                        <div id="modalResponse-upload">
+                            <input type="file" name="file" id="file" />
                         </div>
 
                         <div id="modalResponse-buttons">
