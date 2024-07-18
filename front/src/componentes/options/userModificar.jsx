@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
 import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
+import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
 function UserModificar() {
@@ -37,6 +38,7 @@ function UserModificar() {
         const newEmail = e.target.parentElement.childNodes[1].value
         const newPassword = e.target.parentElement.childNodes[2].value
         const newRepeatPassword = e.target.parentElement.childNodes[3].value
+        let newIMG = e.target.parentElement.childNodes[4].files[0]
 
         const usersAll = await getUser()
 
@@ -64,13 +66,24 @@ function UserModificar() {
                 setAviso('El email ya esta en uso')
             } else {
                 setAviso('Sus datos han sido modificados correctamente')
-                    
-                const newUserData = {'username': newUsername,
-                                    'email': newEmail,
-                                    'password': sha256(newPassword),
-                                    }
-                
-                const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+
+
+                if (newIMG != undefined) {
+                    newIMG = await ImageUpload(newIMG)
+
+                    const newUserData = {'username': newUsername,
+                        'email': newEmail,
+                        'password': sha256(newPassword),
+                        'img': newIMG}
+
+                        const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+                } else {
+                    const newUserData = {'username': newUsername,
+                                        'email': newEmail,
+                                        'password': sha256(newPassword)}
+
+                    const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+                }
             }
         }
     }
