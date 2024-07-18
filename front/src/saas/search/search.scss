@@ -86,6 +86,12 @@
             text-align: center;
         }
 
+        & > #postSearch-img {
+            border-radius: 25px;
+            width: 100%;
+            margin: 5px 0;
+        }
+
         & > p {
             margin: 5px 0;
         }
@@ -112,6 +118,13 @@
             border-radius: 15px;
             padding: 5px 10px;
             text-align: center;
+            margin-bottom: 0;
+        }
+
+        & > #responseSearch-img {
+            border-radius: 25px;
+            width: 100%;
+            margin: 5px 0;
         }
 
         & > p {

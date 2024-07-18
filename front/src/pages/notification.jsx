@@ -35,6 +35,7 @@ function Notification() {
                                 <p id='notification-p-username' name={data._id}>{data.username}</p>
                                 <p id='notification-p-date' name={data._id}>{data.dateString}</p>
                                 <p id='notification-p-post' name={data._id}>{data.post}</p>
+                                <img id='notification-img' src={data.img} />
                             </div>
 
                     )
@@ -77,8 +78,9 @@ function Notification() {
             const notificationRemoveLoop = notificationDelete(notificationRemoveAll.data[i]._id)
         }
 
-        setReboot(true)
         setData(null)
+        setReboot(true)
+        
     }
 
 

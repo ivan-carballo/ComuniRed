@@ -82,7 +82,8 @@ async function responseCreate(data) {
                             'dateString': await dateFormat(Date.now()),
                             'post': data.post,
                             'userPrincipalID': getPostID.data.userID,
-                            'responseID': result.data._id}
+                            'responseID': result.data._id,
+                            'img': result.data.img}
 
     if (userCurrentID != getPostID.data.userID) {
       const notificationSend = await notificationCreate(notificationArray)

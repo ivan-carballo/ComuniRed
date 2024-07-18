@@ -49,6 +49,7 @@ function Search() {
                     <div key={data._id} id="postSearch-div" onClick={async () => navigate(`/response/${data._id}`)}>
                         <p>{data.username} / {data.dateString}</p>
                         <p id='postSearch-post'>{data.post}</p>
+                        <img id='postSearch-img' src={data.img} />
                     </div>
                 )
                 setData(postMap)
@@ -63,6 +64,7 @@ function Search() {
                     <div key={data._id} id="responseSearch-div" onClick={async () => navigate(`/response/${data.postID}`)}>
                         <p>{data.username} / {data.dateString}</p>
                         <p id='responseSearch-post'>{data.post}</p>
+                        <img id='responseSearch-img' src={data.img} />
                     </div>
                 )
                 setData(responseMap)
