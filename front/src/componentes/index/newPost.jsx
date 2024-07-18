@@ -11,6 +11,7 @@ import { ImageUpload } from '../../funciones/resizeIMG.js';
 function NewPost() {
     const [usernamePost, setUsernamePost] = useState('')
     const [userIMG, setUserIMG] = useState('')
+    const [alert, setAlert] = useState()
 
     const userID = Cookies.get('id')
     let username_data = ''
@@ -21,17 +22,24 @@ function NewPost() {
         async function userFind() {
             const userByID = await getUserByID(userID)
 
-            setUsernamePost(`Cuentanos tus divagaciones, ${userByID.data.username}`)
+            setUsernamePost(`Cuenta tus divagaciones, ${userByID.data.username}`)
             setUserIMG(userByID.data.img)
             username_data = userByID.data.username
         }
     }) 
 
 
+    // Funcion para crear un post nuevo
     async function enviarPost(e) {
+        // Sacar los valores de los inputs
         const postText = e.target.form[0].value
-        const postDate = await dateFormat(Date.now())
-        const postIMG = await ImageUpload(e.target.form[1].files[0])
+        let postIMG = e.target.form[1].files[0]
+        const postDate = await dateFormat(Date.now()) // Sacar fecha actual de una funcion externa
+
+        // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
+        if (postIMG != undefined) {
+            postIMG = await ImageUpload(e.target.form[1].files[0])
+        }
 
         const arrayNewPost = await {'userID': userID,
                                 'post': postText,
@@ -39,8 +47,15 @@ function NewPost() {
                                 'dateString': postDate,
                                 'img': postIMG}
 
-        const sendNewPost = await postCreate(arrayNewPost)
+        // Condicional para obligar a que haya un mensaje o una imagen, al menos uno de ellos debe estar con informacion
+        if (postText.length > 0 || postIMG != undefined) {
+            setAlert('')
+            const sendNewPost = await postCreate(arrayNewPost)
+        } else {
+            setAlert('Debe rellenar al menos uno de los campos')
+        }
 
+        // Capturar textarea e input de imagen y vaciarlos una vez creado el post
         const textareaDel = document.getElementById('newPost-input')
         const inputFileDel = document.getElementById('file')
         textareaDel.value = ''
@@ -63,6 +78,7 @@ function NewPost() {
                         <div id="newPost-row-2">
                             <input type="file" name="file" id="file"/>
                             <input type="button" id='newPost-button' value="Enviar" onClick={enviarPost} />
+                            {alert}
                         </div>
                     </form>
                 </div>

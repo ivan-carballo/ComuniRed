@@ -24,7 +24,6 @@ const postSchema  = new mongoose.Schema({
 
     post: {
         type: String,
-        required: true,
     },
 
     img: {

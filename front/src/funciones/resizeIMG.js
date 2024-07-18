@@ -9,7 +9,6 @@ const ImageUpload = async (e) => {
   
     try {
       const base64Image = await resizeImageToBase64(file, { maxWidth, maxHeight });
-      //console.log('Imagen redimensionada en base64:', base64Image);
       return base64Image
 
     } catch (error) {
