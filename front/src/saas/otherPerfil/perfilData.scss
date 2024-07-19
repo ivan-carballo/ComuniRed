@@ -59,3 +59,61 @@
         }
     }
 }
+
+
+
+#modal-body{
+    border: $background-border solid 2px;
+    border-radius: 15px;
+    background-color: $background-divs;
+    padding: 10px;
+
+    & > #modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        & > #modal-header-img {
+
+            & > img {
+                width: 75px;
+                border-radius: 50%;
+            }
+        }
+
+        & > #modal-header-data {
+
+            & > h3 {
+                margin: 0;
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 0 10px;
+            }
+        }
+    }
+
+
+    & > #modal-text {
+        margin: 5px 0;
+
+        & > #modal-textarea {
+            border-radius: 15px;
+            padding: 3px 10px;
+            resize: none;
+            border: 0;
+        }
+    }
+
+
+    & > #modal-buttons {
+        display: flex;
+        justify-content: space-evenly;
+
+        & > button{
+            border: 0;
+            border-radius: 15px;
+            padding: 3px 10px;
+            font-weight: 600;
+        }
+    }
+}

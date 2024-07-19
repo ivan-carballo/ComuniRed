@@ -1,3 +1,6 @@
+// Componente para mostrar todos los posts de los usuarios, sin filtros de busqueda
+
+
 import '../../saas/index/post.scss'
 
 import React from 'react';
@@ -26,11 +29,8 @@ function Post() {
     const [response, setResponse] = useState('')
 
 
-    let sacarResponses = []
-
-
-   
-
+  
+    // UseEffect para traer todos los posts creados
     useEffect(() => {
         if(recarga) {
 
@@ -41,6 +41,7 @@ function Post() {
 
                 let datosIMG = []
 
+                // Sacar datos de las tablas post y user para poder mostrar la foto de perfil de cada usuario al lado de su post
                 const allPostIMG = await AllPostData.map( async (dataIMG) => {
                     let userIMG = await getUserByID(dataIMG.userID)
                     userIMG = userIMG.data.img
@@ -52,11 +53,13 @@ function Post() {
                 })
 
                 
+                // Limite de espera para evitar que continue antes de que se hayan podido guardar correctamente las fotos de perfil
                 setTimeout(async () => {
                     await mapPost()
                 }, 500);
 
 
+                // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
                 async function mapPost() {
                     const allPostMap = await datosIMG.map((data) => 
                         <div id='post-div' key={data._id}>
@@ -72,7 +75,7 @@ function Post() {
                             <div id="buttons-post">
                                 <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                                 <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
-                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>}
+                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
                             </div>
                         </div>
                     )
@@ -86,6 +89,8 @@ function Post() {
 
 
 
+    // Funcion para poder eliminar posts por usuario
+    // Elimina tanto el post original como todas las respuestas asociadas a dicho post
     async function deletePost(e) {
         const postID = e.target.id
 
@@ -106,6 +111,7 @@ function Post() {
 
 
 
+    // Funcion para responder a un post, a esta funcion se accede desde el modal
     async function responsePost(e) {
         let userName = await getUserByID(Cookies.get('id'))
 
@@ -116,6 +122,8 @@ function Post() {
         const postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
 
 
+        // Condicional para diferenciar si se carga una imagen o no junto con la respuesta
+        // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
         if (postIMG === undefined) {
             const arrayResponse = {'postID': postOriginID,
                 'username': postUser,
@@ -137,21 +145,12 @@ function Post() {
                 'userID': userID}
 
             const sendResponse = await responseCreate(arrayResponse)
+
             setResponse(null)
             setRecarga(true)
         }
-
-
-
-
     }
 
-
-
-
-    async function close() {
-        setResponse(null)
-    }
 
 
 
@@ -159,6 +158,7 @@ function Post() {
     return (
         <div id="post-body">
 
+            {/* Modal para poder enviar una respuesta */}
             {response && 
                 <Modal isOpen={true}>
 
@@ -181,7 +181,7 @@ function Post() {
                         </div>
 
                         <div id="modalResponse-buttons">
-                            <button onClick={close}>Cerrar</button>
+                            <button onClick={async () => {setResponse(null)}}>Cerrar</button>
                             <button id={response._id} onClick={responsePost}>Enviar respuesta</button>
                         </div>
 
@@ -191,6 +191,7 @@ function Post() {
             }
 
 
+            {/* Lista de post que viene del metodo map */}
             <div id="listPost">
                 {data}
             </div>
