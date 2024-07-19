@@ -27,6 +27,7 @@ function Post() {
     const [recarga, setRecarga] = useState(true)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
+    const [aviso, setAviso] = useState()
 
 
   
@@ -122,32 +123,38 @@ function Post() {
         const postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
 
 
-        // Condicional para diferenciar si se carga una imagen o no junto con la respuesta
-        // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
-        if (postIMG === undefined) {
-            const arrayResponse = {'postID': postOriginID,
-                'username': postUser,
-                'dateString': postDate,
-                'post': postResponse.value,
-                'userID': userID}
+        // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
+        if (postIMG != undefined || postResponse.length > 0) {
+                setAviso(null)
+                // Condicional para diferenciar si se carga una imagen o no junto con la respuesta
+                // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
+                if (postIMG === undefined) {
+                    const arrayResponse = {'postID': postOriginID,
+                        'username': postUser,
+                        'dateString': postDate,
+                        'post': postResponse.value,
+                        'userID': userID}
 
-            const sendResponse = await responseCreate(arrayResponse)
-            setResponse(null)
-            setRecarga(true)
+                    const sendResponse = await responseCreate(arrayResponse)
+                    setResponse(null)
+                    setRecarga(true)
+                } else {
+                    const postIMGBase64 = await ImageUpload(postIMG)
+
+                    const arrayResponse = {'postID': postOriginID,
+                        'username': postUser,
+                        'dateString': postDate,
+                        'post': postResponse.value,
+                        'img': postIMGBase64,
+                        'userID': userID}
+
+                    const sendResponse = await responseCreate(arrayResponse)
+
+                    setResponse(null)
+                    setRecarga(true)
+                }
         } else {
-            const postIMGBase64 = await ImageUpload(postIMG)
-
-            const arrayResponse = {'postID': postOriginID,
-                'username': postUser,
-                'dateString': postDate,
-                'post': postResponse.value,
-                'img': postIMGBase64,
-                'userID': userID}
-
-            const sendResponse = await responseCreate(arrayResponse)
-
-            setResponse(null)
-            setRecarga(true)
+            setAviso('No se puede dejar la respuesta vacia')
         }
     }
 
@@ -172,6 +179,7 @@ function Post() {
 
                             <div id="modalResponse-form-response">
                                 <textarea id='modalResponse-textarea' cols="35" rows="10" placeholder='Escriba su respuesta' />
+                                {aviso}
                             </div>
 
                         </div>

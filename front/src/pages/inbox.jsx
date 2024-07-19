@@ -90,7 +90,7 @@ function Inbox() {
             <Navbar />
 
             <div id="inbox-body">
-                <h3>Inbox</h3>
+                <h3>Conversaciones activas</h3>
                 {data}
             </div>
         

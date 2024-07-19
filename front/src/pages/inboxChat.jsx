@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
 import { getInboxByID } from "../api/inboxAPI";
+import { Header } from "../componentes/inbox/header";
 import Cookies from 'js-cookie'
 
 import '../saas/inbox/inboxChat.scss'
@@ -16,6 +17,7 @@ function InboxChat() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
+    
 
 
     // useEffect para traer todos los mensajes que se han mandado entre ambos usuarios
@@ -26,7 +28,8 @@ function InboxChat() {
             async function getInbox() {
                 const getInboxByUser = await getInboxByID(id)
 
-                const inboxMap = await getInboxByUser.data.text.map((data) => 
+                // Map para mostrar en pantalla los mensajes ordenados por fecha
+                const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
                     <div id="inboxChat-div" key={data.date}>
                         <p>{data.dateString}</p>
                         <p>{data.text}</p>
@@ -34,10 +37,12 @@ function InboxChat() {
                 )
                 setData(inboxMap)
             }
-
         }
         setReboot(false)
     }, [reboot])
+
+
+
 
 
 
@@ -48,7 +53,9 @@ function InboxChat() {
 
 
             <div id="inboxChat-body">
-                <h2>chatsssss</h2>
+                
+                <Header id={id}/>
+
                 {data}
             </div>
         

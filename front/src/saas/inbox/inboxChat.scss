@@ -4,3 +4,17 @@
 #inboxChat-body {
     margin-top: 50px;
 }
+
+
+#inboxChat-div {
+    background-color: $background-divs;
+    border: $background-border solid 2px;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin: 3px;
+
+    & > p{
+        margin: 3px;
+        text-align: center;
+    }
+}
