@@ -8,11 +8,14 @@ import { getpostByID } from "../api/postAPI";
 import { getresponseByID, getResponseByProperty, responseDelete } from "../api/responseAPI";
 import { getUserByID } from "../api/userAPI";
 import { getNotificationByProperty, getNotificationByID, notificationDelete } from "../api/notificationAPI";
+import { useNavigate } from "react-router-dom";
 
 import '../saas/response/response.scss'
 
 
 function Response() {
+    const navigate = useNavigate()
+
     const { id } = useParams()
     const userCurrentID = Cookies.get('id')
 
@@ -24,6 +27,7 @@ function Response() {
     const [postPrincipal, setPostPrincipal] = useState()
     const [userIMG, setUserIMG] = useState()
     const [postIMG, setPostIMG] = useState()
+    const [userID, setUserID] = useState()
     
 
     useEffect(() => {
@@ -36,6 +40,7 @@ function Response() {
                 setDateString(getPostPrincipal.data.dateString)
                 setPostPrincipal(getPostPrincipal.data.post)
                 setPostIMG(getPostPrincipal.data.img)
+                setUserID(getPostPrincipal.data.userID)
 
                 setUserIMG(getUserPrincipal.data.img)
 
@@ -45,7 +50,7 @@ function Response() {
                 
                 const getResponseChildrenMap = await getResponseChildren.data.reverse().map((data) =>
                     <div key={data._id} id="getResponse-div">
-                        <p id='getResponse-div-username'>{data.username}</p>
+                        <p id='getResponse-div-username' onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</p>
                         <p id='getResponse-div-date'>{data.dateString}</p>
                         <p id='getResponse-div-post'>{data.post}</p>
                         <img id='getResponse-div-img' src={data.img} />
@@ -96,7 +101,7 @@ function Response() {
                             <img id='postPrincipal-userIMG' src={userIMG} />
                         </div>
                         <div id="response-postPrincipal-header-userData">
-                            <p id='userData-username'>{username}</p>
+                            <p id='userData-username' onClick={async () => {navigate(`/user/${userID}`)}}>{username}</p>
                             <p>{dateString}</p>
                         </div>                     
                     </div>

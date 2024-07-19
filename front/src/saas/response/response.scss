@@ -49,6 +49,12 @@
                 font-weight: 750;
                 font-size: 1.25rem;
                 letter-spacing: 2px;
+                cursor: pointer;
+
+                &:hover {
+                    letter-spacing: 5px;
+                    font-style: italic;
+                }
             }
         }
     }
@@ -123,6 +129,12 @@
                 letter-spacing: 2px;
                 font-size: 1.25rem;
                 font-weight: 750;
+                cursor: pointer;
+
+                &:hover {
+                    letter-spacing: 5px;
+                    font-style: italic;
+                }
             }
 
             & > #getResponse-div-date {

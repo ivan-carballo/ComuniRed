@@ -44,7 +44,8 @@ function ResponseForm({id}) {
                             'username': userData.data.username,
                             'dateString': await dateFormat(Date.now()),
                             'post': responsePost.value,
-                            'img': postIMG}
+                            'img': postIMG,
+                            'userID': userID}
 
         const responseSend = await responseCreate(responseArray)   
         responsePost.value = ''

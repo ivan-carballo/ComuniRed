@@ -63,7 +63,7 @@ function Post() {
                             <div id="post-header">
                                 <img src={data.userimg} />
                                 <div id="post-header-data">
-                                    <a href={`/user/${data.userID}`}> <h2>{data.username}</h2> </a>
+                                    <h2 onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</h2>
                                     <h4 id='post-date'>{data.dateString}</h4>
                                 </div>
                             </div>
@@ -120,7 +120,8 @@ function Post() {
             const arrayResponse = {'postID': postOriginID,
                 'username': postUser,
                 'dateString': postDate,
-                'post': postResponse.value}
+                'post': postResponse.value,
+                'userID': userID}
 
             const sendResponse = await responseCreate(arrayResponse)
             setResponse(null)
@@ -132,7 +133,8 @@ function Post() {
                 'username': postUser,
                 'dateString': postDate,
                 'post': postResponse.value,
-                'img': postIMGBase64}
+                'img': postIMGBase64,
+                'userID': userID}
 
             const sendResponse = await responseCreate(arrayResponse)
             setResponse(null)
