@@ -15,8 +15,29 @@ function InboxChat() {
     const userCurrentID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
+    const [data, setData] = useState()
 
-    console.log(id);
+
+    // useEffect para traer todos los mensajes que se han mandado entre ambos usuarios
+    useEffect(() => {
+        if (reboot){
+
+            getInbox()
+            async function getInbox() {
+                const getInboxByUser = await getInboxByID(id)
+
+                const inboxMap = await getInboxByUser.data.text.map((data) => 
+                    <div id="inboxChat-div" key={data.date}>
+                        <p>{data.dateString}</p>
+                        <p>{data.text}</p>
+                    </div>
+                )
+                setData(inboxMap)
+            }
+
+        }
+        setReboot(false)
+    }, [reboot])
 
 
 
@@ -28,6 +49,7 @@ function InboxChat() {
 
             <div id="inboxChat-body">
                 <h2>chatsssss</h2>
+                {data}
             </div>
         
         </>
