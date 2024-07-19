@@ -8,18 +8,24 @@ import { getUserByID } from "../../api/userAPI";
 import { getPostByProperty } from "../../api/postAPI";
 import { FaInbox } from 'react-icons/fa'
 import { Modal } from '../modal.jsx'
+import Cookies from 'js-cookie'
+import { dateFormat } from '../../funciones/fecha.js'
+import { inboxCreate } from '../../api/inboxAPI.js'
 
 
 import '../../saas/otherPerfil/perfilData.scss'
 
 
 function PerfilData({id}) {
+    const userCurrentID = Cookies.get('id')
+
     const [username, setUsername] = useState()
     const [perfilIMG, setPerfilIMG] = useState()
     const [date, setDate] = useState()
     const [post, setPost] = useState()
     const [modal, setModal] = useState()
     const [data, setData] = useState()
+    const [aviso, setAviso] = useState()
 
 
 
@@ -53,6 +59,28 @@ function PerfilData({id}) {
 
     // Funcion para enviar un mensaje privado, se llega aqui desde el modal
     async function sendInbox(e) {
+        const userID1 = userCurrentID
+        const userID2 = data._id
+        const dateNow = await dateFormat(Date.now())
+        
+        const textarea = document.getElementById('modal-textarea')
+        const text = textarea.value
+
+        const inboxArray = {'userID1': userID1,
+                            'userID2': userID2,
+                            'dateString': dateNow,
+                            'text': text}
+        
+        if (text.length > 1) {
+            const sendInbox = await inboxCreate(inboxArray)
+            textarea.value = ''
+            setAviso('Su mensaje ha sido enviado correctamente')
+
+            setTimeout(() => {
+                setModal(null)
+                setAviso(null)
+            }, 3000);
+        }
         
 
     }
@@ -97,6 +125,7 @@ function PerfilData({id}) {
 
                         <div id="modal-text">
                             <textarea id='modal-textarea' placeholder='Escriba aqui su mensaje' cols={38} rows={10}></textarea>
+                            {aviso}
                         </div>
 
                         <div id="modal-buttons">
