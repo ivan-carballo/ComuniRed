@@ -10,7 +10,7 @@ import { FaInbox } from 'react-icons/fa'
 import { Modal } from '../modal.jsx'
 import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js'
-import { inboxCreate } from '../../api/inboxAPI.js'
+import { inboxCreate, inboxUpdate, getInboxByProperty } from '../../api/inboxAPI.js'
 
 
 import '../../saas/otherPerfil/perfilData.scss'
@@ -50,7 +50,7 @@ function PerfilData({id}) {
             setUsername(getOtherUser.username)
             setPerfilIMG(getOtherUser.img)
             setDate(date)
-            setPost(getPostByUser.data.length)
+            setPost(await getPostByUser.data.length)
         }
     })
 
@@ -59,6 +59,7 @@ function PerfilData({id}) {
 
     // Funcion para enviar un mensaje privado, se llega aqui desde el modal
     async function sendInbox(e) {
+        // Recopilar informacion necesaria
         const userID1 = userCurrentID
         const userID2 = data._id
         const dateNow = await dateFormat(Date.now())
@@ -66,24 +67,82 @@ function PerfilData({id}) {
         const textarea = document.getElementById('modal-textarea')
         const text = textarea.value
 
-        const inboxArray = {'userID1': userID1,
-                            'userID2': userID2,
+
+        // Usar getByProperty para saber si ya existe una conversacion entre ambos usuarios
+        // Si existe se actualiza con el nuevo mensaje, si no existe se crea una nueva conversacion
+        const inboxByUserID1 = await getInboxByProperty('userID1', userID1)
+        const inboxByUserID2 = await getInboxByProperty('userID2', userID1)
+
+
+        // Se crea un array para los nuevos mensajes desde aqui para reutilizarlo dentro del condicional
+        const textArray = {'text': text,
                             'dateString': dateNow,
-                            'text': text}
-        
+                            'date': Date.now(),
+                            'state': false}
+
+
+        // Condicional para evitar que se mande un mensaje con el texto vacio
         if (text.length > 1) {
-            const sendInbox = await inboxCreate(inboxArray)
+
+                // Comprobar en que situacion se encuentra la conversacion, analizando las 4 variables
+                if (inboxByUserID1.data.length > 0 && inboxByUserID2.data.length > 0) {
+                        console.log('son ambos mayores');
+                } else if (inboxByUserID1.data.length > 0 && inboxByUserID2.data.length < 1) {
+                        console.log('solo el 1 es mas grande');
+
+                        const inboxFilter = inboxByUserID1.data.filter(data => data.userID2 == userID2)
+                        
+                        // Incluir el nuevo mensaje al array ya existente
+                        let newArray = inboxFilter[0].text
+                        newArray.push(textArray)
+
+                        const newInbox = {'text': newArray}
+
+                        const newInboxUpdate = await inboxUpdate(inboxFilter[0]._id, newInbox)
+
+                        closeModal()
+
+                } else if (inboxByUserID1.data.length < 1 && inboxByUserID2.data.length > 0) {
+                        console.log('solo el 2 es mas grande');
+                } else if (inboxByUserID1.data.length < 1 && inboxByUserID2.data.length < 1) {
+                        console.log('ambos estan vacios');
+
+                        const textArrayNew = [{'text': text,
+                                        'dateString': dateNow,
+                                        'date': Date.now(),
+                                        'state': false}]
+
+                        const inboxArray = {'userID1': userID1,
+                                            'userID2': userID2,
+                                            'dateString': dateNow,
+                                            'text': textArrayNew}
+
+                        const newInbox = await inboxCreate(inboxArray)
+
+                        closeModal()
+
+                } else {
+                        console.log('no entra en nada');
+                }
+
+        } else {
+            setAviso('No puede enviar un mensaje vacio')
+        }
+
+
+
+        // Funcion para poner un mensaje de aviso que el mensaje ya sido enviado y cerrar el modal tras 3 segundos
+        async function closeModal() {
             textarea.value = ''
             setAviso('Su mensaje ha sido enviado correctamente')
 
             setTimeout(() => {
-                setModal(null)
                 setAviso(null)
+                setModal(null)
             }, 3000);
         }
-        
-
     }
+
 
 
 

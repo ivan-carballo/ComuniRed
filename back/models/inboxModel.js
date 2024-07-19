@@ -23,13 +23,8 @@ const inboxSchema  = new mongoose.Schema({
     },
 
     text: {
-        type: String,
+        type: Array,
         required: true,
-    },
-
-    state: {
-        type: Boolean,
-        default: 0,
     },
 
 
