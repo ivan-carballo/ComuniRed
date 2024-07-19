@@ -29,16 +29,30 @@
             align-items: center;
             align-items: center;
 
+            & > #perfilData-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: -10px;
+                margin-bottom: 5px;
+                width: 100%;
+
+                & > #perfilData-user {
+                    font-size: 1.8rem;
+                    font-weight: 750;
+                    margin: 0;
+                }
+
+                & > #perfilData-inbox {
+                    font-size: 1.8rem;
+                    cursor: pointer;
+                }
+            }
+
             & > p {
                 margin: 0;
             }
     
-            & > #perfilData-user {
-                font-size: 1.8rem;
-                font-weight: 750;
-                margin-bottom: 10px;
-            }
-
             & > #perfilData-date {
                 margin-bottom: 5px;
             }
