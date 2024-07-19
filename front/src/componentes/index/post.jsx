@@ -38,7 +38,7 @@ function Post() {
             async function allPost() {
                 let AllPostData = await getPost()
                 AllPostData = AllPostData.data.reverse()
-
+                
                 let datosIMG = []
 
                 // Sacar datos de las tablas post y user para poder mostrar la foto de perfil de cada usuario al lado de su post
