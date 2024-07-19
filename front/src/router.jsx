@@ -8,6 +8,7 @@ import { Response } from "./pages/response.jsx";
 import { Notification } from "./pages/notification.jsx";
 import { Search } from './pages/search.jsx'
 import { Inbox } from "./pages/inbox.jsx";
+import { InboxChat } from "./pages/inboxChat.jsx";
 import React from 'react';
 
 
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/inbox",
     element: <Inbox />
+  },
+
+  {
+    path: "/inbox/:id",
+    element: <InboxChat />
   },
 
   {

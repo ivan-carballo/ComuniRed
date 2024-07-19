@@ -7,12 +7,14 @@ import Cookies from 'js-cookie'
 import { Navbar } from "../componentes/navbar";
 import { getInboxByProperty } from '../api/inboxAPI'
 import { getUserByID } from '../api/userAPI'
+import { useNavigate } from "react-router-dom";
 
 import '../saas/inbox/inbox.scss'
 
 
 
 function Inbox() {
+    const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
@@ -64,7 +66,7 @@ function Inbox() {
 
                 // Crear un metodo map para mostrar en pantalla las conversaciones actuales y que pueda seleccionar la que desea abrir
                 const inboxUserMap = inboxMap.map((data) => 
-                    <div id="chat-div" key={data._id}>
+                    <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} >
                         <img src={data.img} />
                         <p>{data.username}</p>
                     </div>
@@ -80,7 +82,7 @@ function Inbox() {
     }, [reboot])
 
 
-    
+
 
     return (
         <>
