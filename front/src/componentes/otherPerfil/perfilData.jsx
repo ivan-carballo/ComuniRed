@@ -86,39 +86,58 @@ function PerfilData({id}) {
 
                 // Comprobar en que situacion se encuentra la conversacion, analizando las 4 variables
                 if (inboxByUserID1.data.length > 0 && inboxByUserID2.data.length > 0) {
-                        console.log('son ambos mayores');
+                        // los dos tienen informacion
+
+                        const inboxFilter1 = inboxByUserID1.data.filter(data => data.userID2 === userID2)
+                        const inboxFilter2 = inboxByUserID2.data.filter(data => data.userID1 === userID2)
+
+                        // Condicional para las posibilidades con ambos filtros
+                        if (inboxFilter1.length > 0) {
+                            inboxSend(inboxFilter1)
+
+                        } else if (inboxFilter2.length > 0) {
+                            inboxSend(inboxFilter2)
+
+                        } else {
+                            newInboxSend()
+                        }
+
+                        closeModal()
+
                 } else if (inboxByUserID1.data.length > 0 && inboxByUserID2.data.length < 1) {
-                        console.log('solo el 1 es mas grande');
+                        // Solo hay datos para uno de ellos
 
                         const inboxFilter = inboxByUserID1.data.filter(data => data.userID2 == userID2)
-                        
-                        // Incluir el nuevo mensaje al array ya existente
-                        let newArray = inboxFilter[0].text
-                        newArray.push(textArray)
 
-                        const newInbox = {'text': newArray}
+                        // Condicional para cuando no haya aun una conversacion entre ambos
+                        if (inboxFilter.length > 0) {
+                            inboxSend(inboxFilter)
 
-                        const newInboxUpdate = await inboxUpdate(inboxFilter[0]._id, newInbox)
+                        } else {
+                            newInboxSend()
+                        }
 
                         closeModal()
 
                 } else if (inboxByUserID1.data.length < 1 && inboxByUserID2.data.length > 0) {
-                        console.log('solo el 2 es mas grande');
+                        // Solo hay datos para uno de ellos
+
+                        const inboxFilter = inboxByUserID2.data.filter(data => data.userID1 == userID2)
+
+                        // Condicional para cuando no haya aun una conversacion entre ambos
+                        if (inboxFilter.length > 0) {
+                            inboxSend(inboxFilter)
+
+                        } else {
+                            newInboxSend()
+                        }
+
+                        closeModal()
+
                 } else if (inboxByUserID1.data.length < 1 && inboxByUserID2.data.length < 1) {
-                        console.log('ambos estan vacios');
+                        // No hay mensaje entre ambos usuarios
 
-                        const textArrayNew = [{'text': text,
-                                        'dateString': dateNow,
-                                        'date': Date.now(),
-                                        'state': false}]
-
-                        const inboxArray = {'userID1': userID1,
-                                            'userID2': userID2,
-                                            'dateString': dateNow,
-                                            'text': textArrayNew}
-
-                        const newInbox = await inboxCreate(inboxArray)
-
+                        newInboxSend()
                         closeModal()
 
                 } else {
@@ -131,6 +150,39 @@ function PerfilData({id}) {
 
 
 
+        // Funcion para guardar una conversacion cuando es nueva y ningun usuario aun ha mandando mensaje al otro
+        async function newInboxSend() {
+            const textArrayNew = [{'text': text,
+                'dateString': dateNow,
+                'date': Date.now(),
+                'state': false}]
+
+            const inboxArray = {'userID1': userID1,
+                                'userID2': userID2,
+                                'dateString': dateNow,
+                                'text': textArrayNew}
+
+            const newInbox = await inboxCreate(inboxArray)
+        }
+
+
+
+
+        // Funcion para guardar un mensaje cuando ya existe una conversacion entre ambos usuarios
+        async function inboxSend(inboxFilter) {
+
+            // Incluir el nuevo mensaje al array ya existente
+            let newArray = inboxFilter[0].text
+            newArray.push(textArray)
+
+            const newInbox = {'text': newArray}
+
+            const newInboxUpdate = await inboxUpdate(inboxFilter[0]._id, newInbox)
+        }
+
+
+
+
         // Funcion para poner un mensaje de aviso que el mensaje ya sido enviado y cerrar el modal tras 3 segundos
         async function closeModal() {
             textarea.value = ''
@@ -139,7 +191,7 @@ function PerfilData({id}) {
             setTimeout(() => {
                 setAviso(null)
                 setModal(null)
-            }, 3000);
+            }, 5000);
         }
     }
 

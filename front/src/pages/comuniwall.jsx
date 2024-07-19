@@ -33,11 +33,17 @@ function ComuniWall() {
 
             if (token === null) {
                 Cookies.remove('token')
-                navigate("/")
+                close()
             }
             setRecarga(false)
         }
     })
+
+    
+    async function close() {
+        navigate("/")
+    }
+
 
     setInterval(() => {
         setRecarga(true)
