@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell, FaSearch, FaInbox } from 'react-icons/fa'
 import { getNotificationByProperty } from '../api/notificationAPI';
+import { getNotiInboxByProperty } from '../api/notiInboxAPI';
 
 
 
@@ -15,6 +16,7 @@ const Navbar = () => {
 
     const [notification, setNotification] = useState(false)
     const [reboot, setReboot] = useState(true)
+    const [noti, setNoti] = useState('link')
 
 
 
@@ -41,13 +43,22 @@ const Navbar = () => {
 
 
 
+    // useEffect para avisar cuando hay notificaciones de respuestas y de mensajes privados
     useEffect(() => {
         if(reboot) {
+
             alertNotification()
             async function alertNotification() {
                 const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
                 getNotificationByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
             }
+
+            alertInbox()
+            async function alertInbox(){
+                const getNotiInboxByUser = await getNotiInboxByProperty('userReceived', userID)
+                getNotiInboxByUser.data.length > 0 ? setNoti('notification') : setNoti('link')
+            }
+
         }
         setReboot(false)
     }, [reboot])
@@ -60,7 +71,7 @@ const Navbar = () => {
             <nav id='navbar-links'>
                     <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
                     <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
-                    <NavLink to="/inbox" id="inbox" title="inbox" className="link"><FaInbox /></NavLink>
+                    <NavLink to="/inbox" id="inbox" title="inbox" className={noti}><FaInbox /></NavLink>
                     {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>}
                     <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
                     <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>

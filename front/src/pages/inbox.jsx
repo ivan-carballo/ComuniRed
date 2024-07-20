@@ -71,14 +71,15 @@ function Inbox() {
                 // Revisar las posibles notificaciones que hay pendientes
                 const getNotiInbox = await getNotiInboxByProperty('userReceived', userCurrentID)
 
-                
+                let getNotiInboxID = await getNotiInbox.data.map(data => data.userSend)
+                getNotiInboxID = getNotiInboxID.join()
 
 
                 // Crear un metodo map para mostrar en pantalla las conversaciones actuales y que pueda seleccionar la que desea abrir
                 // Meter un ternario para cambiar de color el div en el caso de que tenga mensajes sin leer
                 const inboxUserMap = inboxMap.map((data) => 
                     <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} className={read}>
-                        {}
+                        {getNotiInboxID.includes(data.userOppositeID) ? setRead('notRead') : setRead('read')}
                         <img src={data.img} />
                         <p>{data.username}</p>
                     </div>

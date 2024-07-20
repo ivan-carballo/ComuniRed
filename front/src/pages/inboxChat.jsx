@@ -61,7 +61,9 @@ function InboxChat() {
                 const getNotiInboxReceived = await getNotiInboxByProperty('userReceived', userCurrentID)
                 const getNotiInboxReceivedFilter = await getNotiInboxReceived.data.filter( data => data.userSend == userOpposite)
 
-                const notiInboxRemove = await notiInboxDelete(getNotiInboxReceivedFilter[0]._id)
+                if (getNotiInboxReceivedFilter.length > 0) {
+                    const notiInboxRemove = await notiInboxDelete(getNotiInboxReceivedFilter[0]._id)
+                }
             }
         }
         setReboot(false)
