@@ -11,6 +11,7 @@ import { Modal } from '../modal.jsx'
 import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js'
 import { inboxCreate, inboxUpdate, getInboxByProperty } from '../../api/inboxAPI.js'
+import { getNotiInboxByProperty, notiInboxCreate } from '../../api/notiInboxAPI.js'
 
 
 import '../../saas/otherPerfil/perfilData.scss'
@@ -163,6 +164,8 @@ function PerfilData({id}) {
                                 'text': textArrayNew}
 
             const newInbox = await inboxCreate(inboxArray)
+
+            newNotiInbox()
         }
 
 
@@ -180,6 +183,26 @@ function PerfilData({id}) {
                             'dateString': await dateFormat(Date.now()) }
 
             const newInboxUpdate = await inboxUpdate(inboxFilter[0]._id, newInbox)
+
+            newNotiInbox()
+        }
+
+
+
+
+        // Funcion para añadir una notificacion al otro usuario de que ha recibido un mensaje privado
+        async function newNotiInbox() {
+            
+            const NotiInboxArray = {'userSend': userID1,
+                                    'userReceived': userID2 }
+
+            // Hacer comprobacion de que no tiene ninguna notificacion pendiente anterior y no repetir info en MongoDB
+            const getNotiByUser = await getNotiInboxByProperty('userSend', userID1)
+            const getNotiByUserFilter = await getNotiByUser.data.filter( data => data.userReceived == userID2)
+
+            if (getNotiByUserFilter.length == 0) {
+                const notiInboxSend = await notiInboxCreate(NotiInboxArray)
+            }
         }
 
 

@@ -5,6 +5,7 @@ import { Navbar } from "../componentes/navbar";
 import { getInbox, getInboxByID, inboxUpdate } from "../api/inboxAPI";
 import { Header } from "../componentes/inbox/header";
 import { dateFormat } from '../funciones/fecha.js'
+import { getNotiInboxByProperty, notiInboxCreate } from "../api/notiInboxAPI.js";
 import Cookies from 'js-cookie'
 
 import '../saas/inbox/inboxChat.scss'
@@ -19,9 +20,10 @@ function InboxChat() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
+    const [userReceived, setUserReceived] = useState()
 
 
-    
+
     // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
     setInterval(() => {
         getInbox()
@@ -36,6 +38,9 @@ function InboxChat() {
             getInbox()
             async function getInbox() {
                 const getInboxByUser = await getInboxByID(id)
+
+                // Guardar en un estado el ID del usuario que recibe los mensajes
+                getInboxByUser.data.userID1 === userCurrentID ? setUserReceived(getInboxByUser.data.userID2) : setUserReceived(getInboxByUser.data.userID1)
 
                 // Map para mostrar en pantalla los mensajes ordenados por fecha
                 const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
@@ -73,6 +78,18 @@ function InboxChat() {
                                 'dateString': await dateFormat(Date.now()) }
 
         const UpdateNewChat = await inboxUpdate(id, updateArrayInbox)
+
+        // Crear una notificacion al usuario contrario de los mensajes enviados
+        const NotiInboxArray = {'userSend': userCurrentID,
+                                'userReceived': userReceived }
+
+        // Hacer comprobacion de que no tiene ninguna notificacion pendiente anterior y no repetir info en MongoDB
+        const getNotiByUser = await getNotiInboxByProperty('userSend', userCurrentID)
+        const getNotiByUserFilter = await getNotiByUser.data.filter( data => data.userReceived == userReceived)
+
+        if (getNotiByUserFilter.length == 0) {
+        const notiInboxSend = await notiInboxCreate(NotiInboxArray)
+        }
 
         textarea.value = ''
 

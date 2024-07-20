@@ -15,6 +15,6 @@ const notiInboxSchema  = new mongoose.Schema({
 })
 
 
-const notiInboxModel = mongoose.model("inboxs",notiInboxSchema);
+const notiInboxModel = mongoose.model("notiInboxs",notiInboxSchema);
 
 export default notiInboxModel;
