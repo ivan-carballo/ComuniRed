@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { Navbar } from "../componentes/navbar";
 import { getInboxByProperty } from '../api/inboxAPI'
+import { getNotiInboxByProperty, notiInboxDelete } from '../api/notiInboxAPI.js'
 import { getUserByID } from '../api/userAPI'
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,7 @@ function Inbox() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
+    const [read, setRead] = useState()
 
 
     // UseEffect para recopilar todos los mensajes relacionados con el usuario logueado
@@ -65,9 +67,18 @@ function Inbox() {
                 // Ordenar las conversaciones por fecha para que aparezcan en la zona superior las mas recientes
                 inboxMap.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+
+                // Revisar las posibles notificaciones que hay pendientes
+                const getNotiInbox = await getNotiInboxByProperty('userReceived', userCurrentID)
+
+                
+
+
                 // Crear un metodo map para mostrar en pantalla las conversaciones actuales y que pueda seleccionar la que desea abrir
+                // Meter un ternario para cambiar de color el div en el caso de que tenga mensajes sin leer
                 const inboxUserMap = inboxMap.map((data) => 
-                    <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} >
+                    <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} className={read}>
+                        {}
                         <img src={data.img} />
                         <p>{data.username}</p>
                     </div>
@@ -78,12 +89,9 @@ function Inbox() {
                 if (inboxUserMap.length < 1) {
                     setData('No hay conversaciones activas con ningun usuario')
                 }
-
             }
-
         }
         setReboot(false)
-
     }, [reboot])
 
 

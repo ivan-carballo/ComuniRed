@@ -5,7 +5,7 @@ import { Navbar } from "../componentes/navbar";
 import { getInbox, getInboxByID, inboxUpdate } from "../api/inboxAPI";
 import { Header } from "../componentes/inbox/header";
 import { dateFormat } from '../funciones/fecha.js'
-import { getNotiInboxByProperty, notiInboxCreate } from "../api/notiInboxAPI.js";
+import { getNotiInboxByProperty, notiInboxCreate, notiInboxDelete } from "../api/notiInboxAPI.js";
 import Cookies from 'js-cookie'
 
 import '../saas/inbox/inboxChat.scss'
@@ -17,17 +17,20 @@ function InboxChat() {
     const { id } = useParams()
 
     const userCurrentID = Cookies.get('id')
+    let userOpposite = ''
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
     const [userReceived, setUserReceived] = useState()
 
 
+    
 
     // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
     setInterval(() => {
         getInbox()
     }, 10000);    
+
 
 
 
@@ -50,6 +53,15 @@ function InboxChat() {
                     </div>
                 )
                 setData(inboxMap)
+
+                // Eliminar las notificaciones que estan asociadas a esta conversacion
+                // Ternario para saber cual es el ID del usuario que ha mandado mensaje
+                getInboxByUser.data.userID1 === userCurrentID ? userOpposite = getInboxByUser.data.userID2 : userOpposite = getInboxByUser.data.userID1
+
+                const getNotiInboxReceived = await getNotiInboxByProperty('userReceived', userCurrentID)
+                const getNotiInboxReceivedFilter = await getNotiInboxReceived.data.filter( data => data.userSend == userOpposite)
+
+                const notiInboxRemove = await notiInboxDelete(getNotiInboxReceivedFilter[0]._id)
             }
         }
         setReboot(false)

@@ -12,7 +12,6 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: $background-divs;
         cursor: pointer;
 
         & > img {
@@ -27,4 +26,13 @@
             font-weight: 600;
         }
     }
+
+    & > .notRead {
+        background-color: rgb(246, 126, 126);
+    }
+
+    & > .read {
+        background-color: $background-divs;
+    }
 }
+
