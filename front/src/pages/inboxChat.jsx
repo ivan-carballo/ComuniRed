@@ -2,11 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
-import { getInboxByID } from "../api/inboxAPI";
+import { getInboxByID, inboxUpdate } from "../api/inboxAPI";
 import { Header } from "../componentes/inbox/header";
+import { dateFormat } from '../funciones/fecha.js'
 import Cookies from 'js-cookie'
 
 import '../saas/inbox/inboxChat.scss'
+
 
 
 
@@ -18,6 +20,7 @@ function InboxChat() {
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
     
+
 
 
     // useEffect para traer todos los mensajes que se han mandado entre ambos usuarios
@@ -32,7 +35,7 @@ function InboxChat() {
                 const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
                     <div id="inboxChat-div" key={data.date}>
                         <p className={data.userID != userCurrentID ? "start" : "end"}>{data.dateString}</p>
-                        <p className={data.userID != userCurrentID ? "start" : "end"}>{data.text}</p>
+                        <p className={data.userID != userCurrentID ? "start" : "end"} id='inboxChat-text'>{data.text}</p>
                     </div>
                 )
                 setData(inboxMap)
@@ -40,6 +43,32 @@ function InboxChat() {
         }
         setReboot(false)
     }, [reboot])
+
+
+
+
+    
+    // Funcion para enviar un nuevo mensaje al otro usuario
+    async function sendChat(e) {
+        const textarea = document.getElementById('inboxChat-textarea')
+
+        const getInboxChat = await getInboxByID(id)
+        let allChats = getInboxChat.data.text
+
+        const updateArrayText = {'text': textarea.value,
+                                'dateString': await dateFormat(Date.now()),
+                                'date': Date.now(),
+                                'userID': userCurrentID}
+
+        allChats.push(updateArrayText)
+
+        const updateArrayInbox = {'text': allChats}
+
+        const UpdateNewChat = await inboxUpdate(id, updateArrayInbox)
+
+
+        setReboot(true)
+    }
 
 
 
@@ -56,7 +85,15 @@ function InboxChat() {
                 
                 <Header id={id}/>
 
+
+                <div id="inboxChat-input">
+                    <textarea id='inboxChat-textarea' cols={40} rows={6} />
+                    <input type="button" value="Enviar" onClick={sendChat} />
+                </div>
+
+
                 {data}
+                
             </div>
         
         </>
