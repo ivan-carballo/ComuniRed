@@ -20,7 +20,6 @@ function Inbox() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
-    const [read, setRead] = useState()
 
 
     // UseEffect para recopilar todos los mensajes relacionados con el usuario logueado
@@ -78,8 +77,7 @@ function Inbox() {
                 // Crear un metodo map para mostrar en pantalla las conversaciones actuales y que pueda seleccionar la que desea abrir
                 // Meter un ternario para cambiar de color el div en el caso de que tenga mensajes sin leer
                 const inboxUserMap = inboxMap.map((data) => 
-                    <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} className={read}>
-                        {getNotiInboxID.includes(data.userOppositeID) ? setRead('notRead') : setRead('read')}
+                    <div id="chat-div" key={data._id} onClick={async () => {navigate(`/inbox/${data._id}`)}} className={getNotiInboxID.includes(data.userOppositeID) ? 'notRead'  : 'read'}>
                         <img src={data.img} />
                         <p>{data.username}</p>
                     </div>
