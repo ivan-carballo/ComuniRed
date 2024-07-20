@@ -78,7 +78,7 @@ function PerfilData({id}) {
         const textArray = {'text': text,
                             'dateString': dateNow,
                             'date': Date.now(),
-                            'state': false}
+                            'userID': userCurrentID}
 
 
         // Condicional para evitar que se mande un mensaje con el texto vacio
@@ -153,9 +153,9 @@ function PerfilData({id}) {
         // Funcion para guardar una conversacion cuando es nueva y ningun usuario aun ha mandando mensaje al otro
         async function newInboxSend() {
             const textArrayNew = [{'text': text,
-                'dateString': dateNow,
-                'date': Date.now(),
-                'state': false}]
+                                'dateString': dateNow,
+                                'date': Date.now(),
+                                'userID': userCurrentID}]
 
             const inboxArray = {'userID1': userID1,
                                 'userID2': userID2,
@@ -209,7 +209,9 @@ function PerfilData({id}) {
                 <div id="perfilData-p">
                     <div id="perfilData-header">
                         <p id='perfilData-user'>{username} </p>
-                        <FaInbox id='perfilData-inbox' onClick={async ()=>{setModal(data)}} />  {/* Al pulsar el icono se abre modal para escribir mensaje privado */}
+                        {/* Ternario para que no se pueda ver el boton de abrir modal cuando se esta mirando el perfil del usuario logueado */}
+                        {/* El boton abre modal para enviar mensaje privado */}
+                        {userCurrentID != id ? <FaInbox id='perfilData-inbox' onClick={async ()=>{setModal(data)}} /> : <></>}
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
                     <p id='perfilData-post'>Nº post: {post}</p>

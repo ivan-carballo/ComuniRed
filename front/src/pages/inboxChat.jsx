@@ -31,8 +31,8 @@ function InboxChat() {
                 // Map para mostrar en pantalla los mensajes ordenados por fecha
                 const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
                     <div id="inboxChat-div" key={data.date}>
-                        <p>{data.dateString}</p>
-                        <p>{data.text}</p>
+                        <p className={data.userID != userCurrentID ? "start" : "end"}>{data.dateString}</p>
+                        <p className={data.userID != userCurrentID ? "start" : "end"}>{data.text}</p>
                     </div>
                 )
                 setData(inboxMap)
