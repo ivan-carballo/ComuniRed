@@ -62,10 +62,13 @@ function InboxChat() {
 
         allChats.push(updateArrayText)
 
-        const updateArrayInbox = {'text': allChats}
+        const updateArrayInbox = {'text': allChats,
+                                'date': Date.now(),
+                                'dateString': await dateFormat(Date.now()) }
 
         const UpdateNewChat = await inboxUpdate(id, updateArrayInbox)
 
+        textarea.value = ''
 
         setReboot(true)
     }
@@ -87,7 +90,7 @@ function InboxChat() {
 
 
                 <div id="inboxChat-input">
-                    <textarea id='inboxChat-textarea' cols={40} rows={6} />
+                    <textarea id='inboxChat-textarea' cols={40} rows={6}  placeholder="Escriba su mensaje aqui..." />
                     <input type="button" value="Enviar" onClick={sendChat} />
                 </div>
 

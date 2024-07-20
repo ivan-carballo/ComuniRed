@@ -63,6 +63,8 @@ function Inbox() {
                 }))
 
 
+                // Ordenar las conversaciones por fecha para que aparezcan en la zona superior las mas recientes
+                inboxMap.sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 // Crear un metodo map para mostrar en pantalla las conversaciones actuales y que pueda seleccionar la que desea abrir
                 const inboxUserMap = inboxMap.map((data) => 

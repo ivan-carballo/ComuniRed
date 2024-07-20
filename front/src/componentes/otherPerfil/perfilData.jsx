@@ -175,7 +175,9 @@ function PerfilData({id}) {
             let newArray = inboxFilter[0].text
             newArray.push(textArray)
 
-            const newInbox = {'text': newArray}
+            const newInbox = {'text': newArray,
+                            'date': Date.now(),
+                            'dateString': await dateFormat(Date.now()) }
 
             const newInboxUpdate = await inboxUpdate(inboxFilter[0]._id, newInbox)
         }
