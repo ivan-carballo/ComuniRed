@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
-import { getInboxByID, inboxUpdate } from "../api/inboxAPI";
+import { getInbox, getInboxByID, inboxUpdate } from "../api/inboxAPI";
 import { Header } from "../componentes/inbox/header";
 import { dateFormat } from '../funciones/fecha.js'
 import Cookies from 'js-cookie'
@@ -19,7 +19,13 @@ function InboxChat() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
+
+
     
+    // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
+    setInterval(() => {
+        getInbox()
+    }, 10000);    
 
 
 

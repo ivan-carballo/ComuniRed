@@ -13,6 +13,7 @@ import postRouter from "./postRouter.js";
 import responseRouter from "./responseRouter.js";
 import notificationRouter from './notificationRouter.js'
 import inboxRouter from './inboxRouter.js'
+import notiInboxRouter from './notiInboxRouter.js'
 
 
 
@@ -21,6 +22,7 @@ router.use("/post", postRouter);
 router.use("/response", responseRouter);
 router.use("/notification", notificationRouter);
 router.use("/inbox", inboxRouter);
+router.use("/notiinbox", notiInboxRouter);
 
 
 

@@ -27,11 +27,9 @@ const inboxSchema  = new mongoose.Schema({
         required: true,
     },
 
-
-
 })
 
 
-const inboxModel = mongoose.model("inboxs",inboxSchema);
+const inboxModel = mongoose.model("notiinboxs",inboxSchema);
 
 export default inboxModel;

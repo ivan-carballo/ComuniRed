@@ -18,7 +18,6 @@ function Inbox() {
     const userCurrentID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
-    const [state, setState] = useState()
     const [data, setData] = useState()
 
 
@@ -75,6 +74,10 @@ function Inbox() {
                 )
 
                 setData(inboxUserMap)
+
+                if (inboxUserMap.length < 1) {
+                    setData('No hay conversaciones activas con ningun usuario')
+                }
 
             }
 
