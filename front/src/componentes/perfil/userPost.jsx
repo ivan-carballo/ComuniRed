@@ -46,7 +46,7 @@ function AllPostByUser () {
                         <img id='postMap-img' src={data.img} />
                         <div id="postMap-buttons">
                             <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={postShow} />
-                            <input type="button" value="Eliminar" id={data._id} onClick={postDel} />
+                            <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} />
                         </div>
                     </div>
                 )
@@ -55,6 +55,35 @@ function AllPostByUser () {
         }
         setReboot(false)
     }, [reboot])
+
+
+
+    // Funcion intermedia para desplegar un aviso al usuario antes de hacer la eliminacion por si es un error o se arrepiente
+    async function sweetAlert(e) {
+        Swal.fire({
+            title: 'Confirmar eliminacion de post',
+            text: "Cuando se elimina un post tambien se eliminan todas las respuestas asociadas a dicho post. Esta operacion no se puede revertir.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, elimina todo',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                postDel(e);
+                Swal.fire(
+                    '¡Hecho!',
+                    'Tu acción ha sido completada.',
+                    'success'
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelado',
+                    'Tu acción ha sido cancelada :)',
+                    'error'
+                )
+            }
+        })
+    }
 
 
 

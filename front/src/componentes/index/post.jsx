@@ -4,6 +4,7 @@
 import '../../saas/index/post.scss'
 
 import React from 'react';
+import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
@@ -76,7 +77,7 @@ function Post() {
                             <div id="buttons-post">
                                 <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                                 <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
-                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={deletePost} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
+                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
                             </div>
                         </div>
                     )
@@ -86,6 +87,35 @@ function Post() {
             }
         }
     }, [recarga]);
+
+
+
+    // Funcion intermedia para desplegar un aviso al usuario antes de hacer la eliminacion por si es un error o se arrepiente
+    async function sweetAlert(e) {
+        Swal.fire({
+            title: 'Confirmar eliminacion de post',
+            text: "Cuando se elimina un post tambien se eliminan todas las respuestas asociadas a dicho post. Esta operacion no se puede revertir.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, elimina todo',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deletePost(e);
+                Swal.fire(
+                    '¡Hecho!',
+                    'Tu acción ha sido completada.',
+                    'success'
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelado',
+                    'Tu acción ha sido cancelada :)',
+                    'error'
+                )
+            }
+        })
+    }
 
 
 
@@ -126,6 +156,7 @@ function Post() {
         // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
         if (postIMG != undefined || postResponse.length > 0) {
                 setAviso(null)
+
                 // Condicional para diferenciar si se carga una imagen o no junto con la respuesta
                 // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
                 if (postIMG === undefined) {
