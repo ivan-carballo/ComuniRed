@@ -6,13 +6,14 @@ import { useState, useEffect } from "react";
 import { getUserByID } from '../../api/userAPI.js'
 
 
+// Componente para usar en la pagina de opciones, se muestran los datos del usuario logueado
 function UserData() {
     const [data, setData] = useState([])
-    const [name, setName] = useState('')
 
     const userID = Cookies.get('id')
 
     
+    // useEffect para traer los datos de MongoDB
     useEffect(() => {
         getUser()
         async function getUser() {

@@ -61,7 +61,7 @@ async function postCreate(data) {
     }
 
     const result = await response.json();
-    console.log('post creado:', result);
+    //console.log('post creado:', result);
   } catch (error) {
     console.error('Error al crear el post:', error);
   }
@@ -85,7 +85,7 @@ async function postUpdate(id, data) {
     }
 
     const result = await response.json();
-    console.log('post actualizado:', result);
+    //console.log('post actualizado:', result);
   } catch (error) {
     console.error('Error al actualizar el post:', error);
   }
@@ -108,7 +108,7 @@ async function postDelete(id) {
     }
 
     const result = await response.json();
-    console.log('post eliminada:', result);
+    //console.log('post eliminada:', result);
   } catch (error) {
     console.error('Error al eliminar el post:', error);
   }

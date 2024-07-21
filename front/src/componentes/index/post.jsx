@@ -1,5 +1,3 @@
-// Componente para mostrar todos los posts de los usuarios, sin filtros de busqueda
-
 
 import '../../saas/index/post.scss'
 
@@ -20,7 +18,7 @@ import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
 
-
+// Componente para mostrar todos los posts de los usuarios, sin filtros de busqueda
 function Post() {
     const navigate = useNavigate()
     const userID = Cookies.get('id')

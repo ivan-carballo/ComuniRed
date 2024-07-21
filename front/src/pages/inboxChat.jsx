@@ -12,7 +12,7 @@ import '../saas/inbox/inboxChat.scss'
 
 
 
-
+// Pagina para los mensajes privados entre usuarios, se ven todos los mensajes con un usuario en concreto
 function InboxChat() {
     const { id } = useParams()
 
@@ -26,10 +26,10 @@ function InboxChat() {
 
     
 
-    // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
+    // Intervalo de tiempo para que se actualice cada 5 segundos por si hay nuevos mensajes
     setInterval(() => {
         getInbox()
-    }, 10000);    
+    }, 5000);    
 
 
 

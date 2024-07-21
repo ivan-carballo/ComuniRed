@@ -61,7 +61,7 @@ async function notificationCreate(data) {
     }
 
     const result = await response.json();
-    console.log('Notificacion creada:', result);
+    //console.log('Notificacion creada:', result);
   } catch (error) {
     console.error('Error al crear la notificacion:', error);
   }
@@ -85,7 +85,7 @@ async function notificationUpdate(id, data) {
     }
 
     const result = await response.json();
-    console.log('post actualizado:', result);
+    //console.log('post actualizado:', result);
   } catch (error) {
     console.error('Error al actualizar la notificacion:', error);
   }
@@ -108,7 +108,7 @@ async function notificationDelete(id) {
     }
 
     const result = await response.json();
-    console.log('post eliminada:', result);
+    //console.log('post eliminado:', result);
   } catch (error) {
     console.error('Error al eliminar la notificacion:', error);
   }

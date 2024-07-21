@@ -6,7 +6,7 @@ import { LoginForm } from "../componentes/login/iniciar.jsx";
 import { RegisterForm } from "../componentes/login/register.jsx";
 
 
-
+// Pagina de login principal, se puede registrar un nuevo usuario y loguearse uno ya existente
 function Login() {
     const [form, setForm] = useState(<LoginForm />)
     const [buttonValue, setButtonValue] = useState('Register')

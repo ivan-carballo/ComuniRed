@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import '../saas/inbox/inbox.scss'
 
 
-
+// Pagina para los mensajes privados entre usuarios, se ven todas las conversaciones activas
 function Inbox() {
     const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')

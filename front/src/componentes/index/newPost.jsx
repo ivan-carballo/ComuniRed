@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
-
+// Componente de formulario para poder escribir nuevos posts
 function NewPost() {
     const [usernamePost, setUsernamePost] = useState('')
     const [userIMG, setUserIMG] = useState('')

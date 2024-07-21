@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import '../saas/response/response.scss'
 
 
+// Pagina para poder ver el detalle de las respuestas de un post concreto
 function Response() {
     const navigate = useNavigate()
 
@@ -30,6 +31,8 @@ function Response() {
     const [userID, setUserID] = useState()
     
 
+    // useEffect para mostrar el post principal con la id que se pasa en la URL y todas las respuestas asociadas
+    // Se usa un metodo map para mostrar todo en el return
     useEffect(() => {
         if (reboot) {
             getPost(id)
@@ -97,7 +100,8 @@ function Response() {
 
 
 
-
+    // Funcion para que un usuario pueda eliminar una respuesta que el mismo ha escrito
+    // Ademas de la propia respuesta, tambien se elimina la notificacion en el caso de que aun exista
     async function responseDeleteByUser(e) {
         const responseID = e.target.id
 

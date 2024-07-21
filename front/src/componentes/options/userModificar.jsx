@@ -8,6 +8,7 @@ import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
 import { ImageUpload } from '../../funciones/resizeIMG.js';
 
 
+// Componente para que el usuario pueda modificar sus datos
 function UserModificar() {
     const userCurrentID = Cookies.get('id')
 
@@ -16,6 +17,7 @@ function UserModificar() {
     const [email, setEmail] = useState('')
 
 
+    // useEffect para traer la informacion del usuario de MongoDB
     useEffect(() => {
         userData()
         async function userData() {
@@ -26,14 +28,15 @@ function UserModificar() {
     }, [])
 
 
-
+    // Expresiones regulares para poder validar los datos nuevos que el usuario quiera cambiar
     const regexUsername = /^[A-Za-z0-9]+$/
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#%&_])[a-zA-Z0-9@#%&_]+$/
 
 
-
+    // Funcion a la que se llama desde el boton de modificar
     async function sendNewData(e) {
+        // Se meten en variables los datos de los inputs
         const newUsername = e.target.parentElement.childNodes[0].value
         const newEmail = e.target.parentElement.childNodes[1].value
         const newPassword = e.target.parentElement.childNodes[2].value
@@ -42,6 +45,7 @@ function UserModificar() {
 
         const usersAll = await getUser()
 
+        // Condicionales para comprobar que se han rellenado todos los inputs, que no existe otro usuario con el mismo username y email, y que los datos nuevos son validos usando las expresiones regulares
         if (newEmail.length > 0 && newUsername.length > 0) {
             const emailFiltrar = usersAll.data.filter((data) => data.email === newEmail)
             const userFiltrar = usersAll.data.filter((data) => data.username === newUsername)
@@ -68,6 +72,7 @@ function UserModificar() {
                 setAviso('Sus datos han sido modificados correctamente')
 
 
+                // Condicional para cuando se quiere cambiar la foto de perfil
                 if (newIMG != undefined) {
                     newIMG = await ImageUpload(newIMG)
 

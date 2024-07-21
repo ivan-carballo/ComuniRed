@@ -9,7 +9,7 @@ import '../../saas/perfil/userStadistic.scss'
 
 
 
-
+// Componente para poder ver las estadisticas de tu usuario
 function UserStadistic() {
     const [userPost, setUserPost] = useState()
     const [userResponse, setUserResponse] = useState()
@@ -17,7 +17,8 @@ function UserStadistic() {
     const [userIMG, setUserIMG] = useState()
 
 
-    
+    // useEffect para traer la informacion de tu usuario, post y respuestas
+    // Solo interesa saber el numero de cada uno para sacar en la cabecera, junto con un saludo, foto de perfil y username
     useEffect(() => {
         dataStadistic()
         async function dataStadistic() {

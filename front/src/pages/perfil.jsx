@@ -8,6 +8,7 @@ import { OtherPost } from "../componentes/otherPerfil/otherPost";
 import '../saas/otherPerfil/perfil.scss'
 
 
+// Pagina para ver el perfil de otro usuario, se muestra una cabecera con sus datos y los posts creados
 function Perfil() {
     const { id } = useParams()
 

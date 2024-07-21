@@ -11,6 +11,7 @@ import '../../saas/perfil/userPost.scss'
 
 
 
+// Componente para visualizar todos los posts creados por tu usuario
 function AllPostByUser () {
     const navigate = useNavigate()
 
@@ -19,7 +20,7 @@ function AllPostByUser () {
 
 
 
-
+    // useEffect para traer todos los posts creados y hacer un metodo map para mostrarlos en el return
     useEffect(() => {
         if (reboot) {
             getAllPost()
@@ -31,6 +32,7 @@ function AllPostByUser () {
 
                 let getPostArray = []
 
+                // Se hace un bucle para poder tener tambien el numero de respuestas dadas a cada uno de los posts y poder mostrarlo en un boton de 'ver respuestas'
                 for (let i = 0; getPost.length > i; i++) {
                     let numberResponses = await getResponseByProperty('postID', getPost[i]._id)
                     numberResponses = numberResponses.data.length
@@ -87,7 +89,8 @@ function AllPostByUser () {
 
 
 
-
+    // Funcion para eliminar un post concreto junto con sus respuestas
+    // La funcion postRemove es una funcion externa para poder reutilizarla en diferentes partes de la web
     async function postDel(e) {
         const postID = await e.target.id
         const deletePostResponse = await postRemove(postID)
@@ -97,7 +100,7 @@ function AllPostByUser () {
 
 
 
-
+    // Funcion para ver el detalle y respuestas de un post concreto
     async function postShow(e) {
         const postID = await e.target.id
         navigate(`/response/${postID}`)

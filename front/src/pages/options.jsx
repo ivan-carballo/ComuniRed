@@ -7,6 +7,8 @@ import { UserData } from '../componentes/options/userData';
 import { UserModificar } from '../componentes/options/userModificar';
 
 
+// Pagina para las opciones del usuario logueado
+// Se muestran los datos del usuario y la posibilidad de modificar cualquiera de sus datos
 function Options() {
 
     return (

@@ -37,7 +37,7 @@ async function userCreate(data) {
     }
 
     const result = await response.json();
-    console.log('user creado:', result);
+    //console.log('user creado:', result);
   } catch (error) {
     console.error('Error al user el user:', error);
   }
@@ -102,7 +102,7 @@ async function getUserByProperty(property, value) {
       }
   
       const result = await response.json();
-      console.log('user eliminada:', result);
+      //console.log('user eliminada:', result);
     } catch (error) {
       console.error('Error al eliminar el user:', error);
     }
@@ -127,7 +127,7 @@ async function getUserByProperty(property, value) {
       }
   
       const result = await response.json();
-      console.log('user actualizado:', result);
+      //console.log('user actualizado:', result);
     } catch (error) {
       //console.error('Error al actualizar el user:', error);
     }

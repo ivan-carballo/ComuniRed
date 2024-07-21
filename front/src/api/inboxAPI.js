@@ -61,7 +61,7 @@ async function inboxCreate(data) {
     }
 
     const result = await response.json();
-    console.log('Mensaje creada:', result);
+    //console.log('Mensaje creado:', result);
   } catch (error) {
     console.error('Error al crear los mensajes:', error);
   }
@@ -85,7 +85,7 @@ async function inboxUpdate(id, data) {
     }
 
     const result = await response.json();
-    console.log('Mensaje actualizado:', result);
+    //console.log('Mensaje actualizado:', result);
   } catch (error) {
     console.error('Error al actualizar el mensaje:', error);
   }
@@ -108,7 +108,7 @@ async function inboxDelete(id) {
     }
 
     const result = await response.json();
-    console.log('Mensaje eliminada:', result);
+    //console.log('Mensaje eliminado:', result);
   } catch (error) {
     console.error('Error al eliminar el mensaje:', error);
   }

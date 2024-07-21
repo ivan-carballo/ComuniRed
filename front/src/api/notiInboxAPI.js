@@ -61,7 +61,7 @@ async function notiInboxCreate(data) {
     }
 
     const result = await response.json();
-    console.log('Noti inbox creada:', result);
+    //console.log('Noti inbox creada:', result);
   } catch (error) {
     console.error('Error al crear las noti inbox:', error);
   }
@@ -85,7 +85,7 @@ async function notiInboxUpdate(id, data) {
     }
 
     const result = await response.json();
-    console.log('Noti inbox actualizado:', result);
+    //console.log('Noti inbox actualizado:', result);
   } catch (error) {
     console.error('Error al actualizar las noti inbox:', error);
   }
@@ -108,7 +108,7 @@ async function notiInboxDelete(id) {
     }
 
     const result = await response.json();
-    console.log('Noti inbox eliminada:', result);
+    //console.log('Noti inbox eliminada:', result);
   } catch (error) {
     console.error('Error al eliminar la noti inbox:', error);
   }

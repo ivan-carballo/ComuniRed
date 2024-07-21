@@ -2,7 +2,8 @@ import { postDelete } from '../api/postAPI.js'
 import { getResponseByProperty, responseDelete } from "../api/responseAPI.js"
 
 
-
+// Funcion para poder eliminar un post junto con todas las respuestas asociadas
+// Se hace externo para reutilizarse
 async function postRemove(postID) {
 
     let getResponseByPost = await getResponseByProperty('postID', postID)

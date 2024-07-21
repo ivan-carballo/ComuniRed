@@ -1,13 +1,16 @@
 // Funciones para poder redimensionar imagenes y de esta forma ocupen menos tamaño en MongoDB
 
 
-
+// Funcion reutilizable para poder disminuir el tamaño de las imagenes que se quieran cargar
+// De esta forma ocupan mucho menos, tarda menos en cargar en pantalla y se guardan en mongoDB como base64
 const ImageUpload = async (e) => {
     const file = e
+    // Se define un tamaño estandar en pixeles
     const maxWidth = 350;
     const maxHeight = undefined;
   
     try {
+      // Se manda la informacion a la funcion para redimensionar la imagen
       const base64Image = await resizeImageToBase64(file, { maxWidth, maxHeight });
       return base64Image
 
@@ -18,7 +21,8 @@ const ImageUpload = async (e) => {
 
 
 
-
+  // Funcion para redimensionar la imagen
+  // Se usa Canvas para redimensionar y Filereader para convertir a base64
   const resizeImageToBase64 = (file, options) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -54,7 +58,7 @@ const ImageUpload = async (e) => {
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
   
-          const base64Image = canvas.toDataURL('image/jpeg');
+          const base64Image = canvas.toDataURL('image/webp');
           resolve(base64Image);
         };
   

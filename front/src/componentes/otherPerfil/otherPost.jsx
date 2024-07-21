@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import '../../saas/otherPerfil/otherPost.scss'
 
 
+// Componente para mostrar los posts de un usuario concreto que se veran en la pagina del perfil del usuario (No el logueado, sino otro)
 function OtherPost({id}) {
     const navigate = useNavigate()
 
@@ -18,6 +19,7 @@ function OtherPost({id}) {
     const userID = Cookies.get('id')
 
 
+    // useEffect para traer todos los post del otro usuario y hacer un metodo map para poder meterlo en el return
     useEffect(() => {
         otherPost(id)
         async function otherPost(id) {

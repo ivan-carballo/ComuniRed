@@ -9,7 +9,7 @@ import { getNotiInboxByProperty } from '../api/notiInboxAPI';
 
 
 
-
+// Componente de navbar principal
 const Navbar = () => {
     const navigate = useNavigate();
     const userID = Cookies.get('id')
@@ -20,7 +20,7 @@ const Navbar = () => {
 
 
 
-
+    // useEffect para cargar la funcion de cerrar sesion cuando no se encuentran credenciales en las Cookies
     useEffect(() => {
         if (userID == null) {
             logout()
@@ -29,7 +29,7 @@ const Navbar = () => {
     }, [])
 
 
-   
+   // Funcion para cerrar sesion, se eliminan las Cookies con las credenciales y se manda a la pagina de login
     async function logout() {
         Cookies.remove('id')
         Cookies.remove('token')
@@ -37,6 +37,7 @@ const Navbar = () => {
     }
 
 
+    // Cada 10 segundos se carga el useEffect para comprobar si aun existen las credenciales en las Cookies
     setInterval(() => {
         setReboot(true)
     }, 10000);
@@ -72,7 +73,7 @@ const Navbar = () => {
                     <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
                     <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
                     <NavLink to="/inbox" id="inbox" title="inbox" className={noti}><FaInbox /></NavLink>
-                    {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>}
+                    {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>} {/* Operador ternario para que el icono de las notificaciones de respuestas solo aparezca si existen notificaciones */}
                     <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
                     <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>
                     <NavLink to="/" className='link' title='Cerrar sesion' onClick={logout}><FaUserSlash/></NavLink>

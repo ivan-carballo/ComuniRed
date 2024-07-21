@@ -15,7 +15,7 @@ import React from 'react';
 
 
 
-
+// Asociacion entre rutas y paginas que mostrar
 const router = createBrowserRouter([
   
   {

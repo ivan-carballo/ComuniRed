@@ -9,12 +9,13 @@ import '../../saas/perfil/userPost.scss'
 
 
 
+// Componente para poder ver todas las respuestas creadas por tu usuario
 function AllResponseByUser () {
     const [reboot, setReboot] = useState(true)
     const [show, setShow] = useState()
 
 
-
+    // useEffect para traer todas las respuestas y un metodo map para mostrarlas en el return
     useEffect(() => {
         if (reboot) {
             getAllPost()
@@ -73,7 +74,7 @@ function AllResponseByUser () {
 
 
 
-
+    // Funcion para eliminar una respuesta concreta
     async function responseDel(e) {
         const responseID = await e.target.id
         const responseRemove = await responseDelete(responseID)

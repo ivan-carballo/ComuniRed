@@ -11,7 +11,9 @@ import { AllResponseByUser } from '../componentes/perfil/userResponse.jsx';
 
 
 
-
+// Pagina de perfil del usuario logueado
+// Se muestra en la cabecera el username, foto de perfil y estadisticas
+// Con dos botones se puede alternar la vista entre posts creados y respuestas dadas
 function UserPerfil() {
     const navigate = useNavigate()
 
@@ -22,7 +24,7 @@ function UserPerfil() {
 
 
 
-
+    // Funcion para comprobar que el token es valido
     comprobacionToken()
     async function comprobacionToken() {
         const comprobarToken = await obtenerToken()
@@ -51,6 +53,8 @@ function UserPerfil() {
 
     
 
+    // Funcion para alternar la vista de post y la vista de respuestas
+    // Las vistas son componentes externos
     async function buttonShow(e) {
         const buttonValue = e.target.value
 

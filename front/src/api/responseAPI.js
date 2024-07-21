@@ -75,7 +75,7 @@ async function responseCreate(data) {
     }
 
     const result = await response.json();
-    console.log('response creado:', result);
+    //console.log('response creado:', result);
 
     const userCurrentID = Cookies.get('id')
     const getPostID = await getpostByID(data.postID)
@@ -119,7 +119,7 @@ async function responseUpdate(id, data) {
     }
 
     const result = await response.json();
-    console.log('response actualizado:', result);
+    //console.log('response actualizado:', result);
   } catch (error) {
     console.error('Error al actualizar el response:', error);
   }
@@ -145,7 +145,7 @@ async function responseDelete(id) {
     }
 
     const result = await response.json();
-    console.log('response eliminada:', result);
+    //console.log('response eliminada:', result);
   } catch (error) {
     console.error('Error al eliminar el response:', error);
   }

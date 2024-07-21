@@ -10,7 +10,7 @@ import { Post } from "../componentes/index/post.jsx"
 
 
 
-
+// Pagina principal de la web, aqui cargan todos los posts creados hasta el momento y hay un formulario para crear nuevo post
 function ComuniWall() {
     const navigate = useNavigate()
 
@@ -18,6 +18,7 @@ function ComuniWall() {
 
  
 
+    // Se comprueba que el token es valido, en caso contrario te manda al login
     comprobacionToken()
     async function comprobacionToken() {
         const comprobarToken = obtenerToken()
@@ -26,6 +27,7 @@ function ComuniWall() {
         }
     }
     
+
 
     useEffect(() => {
         if (recarga) {
@@ -45,9 +47,10 @@ function ComuniWall() {
     }
 
 
+    // Se hace una comprobacion cada 30 segundos
     setInterval(() => {
         setRecarga(true)
-    }, 60000);
+    }, 30000);
 
 
 

@@ -13,7 +13,7 @@ import { getResponseByProperty } from '../api/responseAPI'
 import '../saas/search/search.scss'
 
 
-
+// Pagina para la busqueda de usuarios, posts y respuestas
 function Search() {
     const navigate = useNavigate()
 

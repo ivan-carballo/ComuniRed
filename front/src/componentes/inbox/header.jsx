@@ -8,7 +8,7 @@ import { getInboxByID } from '../../api/inboxAPI'
 import '../../saas/inbox/header.scss'
 
 
-
+// Componente de cabecera para la pagina de los mensajes privados
 function Header({id}) {
     const navigate = useNavigate()
 
@@ -16,11 +16,10 @@ function Header({id}) {
 
     const [data, setData] = useState('')
 
-
     let userID = ''
 
 
-    
+    // useEffect para traer la informacion de la tabla de inbox para saber el usuario con el que se tienen mensajes y poder mostrar nombre y foto de perfil
     useEffect(() => {
 
         getUser()       
@@ -42,7 +41,7 @@ function Header({id}) {
 
         <div id="inboxChat-header">
             <img src={data.img}/>
-            <p onClick={async () => {navigate(`/user/${data._id}`)}}>{data.username}</p>
+            <p onClick={async () => {navigate(`/user/${data._id}`)}}>{data.username}</p> {/* Al nombre se le pone un useNavigate para poder ir a su perfil */}
         </div>
 
     )

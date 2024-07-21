@@ -1,7 +1,3 @@
-// Componente para la cabecera de su perfil visto desde otro usuario
-// Contiene los datos basicos del usuario
-
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { getUserByID } from "../../api/userAPI";
@@ -17,6 +13,7 @@ import { getNotiInboxByProperty, notiInboxCreate } from '../../api/notiInboxAPI.
 import '../../saas/otherPerfil/perfilData.scss'
 
 
+// Componente para la cabecera del perfil de otro usuario (No el logueado)
 function PerfilData({id}) {
     const userCurrentID = Cookies.get('id')
 

@@ -10,7 +10,7 @@ import { responseUpdate } from '../api/responseAPI.js'
 import '../saas/notification/notification.scss'
 
 
-
+// Pagina para ver todas las notificaciones de respuestas a post propios
 function Notification() {
     const navigate = useNavigate()
     const userID = Cookies.get('id')
@@ -20,7 +20,7 @@ function Notification() {
 
 
 
-
+    // useEffect para traer de MongoDB todas las notificaciones asociadas a post del usuario logueado y un metodo map para mostrarlas en el return
     useEffect(() => {
         if (reboot) {
 
@@ -51,7 +51,8 @@ function Notification() {
 
 
 
-    
+    // Funcion para poder ver los detalles de la notificacion, lo que es el post completo al que va escrito y todas las respuestas
+    // Se debe pulsar en el div de la respuesta para cargar esta funcion
     async function notificationDetail(e) {
         const notificationID = e.target.attributes.name.value
         
@@ -60,6 +61,7 @@ function Notification() {
 
         const notificationAllByPost = await getNotificationByProperty('postPrincipalID', postPrincipalID)
 
+        // Una vez que entras a verlo, se elimina la notificacion
         for (let i = 0; notificationAllByPost.data.length > i; i++) {
             const notificationRemove = await notificationDelete(notificationAllByPost.data[i]._id)
         }
@@ -70,7 +72,7 @@ function Notification() {
 
 
 
-    
+    // Funcion para poder dar como vistas todas las notificaciones (Sin necesidad de entrar a verlas) y eliminar dichas notificaciones pendientes
     async function notificationView() {
         const notificationRemoveAll = await getNotificationByProperty('userPrincipalID', userID)
 
