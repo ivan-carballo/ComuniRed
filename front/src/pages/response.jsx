@@ -70,8 +70,8 @@ function Response() {
     // Funcion intermedia para desplegar un aviso al usuario antes de hacer la eliminacion por si es un error o se arrepiente
     async function sweetAlert(e) {
         Swal.fire({
-            title: 'Confirmar eliminacion de post',
-            text: "Cuando se elimina un post tambien se eliminan todas las respuestas asociadas a dicho post. Esta operacion no se puede revertir.",
+            title: 'Confirmar eliminacion de respuesta',
+            text: "Cuando se elimina una respuesta no se puede revertir.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Sí, elimina todo',
