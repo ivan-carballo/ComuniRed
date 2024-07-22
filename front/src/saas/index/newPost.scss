@@ -30,7 +30,8 @@
 
                 & > #user-img {
                     border-radius: 50%;
-                    height: 70px;
+                    height: 65px;
+                    border: 2px solid $background-border;;
                 }
 
                 & > #newPost-input {

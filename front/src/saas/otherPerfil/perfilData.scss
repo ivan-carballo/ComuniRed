@@ -19,8 +19,9 @@
         align-items: center;
 
         & > img {
-            width: 100px;
+            width: 90px;
             border-radius: 50%;
+            border: 2px solid $background-border;
         }
 
         & > #perfilData-p {

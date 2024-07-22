@@ -40,6 +40,7 @@
 
     & > #userSearch-div {
         background-color: $background-divs;
+        border: 2px solid $background-border;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -50,8 +51,9 @@
         
         & > img {
             border-radius: 50%;
-            width: 75px;
+            width: 70px;
             margin: 5px 0;
+            border: 2px solid $background-border;
         }
 
         & > p {
@@ -88,8 +90,9 @@
 
         & > #postSearch-img {
             border-radius: 25px;
-            width: 100%;
+            width: 95%;
             margin: 5px 0;
+            border: 2px solid $background-border;
         }
 
         & > p {
@@ -123,7 +126,8 @@
 
         & > #responseSearch-img {
             border-radius: 25px;
-            width: 100%;
+            width: 95%;
+            border: 2px solid $background-border;
             margin: 5px 0;
         }
 
