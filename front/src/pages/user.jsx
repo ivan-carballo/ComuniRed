@@ -5,6 +5,7 @@ import { Navbar } from "../componentes/navbar.jsx";
 import { UserStadistic } from '../componentes/perfil/userStadistic.jsx';
 import { AllPostByUser } from '../componentes/perfil/userPost.jsx';
 import { AllResponseByUser } from '../componentes/perfil/userResponse.jsx';
+import { AllFollowByUser } from '../componentes/perfil/userFollow.jsx'
 
 
 
@@ -16,6 +17,7 @@ function UserPerfil() {
     const [show, setShow] = useState(<AllPostByUser />)
     const [buttonResponse, setButtonResponse] = useState()
     const [buttonPost, setButtonPost] = useState('active')
+    const [buttonFollow, setButtonFolow] = useState()
 
 
 
@@ -30,10 +32,17 @@ function UserPerfil() {
             setShow(<AllPostByUser />)
             setButtonPost('active')
             setButtonResponse('')
-        } else {
+            setButtonFolow('')
+        } else if (buttonValue === 'Respuestas') {
             setShow(<AllResponseByUser />)
             setButtonPost('')
             setButtonResponse('active')
+            setButtonFolow('')
+        } else if (buttonValue === 'Seguidores') {
+            setShow(<AllFollowByUser />)
+            setButtonPost('')
+            setButtonResponse('')
+            setButtonFolow('active')        
         }
     }
 
@@ -50,6 +59,7 @@ function UserPerfil() {
             <div id="postByUser-buttons">
                 <input type="button" value="Posts" id={buttonPost} onClick={buttonShow} />
                 <input type="button" value="Respuestas" id={buttonResponse} onClick={buttonShow} />
+                <input type="button" value="Seguidores" id={buttonFollow} onClick={buttonShow} />
             </div>
 
                 {show}

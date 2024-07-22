@@ -9,10 +9,11 @@ import { dateFormat } from '../../funciones/fecha.js'
 import { inboxCreate, inboxUpdate, getInboxByProperty } from '../../api/inboxAPI.js'
 import { getNotiInboxByProperty, notiInboxCreate } from '../../api/notiInboxAPI.js'
 import { FaUserPlus, FaUserMinus } from "react-icons/fa";
-import { getFollowByID, getFollowByProperty, followCreate, followUpdate } from '../../api/followAPI.js'
-import { getFollowerByID, getFollowerByProperty, followerCreate, followerUpdate } from '../../api/followerAPI.js'
+import { getFollowByProperty, followCreate, } from '../../api/followAPI.js'
+import { getFollowerByProperty, followerCreate, } from '../../api/followerAPI.js'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { followAdd } from "../../funciones/follow.js";
 
 
 import '../../saas/otherPerfil/perfilData.scss'
@@ -260,32 +261,21 @@ function PerfilData({id}) {
 
 
 
-    // Funcion asociada al icono de follow para seguir a el usuario o dejar de seguir en el caso de que ya se este siguiendo
-    async function followAdd() {
-        // Buscar la informacion de las tablas follow y followers para obtener los arrays necesarios
-        const getFollowID = await getFollowByProperty('userID', userCurrentID)
-        const getFollowArray = await getFollowByID(getFollowID.data[0]._id)
-        let followArray = getFollowArray.data.follow
 
-        const getFollowerID = await getFollowerByProperty('userID', id)
-        const getFollowerArray = await getFollowerByID(getFollowerID.data[0]._id)
-        let followerArray = getFollowerArray.data.follower
 
-        // Ternario para quitar o poner el follow dependiendo del estado
-        follow ? followArray=followArray.filter(data => data !== id) : followArray.push(id)
-        follow ? followerArray=followerArray.filter(data => data !== userCurrentID) : followerArray.push(userCurrentID)
 
-        // Hacer el update con la nueva situacion del follow
-        const newFollowArray = {'follow': followArray}
-        const sendUpdateFollow = await followUpdate(getFollowID.data[0]._id, newFollowArray)  
-        
-        const newFollowerArray = {'follower': followerArray}
-        const sendUpdateFollower = await followerUpdate(getFollowerID.data[0]._id, newFollowerArray) 
+    // Funcion asociada al icono de follow para seguir al usuario o dejar de seguir en el caso de que ya se este siguiendo
+    // Llama a una funcion externa para reutilizar codigo
+    async function followGestion() {
+        followAdd(userCurrentID, id, follow)
 
-        setReboot(true)
+        setTimeout(() => {
+            setReboot(true)
+        }, 250);
     }
 
     
+
 
 
     // Funcion intermedia para desplegar un aviso al usuario antes de dejar de seguir al otro usuario
@@ -299,7 +289,7 @@ function PerfilData({id}) {
             cancelButtonText: 'No, cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                followAdd(e);
+                followGestion(e);
                 Swal.fire(
                     '¡Hecho!',
                     `Has dejado de seguir a ${username}`,
@@ -332,7 +322,7 @@ function PerfilData({id}) {
                         {/* Ternario para que no se pueda ver el boton de abrir modal cuando se esta mirando el perfil del usuario logueado */}
                         {/* El boton abre modal para enviar mensaje privado */}
                         { userCurrentID != id ? <FaInbox id='perfilData-inbox' title='Mandar privado' onClick={async ()=>{setModal(data)}} /> : <></> }
-                        { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followAdd}/> }
+                        { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followGestion}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
                     <p id='perfilData-post'>Nº post: {post}</p>
