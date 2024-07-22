@@ -1,6 +1,7 @@
 // Funcion para guardar el token en las Cookies
 function guardarToken(token) {
-    document.cookie = `token=${token}; expires=${new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=none;`;
+    // Se le da una caducidad de 24 horas
+    document.cookie = `token=${token}; expires=${new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=none;`;
 }
   
 

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell, FaSearch, FaInbox } from 'react-icons/fa'
 import { getNotificationByProperty } from '../api/notificationAPI';
 import { getNotiInboxByProperty } from '../api/notiInboxAPI';
+import { obtenerToken } from "../funciones/token.js";
 
 
 
@@ -29,6 +30,35 @@ const Navbar = () => {
     }, [])
 
 
+
+
+
+    // Se comprueba que el token es valido, en caso contrario te manda al login
+    useEffect(() => {
+        if (reboot) {
+
+            comprobacionToken()
+            async function comprobacionToken() {
+                const comprobarToken = obtenerToken()
+                if (comprobarToken === null) {
+                    logout()
+                    navigate('/')
+                }
+            }
+
+            const token = obtenerToken()
+
+            if (token === null) {
+                Cookies.remove('token')
+                logout()
+                close()
+            }
+        }
+    }, [reboot])
+
+
+
+
    // Funcion para cerrar sesion, se eliminan las Cookies con las credenciales y se manda a la pagina de login
     async function logout() {
         Cookies.remove('id')
@@ -37,10 +67,13 @@ const Navbar = () => {
     }
 
 
+
+
     // Cada 10 segundos se carga el useEffect para comprobar si aun existen las credenciales en las Cookies
     setInterval(() => {
         setReboot(true)
     }, 10000);
+
 
 
 
@@ -63,6 +96,7 @@ const Navbar = () => {
         }
         setReboot(false)
     }, [reboot])
+
 
 
 

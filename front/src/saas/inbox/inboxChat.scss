@@ -28,7 +28,6 @@
 
 
 #inboxChat-div {
-    background-color: $background-divs;
     border: $background-border solid 2px;
     border-radius: 25px;
     padding: 5px 15px;
@@ -36,18 +35,32 @@
 
     & > p {
         margin: 3px;
+        font-size: 0.8rem;
     }
 
     & > #inboxChat-text {
-        border: 0;
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: solid 2px $background-border;
     }
 
     & > .start {
-        text-align: start;
+        text-align: justify;
+        padding-right: 75px;
     }
 
     & > .end {
-        text-align: end;
-        justify-self: end;
+        text-align: justify;
+        padding-left: 75px;
+        align-items: end;
     }
+}
+
+
+.opposite {
+    background-color: $background-divs;
+}
+
+.current {
+    background-color: rgb(204, 202, 202);
 }

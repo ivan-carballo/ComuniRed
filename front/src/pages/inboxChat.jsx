@@ -46,9 +46,10 @@ function InboxChat() {
                 getInboxByUser.data.userID1 === userCurrentID ? setUserReceived(getInboxByUser.data.userID2) : setUserReceived(getInboxByUser.data.userID1)
 
                 // Map para mostrar en pantalla los mensajes ordenados por fecha
+                // Operadores ternarios para poder visualizar que mensaje pertenece a cada usuario
                 const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
-                    <div id="inboxChat-div" key={data.date}>
-                        <p className={data.userID != userCurrentID ? "start" : "end"}>{data.dateString}</p>
+                    <div id="inboxChat-div" key={data.date} className={data.userID != userCurrentID ? "opposite" : "current"}>
+                        <p className={data.userID != userCurrentID ? "start" : "end"} id='inboxChat-date'>{data.dateString}</p>
                         <p className={data.userID != userCurrentID ? "start" : "end"} id='inboxChat-text'>{data.text}</p>
                     </div>
                 )
