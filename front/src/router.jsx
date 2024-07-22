@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useLocation } from "react-router-dom";
 import { ComuniWall } from "./pages/comuniwall.jsx";
 import { Login } from "./pages/login.jsx";
 import { UserPerfil } from "./pages/user.jsx";
@@ -10,13 +10,23 @@ import { Search } from './pages/search.jsx'
 import { Inbox } from "./pages/inbox.jsx";
 import { InboxChat } from "./pages/inboxChat.jsx";
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
+const location = useLocation();
+
+
+{/* <TransitionGroup>
+<CSSTransition
+  key={location.key}
+  timeout={300}
+  classNames="fade"> */}
 
 
 
 // Asociacion entre rutas y paginas que mostrar
 const router = createBrowserRouter([
+
   
   {
     path: "/",
@@ -68,7 +78,12 @@ const router = createBrowserRouter([
     element: <Notification />
   }
 
+
 ]);
+
+
+/* </CSSTransition>
+</TransitionGroup> */
 
 
 export default router; 

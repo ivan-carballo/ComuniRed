@@ -102,17 +102,22 @@ const Navbar = () => {
 
 
     return (
-        <div id='navbar-global'>
-            <nav id='navbar-links'>
-                    <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
-                    <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
-                    <NavLink to="/inbox" id="inbox" title="inbox" className={noti}><FaInbox /></NavLink>
-                    {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>} {/* Operador ternario para que el icono de las notificaciones de respuestas solo aparezca si existen notificaciones */}
-                    <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
-                    <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>
-                    <NavLink to="/" className='link' title='Cerrar sesion' onClick={logout}><FaUserSlash/></NavLink>
-            </nav>
-        </div>
+
+            <div id='navbar-global'>
+                <nav id='navbar-links'>
+
+
+                        <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
+                        <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
+                        <NavLink to="/inbox" id="inbox" title="inbox" className={noti}><FaInbox /></NavLink>
+                        {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>} {/* Operador ternario para que el icono de las notificaciones de respuestas solo aparezca si existen notificaciones */}
+                        <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
+                        <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>
+                        <NavLink to="/" className='link' title='Cerrar sesion' onClick={logout}><FaUserSlash/></NavLink>
+
+
+                </nav>
+            </div>
     ) 
 };
 
