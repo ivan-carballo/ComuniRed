@@ -29,7 +29,6 @@ const responseSchema  = new mongoose.Schema({
 
     post: {
         type: String,
-        required: true,
     },
 
     img: {

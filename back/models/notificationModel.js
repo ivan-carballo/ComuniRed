@@ -34,7 +34,6 @@ const notificationSchema  = new mongoose.Schema({
 
     post: {
         type: String,
-        required: true,
     },
 
     img: {

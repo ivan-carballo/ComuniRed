@@ -55,9 +55,9 @@ function Search() {
             if (postSearch.data.length > 0) {
                 const postMap = postSearch.data.reverse().map((data) => 
                     <div key={data._id} id="postSearch-div" onClick={async () => navigate(`/response/${data._id}`)}>
-                        <p>{data.username} / {data.dateString}</p>
-                        <p id='postSearch-post'>{data.post}</p>
-                        <img id='postSearch-img' src={data.img} />
+                        <p id='postSearch-data'>{data.username} / {data.dateString}</p>
+                        { data.post.length > 1 ? <p id='postSearch-post'>{data.post}</p> : <></> } 
+                        { data.img != undefined && data.img != null ? <img id='postSearch-img' src={data.img} /> : <></> }
                     </div>
                 )
                 setData(postMap)
@@ -70,19 +70,26 @@ function Search() {
             if (responseSearch.data.length > 0) {
                 const responseMap = responseSearch.data.reverse().map((data) => 
                     <div key={data._id} id="responseSearch-div" onClick={async () => navigate(`/response/${data.postID}`)}>
-                        <p>{data.username} / {data.dateString}</p>
-                        <p id='responseSearch-post'>{data.post}</p>
-                        <img id='responseSearch-img' src={data.img} />
+                        <p id='responseSearch-date'>{data.username} / {data.dateString}</p>
+                        { data.post.length > 1 ? <p id='responseSearch-post'>{data.post}</p> : <></> }
+                        { data.img != undefined && data.img != null ? <img id='responseSearch-img' src={data.img} /> : <></> }
                     </div>
                 )
                 setData(responseMap)
             }
         }
-
-
-        
-
     }
+
+
+
+
+    // Funcion para que cuando se pulse sobre el desplegable, se haga una limpieza de lo escrito en el input de busqueda
+    async function clear(e) {
+        const searchClear = document.getElementById('input-search')
+        searchClear.value = ''
+        setData(null)
+    }
+
 
 
 
@@ -93,12 +100,12 @@ function Search() {
         
             <div id="search-body">
                 <div id="search-form">
-                    <select>
+                    <select onChange={clear}>
                         <option value="user">Usuarios</option>
                         <option value="post">Posts</option>
                         <option value="response">Respuestas</option>
                     </select>
-                    <input type="text" placeholder='Escriba su busqueda' onChange={inputSearch} />
+                    <input id='input-search' type="text" placeholder='Escriba su busqueda' onChange={inputSearch} />
                 </div>
 
                 <div id="search-result">

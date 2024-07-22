@@ -81,11 +81,19 @@
         flex-direction: column;
         align-items: center;
 
+        & > #postSearch-data {
+            border-bottom: 2px solid $background-border;
+            width: 90%;
+            text-align: center;
+            padding-bottom: 5px;
+        }
+
         & > #postSearch-post {
             background-color: $background-text;
             border-radius: 15px;
             padding: 5px 10px;
             text-align: center;
+            width: 90%;
         }
 
         & > #postSearch-img {
@@ -115,6 +123,13 @@
         flex-direction: column;
         align-items: center;
         width: 315px;
+
+        & > #responseSearch-date {
+            border-bottom: 2px solid $background-border;
+            width: 90%;
+            text-align: center;
+            padding-bottom: 5px;
+        }
 
         & > #responseSearch-post {
             background-color: $background-text;

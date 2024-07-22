@@ -1,6 +1,7 @@
 import React, { useSyncExternalStore } from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
+import Swal from 'sweetalert2'
 import { getResponseByProperty, responseDelete } from '../../api/responseAPI.js'
 import { getUserByID } from '../../api/userAPI.js'
 import { UserStadistic } from "./userStadistic.jsx";
@@ -31,8 +32,8 @@ function AllResponseByUser () {
                 const responseMap = getResponse.map((data) => 
                     <div id="responseMap-div" key={data._id}>
                         <p id='responseMap-date'>{data.dateString}</p>
-                        <p id='responseMap-response'>{data.post}</p>
-                        <img id='responseMap-img' src={data.img} />
+                        { data.post.length > 1 ? <p id='responseMap-response'>{data.post}</p> : <></> }
+                        { data.img != undefined && data.img != null ? <img id='responseMap-img' src={data.img} /> : <></> }
                         <input type="button" value="Eliminar respuesta" id={data._id} onClick={sweetAlert} />
                     </div>
                 )

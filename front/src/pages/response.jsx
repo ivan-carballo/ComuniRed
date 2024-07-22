@@ -27,8 +27,10 @@ function Response() {
     const [username, setUsername] = useState()
     const [dateString, setDateString] = useState()
     const [postPrincipal, setPostPrincipal] = useState()
+    const [postPrincipalLength, setPostPrincipalLength] = useState(false)
     const [userIMG, setUserIMG] = useState()
     const [postIMG, setPostIMG] = useState()
+    const [postIMGLength, setPostIMGLength] = useState(false)
     const [userID, setUserID] = useState()
     
 
@@ -48,6 +50,10 @@ function Response() {
 
                 setUserIMG(getUserPrincipal.data.img)
 
+                getPostPrincipal.data.post.length > 0 ? setPostPrincipalLength(true) : setPostPrincipalLength(false)
+                getPostPrincipal.data.img == undefined || getPostPrincipal.data.img == null ? setPostIMGLength(false) : setPostIMGLength(true)
+
+
                 const userCurrentUsername = await getUserByID(userCurrentID)
 
                 const getResponseChildren = await getResponseByProperty('postID', id)
@@ -56,8 +62,8 @@ function Response() {
                     <div key={data._id} id="getResponse-div">
                         <p id='getResponse-div-username' onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</p>
                         <p id='getResponse-div-date'>{data.dateString}</p>
-                        <p id='getResponse-div-post'>{data.post}</p>
-                        <img id='getResponse-div-img' src={data.img} />
+                        { data.post.length > 1 ? <p id='getResponse-div-post'>{data.post}</p> : <></> }
+                        { data.img != undefined && data.img != null ? <img id='getResponse-div-img' src={data.img} /> : <></> }
                         {userCurrentUsername.data.username === data.username ? <div id="getResponse-div-button"> <input type="button" value="Eliminar respuesta" id={data._id} onClick={sweetAlert} /> </div> : <></>}
                     </div>
                 )
@@ -145,8 +151,11 @@ function Response() {
                         </div>                     
                     </div>
 
-                    <p id='response-postPrincipal-post'>{postPrincipal}</p>
-                    <img id='response-postPrincipal-img' src={postIMG} />
+                    {/* Operadores ternarios para evitar que si no hay texto u foto, aparezcan los background o borders */}
+                    <div id="response-postPrincipal-data">
+                        { postPrincipalLength ? ( <p id='response-postPrincipal-post'>{postPrincipal}</p> ) : ( <></> ) }
+                        { postIMGLength ? ( <img id='response-postPrincipal-img' src={postIMG} /> ) : ( <></> ) }
+                    </div>
                 </div>
 
 

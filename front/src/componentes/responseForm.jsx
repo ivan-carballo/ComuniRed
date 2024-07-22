@@ -52,10 +52,11 @@ function ResponseForm({id}) {
                             'img': postIMG,
                             'userID': userID}
 
+
         const responseSend = await responseCreate(responseArray)   
-        responsePost.value = ''
-        responseIMG.value = ''
-        setReboot(true)
+        //responsePost.value = ''
+        //responseIMG.value = ''
+        //setReboot(true)
     }
 
 

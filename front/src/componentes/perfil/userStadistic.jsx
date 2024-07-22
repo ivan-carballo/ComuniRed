@@ -46,7 +46,7 @@ function UserStadistic() {
                 <p id='userStadistic-welcome'>Bienvenido {user}</p>
                 <img id='userStadistic-img' src={userIMG} />
             </div>
-            <p>Nº posts: {userPost} - Nº respuestas: {userResponse}</p>
+            <p>Posts: {userPost} - Respuestas: {userResponse}</p>
         </div>
     )
 }

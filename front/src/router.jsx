@@ -13,16 +13,6 @@ import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
-const location = useLocation();
-
-
-{/* <TransitionGroup>
-<CSSTransition
-  key={location.key}
-  timeout={300}
-  classNames="fade"> */}
-
-
 
 // Asociacion entre rutas y paginas que mostrar
 const router = createBrowserRouter([
@@ -82,8 +72,6 @@ const router = createBrowserRouter([
 ]);
 
 
-/* </CSSTransition>
-</TransitionGroup> */
 
 
 export default router; 
