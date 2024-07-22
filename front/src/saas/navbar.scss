@@ -31,12 +31,12 @@
 
         
         & > .notification {
-            color: red;
+            color: $background-red;
             text-decoration: none;
             font-size: 1.5rem;
 
             & > :hover {
-                color: rgb(119, 0, 0);
+                color: red
             }
 
         }
