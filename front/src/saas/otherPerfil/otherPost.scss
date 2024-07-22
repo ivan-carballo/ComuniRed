@@ -19,6 +19,10 @@
         font-size: 1.1rem;
         font-weight: 600;
         margin: 5px 0;
+        width: 95%;
+        text-align: center;
+        border-bottom: solid 2px $background-border;
+        padding-bottom: 3px;
     }
 
     & > #getPost-post {
@@ -26,14 +30,14 @@
         text-align: center;
         background-color: $background-text;
         border-radius: 25px;
-        padding: 8px 20px;
+        padding: 5px 15px;
         width: 90%;
         white-space: pre-wrap;
     }
 
     & > #getPost-img {
         border-radius: 25px;
-        width: 105%;
+        width: 100%;
         margin: 5px;
         border: 2px solid $background-border;
     }

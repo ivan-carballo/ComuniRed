@@ -29,8 +29,8 @@ function OtherPost({id}) {
             const getPostMap = await getPostByUserID.map((data) => 
                 <div key={data._id} id="getPost-div">
                     <p id='getPost-date'>{data.dateString}</p>
-                    <p id='getPost-post'>{data.post}</p>
-                    <img id='getPost-img' src={data.img} />
+                    { data.post.length > 0 ? <p id='getPost-post'>{data.post}</p> : <></> }
+                    { data.img != undefined && data.img != null ? <img id='getPost-img' src={data.img} /> : <></> }
                     <div id="getPost-buttons">
                     <input className="getPost-buttons-input" type="button" value="Ver detalles / Responder" id={data._id} onClick={async ()=>{navigate(`/response/${data._id}`)}} />
                     </div>

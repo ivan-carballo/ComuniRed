@@ -8,6 +8,10 @@ import Cookies from 'js-cookie'
 import { dateFormat } from '../../funciones/fecha.js'
 import { inboxCreate, inboxUpdate, getInboxByProperty } from '../../api/inboxAPI.js'
 import { getNotiInboxByProperty, notiInboxCreate } from '../../api/notiInboxAPI.js'
+import { FaUserPlus, FaUserMinus } from "react-icons/fa";
+import { getFollowByID, getFollowByProperty, followCreate, followUpdate } from '../../api/followAPI.js'
+import { getFollowerByID, getFollowerByProperty, followerCreate, followerUpdate } from '../../api/followerAPI.js'
+import { useNavigate } from 'react-router-dom'
 
 
 import '../../saas/otherPerfil/perfilData.scss'
@@ -15,6 +19,7 @@ import '../../saas/otherPerfil/perfilData.scss'
 
 // Componente para la cabecera del perfil de otro usuario (No el logueado)
 function PerfilData({id}) {
+    const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')
 
     const [username, setUsername] = useState()
@@ -24,7 +29,8 @@ function PerfilData({id}) {
     const [modal, setModal] = useState()
     const [data, setData] = useState()
     const [aviso, setAviso] = useState()
-
+    const [follow, setFollow] = useState()
+    const [follower, setFollower] = useState()
 
 
 
@@ -50,7 +56,39 @@ function PerfilData({id}) {
             setDate(date)
             setPost(await getPostByUser.data.length)
         }
-    })
+    },[])
+
+
+
+    // useEffect para comprobar si se esta siguiendo o no al usuario y comprobar las tablas follow y follower
+    useEffect(() => {
+
+        followValidate()
+        async function followValidate() {
+            const getFollows = await getFollowByProperty('userID', userCurrentID)
+            const getFollowers = await getFollowerByProperty('userID', id)
+
+            // Comprobar si existe informacion sobre el usuario logueado para crear o no un nuevo registro propio
+            if (getFollows.data.length == 0) {
+                const newFollowArray = {'userID': userCurrentID}
+                const newFollowSend = await followCreate(newFollowArray)
+            }
+
+            // Comprobar si existe informacion sobre el otro usuario para crear un nuevo registro
+            if (getFollowers.data.length == 0) {
+                const newFollowerArray = {'userID': id}
+                const newFollowerSend = await followerCreate(newFollowerArray)
+            }
+
+
+            // Comprobar si ya estas siguiendo al usuario para poder poner el icono adecuado y un estado para saber si incluir o quitar
+            const newGetFollows = await getFollowByProperty('userID', userCurrentID)
+            const findFollow = await newGetFollows.data[0].follow.some(data => data == id)
+            setFollow(findFollow)
+            
+        }
+
+    }, [])
 
 
 
@@ -219,6 +257,31 @@ function PerfilData({id}) {
 
 
 
+    // Funcion asociada al icono de follow para seguir a el usuario o dejar de seguir en el caso de que ya se este siguiendo
+    async function followAdd() {
+        // Buscar la informacion de las tablas follow y followers para obtener los arrays necesarios
+        const getFollowID = await getFollowByProperty('userID', userCurrentID)
+        const getFollowArray = await getFollowByID(getFollowID.data[0]._id)
+        let followArray = getFollowArray.data.follow
+
+        const getFollowerID = await getFollowerByProperty('userID', id)
+        const getFollowerArray = await getFollowerByID(getFollowerID.data[0]._id)
+        let followerArray = getFollowerArray.data.follower
+
+        // Ternario para quitar o poner el follow dependiendo del estado
+        follow ? followArray=followArray.filter(data => data !== id) : followArray.push(id)
+        follow ? followerArray=followerArray.filter(data => data !== userCurrentID) : followerArray.push(userCurrentID)
+
+        // Hacer el update con la nueva situacion del follow
+        const newFollowArray = {'follow': followArray}
+        const sendUpdateFollow = await followUpdate(getFollowID.data[0]._id, newFollowArray)  
+        
+        const newFollowerArray = {'follower': followerArray}
+        const sendUpdateFollower = await followerUpdate(getFollowerID.data[0]._id, newFollowerArray) 
+    }
+
+
+
 
 
 
@@ -233,7 +296,8 @@ function PerfilData({id}) {
                         <p id='perfilData-user'>{username} </p>
                         {/* Ternario para que no se pueda ver el boton de abrir modal cuando se esta mirando el perfil del usuario logueado */}
                         {/* El boton abre modal para enviar mensaje privado */}
-                        {userCurrentID != id ? <FaInbox id='perfilData-inbox' onClick={async ()=>{setModal(data)}} /> : <></>}
+                        { userCurrentID != id ? <FaInbox id='perfilData-inbox' title='Mandar privado' onClick={async ()=>{setModal(data)}} /> : <></> }
+                        { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={followAdd}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followAdd}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
                     <p id='perfilData-post'>Nº post: {post}</p>
