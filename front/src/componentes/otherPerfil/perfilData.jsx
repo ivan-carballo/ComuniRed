@@ -12,6 +12,7 @@ import { FaUserPlus, FaUserMinus } from "react-icons/fa";
 import { getFollowByID, getFollowByProperty, followCreate, followUpdate } from '../../api/followAPI.js'
 import { getFollowerByID, getFollowerByProperty, followerCreate, followerUpdate } from '../../api/followerAPI.js'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 import '../../saas/otherPerfil/perfilData.scss'
@@ -22,6 +23,7 @@ function PerfilData({id}) {
     const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')
 
+    const [reboot, setReboot] = useState(true)
     const [username, setUsername] = useState()
     const [perfilIMG, setPerfilIMG] = useState()
     const [date, setDate] = useState()
@@ -30,7 +32,6 @@ function PerfilData({id}) {
     const [data, setData] = useState()
     const [aviso, setAviso] = useState()
     const [follow, setFollow] = useState()
-    const [follower, setFollower] = useState()
 
 
 
@@ -62,33 +63,35 @@ function PerfilData({id}) {
 
     // useEffect para comprobar si se esta siguiendo o no al usuario y comprobar las tablas follow y follower
     useEffect(() => {
+        if (reboot) {
 
-        followValidate()
-        async function followValidate() {
-            const getFollows = await getFollowByProperty('userID', userCurrentID)
-            const getFollowers = await getFollowerByProperty('userID', id)
+            followValidate()
+            async function followValidate() {
+                const getFollows = await getFollowByProperty('userID', userCurrentID)
+                const getFollowers = await getFollowerByProperty('userID', id)
 
-            // Comprobar si existe informacion sobre el usuario logueado para crear o no un nuevo registro propio
-            if (getFollows.data.length == 0) {
-                const newFollowArray = {'userID': userCurrentID}
-                const newFollowSend = await followCreate(newFollowArray)
+                // Comprobar si existe informacion sobre el usuario logueado para crear o no un nuevo registro propio
+                if (getFollows.data.length == 0) {
+                    const newFollowArray = {'userID': userCurrentID}
+                    const newFollowSend = await followCreate(newFollowArray)
+                }
+
+                // Comprobar si existe informacion sobre el otro usuario para crear un nuevo registro
+                if (getFollowers.data.length == 0) {
+                    const newFollowerArray = {'userID': id}
+                    const newFollowerSend = await followerCreate(newFollowerArray)
+                }
+
+
+                // Comprobar si ya estas siguiendo al usuario para poder poner el icono adecuado y un estado para saber si incluir o quitar
+                const newGetFollows = await getFollowByProperty('userID', userCurrentID)
+                const findFollow = await newGetFollows.data[0].follow.some(data => data == id)
+                setFollow(findFollow)
             }
+            setReboot(false)
 
-            // Comprobar si existe informacion sobre el otro usuario para crear un nuevo registro
-            if (getFollowers.data.length == 0) {
-                const newFollowerArray = {'userID': id}
-                const newFollowerSend = await followerCreate(newFollowerArray)
-            }
-
-
-            // Comprobar si ya estas siguiendo al usuario para poder poner el icono adecuado y un estado para saber si incluir o quitar
-            const newGetFollows = await getFollowByProperty('userID', userCurrentID)
-            const findFollow = await newGetFollows.data[0].follow.some(data => data == id)
-            setFollow(findFollow)
-            
         }
-
-    }, [])
+    }, [reboot])
 
 
 
@@ -278,6 +281,38 @@ function PerfilData({id}) {
         
         const newFollowerArray = {'follower': followerArray}
         const sendUpdateFollower = await followerUpdate(getFollowerID.data[0]._id, newFollowerArray) 
+
+        setReboot(true)
+    }
+
+    
+
+
+    // Funcion intermedia para desplegar un aviso al usuario antes de dejar de seguir al otro usuario
+    async function sweetAlert(e) {
+        Swal.fire({
+            title: 'Confirmar dejar de seguir',
+            text: `¿Desea dejar de seguir a ${username}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, dejar de seguir',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                followAdd(e);
+                Swal.fire(
+                    '¡Hecho!',
+                    `Has dejado de seguir a ${username}`,
+                    'success'
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelado',
+                    'Tu acción ha sido cancelada :)',
+                    'error'
+                )
+            }
+        })
     }
 
 
@@ -297,7 +332,7 @@ function PerfilData({id}) {
                         {/* Ternario para que no se pueda ver el boton de abrir modal cuando se esta mirando el perfil del usuario logueado */}
                         {/* El boton abre modal para enviar mensaje privado */}
                         { userCurrentID != id ? <FaInbox id='perfilData-inbox' title='Mandar privado' onClick={async ()=>{setModal(data)}} /> : <></> }
-                        { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={followAdd}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followAdd}/> }
+                        { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followAdd}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
                     <p id='perfilData-post'>Nº post: {post}</p>
