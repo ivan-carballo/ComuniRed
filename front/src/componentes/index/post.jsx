@@ -150,9 +150,8 @@ function Post() {
         const postResponse = document.getElementById('modalResponse-textarea')
         const postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
 
-
         // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
-        if (postIMG != undefined || postResponse.length > 0) {
+        if (postIMG != undefined || postResponse.value.length > 0) {
                 setAviso(null)
 
                 // Condicional para diferenciar si se carga una imagen o no junto con la respuesta

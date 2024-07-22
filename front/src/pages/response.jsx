@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
+import Swal from 'sweetalert2'
 import { Navbar } from "../componentes/navbar";
 import { ResponseForm } from "../componentes/responseForm";
 import { useParams } from "react-router-dom";
@@ -107,8 +108,12 @@ function Response() {
 
         const getNotificationID = await getNotificationByProperty('responseID', responseID)
 
+        if (getNotificationID.data.length > 0) {
+            const notificationRemove = await notificationDelete(getNotificationID.data[0]._id)
+        }
+
         const responseRemove = await responseDelete(responseID)
-        const notificationRemove = await notificationDelete(getNotificationID.data[0]._id)
+        
 
         setReboot(true)
     }
