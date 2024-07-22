@@ -26,7 +26,6 @@ function LoginForm() {
         const userAll = await getUser()
         const userFilter = userAll.data.filter((data) => data.email === formEmail)
 
-
         // Condicional para controlar que se rellenan todos los campos y que las credenciales son validas con lo que hay en MongoDB
         if (formEmail.length < 1 || formPassword.length < 1) {
             setAviso('Debe rellenar todos los campos para poder iniciar sesion')
