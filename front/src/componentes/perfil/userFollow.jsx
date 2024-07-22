@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import { getUserByID } from "../../api/userAPI";
 import { getFollowByProperty, followUpdate } from '../../api/followAPI'
 import { getFollowerByProperty, followerUpdate } from "../../api/followerAPI";
+import { followAdd } from '../../funciones/follow.js'
 import Swal from "sweetalert2";
 
 import '../../saas/perfil/userPost.scss'
@@ -56,16 +57,16 @@ function AllFollowByUser() {
                 const followMap = allUserFollow.map((data) => 
                     <div id="follow-div" key={data._id}>
                         <img src={data.img} />
-                        <p onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                        <input type="button" value="Dejar de seguir" id={data._id}  />
+                        <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
+                        <input type="button" className="follow" value="Dejar de seguir" id={data._id} onClick={sweetAlert} />
                     </div>
                 )
 
                 const followerMap = allUserFollower.map((data) => 
                     <div id="follow-div" key={data._id}>
                         <img src={data.img} />
-                        <p onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                        <input type="button" value="Seguir" id={data._id} />
+                        <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
+                        <input type="button" className="follower" value={ getArrayFollow.includes(data._id) ? 'Dejar de seguir' : 'Seguir' } id={data._id} onClick={followResolve} />
                     </div>
                 )
 
@@ -77,6 +78,88 @@ function AllFollowByUser() {
             setReboot(false)
         }
     }, [reboot])
+
+
+
+
+
+    // Funcion para eliminar a un follow
+    async function followMinus(e) {
+        const id = e.target.id
+        const classNameButton = e.target.className
+
+        followAdd(userCurrentID, id, true)
+
+        setTimeout(() => {
+            setReboot(true)
+
+            setTimeout(() => {
+                if (classNameButton === 'follower') {
+                    setButtonFollower('active')
+                    setButtonFollow('')
+                    setShow(showFollower)
+                } else {
+                    setButtonFollow('active')
+                    setButtonFollower('')
+                    setShow(showFollow)
+                }
+            }, 350);
+
+        }, 250);
+    }
+
+
+
+
+    // Funcion para comprobar si el usuario ya se esta siguiendo o si es nuevo
+    async function followResolve(e) {
+        const followState = e.target.value
+        const id = e.target.id
+        
+        followState === 'Seguir' ? followAdd(userCurrentID, id, false) : sweetAlert(e)
+
+        setTimeout(() => {
+            setReboot(true)
+            setButtonFollower('active')
+            setButtonFollow('')
+            setShow(showFollower)
+        }, 300);
+
+    }
+
+
+
+
+    // Funcion intermedia para desplegar un aviso al usuario antes de dejar de seguir al otro usuario
+    async function sweetAlert(e) {
+        const username = document.getElementById('follow-p')
+        
+        Swal.fire({
+            title: 'Confirmar dejar de seguir',
+            text: `¿Desea dejar de seguir a ${username.textContent}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, dejar de seguir',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                followMinus(e);
+                Swal.fire(
+                    '¡Hecho!',
+                    `Has dejado de seguir a ${username.textContent}`,
+                    'success'
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelado',
+                    'Tu acción ha sido cancelada :)',
+                    'error'
+                )
+            }
+        })
+    }
+    
+
 
 
 
