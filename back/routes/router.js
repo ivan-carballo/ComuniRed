@@ -6,7 +6,6 @@ const app = express();
 app.use(cors())
 const router  =  Router();
 
-import { isAuthenticated } from '../middleware/authMiddleware.js'
 
 import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
