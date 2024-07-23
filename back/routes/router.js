@@ -16,6 +16,7 @@ import inboxRouter from './inboxRouter.js'
 import notiInboxRouter from './notiInboxRouter.js'
 import followRouter from './followRouter.js'
 import followerRouter from './followerRouter.js'
+import notiFollowRouter from './notiFollowRouter.js'
 
 
 
@@ -27,6 +28,7 @@ router.use("/inbox", inboxRouter);
 router.use("/notiinbox", notiInboxRouter);
 router.use("/follow", followRouter);
 router.use("/follower", followerRouter);
+router.use("/notifollow", notiFollowRouter);
 
 
 
