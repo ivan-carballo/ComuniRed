@@ -32,10 +32,12 @@ function Notification() {
                     const notificacionMap = getNotificationByUser.data.map((data) => 
 
                             <div key={data._id} name={data._id} id="notification-div" onClick={notificationDetail}>
-                                <p id='notification-p-username' name={data._id}>{data.username}</p>
-                                <p id='notification-p-date' name={data._id}>{data.dateString}</p>
-                                <p id='notification-p-post' name={data._id}>{data.post}</p>
-                                <img id='notification-img' src={data.img} />
+                                <div id="notification-div-header">
+                                    <p id='notification-p-username' name={data._id}>{data.username}</p>
+                                    <p id='notification-p-date' name={data._id}>{data.dateString}</p>
+                                </div>
+                                { data.post.length > 0 ? <p id='notification-p-post' name={data._id}>{data.post}</p> : <></> }
+                                { data.img != undefined && data.img != null ? <img id='notification-img' src={data.img} /> : <></> }
                             </div>
 
                     )

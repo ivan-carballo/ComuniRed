@@ -39,7 +39,10 @@ function ResponseForm({id}) {
     async function sendResponse(e) {
         // Se meten los datos de los inputs en variables
         const userData = await getUserByID(userID)
-        const postIMG = await ImageUpload(e.target.parentElement.childNodes[0].files[0])
+        let postIMG = ''
+
+        // Ternario para evitar que si no hay foto de error la funcion de redimensionar
+        e.target.parentElement.childNodes[0].files[0] != undefined ? postIMG = await ImageUpload(e.target.parentElement.childNodes[0].files[0]) : postIMG
 
         const responsePost = document.getElementById('responseForm-textarea')
         const responseIMG = document.getElementById('file')
@@ -54,9 +57,9 @@ function ResponseForm({id}) {
 
 
         const responseSend = await responseCreate(responseArray)   
-        //responsePost.value = ''
-        //responseIMG.value = ''
-        //setReboot(true)
+        responsePost.value = ''
+        responseIMG.value = ''
+        setReboot(true)
     }
 
 

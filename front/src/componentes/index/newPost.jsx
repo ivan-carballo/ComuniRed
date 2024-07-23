@@ -39,15 +39,15 @@ function NewPost() {
         const postDate = await dateFormat(Date.now()) // Sacar fecha actual de una funcion externa
 
         // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
-        if (postIMG != undefined) {
+        if (postIMG != undefined && postIMG != null) {
             postIMG = await ImageUpload(e.target.form[1].files[0])
         }
 
-        const arrayNewPost = await {'userID': userID,
-                                'post': postText,
-                                'username': username_data,
-                                'dateString': postDate,
-                                'img': postIMG}
+        const arrayNewPost = {'userID': userID,
+                            'post': postText,
+                            'username': username_data,
+                            'dateString': postDate,
+                            'img': postIMG}
 
         // Condicional para obligar a que haya un mensaje o una imagen, al menos uno de ellos debe estar con informacion
         if (postText.length > 0 || postIMG != undefined) {
