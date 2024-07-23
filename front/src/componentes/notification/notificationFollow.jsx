@@ -24,19 +24,28 @@ function NotificationFollow() {
 
             getNotiFollow()
             async function getNotiFollow() {
-                const getNotiFollowByUser = await getNotiFollowByProperty('followerID', userCurrentID)
+                let allUserFollow = []
 
-                const notiFollowMap = getNotiFollowByUser.data.reverse().map((data) => 
+                const getNotiFollowerByUser = await getNotiFollowByProperty('followerID', userCurrentID)
+                const getNotiFollowByUser = await getNotiFollowByProperty('followID', userCurrentID)
+                
+                // Hacer un metodo map para tener solo los IDs de los usuarios a los que sigue el usuario logueado
+                const followDataUser = await Promise.all( getNotiFollowByUser.data.map((data) => {
+                    data.followerID
+                }))
+
+
+                const notiFollowerMap = getNotiFollowerByUser.data.reverse().map((data) => 
                     <div id="notiFollowMap-div" key={data._id}>
                         <p id="notiFollowMap-date">{data.dateString}</p>
                         <div id="notiFollowMap-data">
                             <img id="notiFollowMap-data-img" src={data.img}></img>
                             <p id="notiFollowMap-data-username" value={data.followID} onClick={checkFollow}>{data.username}</p>
-                            <input type="button" value='seguir' id="notiFollowMap-data-button" />
+                            {/* <input type="button" value='dsf' id="notiFollowMap-data-button" /> */}
                         </div>
                     </div>
                 )
-                setData(notiFollowMap)
+                setData(notiFollowerMap)
             }
         }
     }, [reboot])
@@ -58,7 +67,7 @@ function NotificationFollow() {
     }
 
 
-    
+
 
     // Funcion para marcar todas las notificaciones de nuevos seguidores como vistas
     async function Allcheck(e) {

@@ -47,8 +47,8 @@ function UserStadistic() {
             const getFollow = await getFollowByProperty('userID', userCurrentID)
             const getFollower = await getFollowerByProperty('userID', userCurrentID)
 
-            setUserFollow(getFollow.data[0].follow.length)
-            setUserFollower(getFollower.data[0].follower.length)
+            getFollow.data.length > 0 ? setUserFollow(getFollow.data[0].follow.length) : setUserFollow(0)
+            getFollower.data.length > 0 ? setUserFollower(getFollower.data[0].follower.length) : setUserFollower(0)
         }
 
     }, [])

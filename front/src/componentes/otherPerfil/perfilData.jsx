@@ -40,69 +40,59 @@ function PerfilData({id}) {
 
     // UseEffect para recopilar los datos del usuario con una llamada API
     useEffect(() => {
-        showUser(id)
-        async function showUser(id) {
-            let getOtherUser = await getUserByID(id)
-            getOtherUser = getOtherUser.data
-            setData(getOtherUser)
-
-            // Sacar solo el mes y año de la fecha de registro
-            let date = getOtherUser.dateString
-            date = date.split(",")[0].split(" de ")
-            date = `${date[1]} ${date[2]}`
-            date = date.charAt(0).toUpperCase() + date.slice(1).toLowerCase()
-
-            // Buscar todos los posts del usuario para la estadistica
-            const getPostByUser = await getPostByProperty('userID', id)
-
-            setUsername(getOtherUser.username)
-            setPerfilIMG(getOtherUser.img)
-            setDate(date)
-            setPost(await getPostByUser.data.length)
-
-            // Obtener datos de los follow y followers
-            const getFollow = await getFollowByProperty('userID', userCurrentID)
-            const getFollower = await getFollowerByProperty('userID', userCurrentID)
-
-            setUserFollow(getFollow.data[0].follow.length)
-            setUserFollower(getFollower.data[0].follower.length)
-        }
-    },[])
-
-
-
-    // useEffect para comprobar si se esta siguiendo o no al usuario y comprobar las tablas follow y follower
-    useEffect(() => {
         if (reboot) {
+            showUser(id)
+            async function showUser(id) {
+                let getOtherUser = await getUserByID(id)
+                getOtherUser = getOtherUser.data
+                setData(getOtherUser)
 
-            followValidate()
-            async function followValidate() {
+                // Sacar solo el mes y año de la fecha de registro
+                let date = getOtherUser.dateString
+                date = date.split(",")[0].split(" de ")
+                date = `${date[1]} ${date[2]}`
+                date = date.charAt(0).toUpperCase() + date.slice(1).toLowerCase()
+
+                // Buscar todos los posts del usuario para la estadistica
+                const getPostByUser = await getPostByProperty('userID', id)
+
+                setUsername(getOtherUser.username)
+                setPerfilIMG(getOtherUser.img)
+                setDate(date)
+                setPost(await getPostByUser.data.length)
+
+                // Obtener datos de los follow y followers
+                const getFollow = await getFollowByProperty('userID', userCurrentID)
+                const getFollower = await getFollowerByProperty('userID', userCurrentID)
+
+                getFollow.data.length > 0 ? setUserFollow(getFollow.data[0].follow.length) : setUserFollow(0)
+                getFollower.data.length > 0 ? setUserFollower(getFollower.data[0].follower.length) : setUserFollower(0)
+
+                // Comprobar si se esta siguiendo o no al usuario y comprobar las tablas follow y follower
                 const getFollows = await getFollowByProperty('userID', userCurrentID)
-                const getFollowers = await getFollowerByProperty('userID', id)
+                    const getFollowers = await getFollowerByProperty('userID', id)
 
-                // Comprobar si existe informacion sobre el usuario logueado para crear o no un nuevo registro propio
-                if (getFollows.data.length == 0) {
-                    const newFollowArray = {'userID': userCurrentID}
-                    const newFollowSend = await followCreate(newFollowArray)
-                }
+                    // Comprobar si existe informacion sobre el usuario logueado para crear o no un nuevo registro propio
+                    if (getFollows.data.length == 0) {
+                        const newFollowArray = {'userID': userCurrentID}
+                        const newFollowSend = await followCreate(newFollowArray)
+                    }
 
-                // Comprobar si existe informacion sobre el otro usuario para crear un nuevo registro
-                if (getFollowers.data.length == 0) {
-                    const newFollowerArray = {'userID': id}
-                    const newFollowerSend = await followerCreate(newFollowerArray)
-                }
+                    // Comprobar si existe informacion sobre el otro usuario para crear un nuevo registro
+                    if (getFollowers.data.length == 0) {
+                        const newFollowerArray = {'userID': id}
+                        const newFollowerSend = await followerCreate(newFollowerArray)
+                    }
 
 
-                // Comprobar si ya estas siguiendo al usuario para poder poner el icono adecuado y un estado para saber si incluir o quitar
-                const newGetFollows = await getFollowByProperty('userID', userCurrentID)
-                const findFollow = await newGetFollows.data[0].follow.some(data => data == id)
-                setFollow(findFollow)
+                    // Comprobar si ya estas siguiendo al usuario para poder poner el icono adecuado y un estado para saber si incluir o quitar
+                    const newGetFollows = await getFollowByProperty('userID', userCurrentID)
+                    const findFollow = await newGetFollows.data[0].follow.some(data => data == id)
+                    setFollow(findFollow)
             }
-            setReboot(false)
-
         }
-    }, [reboot])
-
+        setReboot(false)
+    },[reboot])
 
 
 
@@ -334,7 +324,7 @@ function PerfilData({id}) {
                         { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followGestion}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
-                    <p id='perfilData-post'>Post: {post} - Siguiendo: {userFollow} - Seguidores: {userFollower}</p>
+                    <p id='perfilData-post'>Post: {post} - Siguiendo: {userFollower} - Seguidores: {userFollow}</p>
                 </div>
 
             </div>

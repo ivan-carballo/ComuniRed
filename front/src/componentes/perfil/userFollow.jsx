@@ -32,49 +32,52 @@ function AllFollowByUser() {
             async function getDataFollow() {
                 let allUserFollow = []
                 let allUserFollower = []
+                let getArrayFollow = []
 
                 // Obtener los arrays de ambas tablas
                 const getFollow = await getFollowByProperty('userID', userCurrentID)
                 const getFollower = await getFollowerByProperty('userID', userCurrentID)
 
-                const getArrayFollow = await getFollow.data[0].follow.reverse()
-                const getArrayFollower = await getFollower.data[0].follower.reverse()
-                
-                
-                // Hacer dos metodos map para sacar la informacion de los usuarios desde los IDs
-                const followDataUser = await Promise.all( getArrayFollow.map( async (data) => {
-                    const getUserFollow = await getUserByID(data)
-                    allUserFollow.push(getUserFollow.data)
-                }))
+                // Crear condicional por cada tabla para controlar errores si no existe informacion
+                // En cada condicional hay una busqueda de seguidores, un map para obtener datos de los usuarios y otro map para mostrar en pantalla dentro del return
+                if (getFollow.data.length > 0) {
+                    getArrayFollow = await getFollow.data[0].follow.reverse()
 
-                const followerDataUser = await Promise.all( getArrayFollower.map( async (data) => {
-                    const getUserFollower = await getUserByID(data)
-                    allUserFollower.push(getUserFollower.data)
-                }))
+                    const followDataUser = await Promise.all( getArrayFollow.map( async (data) => {
+                        const getUserFollow = await getUserByID(data)
+                        allUserFollow.push(getUserFollow.data)
+                    }))
 
-
-                // Hacer dos metodos map para meter en useState y sacarlo en pantalla dentro del return
-                const followMap = allUserFollow.map((data) => 
-                    <div id="follow-div" key={data._id}>
-                        <img src={data.img} />
-                        <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                        <input type="button" className="follow" value="Dejar de seguir" id={data._id} onClick={sweetAlert} />
-                    </div>
-                )
-
-                const followerMap = allUserFollower.map((data) => 
-                    <div id="follow-div" key={data._id}>
-                        <img src={data.img} />
-                        <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                        <input type="button" className="follower" value={ getArrayFollow.includes(data._id) ? 'Dejar de seguir' : 'Seguir' } id={data._id} onClick={followResolve} />
-                    </div>
-                )
-
-                setShowFollow(followMap)
-                setShowFollower(followerMap)
-                setShow(followMap)
-
+                    const followMap = allUserFollow.map((data) => 
+                        <div id="follow-div" key={data._id}>
+                            <img src={data.img} />
+                            <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
+                            <input type="button" className="follow" value="Dejar de seguir" id={data._id} onClick={sweetAlert} />
+                        </div>
+                    )
+                    setShowFollow(followMap)
+                    setShow(followMap)
                 }
+
+
+                if (getFollower.data.length > 0) {
+                    const getArrayFollower = await getFollower.data[0].follower.reverse()
+
+                    const followerDataUser = await Promise.all( getArrayFollower.map( async (data) => {
+                        const getUserFollower = await getUserByID(data)
+                        allUserFollower.push(getUserFollower.data)
+                    }))
+    
+                    const followerMap = allUserFollower.map((data) => 
+                        <div id="follow-div" key={data._id}>
+                            <img src={data.img} />
+                            <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
+                            <input type="button" className="follower" value={ getArrayFollow.includes(data._id) ? 'Dejar de seguir' : 'Seguir' } id={data._id} onClick={followResolve} />
+                        </div>
+                    )
+                    setShowFollower(followerMap)
+                }
+            }
             setReboot(false)
         }
     }, [reboot])
