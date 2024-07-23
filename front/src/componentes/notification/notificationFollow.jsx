@@ -43,6 +43,7 @@ function NotificationFollow() {
 
 
 
+
     // Funcion para ir al perfil de un seguidor pulsando el nombre y eliminar la notificacion asociada a ese seguidor
     async function checkFollow(e) {
         const getFollowID = e.target.attributes[1].value
@@ -57,6 +58,7 @@ function NotificationFollow() {
     }
 
 
+    
 
     // Funcion para marcar todas las notificaciones de nuevos seguidores como vistas
     async function Allcheck(e) {

@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { FaHome, FaUserSlash, FaUserCircle, FaCog, FaBell, FaSearch, FaInbox } from 'react-icons/fa'
 import { getNotificationByProperty } from '../api/notificationAPI';
 import { getNotiInboxByProperty } from '../api/notiInboxAPI';
+import { getNotiFollowByProperty } from '../api/notiFollowAPI.js';
 import { obtenerToken } from "../funciones/token.js";
 
 
@@ -13,7 +14,7 @@ import { obtenerToken } from "../funciones/token.js";
 // Componente de navbar principal
 const Navbar = () => {
     const navigate = useNavigate();
-    const userID = Cookies.get('id')
+    const userCurrentID = Cookies.get('id')
 
     const [notification, setNotification] = useState(false)
     const [reboot, setReboot] = useState(true)
@@ -23,7 +24,7 @@ const Navbar = () => {
 
     // useEffect para cargar la funcion de cerrar sesion cuando no se encuentran credenciales en las Cookies
     useEffect(() => {
-        if (userID == null) {
+        if (userCurrentID == null) {
             logout()
         }
 
@@ -77,19 +78,20 @@ const Navbar = () => {
 
 
 
-    // useEffect para avisar cuando hay notificaciones de respuestas y de mensajes privados
+    // useEffect para avisar cuando hay notificaciones de respuestas, de mensajes privados y de nuevos seguidores
     useEffect(() => {
         if(reboot) {
 
             alertNotification()
             async function alertNotification() {
-                const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userID)
-                getNotificationByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
+                const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userCurrentID)
+                const getNotiFollowByUser = await getNotiFollowByProperty('followerID', userCurrentID)
+                getNotificationByUser.data.length > 0 || getNotiFollowByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
             }
 
             alertInbox()
             async function alertInbox(){
-                const getNotiInboxByUser = await getNotiInboxByProperty('userReceived', userID)
+                const getNotiInboxByUser = await getNotiInboxByProperty('userReceived', userCurrentID)
                 getNotiInboxByUser.data.length > 0 ? setNoti('notification') : setNoti('link')
             }
 
