@@ -153,7 +153,7 @@ function Post({  }) {
                         'post': postResponse.value,
                         'userID': userID}
 
-                    const sendResponse = await responseCreate(arrayResponse)
+                    const sendResponse = await responseCreate(arrayResponse, userName.data.img)
                     setResponse(null)
                     setRecarga(true)
                 } else {
@@ -166,7 +166,7 @@ function Post({  }) {
                         'img': postIMGBase64,
                         'userID': userID}
 
-                    const sendResponse = await responseCreate(arrayResponse)
+                    const sendResponse = await responseCreate(arrayResponse, userName.data.img)
 
                     setResponse(null)
                     setRecarga(true)

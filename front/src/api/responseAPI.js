@@ -59,7 +59,7 @@ async function getResponseByProperty(property, value) {
 
 
 // Esta funcion es doble, por un lado guarda una respuesta y por otro guarda una notificacion, son dos guardados en dos tablas independientes
-async function responseCreate(data) {
+async function responseCreate(data, userIMG) {
   try {
     const response = await fetch(`${API_URL}/response`,
       {
@@ -76,6 +76,12 @@ async function responseCreate(data) {
 
     const result = await response.json();
     //console.log('response creado:', result);
+    
+    // Si existe una foto de perfil, hacer un update
+    if (userIMG.length > 0) {
+      const updateArray = {'userIMG': userIMG}
+      const sendUpdate = await responseUpdate(result.data._id, updateArray)
+    }
 
     const userCurrentID = Cookies.get('id')
     const getPostID = await getpostByID(data.postID)

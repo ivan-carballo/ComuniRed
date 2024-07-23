@@ -15,7 +15,7 @@ import '../../saas/response/responseForm.scss'
 // Componente de un formulario para poder responder a post desde la pagina de detalle de post
 function ResponseForm({id}) {
     const navigate = useNavigate()
-    const userID = Cookies.get('id')
+    const userCurrentID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
     const [userPost, setUserPost] = useState()
@@ -43,7 +43,7 @@ function ResponseForm({id}) {
     // Funcion para guardar una nueva respuesta
     async function sendResponse(e) {
         // Se meten los datos de los inputs en variables
-        const userData = await getUserByID(userID)
+        const userData = await getUserByID(userCurrentID)
         let postIMG = ''
 
         // Ternario para evitar que si no hay foto de error la funcion de redimensionar
@@ -52,16 +52,18 @@ function ResponseForm({id}) {
         const responsePost = document.getElementById('responseForm-textarea')
         const responseIMG = document.getElementById('file')
 
+        // Obtener datos del usuario para la foto de perfil
+        const getUserIMG = await getUserByID(userCurrentID)
+
         // Objeto con todos los datos para guardar en MongoDB
         const responseArray = {'postID': id,
                             'username': userData.data.username,
                             'dateString': await dateFormat(Date.now()),
                             'post': responsePost.value,
                             'img': postIMG,
-                            'userID': userID}
+                            'userID': userCurrentID}
 
-
-        const responseSend = await responseCreate(responseArray)   
+        const responseSend = await responseCreate(responseArray, getUserIMG.data.img)   
         responsePost.value = ''
         responseIMG.value = ''
 

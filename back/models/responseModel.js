@@ -33,7 +33,11 @@ const responseSchema  = new mongoose.Schema({
 
     img: {
         type: String,
-    }
+    },
+
+    userIMG: {
+        type: String,
+    },
 
 
 

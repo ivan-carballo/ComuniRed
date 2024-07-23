@@ -69,15 +69,19 @@ function ResponsePost() {
                 
                 const getResponseChildrenMap = await getResponseChildren.data.reverse().map((data) =>
                     <div key={data._id} id="getResponse-div">
-                        <p id='getResponse-div-username' onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</p>
-                        <p id='getResponse-div-date'>{data.dateString}</p>
+                        <div id="getResponse-div-header">
+                            <img id='getResponse-div-userIMG' src={data.userIMG} />
+                            <div id="getResponse-div-header-data">
+                                <p id='getResponse-div-username' onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</p>
+                                <p id='getResponse-div-date'>{data.dateString}</p>
+                            </div>
+                        </div>
                         { data.post.length > 1 ? <p id='getResponse-div-post'>{data.post}</p> : <></> }
-                        { data.img != undefined && data.img != null ? <img id='getResponse-div-img' src={data.img} /> : <></> }
+                        { data.img == undefined || data.img == null ? <></> : <img id='getResponse-div-img' src={data.img} />  }
                         {userCurrentUsername.data.username === data.username ? <div id="getResponse-div-button"> <input type="button" value="Eliminar respuesta" id={data._id} onClick={sweetAlert} /> </div> : <></>}
                     </div>
                 )
                 setDataResponse(getResponseChildrenMap)
-
             }
         }
         setReboot(false)

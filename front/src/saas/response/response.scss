@@ -27,6 +27,7 @@
         & > #response-postPrincipal-header-img img {
             width: 75px;
             border-radius: 50%;
+            border: solid 2px $background-border;
         }
 
         & > #response-postPrincipal-header-userData {
@@ -83,6 +84,7 @@
 
 
 
+
 #response-responses {
     display: flex;
     flex-direction: column;
@@ -134,23 +136,55 @@
                 }
             }
 
-            & > #getResponse-div-username {
-                letter-spacing: 2px;
-                font-size: 1.25rem;
-                font-weight: 750;
-                cursor: pointer;
+            & > #getResponse-div-header {
+                border-bottom: solid 1px $background-border;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 95%;
+                margin-bottom: 5px;
+                padding-bottom: 4px;
 
-                &:hover {
-                    letter-spacing: 5px;
-                    font-style: italic;
+                & > #getResponse-div-userIMG {
+                    width: 50px;
+                    border-radius: 50%;
+                    border: 2px solid $background-border;
+                }
+
+
+                & > #getResponse-div-header-data {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+
+                    & > p {
+                        margin: 0;
+                    }
+
+                    & > #getResponse-div-username {
+                        letter-spacing: 2px;
+                        font-size: 1.25rem;
+                        font-weight: 750;
+                        cursor: pointer;
+        
+                        &:hover {
+                            letter-spacing: 5px;
+                            font-style: italic;
+                        }
+                    }
+        
+                    & > #getResponse-div-date {
+                        width: 95%;
+                        padding-bottom: 5px;
+                        text-align: center;
+                        text-align: center;
+                    }
                 }
             }
 
-            & > #getResponse-div-date {
-                border-bottom: 1px solid $border-button;
-                width: 95%;
-                padding-bottom: 5px;
-            }
+   
 
             & > #getResponse-div-post {
                 background-color: $background-text;
@@ -164,7 +198,6 @@
                 width: 95%;
                 border-radius: 25px;
                 margin-top: 10px;
-                border: solid 2px $background-border
             }
         }
     }
