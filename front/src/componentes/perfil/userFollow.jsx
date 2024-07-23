@@ -89,23 +89,12 @@ function AllFollowByUser() {
         const classNameButton = e.target.className
 
         followAdd(userCurrentID, id, true)
-
+        
         setTimeout(() => {
             setReboot(true)
-
-            setTimeout(() => {
-                if (classNameButton === 'follower') {
-                    setButtonFollower('active')
-                    setButtonFollow('')
-                    setShow(showFollower)
-                } else {
-                    setButtonFollow('active')
-                    setButtonFollower('')
-                    setShow(showFollow)
-                }
-            }, 350);
-
-        }, 250);
+            setButtonFollow('active')
+            setButtonFollower('')
+       }, 300);
     }
 
 
@@ -116,15 +105,18 @@ function AllFollowByUser() {
         const followState = e.target.value
         const id = e.target.id
         
-        followState === 'Seguir' ? followAdd(userCurrentID, id, false) : sweetAlert(e)
+        if (followState === 'Seguir') {
+            followAdd(userCurrentID, id, false)
 
-        setTimeout(() => {
-            setReboot(true)
-            setButtonFollower('active')
-            setButtonFollow('')
-            setShow(showFollower)
-        }, 300);
+            setTimeout(() => {
+                setReboot(true)
+                setButtonFollow('active')
+                setButtonFollower('')
+           }, 300);
 
+        } else {
+            sweetAlert(e)
+        }
     }
 
 
@@ -178,6 +170,7 @@ function AllFollowByUser() {
             setButtonFollower('active')
         }
     }
+
 
 
 
