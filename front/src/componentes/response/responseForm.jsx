@@ -1,14 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { dateFormat } from "../funciones/fecha";
-import { getpostByID } from "../api/postAPI";
-import { getUserByID } from "../api/userAPI";
-import { responseCreate } from "../api/responseAPI";
-import { ImageUpload } from "../funciones/resizeIMG";
+import { useState, useEffect, useContext } from "react";
+import { dateFormat } from "../../funciones/fecha";
+import { getpostByID } from "../../api/postAPI";
+import { getUserByID } from "../../api/userAPI";
+import { responseCreate } from "../../api/responseAPI";
+import { ImageUpload } from "../../funciones/resizeIMG";
 import { useNavigate } from "react-router-dom";
+import { ContextoCompartido } from "../../funciones/context";
 import Cookies from 'js-cookie'
 
-import '../saas/response/responseForm.scss'
+import '../../saas/response/responseForm.scss'
 
 
 // Componente de un formulario para poder responder a post desde la pagina de detalle de post
@@ -18,6 +19,7 @@ function ResponseForm({id}) {
 
     const [reboot, setReboot] = useState(true)
     const [userPost, setUserPost] = useState()
+    const { setValorResponse } = useContext(ContextoCompartido);
 
 
 
@@ -64,6 +66,7 @@ function ResponseForm({id}) {
         responseIMG.value = ''
 
         setReboot(true)
+        setValorResponse(true)
     }
 
 

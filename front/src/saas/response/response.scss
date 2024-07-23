@@ -7,18 +7,13 @@
 
 
 
-#response-responseForm {
-    margin-bottom: 10px;
-}
-
-
-
 #response-postPrincipal {
     background-color: $background-divs;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -50px;
 
     & > #response-postPrincipal-header {
         display: flex;
