@@ -45,7 +45,7 @@ async function getPostByProperty(property, value) {
 
 
 
-async function postCreate(data) {
+async function postCreate(data, userIMG) {
   try {
     const response = await fetch(`${API_URL}/post`,
       {
@@ -62,6 +62,13 @@ async function postCreate(data) {
 
     const result = await response.json();
     //console.log('post creado:', result);
+
+    // Si existe una foto de perfil, hacer un update
+    if (userIMG.length > 0) {
+      const updateArray = {'userIMG': userIMG}
+      const sendUpdate = await postUpdate(result.data._id, updateArray)
+    }
+
   } catch (error) {
     console.error('Error al crear el post:', error);
   }

@@ -52,7 +52,7 @@ function NewPost() {
         // Condicional para obligar a que haya un mensaje o una imagen, al menos uno de ellos debe estar con informacion
         if (postText.length > 0 || postIMG != undefined) {
             setAlert('')
-            const sendNewPost = await postCreate(arrayNewPost)
+            const sendNewPost = await postCreate(arrayNewPost, userIMG)
         } else {
             setAlert('Debe rellenar al menos uno de los campos')
         }

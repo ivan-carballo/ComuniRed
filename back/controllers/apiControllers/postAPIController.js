@@ -32,7 +32,7 @@ const create = async(req,res)=>{
 
 
 const update = async(req,res)=>{
-    const id = eq.params.id;
+    const id = req.params.id;
     const propiedad = await postController.update(id,req.body);
     res.json({data:propiedad})
 }

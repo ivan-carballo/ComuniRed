@@ -4,6 +4,10 @@
 #inbox-body {
     margin-top: 50px;
 
+    & > #inbox-header {
+        text-align: center;
+    }
+
     & > #chat-div {
         border: solid $background-border 2px;
         border-radius: 25px;

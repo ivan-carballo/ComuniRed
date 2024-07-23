@@ -20,6 +20,7 @@ function Inbox() {
 
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
+    const [header, setHeader] = useState('')
 
 
     // UseEffect para recopilar todos los mensajes relacionados con el usuario logueado
@@ -82,10 +83,11 @@ function Inbox() {
                         <p>{data.username}</p>
                     </div>
                 )
-
+                setHeader('Conversaciones activas')
                 setData(inboxUserMap)
 
                 if (inboxUserMap.length < 1) {
+                    setHeader('')
                     setData('No hay conversaciones activas con ningun usuario')
                 }
             }
@@ -102,7 +104,7 @@ function Inbox() {
             <Navbar />
 
             <div id="inbox-body">
-                <h3>Conversaciones activas</h3>
+                <h3 id='inbox-header'>{header}</h3>
                 {data}
             </div>
         

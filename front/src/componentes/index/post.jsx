@@ -29,6 +29,7 @@ function Post() {
     const [aviso, setAviso] = useState()
 
 
+
   
     // UseEffect para traer todos los posts creados
     useEffect(() => {
@@ -36,58 +37,37 @@ function Post() {
 
             allPost()
             async function allPost() {
-                let AllPostData = await getPost()
-                AllPostData = AllPostData.data.reverse()
+                const allPostData = await getPost()
                 
-                let datosIMG = []
-
-                // Sacar datos de las tablas post y user para poder mostrar la foto de perfil de cada usuario al lado de su post
-                const allPostIMG = await AllPostData.map( async (dataIMG) => {
-                    let userIMG = await getUserByID(dataIMG.userID)
-                    userIMG = userIMG.data.img
-                    dataIMG.userimg = userIMG
-
-                    let userResponse = await getResponseByProperty('postID', dataIMG._id)
-                    dataIMG.responses = userResponse.data.length
-                    datosIMG.push(dataIMG)
-                })
-
-                
-                // Limite de espera para evitar que continue antes de que se hayan podido guardar correctamente las fotos de perfil
-                setTimeout(async () => {
-                    await mapPost()
-                }, 500);
-
-
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
-                async function mapPost() {
-                    const allPostMap = await datosIMG.map((data) => 
-                        <div id='post-div' key={data._id}>
-                            <div id="post-header">
-                                <img src={data.userimg} />
-                                <div id="post-header-data">
-                                    <h2 onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</h2>
-                                    <h4 id='post-date'>{data.dateString}</h4>
-                                </div>
-                            </div>
-                            <div id="post-data">
-                                {/* Operadores ternarios para evitar que aparezca background-color y border cuando no existe informacion en MongoDB */}
-                                { data.post.length > 1 ? <p id='post-post'>{data.post}</p> : <></> }
-                                { data.img != null && data.img != undefined ? <img id='post-img' src={data.img} /> : <></> }
-                            </div>
-                            <div id="buttons-post">
-                                <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
-                                <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
-                                {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
+                const allPostMap = allPostData.data.reverse().map((data) => 
+                    <div id='post-div' key={data._id}>
+                        <div id="post-header">
+                            <img src={data.userIMG} />
+                            <div id="post-header-data">
+                                <h2 onClick={async () => {navigate(`/user/${data.userID}`)}}>{data.username}</h2>
+                                <h4 id='post-date'>{data.dateString}</h4>
                             </div>
                         </div>
-                    )
-                    setData(allPostMap)
-                }
+                        <div id="post-data">
+                            {/* Operadores ternarios para evitar que aparezca background-color y border cuando no existe informacion en MongoDB */}
+                            { data.post.length > 1 ? <p id='post-post'>{data.post}</p> : <></> }
+                            { data.img != null && data.img != undefined ? <img id='post-img' src={data.img} /> : <></> }
+                        </div>
+                        <div id="buttons-post">
+                            <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
+                            <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
+                            {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
+                        </div>
+                    </div>
+                )
+                setData(allPostMap)
                 setRecarga(false)
             }
         }
     }, [recarga]);
+
+
 
 
 
@@ -117,6 +97,7 @@ function Post() {
             }
         })
     }
+
 
 
 
