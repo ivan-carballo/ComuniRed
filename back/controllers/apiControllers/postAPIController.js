@@ -8,10 +8,33 @@ const app = express();
 app.use(cors())
 
 
+const getAllScroll = async(req,res)=>{
+    try {
+        const skip = parseInt(req.query.skip) || 0; // Índice inicial
+        const limit = parseInt(req.query.limit) || 15; // Cantidad de mensajes a obtener
+
+        // Obtén todos los mensajes (esto debería ser reemplazado por una consulta a la base de datos)
+        const propiedad = await postController.getAll();
+
+        // Aplica la paginación
+        const paginatedMessages = propiedad.slice(skip, skip + limit);
+
+        // Envía la respuesta paginada
+        res.json({ data: paginatedMessages });
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+
+
 const getAll = async(req,res)=>{
     const propiedad = await postController.getAll();
     res.json({data:propiedad})
 }
+
 
 const getById = async (req,res) =>{
     const id = req.params.id
@@ -45,6 +68,7 @@ const remove = async(req,res)=>{
 
 export default{
     getAll,
+    getAllScroll,
     getById,
     getByProperty,
     create,

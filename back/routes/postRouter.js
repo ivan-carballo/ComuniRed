@@ -13,6 +13,7 @@ router.post("/update/:id",postAPIController.update);
 
 
 router.get("/",postAPIController.getAll);
+router.get("/scroll",postAPIController.getAllScroll);
 router.get("/:id",postAPIController.getById);
 
 

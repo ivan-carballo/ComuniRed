@@ -8,7 +8,7 @@ import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
-import { getPost } from "../../api/postAPI.js"
+import { getPost, getPostScroll } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
 import { getResponseByProperty, responseDelete, responseCreate } from '../../api/responseAPI.js';
 import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
@@ -32,6 +32,25 @@ function Post({  }) {
     const [response, setResponse] = useState('')
     const [aviso, setAviso] = useState()
 
+/*     const [skip, setSkip] = useState(0)
+    const [limit, setLimit] = useState(15)
+    const [postList, setPostList] = useState([]) */
+
+
+
+
+    // Codigo para detectar cuando se ha llegado al final de la pagina al hacer scroll
+/*     window.addEventListener('scroll', async () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 225) {
+            setSkip(skip + 15)
+            setLimit(limit + 15)
+            //setValorCompartido(true)
+
+            const allPostData = await getPostScroll(skip, limit)
+            postList = [...postList, ...allPostData.data]
+
+        }}) */
+
 
 
   
@@ -41,8 +60,12 @@ function Post({  }) {
 
             allPost()
             async function allPost() {
+                //const allPostData = await getPostScroll(skip, limit)
                 const allPostData = await getPost()
                 
+                //setPostList(events => [...postList, ...allPostData.data])
+                
+
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
                 const allPostMap = allPostData.data.reverse().map((data) => 
                     <div id='post-div' key={data._id}>
@@ -61,7 +84,7 @@ function Post({  }) {
                         <div id="buttons-post">
                             <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
                             <input type="button" value='Ver detalle' id={data._id} onClick={async ()=> {navigate(`/response/${data._id}`)}} />
-                            {userID == data.userID ? <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
+                            {userID == data.userID ? <input type="button" className='buttonDeletePost' value="Eliminar" id={data._id} onClick={sweetAlert} /> : <></>} {/* Ternario para que el dueño del post pueda eliminarlo, pero no visible para el resto de users */}
                         </div>
                     </div>
                 )
@@ -176,6 +199,7 @@ function Post({  }) {
             setAviso('No se puede dejar la respuesta vacia')
         }
     }
+
 
 
 

@@ -47,6 +47,7 @@ function NotificationFollow() {
                 )
                 setData(notiFollowerMap)
             }
+            setReboot(false)
         }
     }, [reboot])
 
@@ -75,8 +76,8 @@ function NotificationFollow() {
         const followDeleteMap = Promise.all( getAllNotiFollow.data.map( async (data) => {
             const followAllDelete = await notiFollowDelete(data._id)
         }))
+
         setReboot(true)
-        
     }
 
 

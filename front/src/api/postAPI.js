@@ -12,6 +12,13 @@ async function getPost() {
 }
 
 
+async function getPostScroll(skip, limit) {
+  let dato = await fetch(`${API_URL}/post/scroll?skip=${skip}&limit=${limit}`);
+  dato = await dato.json();
+  return (dato)
+}
+
+
 async function getpostByID(id) {
   let dato = await fetch(`${API_URL}/post/${id}`);
   dato = await dato.json();
@@ -125,6 +132,7 @@ async function postDelete(id) {
 
   export {
     getPost,
+    getPostScroll,
     getpostByID,
     getPostByProperty,
     postCreate,
