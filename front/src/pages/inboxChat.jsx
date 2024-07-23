@@ -26,10 +26,10 @@ function InboxChat() {
 
     
 
-    // Intervalo de tiempo para que se actualice cada 5 segundos por si hay nuevos mensajes
+    // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
     setInterval(() => {
-        getInbox()
-    }, 5000);    
+        setReboot(true)
+    }, 10000);    
 
 
 
@@ -65,9 +65,9 @@ function InboxChat() {
                 if (getNotiInboxReceivedFilter.length > 0) {
                     const notiInboxRemove = await notiInboxDelete(getNotiInboxReceivedFilter[0]._id)
                 }
+                setReboot(false)
             }
         }
-        setReboot(false)
     }, [reboot])
 
 

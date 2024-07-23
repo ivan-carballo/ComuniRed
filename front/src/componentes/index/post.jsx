@@ -8,22 +8,26 @@ import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
-import { getPost, postDelete } from "../../api/postAPI.js"
+import { getPost } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
 import { getResponseByProperty, responseDelete, responseCreate } from '../../api/responseAPI.js';
 import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
 import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
 import { ImageUpload } from '../../funciones/resizeIMG.js';
+import { ContextoCompartido  } from '../../funciones/context.jsx';
 
 
 
 // Componente para mostrar todos los posts de los usuarios, sin filtros de busqueda
-function Post() {
+function Post({  }) {
     const navigate = useNavigate()
     const userID = Cookies.get('id')
 
-    const [recarga, setRecarga] = useState(true)
+    const { valorCompartido } = useContext(ContextoCompartido);
+    const { setValorCompartido } = useContext(ContextoCompartido);
+
+    const [recarga, setRecarga] = useState(valorCompartido)
     const [data, setData] = useState('')
     const [response, setResponse] = useState('')
     const [aviso, setAviso] = useState()
@@ -33,7 +37,7 @@ function Post() {
   
     // UseEffect para traer todos los posts creados
     useEffect(() => {
-        if(recarga) {
+        if(valorCompartido) {
 
             allPost()
             async function allPost() {
@@ -63,9 +67,10 @@ function Post() {
                 )
                 setData(allPostMap)
                 setRecarga(false)
+                setValorCompartido(false)
             }
         }
-    }, [recarga]);
+    }, [valorCompartido]);
 
 
 
@@ -120,6 +125,7 @@ function Post() {
 
         const deletePostAPI = await postRemove(postID)
         setRecarga(true)
+        setValorCompartido(true)
     }
 
 
@@ -164,6 +170,7 @@ function Post() {
 
                     setResponse(null)
                     setRecarga(true)
+                    setValorCompartido(true)
                 }
         } else {
             setAviso('No se puede dejar la respuesta vacia')
@@ -175,48 +182,50 @@ function Post() {
 
 
     return (
-        <div id="post-body">
 
-            {/* Modal para poder enviar una respuesta */}
-            {response && 
-                <Modal isOpen={true}>
+            <div id="post-body">
 
-                    <div id="modalResponse-body">
+                {/* Modal para poder enviar una respuesta */}
+                {response && 
+                    <Modal isOpen={true}>
 
-                        <div id="modalResponse-form">
+                        <div id="modalResponse-body">
 
-                            <div id="modalResponse-form-header">
-                                <p>Responder a {response.username}</p>
+                            <div id="modalResponse-form">
+
+                                <div id="modalResponse-form-header">
+                                    <p>Responder a {response.username}</p>
+                                </div>
+
+                                <div id="modalResponse-form-response">
+                                    <textarea id='modalResponse-textarea' cols="35" rows="10" placeholder='Escriba su respuesta' />
+                                    {aviso}
+                                </div>
+
                             </div>
 
-                            <div id="modalResponse-form-response">
-                                <textarea id='modalResponse-textarea' cols="35" rows="10" placeholder='Escriba su respuesta' />
-                                {aviso}
+                            <div id="modalResponse-upload">
+                                <input type="file" name="file" id="file" />
+                            </div>
+
+                            <div id="modalResponse-buttons">
+                                <button onClick={async () => {setResponse(null)}}>Cerrar</button>
+                                <button id={response._id} onClick={responsePost}>Enviar respuesta</button>
                             </div>
 
                         </div>
 
-                        <div id="modalResponse-upload">
-                            <input type="file" name="file" id="file" />
-                        </div>
-
-                        <div id="modalResponse-buttons">
-                            <button onClick={async () => {setResponse(null)}}>Cerrar</button>
-                            <button id={response._id} onClick={responsePost}>Enviar respuesta</button>
-                        </div>
-
-                    </div>
-
-                </Modal>
-            }
+                    </Modal>
+                }
 
 
-            {/* Lista de post que viene del metodo map */}
-            <div id="listPost">
-                {data}
+                {/* Lista de post que viene del metodo map */}
+                <div id="listPost">
+                    {data}
+                </div>
             </div>
-        </div>
-    )
+
+        )
 }
 
 

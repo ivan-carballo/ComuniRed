@@ -23,7 +23,7 @@ function Response() {
 
     const [dataResponse, setDataResponse] = useState()
     const [reboot, setReboot] = useState(true)
-
+  
     const [username, setUsername] = useState()
     const [dateString, setDateString] = useState()
     const [postPrincipal, setPostPrincipal] = useState()
@@ -119,7 +119,6 @@ function Response() {
         }
 
         const responseRemove = await responseDelete(responseID)
-        
 
         setReboot(true)
     }
@@ -128,15 +127,18 @@ function Response() {
 
 
 
+
     return (
 
         <>
+
             <Navbar />
 
             <div id="response-body">
 
                 <div id="response-responseForm">
                     <ResponseForm id={id} />
+
                 </div>
 
                 <div id="response-postPrincipal">

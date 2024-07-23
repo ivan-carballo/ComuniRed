@@ -5,6 +5,7 @@ import { getpostByID } from "../api/postAPI";
 import { getUserByID } from "../api/userAPI";
 import { responseCreate } from "../api/responseAPI";
 import { ImageUpload } from "../funciones/resizeIMG";
+import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 
 import '../saas/response/responseForm.scss'
@@ -12,10 +13,12 @@ import '../saas/response/responseForm.scss'
 
 // Componente de un formulario para poder responder a post desde la pagina de detalle de post
 function ResponseForm({id}) {
+    const navigate = useNavigate()
     const userID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)
     const [userPost, setUserPost] = useState()
+
 
 
     // useEffect para mostrar la informacion del post desde el id que se ha mandado como argumento de la funcion principal
@@ -59,6 +62,7 @@ function ResponseForm({id}) {
         const responseSend = await responseCreate(responseArray)   
         responsePost.value = ''
         responseIMG.value = ''
+
         setReboot(true)
     }
 

@@ -6,16 +6,21 @@ import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
 import { ImageUpload } from '../../funciones/resizeIMG.js';
+import { ContextoCompartido  } from '../../funciones/context.jsx';
+
 
 
 // Componente de formulario para poder escribir nuevos posts
-function NewPost() {
+function NewPost({  }) {
     const [usernamePost, setUsernamePost] = useState('')
     const [userIMG, setUserIMG] = useState('')
     const [alert, setAlert] = useState()
 
+    const { setValorCompartido } = useContext(ContextoCompartido);
+
     const userID = Cookies.get('id')
     let username_data = ''
+
 
 
     // UseEffect a la carga del componente para traer los datos del usuario logueado y usarlos en el formulario
@@ -62,6 +67,8 @@ function NewPost() {
         const inputFileDel = document.getElementById('file')
         textareaDel.value = ''
         inputFileDel.value = ''
+
+        setValorCompartido(true)
     }
 
 

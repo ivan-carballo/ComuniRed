@@ -6,6 +6,7 @@ import { getPost, getPostByProperty, postDelete } from '../../api/postAPI.js'
 import { getResponseByProperty, responseDelete } from "../../api/responseAPI.js"
 import { getUserByID } from '../../api/userAPI.js'
 import { postRemove } from "../../funciones/postDelete.js";
+import Swal from "sweetalert2";
 
 import '../../saas/perfil/userPost.scss'
 

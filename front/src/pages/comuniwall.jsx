@@ -1,7 +1,8 @@
-import React from "react";
-import { Navbar } from "../componentes/navbar.jsx";
-import { NewPost } from "../componentes/index/newPost.jsx";
+import React, { useState } from "react"
+import { Navbar } from "../componentes/navbar.jsx"
+import { NewPost } from "../componentes/index/newPost.jsx"
 import { Post } from "../componentes/index/post.jsx"
+import { ProveedorContexto } from "../funciones/context.jsx"
 
 
 
@@ -11,14 +12,17 @@ import { Post } from "../componentes/index/post.jsx"
 function ComuniWall() {
 
 
+
     return (
-        <>
+
+        <ProveedorContexto>
+        
             <Navbar />
 
             <NewPost />
             <Post />
-
-        </>
+        
+        </ProveedorContexto>
             
     )
 }
