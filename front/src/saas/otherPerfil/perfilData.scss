@@ -19,7 +19,7 @@
         align-items: center;
 
         & > img {
-            width: 90px;
+            width: 65px;
             border-radius: 50%;
             border: 2px solid $background-border;
         }
@@ -39,13 +39,13 @@
                 width: 100%;
 
                 & > #perfilData-user {
-                    font-size: 1.8rem;
-                    font-weight: 750;
+                    font-size: 1.6rem;
+                    font-weight: 600;
                     margin: 0;
                 }
 
                 & > #perfilData-inbox {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     cursor: pointer;
                 }
             }
@@ -56,6 +56,12 @@
     
             & > #perfilData-date {
                 margin-bottom: 5px;
+            }
+
+            & > #perfilData-post {
+                font-size: 0.75rem;
+                width: 100%;
+                text-align: center;
             }
         }
     }

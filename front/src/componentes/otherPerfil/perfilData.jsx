@@ -33,6 +33,8 @@ function PerfilData({id}) {
     const [data, setData] = useState()
     const [aviso, setAviso] = useState()
     const [follow, setFollow] = useState()
+    const [userFollow, setUserFollow] = useState()
+    const [userFollower, setUserFollower] = useState()
 
 
 
@@ -57,6 +59,13 @@ function PerfilData({id}) {
             setPerfilIMG(getOtherUser.img)
             setDate(date)
             setPost(await getPostByUser.data.length)
+
+            // Obtener datos de los follow y followers
+            const getFollow = await getFollowByProperty('userID', userCurrentID)
+            const getFollower = await getFollowerByProperty('userID', userCurrentID)
+
+            setUserFollow(getFollow.data[0].follow.length)
+            setUserFollower(getFollower.data[0].follower.length)
         }
     },[])
 
@@ -325,7 +334,7 @@ function PerfilData({id}) {
                         { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followGestion}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
-                    <p id='perfilData-post'>Nº post: {post}</p>
+                    <p id='perfilData-post'>Post: {post} - Siguiendo: {userFollow} - Seguidores: {userFollower}</p>
                 </div>
 
             </div>
