@@ -1,74 +1,32 @@
 @import '../color.scss';
 
 
-#notification-readAll {
-    margin-top: 50px;
+#notification-body {
+    margin-top: 45px;
     text-align: center;
-    margin-bottom: 15px;
-    border-bottom: solid 2px green;
-
-    & > input {
-        border-radius: 15px;
-        border: 0;
-        cursor: pointer;
-        padding: 3px 12px;
-        font-weight: 600;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        margin-bottom: 10px;
-    }
-}
-
-
-
-#notification-a {
-    text-decoration: none;
-}
-
-
-
-#notification-div {
-    background-color: $background-divs;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 25px;
-    padding: 3px 10px;
-    margin: 5px 0;
-    cursor: pointer;
-
-    & > #notification-div-header {
+    margin-bottom: 10px;
+    
+    #notification-buttons {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
+        justify-content: space-evenly;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: solid 2px green;
+        padding-bottom: 5px;
 
-        & > p {
-            margin: 0;
+    
+        & > input {
+            cursor: pointer;
+            border-radius: 15px;
+            padding: 5px 15px;
+            border: 0;
+            font-size: 0.9rem;
+            font-weight: 650;
         }
-
-        & > #notification-p-username {
-            font-weight: 600;
-            letter-spacing: 2px;
-            font-size: 1.25rem;
+    
+        & > #active {
+            background-color: $button-active;
+            color: beige;
         }
-    }
-
-
-    & > #notification-p-post {
-        background-color: $background-text;
-        border-radius: 15px;
-        padding: 3px 10px;
-        margin: 10px 0;
-        white-space: pre-wrap;
-    }
-
-    & > #notification-img {
-        border-radius: 25px;
-        width: 100%;
-        margin-top: -5px;
-        margin-bottom: 3px;
-        border: 2px solid $background-border;
     }
 }
