@@ -59,14 +59,21 @@ function UserStadistic() {
 
     return (
         <div id="userStadistic-body">
-            <div id="userStadistic-header">
-                <p id='userStadistic-welcome'>Bienvenido {user}</p>
-                <img id='userStadistic-img' src={userIMG} />
+
+            <div id="userStadistic-container">
+
+                <div id="userStadistic-header">
+                    <p id='userStadistic-welcome'>Bienvenido {user}</p>
+                    <img id='userStadistic-img' src={userIMG} />
+                </div>
+
+                <div id="userStadistic-stadistic">
+                    <p>Posts: {userPost} <>&nbsp;&nbsp;&nbsp;</> Respuestas: {userResponse}</p>
+                    <p>Siguiendo: {userFollow} <>&nbsp;&nbsp;&nbsp;</> Seguidores: {userFollower}</p>
+                </div>
+
             </div>
-            <div id="userStadistic-stadistic">
-                <p>Posts: {userPost} - Respuestas: {userResponse}</p>
-                <p>Siguiendo: {userFollow} - Seguidores: {userFollower}</p>
-            </div>
+
         </div>
     )
 }
