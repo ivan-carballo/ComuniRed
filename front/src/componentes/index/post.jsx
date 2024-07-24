@@ -45,12 +45,9 @@ function Post({  }) {
         if (newPosts.data.length < 1) {
             return
         }
-        //console.log('New posts:', newPosts);
 
         //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip + 15);
-
-        //console.log('All posts received: ', postList);
 
         setValorCompartido(true);
 
@@ -59,7 +56,7 @@ function Post({  }) {
                 top: 0,
                 behavior: 'smooth'
             });   
-        }, 100);
+        }, 125);
 
     }
 
@@ -71,12 +68,9 @@ function Post({  }) {
         if (newPosts.data.length < 1 || skip < 15) {
             return
         }
-        //console.log('New posts:', newPosts);
 
         //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip - 15);
-
-        //console.log('All posts received: ', postList);
 
         setValorCompartido(true);
 
@@ -85,7 +79,7 @@ function Post({  }) {
                 top: 0,
                 behavior: 'smooth'
             });   
-        }, 100);
+        }, 125);
     }
     
 
@@ -103,9 +97,6 @@ function Post({  }) {
                 if (allPostData.data.length < 1) {
                     return
                 }
-
-                setPostList()
-                //setPostList([...postList, ...allPostData.data])
 
 
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla

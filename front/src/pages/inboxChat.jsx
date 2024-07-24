@@ -22,6 +22,7 @@ function InboxChat() {
     const [reboot, setReboot] = useState(true)
     const [data, setData] = useState()
     const [userReceived, setUserReceived] = useState()
+    const [final, setFinal] = useState(15)
 
 
     
@@ -29,7 +30,16 @@ function InboxChat() {
     // Intervalo de tiempo para que se actualice cada 10 segundos por si hay nuevos mensajes
     setInterval(() => {
         setReboot(true)
-    }, 10000);    
+    }, 1000 * 10);
+    
+    
+
+    window.addEventListener('scroll', () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 25) {
+            setFinal(prevFinal => prevFinal + 15)
+            setReboot(true)
+        }
+    })
 
 
 
@@ -45,9 +55,11 @@ function InboxChat() {
                 // Guardar en un estado el ID del usuario que recibe los mensajes
                 getInboxByUser.data.userID1 === userCurrentID ? setUserReceived(getInboxByUser.data.userID2) : setUserReceived(getInboxByUser.data.userID1)
 
+                let segmentInbox = getInboxByUser.data.text.reverse().slice(0, final)
+
                 // Map para mostrar en pantalla los mensajes ordenados por fecha
                 // Operadores ternarios para poder visualizar que mensaje pertenece a cada usuario
-                const inboxMap = await getInboxByUser.data.text.reverse().map((data) => 
+                const inboxMap = await segmentInbox.map((data) => 
                     <div id="inboxChat-div" key={data.date} className={data.userID != userCurrentID ? "opposite" : "current"}>
                         <p className={data.userID != userCurrentID ? "start" : "end"} id='inboxChat-date'>{data.dateString}</p>
                         <p className={data.userID != userCurrentID ? "start" : "end"} id='inboxChat-text'>{data.text}</p>
