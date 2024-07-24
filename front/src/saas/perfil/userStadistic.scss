@@ -33,12 +33,14 @@
 
     & > #userStadistic-stadistic {
         display: flex;
-        flex-direction: column;
+        flex-direction: center;
+        margin-left: 43px;
         align-items: center;
-        margin-top: 5px;
+        margin-top: 15px;
+        border:solid 1px red; 
 
         & > p {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             margin: 0;
             letter-spacing: 2px;
         }
