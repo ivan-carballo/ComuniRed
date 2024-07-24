@@ -53,10 +53,14 @@ function Post({  }) {
         //console.log('All posts received: ', postList);
 
         setValorCompartido(true);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });   
+        }, 100);
+
     }
 
 
@@ -75,10 +79,13 @@ function Post({  }) {
         //console.log('All posts received: ', postList);
 
         setValorCompartido(true);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });   
+        }, 100);
     }
     
 
@@ -284,8 +291,8 @@ function Post({  }) {
                 </div>
 
                 <div id="listPost-button">
-                    <input type="button" value="Atras" onClick={loadingPost} />
-                    <input type="button" value="Adelante" onClick={loadingPostMinus} />
+                    <input type="button" value="<- Mas antiguo" onClick={loadingPost} />
+                    <input type="button" value="Mas actual ->" onClick={loadingPostMinus} />
                 </div>
             </div>
 
