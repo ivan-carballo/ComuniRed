@@ -34,7 +34,7 @@ function AllResponseByUser () {
                         <p id='responseMap-date'>{data.dateString}</p>
                         { data.post.length > 1 ? <p id='responseMap-response'>{data.post}</p> : <></> }
                         { data.img != undefined && data.img != null ? <img id='responseMap-img' src={data.img} /> : <></> }
-                        <input type="button" value="Eliminar respuesta" id={data._id} onClick={sweetAlert} />
+                        <input type="button" className="deletePost" value="Eliminar respuesta" id={data._id} onClick={sweetAlert} />
                     </div>
                 )
                 setShow(responseMap)

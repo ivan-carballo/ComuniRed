@@ -166,3 +166,26 @@
         }
     }
 }
+
+
+#listPost-button {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 2px solid $background-border;
+    padding-top: 5px;
+    margin-bottom: 15px;
+
+    & > input {
+        border: 2px solid $background-border;
+        background-color: $chat-currentUser;
+        border-radius: 15px;
+        padding: 5px 15px;
+        font-size: 1.15rem;
+        font-style: 600;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $background-chat;
+        }
+    }
+}

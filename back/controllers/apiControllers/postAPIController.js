@@ -10,16 +10,13 @@ app.use(cors())
 
 const getAllScroll = async(req,res)=>{
     try {
-        const skip = parseInt(req.query.skip) || 0; // inicial
-        const limit = parseInt(req.query.limit) || 15; // Cantidad de mensajes a obtener
+        const skip = parseInt(req.query.skip) || 0
+        const limit = parseInt(req.query.limit) || 15
 
-        // Obtener todos los mensajes
-        const propiedad = await postController.getAll();
+        const propiedad = await postController.getAll()
 
-        // Aplica la paginación
-        const paginatedMessages = propiedad.reverse().slice(skip, skip + limit);
+        const paginatedMessages = propiedad.reverse().slice(skip, skip + limit)
 
-        // respuesta paginada
         res.json({ data: paginatedMessages });
     } catch (error) {
         console.error('Error fetching messages:', error);

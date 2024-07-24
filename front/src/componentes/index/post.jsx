@@ -40,13 +40,11 @@ function Post({  }) {
 
 
     async function loadingPost(e) {
-
         const newPosts = await getPostScroll(skip + 15, 15);
 
         if (newPosts.data.length < 1) {
             return
         }
-
         //console.log('New posts:', newPosts);
 
         //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
@@ -55,10 +53,31 @@ function Post({  }) {
         //console.log('All posts received: ', postList);
 
         setValorCompartido(true);
-
         window.scrollTo({
-            //top: 0,
-            //behavior: 'smooth'
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+
+
+    async function loadingPostMinus(e) {
+        const newPosts = await getPostScroll(skip - 15, 15);
+
+        if (newPosts.data.length < 1 || skip < 15) {
+            return
+        }
+        //console.log('New posts:', newPosts);
+
+        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
+        setSkip(skip - 15);
+
+        //console.log('All posts received: ', postList);
+
+        setValorCompartido(true);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
     }
     
@@ -265,7 +284,8 @@ function Post({  }) {
                 </div>
 
                 <div id="listPost-button">
-                    <input type="button" value="Cargar mas" onClick={loadingPost} />
+                    <input type="button" value="Atras" onClick={loadingPost} />
+                    <input type="button" value="Adelante" onClick={loadingPostMinus} />
                 </div>
             </div>
 

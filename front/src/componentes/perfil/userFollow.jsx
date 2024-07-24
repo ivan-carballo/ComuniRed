@@ -52,7 +52,7 @@ function AllFollowByUser() {
                         <div id="follow-div" key={data._id}>
                             <img src={data.img} />
                             <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                            <input type="button" className="follow" value="Dejar de seguir" id={data._id} onClick={sweetAlert} />
+                            <input type="button" className="deleteFollow" value="Dejar de seguir" id={data._id} onClick={sweetAlert} />
                         </div>
                     )
                     setShowFollow(followMap)
@@ -72,7 +72,7 @@ function AllFollowByUser() {
                         <div id="follow-div" key={data._id}>
                             <img src={data.img} />
                             <p id='follow-p' onClick={async () => { navigate(`/user/${data._id}`) }}>{data.username}</p>
-                            <input type="button" className="follower" value={ getArrayFollow.includes(data._id) ? 'Dejar de seguir' : 'Seguir' } id={data._id} onClick={followResolve} />
+                            <input type="button" className={ getArrayFollow.includes(data._id) ? 'deleteFollow' : 'follow' } value={ getArrayFollow.includes(data._id) ? 'Dejar de seguir' : 'Seguir' } id={data._id} onClick={followResolve} />
                         </div>
                     )
                     setShowFollower(followerMap)

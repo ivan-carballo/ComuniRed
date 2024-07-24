@@ -53,6 +53,15 @@
                 border-radius: 15px;
                 padding: 3px 10px;
             }
+
+            & > .deletePost {
+                background-color: $background-red;
+
+                &:hover {
+                    background-color: red;
+                    color: white;
+                }
+            }
         }
     }
 }
@@ -105,6 +114,15 @@
             border-radius: 15px;
             padding: 2px 10px;
             margin: 10px 0;
+        }
+
+        & > .deletePost {
+            background-color: $background-red;
+
+            &:hover {
+                background-color: red;
+                color: white;
+            }
         }
     }
 }
@@ -176,6 +194,25 @@
                 border: 0;
                 border-radius: 15px;
                 padding: 3px 8px;
+            }
+
+            & > .deleteFollow {
+                background-color: $background-red;
+    
+                &:hover {
+                    background-color: red;
+                    color: white;
+                }
+            }
+
+            & > .follow {
+                background-color: $chat-currentUser;
+                color: black;
+    
+                &:hover {
+                    background-color: $navbar-icons-active;
+                    color: white;
+                }
             }
         }
     }

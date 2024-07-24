@@ -49,7 +49,7 @@ function AllPostByUser () {
                         { data.img != undefined && data.img != null ? <img id='postMap-img' src={data.img} /> : <></> }
                         <div id="postMap-buttons">
                             <input type="button" value={`Ver respuestas (${data.responses})`} id={data._id} onClick={postShow} />
-                            <input type="button" value="Eliminar" id={data._id} onClick={sweetAlert} />
+                            <input type="button" className="deletePost" value="Eliminar" id={data._id} onClick={sweetAlert} />
                         </div>
                     </div>
                 )

@@ -13,6 +13,7 @@ const getAll = async(req,res)=>{
     res.json({data:propiedad})
 }
 
+
 const getById = async (req,res) =>{
     const id = req.params.id
     const propiedad = await inboxController.getById(id);
