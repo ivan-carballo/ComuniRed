@@ -28,5 +28,9 @@
             background-color: $button-active;
             color: beige;
         }
+
+        & > #notification {
+            background-color: $background-red;
+        }
     }
 }

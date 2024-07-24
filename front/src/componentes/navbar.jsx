@@ -11,6 +11,7 @@ import { obtenerToken } from "../funciones/token.js";
 
 
 
+
 // Componente de navbar principal
 const Navbar = () => {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ const Navbar = () => {
     const [notification, setNotification] = useState(false)
     const [reboot, setReboot] = useState(true)
     const [noti, setNoti] = useState('link')
+    const [numberNoti, setNumberNoti] = useState(0)
+
 
 
 
@@ -27,7 +30,6 @@ const Navbar = () => {
         if (userCurrentID == null) {
             logout()
         }
-
     }, [])
 
 
@@ -73,12 +75,13 @@ const Navbar = () => {
     // Cada 10 segundos se carga el useEffect para comprobar si aun existen las credenciales en las Cookies
     setInterval(() => {
         setReboot(true)
-    }, 10000);
+    }, 5000);
 
 
 
 
     // useEffect para avisar cuando hay notificaciones de respuestas, de mensajes privados y de nuevos seguidores
+    // Tambien se saca el numero total de notificaciones para poner al lado del icono
     useEffect(() => {
         if(reboot) {
 
@@ -86,7 +89,9 @@ const Navbar = () => {
             async function alertNotification() {
                 const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userCurrentID)
                 const getNotiFollowByUser = await getNotiFollowByProperty('followerID', userCurrentID)
-                getNotificationByUser.data.length > 0 || getNotiFollowByUser.data.length > 0 ? setNotification(true) : setNotification(false)            
+                getNotificationByUser.data.length > 0 || getNotiFollowByUser.data.length > 0 ? setNotification(true) : setNotification(false)  
+                
+                setNumberNoti(getNotificationByUser.data.length + getNotiFollowByUser.data.length)
             }
 
             alertInbox()
@@ -112,7 +117,7 @@ const Navbar = () => {
                         <NavLink to="/comuniwall" id='comuniwall' title='ComuniWall' className='link'><FaHome /></NavLink>
                         <NavLink to="/user" id='user' title='Perfil' className='link'><FaUserCircle /></NavLink>
                         <NavLink to="/inbox" id="inbox" title="inbox" className={noti}><FaInbox /></NavLink>
-                        {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell /></NavLink> : <></>} {/* Operador ternario para que el icono de las notificaciones de respuestas solo aparezca si existen notificaciones */}
+                        {notification ? <NavLink to="/notification" id='notifications' title='notificacions' className='notification'><FaBell />{numberNoti}</NavLink> : <></>} {/* Operador ternario para que el icono de las notificaciones de respuestas solo aparezca si existen notificaciones */}
                         <NavLink to="/search" id='search' title='search' className='link'><FaSearch /></NavLink>
                         <NavLink to="/options" id='options' title='options' className='link'><FaCog /></NavLink>
                         <NavLink to="/" className='link' title='Cerrar sesion' onClick={logout}><FaUserSlash/></NavLink>

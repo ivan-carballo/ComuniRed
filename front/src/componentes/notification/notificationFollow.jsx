@@ -77,6 +77,7 @@ function NotificationFollow() {
             const followAllDelete = await notiFollowDelete(data._id)
         }))
 
+        setData(null)
         setReboot(true)
     }
 

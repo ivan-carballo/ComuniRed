@@ -9,6 +9,8 @@ import { NotificationFollow } from "../componentes/notification/notificationFoll
 
 
 import '../saas/notification/notification.scss'
+import { getNotificationByProperty } from "../api/notificationAPI.js";
+import { getNotiFollowByProperty } from "../api/notiFollowAPI.js";
 
 
 // Pagina para ver todas las notificaciones de respuestas a post propios y follows
@@ -20,6 +22,32 @@ function Notification() {
     const [show, setShow] = useState(<NotificationResponse />)
     const [buttonFollow, setButtonFollow] = useState('')
     const [buttonResponse, setButtonResponse] = useState('active')
+    const [reboot, setReboot] = useState(true)
+
+
+
+    // useEffect para detectar de donde son las notificaciones y poner el boton en rojo
+    useEffect(() => {
+        if (reboot) {
+
+            getNotiAll()
+            async function getNotiAll() {
+
+                const getNotiResponse = await getNotificationByProperty('userPrincipalID', userCurrentID)
+                const getNotiFollow = await getNotiFollowByProperty('followerID', userCurrentID)
+
+                if (getNotiResponse.data.length > 0) {
+                    setButtonResponse('notification')
+                }
+
+                if (getNotiFollow.data.length > 0) {
+                    setButtonFollow('notification')
+                }
+            }
+
+            setReboot(false)
+        }
+    }, [reboot])
 
 
 
@@ -32,10 +60,12 @@ function Notification() {
             setShow(<NotificationResponse />)
             setButtonResponse('active')
             setButtonFollow('')
+            setReboot(true)
         } else if (buttonValue === 'Seguidores') {
             setShow(<NotificationFollow />)
             setButtonResponse('')
             setButtonFollow('active')
+            setReboot(true)
         }
     }
 
