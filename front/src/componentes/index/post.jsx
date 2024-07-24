@@ -32,24 +32,36 @@ function Post({  }) {
     const [response, setResponse] = useState('')
     const [aviso, setAviso] = useState()
 
-/*     const [skip, setSkip] = useState(0)
-    const [limit, setLimit] = useState(15)
-    const [postList, setPostList] = useState([]) */
+    const [skip, setSkip] = useState(0)
+    const [postList, setPostList] = useState([])
+
+    let allPost = []
 
 
 
+    async function loadingPost(e) {
 
-    // Codigo para detectar cuando se ha llegado al final de la pagina al hacer scroll
-/*     window.addEventListener('scroll', async () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 225) {
-            setSkip(skip + 15)
-            setLimit(limit + 15)
-            //setValorCompartido(true)
+        const newPosts = await getPostScroll(skip + 15, 15);
 
-            const allPostData = await getPostScroll(skip, limit)
-            postList = [...postList, ...allPostData.data]
+        if (newPosts.data.length < 1) {
+            return
+        }
 
-        }}) */
+        //console.log('New posts:', newPosts);
+
+        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
+        setSkip(skip + 15);
+
+        //console.log('All posts received: ', postList);
+
+        setValorCompartido(true);
+
+        window.scrollTo({
+            //top: 0,
+            //behavior: 'smooth'
+        });
+    }
+    
 
 
 
@@ -60,14 +72,18 @@ function Post({  }) {
 
             allPost()
             async function allPost() {
-                //const allPostData = await getPostScroll(skip, limit)
-                const allPostData = await getPost()
-                
-                //setPostList(events => [...postList, ...allPostData.data])
-                
+                const allPostData = await getPostScroll(skip, 15)
+
+                if (allPostData.data.length < 1) {
+                    return
+                }
+
+                setPostList()
+                //setPostList([...postList, ...allPostData.data])
+
 
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
-                const allPostMap = allPostData.data.reverse().map((data) => 
+                const allPostMap = allPostData.data.map((data) => 
                     <div id='post-div' key={data._id}>
                         <div id="post-header">
                             <img src={data.userIMG} />
@@ -246,6 +262,10 @@ function Post({  }) {
                 {/* Lista de post que viene del metodo map */}
                 <div id="listPost">
                     {data}
+                </div>
+
+                <div id="listPost-button">
+                    <input type="button" value="Cargar mas" onClick={loadingPost} />
                 </div>
             </div>
 
