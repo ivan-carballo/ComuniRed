@@ -1,15 +1,12 @@
 import dotenv from 'dotenv';
-
+import Mailjet from 'node-mailjet';
 dotenv.config();
-
 
 // https://app.mailjet.com/account/apikeys
 const apiKey = '4f9935f315b5d9cdb36645e5c31a0f7b'
 const secretKey = 'e18f8d62f5f50f6326d516590f0c45bb'
 
 
-
-const mailjet = require ('node-mailjet')
 .connect('****************************1234', '****************************abcd')
 const request = mailjet
 .post("send", {'version': 'v3.1'})
