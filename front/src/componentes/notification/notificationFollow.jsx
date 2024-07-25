@@ -36,12 +36,11 @@ function NotificationFollow() {
 
 
                 const notiFollowerMap = getNotiFollowerByUser.data.reverse().map((data) => 
-                    <div id="notiFollowMap-div" key={data._id}>
+                    <div id="notiFollowMap-div" key={data._id} onClick={checkFollow}>
                         <p id="notiFollowMap-date">{data.dateString}</p>
                         <div id="notiFollowMap-data">
                             <img id="notiFollowMap-data-img" src={data.img}></img>
-                            <p id="notiFollowMap-data-username" value={data.followID} onClick={checkFollow}>{data.username}</p>
-                            {/* <input type="button" value='dsf' id="notiFollowMap-data-button" /> */}
+                            <p id="notiFollowMap-data-username" value={data.followID}>{data.username}</p>
                         </div>
                     </div>
                 )

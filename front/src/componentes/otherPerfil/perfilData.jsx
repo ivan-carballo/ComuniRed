@@ -62,8 +62,8 @@ function PerfilData({id}) {
                 setPost(await getPostByUser.data.length)
 
                 // Obtener datos de los follow y followers
-                const getFollow = await getFollowByProperty('userID', userCurrentID)
-                const getFollower = await getFollowerByProperty('userID', userCurrentID)
+                const getFollow = await getFollowByProperty('userID', id)
+                const getFollower = await getFollowerByProperty('userID', id)
 
                 getFollow.data.length > 0 ? setUserFollow(getFollow.data[0].follow.length) : setUserFollow(0)
                 getFollower.data.length > 0 ? setUserFollower(getFollower.data[0].follower.length) : setUserFollower(0)
@@ -324,7 +324,7 @@ function PerfilData({id}) {
                         { follow ? <FaUserMinus id='perfilData-inbox' title='Dejar de seguir' onClick={sweetAlert}/> : <FaUserPlus id='perfilData-inbox' title='Seguir' onClick={followGestion}/> }
                     </div>
                     <p id='perfilData-date'>Registrado: {date}</p>
-                    <p id='perfilData-post'>Post: {post} - Siguiendo: {userFollower} - Seguidores: {userFollow}</p>
+                    <p id='perfilData-post'>Post: {post} - Siguiendo: {userFollow} - Seguidores: {userFollower}</p>
                 </div>
 
             </div>
