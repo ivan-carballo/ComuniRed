@@ -7,10 +7,8 @@ const apiKey = '4f9935f315b5d9cdb36645e5c31a0f7b'
 const secretKey = 'e18f8d62f5f50f6326d516590f0c45bb'
 
 
-const mailjet = require('node-mailjet').connect(
-  apiKey,
-  secretKey
-)
+const mailjet = new Mailjet({apiKey: apiKey, apiSecret: secretKey})
+
 const request = mailjet.post('send', { version: 'v3.1' }).request({
   Messages: [
     {
@@ -33,8 +31,8 @@ const request = mailjet.post('send', { version: 'v3.1' }).request({
 })
 request
   .then(result => {
-    console.log(result.body)
+    console.log('result.body', result.body)
   })
   .catch(err => {
-    console.log(err.statusCode)
+    console.log('err.statusCode', err.statusCode)
   })
