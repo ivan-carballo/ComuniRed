@@ -1,26 +1,3 @@
-import nodemailer from 'nodemailer'
-import dotenv from 'dotenv';
-import { Resend } from 'resend';
-
-dotenv.config();
-
-
-
-
-const resend = new Resend('re_123456789');
-
-(async function () {
-  const { data, error } = await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
-    to: ['delivered@resend.dev'],
-    subject: 'Hello World',
-    html: '<strong>It works!</strong>',
-  });
-
-  
-  if (error) {
-    return console.error({ error });
-  }
-
-  console.log({ data });
-})();
+// https://app.mailjet.com/account/apikeys
+const apiKey = '4f9935f315b5d9cdb36645e5c31a0f7b'
+const secretKey = 'e18f8d62f5f50f6326d516590f0c45bb'
