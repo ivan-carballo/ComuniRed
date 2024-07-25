@@ -4,6 +4,7 @@ import { NewPost } from "../componentes/index/newPost.jsx"
 import { Post } from "../componentes/index/post.jsx"
 import { ProveedorContexto } from "../funciones/context.jsx"
 
+import '../saas/index/comuniwall.scss'
 
 
 
@@ -15,14 +16,22 @@ function ComuniWall() {
 
     return (
 
-        <ProveedorContexto>
-        
-            <Navbar />
+        <div id="index-body">
 
-            <NewPost />
-            <Post />
-        
-        </ProveedorContexto>
+            <ProveedorContexto>
+            
+                <Navbar />
+
+                <div id="index-query">
+
+                    <NewPost />
+                    <Post />
+
+                </div>
+            
+            </ProveedorContexto>
+
+        </div>
             
     )
 }

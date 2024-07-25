@@ -16,7 +16,7 @@ function Options() {
             <Navbar />
 
             <div id="options-body">            
-                <h1 id='rotulo'>Opciones de usuario</h1>
+                <h2 id='rotulo'>Opciones de usuario</h2>
                 <UserData />
                 <UserModificar />
 

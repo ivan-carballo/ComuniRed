@@ -68,8 +68,8 @@ function UserStadistic() {
                 </div>
 
                 <div id="userStadistic-stadistic">
-                    <p>Posts: {userPost} <>&nbsp;&nbsp;&nbsp;</> Respuestas: {userResponse}</p>
-                    <p>Siguiendo: {userFollow} <>&nbsp;&nbsp;&nbsp;</> Seguidores: {userFollower}</p>
+                    <p>Posts: {userPost} <>&nbsp;&nbsp;</> Respuestas: {userResponse}</p>
+                    <p>Siguiendo: {userFollow} <>&nbsp;&nbsp;</> Seguidores: {userFollower}</p>
                 </div>
 
             </div>

@@ -67,7 +67,7 @@ function Post({  }) {
 
         if (newPosts.data.length < 1 || skip < 15) {
             return
-        }
+        } 
 
         //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip - 15);
@@ -184,6 +184,7 @@ function Post({  }) {
         setValorCompartido(true)
     }
 
+    
 
 
     // Funcion para responder a un post, a esta funcion se accede desde el modal

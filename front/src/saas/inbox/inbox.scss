@@ -3,40 +3,52 @@
 
 #inbox-body {
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     & > #inbox-header {
         text-align: center;
     }
 
-    & > #chat-div {
-        border: solid $background-border 2px;
-        border-radius: 25px;
-        padding: 5px 20px;
-        margin: 5px;
+    & > #inbox-chat-responsive {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        cursor: pointer;
+        justify-content: center;
+        max-width: 600px;
+        width: 100%;
 
-        & > img {
-            width: 50px;
-            border-radius: 50%;
-            border: solid 2px $background-border;
+        & > #chat-div {
+            border: solid $background-border 2px;
+            border-radius: 25px;
+            padding: 5px 20px;
+            margin: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            min-width: 0;
+
+            & > img {
+                width: 50px;
+                border-radius: 50%;
+                border: solid 2px $background-border;
+            }
+
+            & > p {
+                font-size: 1.5rem;
+                margin: 0;
+                font-weight: 600;
+            }
         }
 
-        & > p {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: 600;
+        & > .notRead {
+            background-color: $background-red;
         }
-    }
-
-    & > .notRead {
-        background-color: $background-red;
-    }
-
-    & > .read {
-        background-color: $background-divs;
+    
+        & > .read {
+            background-color: $background-divs;
+        }
     }
 }
 

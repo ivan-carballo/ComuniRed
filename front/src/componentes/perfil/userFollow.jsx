@@ -184,12 +184,16 @@ function AllFollowByUser() {
             <div id="followByUser-body">
 
                 <div id="followByUser-buttons">
-                    <input type="button" value="Siguiendo" id={buttonFollow} onClick={buttonShow} />
-                    <input type="button" value="Seguidores" id={buttonFollower} onClick={buttonShow} />
+                    <div id="followByUser-buttons-responsive">
+                        <input type="button" value="Siguiendo" id={buttonFollow} onClick={buttonShow} />
+                        <input type="button" value="Seguidores" id={buttonFollower} onClick={buttonShow} />
+                    </div>
                 </div>
 
                 <div id="followByUser-data">
-                    {show}
+                    <div id="followByUser-data-responsive">
+                        {show}
+                    </div>
                 </div>
                
             </div>

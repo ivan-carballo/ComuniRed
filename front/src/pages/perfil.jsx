@@ -32,10 +32,14 @@ function Perfil() {
             <Navbar />
         
             <div id="perfil-body">
+
+                <div id="perfil-responsive">
                 
-                <PerfilData id={id} />
-                
-                <OtherPost id={id} />
+                    <PerfilData id={id} />
+                    
+                    <OtherPost id={id} />
+
+                </div>
 
             </div>
         </>

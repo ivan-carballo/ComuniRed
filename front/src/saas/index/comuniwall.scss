@@ -1,2 +1,13 @@
 @import '../color.scss';
 
+
+
+#index-body {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    & > #index-query{
+        width: 1000px;
+    }
+}

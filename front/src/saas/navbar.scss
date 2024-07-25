@@ -7,11 +7,17 @@
     width: 100%;
     background-color: $background;
     border-bottom: 2px solid green;
+    display: flex;
+    justify-content: center;
 
     & > #navbar-links {
         margin-top: 8px;
         display: flex;
         justify-content: space-evenly;
+        width: 100%;
+        max-width: 600px;
+        margin-left: 0;
+        margin-right: 0;
 
         & > .link {
             color: $navbar-icons;
@@ -39,6 +45,20 @@
                 color: red
             }
 
+        }
+    }
+}
+
+
+@media (max-width: 300px) {
+    #navbar-global {
+    
+        & > #navbar-links {
+
+            & > .link, .notification {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
         }
     }
 }

@@ -27,18 +27,24 @@ function UserData() {
  
 
     return (
+
         <div id="userData-body">
 
-            <div id="userData-img">
-                <img src={data.img} />
-            </div>
-            
-            <div id="userData-data">
-                <p>Nombre de usuario: {data.username}</p>
-                <p>Email: {data.email}</p>
+            <div id="userData-responsive">
+
+                <div id="userData-img">
+                    <img src={data.img} />
+                </div>
+                
+                <div id="userData-data">
+                    <p>Nombre de usuario: {data.username}</p>
+                    <p>Email: {data.email}</p>
+                </div>
+
             </div>
 
         </div>
+
     )
 }
 

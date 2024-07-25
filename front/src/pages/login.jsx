@@ -32,7 +32,8 @@ function Login() {
 
 
     return (
-        <>
+        <div id='login-query'>
+
             <div id='login-body'>
                 <h2>¡Bienvenid@ a ComuniRed!</h2>
 
@@ -48,10 +49,9 @@ function Login() {
                 <div id="forms">
                     {form}
                 </div>
-
             </div>
 
-        </>
+        </div>
     )
 }
 

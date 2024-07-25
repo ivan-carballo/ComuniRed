@@ -8,15 +8,18 @@
     align-items: center;
     border-bottom: solid 2px green;
     padding-bottom: 6px;
+    width: 100%;
 
     & > #userStadistic-container {
         width: 16rem;
         margin-top: 5px;
+        width: 85%;
+        max-width: 800px;
 
 
         & > #userStadistic-header {
             display: flex;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
             width: 100%;
             margin: -20px 0;
@@ -40,7 +43,7 @@
             display: flex;
             flex-direction: column;
             flex-direction: center;
-            align-items: start;
+            align-items: center;
             margin-top: 15px;
 
             & > p {
@@ -49,5 +52,27 @@
                 letter-spacing: 2px;
             }
         }
+    }
+}
+
+
+@media (max-width: 250px) {
+    #userStadistic-header {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+
+        & > #userStadistic-img {
+            margin-top: 15px;
+            margin-bottom: -20px;
+        }
+
+        & > #userStadistic-welcome {
+            text-align: center;
+        }
+    }
+
+    #userStadistic-stadistic {
+        text-align: center;
     }
 }

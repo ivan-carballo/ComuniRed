@@ -105,7 +105,9 @@ function Inbox() {
 
             <div id="inbox-body">
                 <h3 id='inbox-header'>{header}</h3>
-                {data}
+                <div id='inbox-chat-responsive'>
+                    {data}
+                </div>
             </div>
         
         </>

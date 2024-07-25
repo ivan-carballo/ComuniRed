@@ -57,9 +57,11 @@ function UserPerfil() {
                 <UserStadistic />
 
             <div id="postByUser-buttons">
-                <input type="button" value="Posts" id={buttonPost} onClick={buttonShow} />
-                <input type="button" value="Respuestas" id={buttonResponse} onClick={buttonShow} />
-                <input type="button" value="Seguidores" id={buttonFollow} onClick={buttonShow} />
+                <div id="postByUser-buttons-responsive">
+                    <input type="button" value="Posts" id={buttonPost} onClick={buttonShow} />
+                    <input type="button" value="Respuestas" id={buttonResponse} onClick={buttonShow} />
+                    <input type="button" value="Seguidores" id={buttonFollow} onClick={buttonShow} />
+                </div>
             </div>
 
                 {show}

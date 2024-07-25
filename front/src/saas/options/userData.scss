@@ -2,21 +2,43 @@
 
 
 #userData-body {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
     margin-bottom: -35px;
+    display: flex;
+    justify-content: center;
 
-    & > #userData-img > img {
-        height: 75px;
-        border: 2px solid $background-border;
-        border-radius: 50%;
+    & > #userData-responsive {
+        max-width: 500px;
+        min-width: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    
+
+        & > #userData-img > img {
+            height: 75px;
+            border: 2px solid $background-border;
+            border-radius: 50%;
+        }
+
+        & > #userData-data {
+
+            & > p {
+                margin: 10px 0;
+            }
+        }
     }
+}
 
-    & > #userData-data {
 
-        & > p {
-            margin: 10px 0;
+
+@media (max-width: 300px) {
+    #userData-body {
+
+        & > #userData-responsive {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

@@ -82,7 +82,7 @@ function NewPost({  }) {
                     <form id='newPost-form'>
                         <div id="newPost-row-1">
                             <img src={userIMG} alt="user-img" id='user-img' />
-                            <textarea id="newPost-input" rows='5' cols='30' placeholder={usernamePost} />
+                            <textarea id="newPost-input" rows='5' cols='15' placeholder={usernamePost} />
                         </div>
                         <div id="newPost-row-2">
                             <input type="file" name="file" id="file"/>
