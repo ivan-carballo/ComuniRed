@@ -9,6 +9,7 @@ import { Notification } from "./pages/notification.jsx";
 import { Search } from './pages/search.jsx'
 import { Inbox } from "./pages/inbox.jsx";
 import { InboxChat } from "./pages/inboxChat.jsx";
+import { Validate } from "./pages/validate.jsx";
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -66,6 +67,11 @@ const router = createBrowserRouter([
   {
     path: "/notification",
     element: <Notification />
+  },
+
+  {
+    path: "/validate/:id",
+    element: <Validate />
   }
 
 

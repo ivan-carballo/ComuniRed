@@ -31,7 +31,7 @@ const userSchema  = new mongoose.Schema({
         required: true,
     },
 
-    validate: {
+    validateEmail: {
         type: Boolean,
         default: 0
     },

@@ -29,7 +29,7 @@ async function sendEmail(email, username, url) {
 
             <p>Nos alegra darte la bienvenida a ComuniRed, tu nueva red social donde podrás conectar con amigos, compartir momentos y descubrir contenido interesante.</p>
 
-            <p>Para completar el proceso de registro y empezar a disfrutar de todas las funcionalidades de ComuniRed, necesitamos que verifiques tu correo electrónico. Este paso es fundamental para garantizar la seguridad de tu cuenta y asegurarnos de que realmente quieres unirte a nuestra comunidad.</p>
+            <p>Para completar el proceso de registro y empezar a disfrutar de todas las funcionalidades de ComuniRed, necesitamos que verifiques tu correo electrónico. Este paso es fundamental para garantizar la seguridad de tu cuenta y asegurarnos de poder contactar con usted en caso de cualquier problema tecnico.</p>
 
             <p>Por favor, haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
 

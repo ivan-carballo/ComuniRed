@@ -64,7 +64,6 @@ const create = async(req,res)=>{
 
 const login = async(req,res)=> {
     const datos = req.body;
-    
     const userFind = await userController.getByProperty('email', datos.email)
 
     const payload = {'userID': userFind[0]._id, 'username':userFind[0].username, 'pass':userFind[0].password}
