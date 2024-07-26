@@ -14,7 +14,7 @@ async function sendEmail(email, username, url) {
     Messages: [
       {
         From: {
-          Email: '79.umaru@gmail.com',
+          Email: 'soporte.comunired@gmail.com',
           Name: 'ComuniRed Admissions',
         },
         To: [
