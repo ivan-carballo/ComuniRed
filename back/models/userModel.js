@@ -26,16 +26,6 @@ const userSchema  = new mongoose.Schema({
         default: 'user'
     },
 
-    ban: {
-        type: String,
-        enum: ['no', 'yes'],
-        default: 'no'
-    }, 
-
-    dateban: {
-        type: Date,
-    },
-
     dateString: {
         type: String,
         required: true,

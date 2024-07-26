@@ -32,26 +32,30 @@ function LoginForm() {
         } else if (userFilter.length == 1) {
 
             if (userFilter[0].password === sha256(formPassword)) {
-                Cookies.set('id', userFilter[0]._id, { sameSite: 'none', secure: true })
 
-                const userArrayLogin = {'email':formEmail}
+                
+                if (userFilter[0].validate) {
+                    Cookies.set('id', userFilter[0]._id, { sameSite: 'Lax', secure: true })
 
-                const data = {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userArrayLogin),
-                    };   
-                    
-                    const userLogin = await login(data) 
+                    const userArrayLogin = {'email':formEmail}
 
-                    setTimeout(() => {
-                        navigate('/comuniwall')
-                    }, 300);
+                    const data = {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userArrayLogin),
+                        };   
+                        
+                        const userLogin = await login(data) 
 
+                        setTimeout(() => {
+                            navigate('/comuniwall')
+                        }, 300);
+                } else {
+                    setAviso('Su usuario y/o email aun no ha sido validados')
+                }
 
-                    
 
             } else {
                 setAviso('Su email y/o contraseña no son correctas')
@@ -71,7 +75,7 @@ function LoginForm() {
     return (
         <>
             <div id='loginForm-body'>
-                <h5>{aviso}</h5>
+                <h4>{aviso}</h4>
                 <form id='form'>
                     <input type="email" placeholder='Email' id="login-email" />
                     <input type="password" placeholder='Password' id="login-password" />

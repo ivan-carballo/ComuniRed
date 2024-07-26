@@ -1,12 +1,15 @@
-import express from "express";
+import express from "express"
 import cors from "cors"
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv';
-import userController from "../controllers/userController.js";
+import dotenv from 'dotenv'
+import userController from "../controllers/userController.js"
+import { sendEmail } from '../../config/emailService.js'
+import sha256 from 'js-sha256'
 
-dotenv.config();
-const app = express();
+dotenv.config()
+const app = express()
 app.use(cors())
+
 
 
 const getAll = async(req,res)=>{
@@ -47,10 +50,17 @@ const getByProperty=async(req,res)=>{
     res.json({data:propiedad})
 }
 
+
+
+// Al crear un nuevo usuario, tambien hay que crear un email de verificacion
 const create = async(req,res)=>{
     const propiedad = await userController.create(req.body);
+    sendEmail(req.body.email, req.body.username, propiedad._id)
     res.json({data:propiedad})
 }
+
+
+
 
 const login = async(req,res)=> {
     const datos = req.body;
