@@ -68,6 +68,14 @@ function NewPost({  }) {
         textareaDel.value = ''
         inputFileDel.value = ''
 
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Su mensaje ha sido creado",
+            showConfirmButton: false,
+            timer: 2000
+          });
+
         setValorCompartido(true)
     }
 

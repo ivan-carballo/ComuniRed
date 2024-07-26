@@ -34,6 +34,8 @@ function UserModificar() {
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#%&_])[a-zA-Z0-9@#%&_]+$/
 
 
+
+
     // Funcion a la que se llama desde el boton de modificar
     async function sendNewData(e) {
         // Se meten en variables los datos de los inputs
@@ -82,17 +84,32 @@ function UserModificar() {
                         'img': newIMG}
 
                         const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+
+                        swalAlert()
                 } else {
                     const newUserData = {'username': newUsername,
                                         'email': newEmail,
                                         'password': sha256(newPassword)}
 
                     const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+
+                    swalAlert()
                 }
             }
         }
     }
 
+
+    // Funcion que muestra un mensaje cuando el usuario se ha cambiado correctamente
+    async function swalAlert() {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Su usuario ha sido modificado correctamente",
+            showConfirmButton: false,
+            timer: 2000
+          });
+    }
 
 
     async function newUsername(e) {

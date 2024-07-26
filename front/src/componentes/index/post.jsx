@@ -229,6 +229,15 @@ function Post({  }) {
                     setRecarga(true)
                     setValorCompartido(true)
                 }
+
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Su respuesta ha sido enviada",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+
         } else {
             setAviso('No se puede dejar la respuesta vacia')
         }

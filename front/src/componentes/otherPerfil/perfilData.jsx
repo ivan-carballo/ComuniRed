@@ -248,13 +248,17 @@ function PerfilData({id}) {
 
         // Funcion para poner un mensaje de aviso que el mensaje ya sido enviado y cerrar el modal tras 3 segundos
         async function closeModal() {
-            textarea.value = ''
-            setAviso('Su mensaje ha sido enviado correctamente')
 
-            setTimeout(() => {
-                setAviso(null)
-                setModal(null)
-            }, 5000);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Su mensaje privado ha sido enviado",
+                showConfirmButton: false,
+                timer: 2000
+              });
+
+            setAviso(null)
+            setModal(null)
         }
     }
 

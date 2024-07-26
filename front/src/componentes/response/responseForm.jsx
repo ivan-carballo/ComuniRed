@@ -67,6 +67,14 @@ function ResponseForm({id}) {
         responsePost.value = ''
         responseIMG.value = ''
 
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Su respuesta ha sido enviada",
+            showConfirmButton: false,
+            timer: 2000
+          });
+
         setReboot(true)
         setValorResponse(true)
     }
