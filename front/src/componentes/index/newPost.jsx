@@ -7,6 +7,7 @@ import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
 import { ImageUpload } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
+import Swal from 'sweetalert2'
 
 
 

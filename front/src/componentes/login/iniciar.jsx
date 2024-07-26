@@ -34,7 +34,7 @@ function LoginForm() {
             if (userFilter[0].password === sha256(formPassword)) {
 
                 
-                if (userFilter[0].validate) {
+                if (userFilter[0].validateEmail) {
                     Cookies.set('id', userFilter[0]._id, { sameSite: 'Lax', secure: true })
 
                     const userArrayLogin = {'email':formEmail}
