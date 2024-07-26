@@ -53,7 +53,7 @@ function RegisterForm() {
         } else if (emailFiltrar.length > 0) {
             setAviso('El email ya esta en uso')
         } else {
-            setAviso('Su usuario ha sido creado correctamente')
+            setAviso('Su usuario ha sido creado correctamente. Se le ha enviado un correo de validacion (Puede estar en spam).')
             
             const userArrayNew = {'username':formUsername, 
                                 'email':formEmail, 
