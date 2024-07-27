@@ -2,11 +2,14 @@ import dotenv from 'dotenv';
 import Mailjet from 'node-mailjet';
 dotenv.config();
 
+const ApiKey = process.env.APIKEY
+const SecretKey = process.env.SECRETKEY
+const EmailSupport = process.env.EMAIL
 
 async function sendEmailUserDelete(username, email) {
 
   // Incluir las claves publicas y privadas del servicio de envio de email
-  const mailjet = new Mailjet({apiKey: '4f9935f315b5d9cdb36645e5c31a0f7b', apiSecret: 'e18f8d62f5f50f6326d516590f0c45bb'})
+  const mailjet = new Mailjet({apiKey: ApiKey, apiSecret: SecretKey})
 
 
   // Cuerpo completo del email
@@ -14,7 +17,7 @@ async function sendEmailUserDelete(username, email) {
     Messages: [
       {
         From: {
-          Email: 'soporte.comunired@gmail.com',
+          Email: EmailSupport,
           Name: 'ComuniRed Admissions',
         },
         To: [
