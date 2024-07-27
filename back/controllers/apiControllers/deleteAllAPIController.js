@@ -9,7 +9,7 @@ import postController from '../controllers/postController.js'
 import responseController from '../controllers/responseController.js'
 
 
-import { sendEmail } from '../../config/emailService.js'
+import { sendEmailUserDelete } from '../../config/emailUserDelete.js'
 import sha256 from 'js-sha256'
 
 
@@ -129,6 +129,9 @@ const deleteAllUser = async(req,res)=>{
         const arrayUser = {'del': true}
         try {
             const sendUpdateUser = await userController.update(id, arrayUser)
+
+            sendEmailUserDelete(userDataGet.username, userDataGet.email)
+
         } catch (error) {}
 
         
