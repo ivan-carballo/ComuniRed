@@ -5,6 +5,7 @@ import { validateEmailByID } from '../api/validateAPI.js'
 import { ValidateCorrect } from "../componentes/validate/correct.jsx";
 import { ValidateError } from "../componentes/validate/error.jsx";
 import { ValidateExpired } from "../componentes/validate/expired.jsx";
+import comunired from '../assets/comunired.png'
 
 import '../saas/validate/header.scss'
 
@@ -49,7 +50,7 @@ function Validate() {
         <div id="validate-body">
             
             <div id="validate-header">
-                <img src="../assets/Comunired.png" />
+                <img src={comunired} />
                 <h3>Bienvenid@ a ComuniRed</h3>
             </div>
 
