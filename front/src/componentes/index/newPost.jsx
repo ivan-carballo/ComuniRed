@@ -5,7 +5,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
-import { ImageUpload } from '../../funciones/resizeIMG.js';
+import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 import Swal from 'sweetalert2'
 
@@ -42,12 +42,21 @@ function NewPost({  }) {
         // Sacar los valores de los inputs
         const postText = e.target.form[0].value
         let postIMG = e.target.form[1].files[0]
-        const postDate = await dateFormat(Date.now()) // Sacar fecha actual de una funcion externa
 
-        // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
-        if (postIMG != undefined && postIMG != null) {
-            postIMG = await ImageUpload(e.target.form[1].files[0])
+        // Condicional para evitar que se carguen archivos que no sean de imagen
+        if (postIMG) {
+            if (validImageTypes.includes(postIMG.type)) {
+                // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
+                if (postIMG != undefined && postIMG != null) {
+                    postIMG = await ImageUpload(postIMG)
+                }
+            } else {
+              setAlert('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+              return
+            }
         }
+
+        const postDate = await dateFormat(Date.now()) // Sacar fecha actual de una funcion externa
 
         const arrayNewPost = {'userID': userID,
                             'post': postText,
@@ -77,7 +86,10 @@ function NewPost({  }) {
             timer: 2000
           });
 
-        setValorCompartido(true)
+          setTimeout(() => {
+            setValorCompartido(true)
+          }, 1250);
+        
     }
 
 

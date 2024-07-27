@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
 import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
-import { ImageUpload } from '../../funciones/resizeIMG.js';
+import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
+import Swal from 'sweetalert2';
 
 
 // Componente para que el usuario pueda modificar sus datos
@@ -71,12 +72,18 @@ function UserModificar() {
             } else if (emailFiltrar.length > 1) {
                 setAviso('El email ya esta en uso')
             } else {
-                setAviso('Sus datos han sido modificados correctamente')
-
-
-                // Condicional para cuando se quiere cambiar la foto de perfil
-                if (newIMG != undefined) {
-                    newIMG = await ImageUpload(newIMG)
+                
+                // Condicional para evitar que se carguen archivos que no sean de imagen
+                if (newIMG) {
+                    if (validImageTypes.includes(newIMG.type)) {
+                        // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
+                        if (newIMG != undefined && newIMG != null) {
+                            newIMG = await ImageUpload(newIMG)
+                        }
+                    } else {
+                        setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                        return
+                    }
 
                     const newUserData = {'username': newUsername,
                         'email': newEmail,
@@ -85,6 +92,8 @@ function UserModificar() {
 
                         const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
 
+                        setAviso('Sus datos han sido modificados correctamente')
+
                         swalAlert()
                 } else {
                     const newUserData = {'username': newUsername,
@@ -92,6 +101,8 @@ function UserModificar() {
                                         'password': sha256(newPassword)}
 
                     const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+
+                    setAviso('Sus datos han sido modificados correctamente')
 
                     swalAlert()
                 }

@@ -3,6 +3,10 @@
 
 #response-body {
     margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 
@@ -14,20 +18,25 @@
     flex-direction: column;
     align-items: center;
     margin-top: -50px;
+    width: 100%;
+    max-width: 750px;
+    min-width: 0;
 
     & > #response-postPrincipal-header {
         display: flex;
-        justify-content: center;
         justify-content: space-evenly;
         width: 95%;
         margin-top: 5px;
         margin-bottom: -10px;
         border-bottom: 1px solid $border-button;
 
-        & > #response-postPrincipal-header-img img {
+        & > #response-postPrincipal-header-img {
+
+            & > img {
             width: 75px;
             border-radius: 50%;
             border: solid 2px $background-border;
+            }
         }
 
         & > #response-postPrincipal-header-userData {
@@ -35,7 +44,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
-            width: 95%;
 
             & > p {
                 margin: 0;
@@ -73,7 +81,7 @@
         }
 
         & > #response-postPrincipal-img {
-            width: 95%;
+            width: 100%;
             border-radius: 15px;
             margin-bottom: 10px;
             border: solid 2px $background-border;
@@ -85,10 +93,12 @@
 
 
 
+
 #response-responses {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: center;
+    width: 100%;
 
     & > #response-border {
         border-radius: 0 25px;
@@ -97,7 +107,9 @@
         margin-top: 5px;
         margin-right: -5px;
         padding: 0 5px;
-        width: 90%;
+        width: 100%;
+        max-width: 550px;
+        min-width: 0;
 
         & > #getResponse-div {
             background-color: $background-divs;
@@ -140,7 +152,7 @@
                 border-bottom: solid 1px $background-border;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-evenly;
                 width: 95%;
                 margin-bottom: 5px;
                 padding-bottom: 4px;
@@ -157,7 +169,6 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    width: 100%;
 
                     & > p {
                         margin: 0;

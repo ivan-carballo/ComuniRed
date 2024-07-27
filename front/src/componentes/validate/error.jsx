@@ -63,19 +63,22 @@ function ValidateError() {
 
 
     return (
-        <div id="validateCorrect-body">
-            
-            <h3>Enlace no válido</h3>
+        <div id="validate-body">
 
-            <p id='greeting'>¡Hola!</p>
-            <p>Parece que el enlace que utilizaste no es válido. Esto puede deberse a que el código de verificación es incorrecto o ha sido manipulado. Para verificar tu cuenta, por favor solicita un nuevo correo electrónico con un enlace de verificación actualizado.</p>
+            <div id="validate-responsive">
             
-            <input type="button" value="Enviar correo de validación" onClick={newEmail} />
-            
-            <p>Si necesitas ayuda adicional, no dudes en ponerte en contacto con nosotros. Estamos aquí para asistirte.</p>
-            <p>Saludos cordiales,</p>
-            <b id='greeting'>El equipo de ComuniRed</b>
+                <h3>Enlace no válido</h3>
 
+                <p id='greeting'>¡Hola!</p>
+                <p>Parece que el enlace que utilizaste no es válido. Esto puede deberse a que el código de verificación es incorrecto o ha sido manipulado. Para verificar tu cuenta, por favor solicita un nuevo correo electrónico con un enlace de verificación actualizado.</p>
+                
+                <input type="button" value="Enviar correo de validación" onClick={newEmail} />
+                
+                <p>Si necesitas ayuda adicional, no dudes en ponerte en contacto con nosotros. Estamos aquí para asistirte.</p>
+                <p>Saludos cordiales,</p>
+                <b id='greeting'>El equipo de ComuniRed</b>
+                
+            </div>
 
         </div>
     )

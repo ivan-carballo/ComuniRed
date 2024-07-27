@@ -1,32 +1,40 @@
 @import '../color.scss';
 
-#validateCorrect-body {
+#validate-body {
     margin-top: 15px;
-    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    & > h3 {
-        text-align: center;
-    }
+    & > #validate-responsive {
+        width: 100%;
+        max-width: 600px;
+        min-width: 0;
 
-    & > #greeting {
-        margin-left: 15px;
-    }
-
-    & > a {
-        text-decoration: none;
-        cursor: pointer;
-        color: green;
-
-        &:hover {
-            color: $background-divs;
-            letter-spacing: 2px;
+        & > h3 {
+            text-align: center;
         }
-    }
 
-    & > input {
-        margin-left: 15px;
-        border-radius: 15px;
-        border: 1px solid $background-border;
-        padding: 3px 10px;
+        & > #greeting {
+            margin-left: 15px;
+        }
+
+        & > a {
+            text-decoration: none;
+            cursor: pointer;
+            color: green;
+
+            &:hover {
+                color: $background-divs;
+                letter-spacing: 2px;
+            }
+        }
+
+        & > input {
+            margin-left: 15px;
+            border-radius: 15px;
+            border: 1px solid $background-border;
+            padding: 3px 10px;
+        }
     }
 }

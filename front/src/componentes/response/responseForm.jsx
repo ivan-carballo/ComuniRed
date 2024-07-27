@@ -4,7 +4,7 @@ import { dateFormat } from "../../funciones/fecha";
 import { getpostByID } from "../../api/postAPI";
 import { getUserByID } from "../../api/userAPI";
 import { responseCreate } from "../../api/responseAPI";
-import { ImageUpload } from "../../funciones/resizeIMG";
+import { ImageUpload, validImageTypes } from "../../funciones/resizeIMG";
 import { useNavigate } from "react-router-dom";
 import { ContextoCompartido } from "../../funciones/context";
 import Cookies from 'js-cookie'
@@ -20,6 +20,7 @@ function ResponseForm({id}) {
 
     const [reboot, setReboot] = useState(true)
     const [userPost, setUserPost] = useState()
+    const [alert, setAlert] = useState()
     const { setValorResponse } = useContext(ContextoCompartido);
 
 
@@ -45,10 +46,20 @@ function ResponseForm({id}) {
     async function sendResponse(e) {
         // Se meten los datos de los inputs en variables
         const userData = await getUserByID(userCurrentID)
-        let postIMG = ''
+        let postIMG = e.target.parentElement.childNodes[0].files[0]
 
-        // Ternario para evitar que si no hay foto de error la funcion de redimensionar
-        e.target.parentElement.childNodes[0].files[0] != undefined ? postIMG = await ImageUpload(e.target.parentElement.childNodes[0].files[0]) : postIMG
+        // Condicional para evitar que se carguen archivos que no sean de imagen
+        if (postIMG) {
+            if (validImageTypes.includes(postIMG.type)) {
+                // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
+                if (postIMG != undefined && postIMG != null) {
+                    postIMG = await ImageUpload(postIMG)
+                }
+            } else {
+                setAlert('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                return
+            }
+        }
 
         const responsePost = document.getElementById('responseForm-textarea')
         const responseIMG = document.getElementById('file')
@@ -78,6 +89,7 @@ function ResponseForm({id}) {
 
         setReboot(true)
         setValorResponse(true)
+        setAlert(null)
     }
 
 
@@ -92,6 +104,7 @@ function ResponseForm({id}) {
                 <div id="responseForm-buttons">
                     <input type="file" name="file" id="file" />
                     <input type="button" value="Enviar" onClick={sendResponse} />
+                    {alert}
                 </div>
             </div>
         

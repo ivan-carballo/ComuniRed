@@ -14,7 +14,7 @@ import { getResponseByProperty, responseDelete, responseCreate } from '../../api
 import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
 import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
-import { ImageUpload } from '../../funciones/resizeIMG.js';
+import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 
 
@@ -33,9 +33,7 @@ function Post({  }) {
     const [aviso, setAviso] = useState()
 
     const [skip, setSkip] = useState(0)
-    const [postList, setPostList] = useState([])
 
-    let allPost = []
 
 
 
@@ -56,7 +54,7 @@ function Post({  }) {
                 top: 0,
                 behavior: 'smooth'
             });   
-        }, 125);
+        }, 150);
 
     }
 
@@ -79,7 +77,7 @@ function Post({  }) {
                 top: 0,
                 behavior: 'smooth'
             });   
-        }, 125);
+        }, 150);
     }
     
 
@@ -195,7 +193,8 @@ function Post({  }) {
         const postOriginID = e.target.id
         const postDate = await dateFormat(Date.now())
         const postResponse = document.getElementById('modalResponse-textarea')
-        const postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
+        let postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
+        
 
         // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
         if (postIMG != undefined || postResponse.value.length > 0) {
@@ -214,13 +213,26 @@ function Post({  }) {
                     setResponse(null)
                     setRecarga(true)
                 } else {
-                    const postIMGBase64 = await ImageUpload(postIMG)
+
+                    // Condicional para evitar que se carguen archivos que no sean de imagen
+                    if (postIMG) {
+                        if (validImageTypes.includes(postIMG.type)) {
+                            // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
+                            if (postIMG != undefined && postIMG != null) {
+                                postIMG = await ImageUpload(postIMG)
+                            }
+                        } else {
+                            setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                            return
+                        }
+                    }
+                    
 
                     const arrayResponse = {'postID': postOriginID,
                         'username': postUser,
                         'dateString': postDate,
                         'post': postResponse.value,
-                        'img': postIMGBase64,
+                        'img': postIMG,
                         'userID': userID}
 
                     const sendResponse = await responseCreate(arrayResponse, userName.data.img)

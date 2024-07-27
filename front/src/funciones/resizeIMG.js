@@ -76,6 +76,20 @@ const ImageUpload = async (e) => {
   };
 
 
+
+
+  const validImageTypes = [
+    'image/jpeg', 
+    'image/png', 
+    'image/gif', 
+    'image/bmp', 
+    'image/webp'
+  ]
+
+
+
+
   export {
-    ImageUpload
+    ImageUpload,
+    validImageTypes
   }
