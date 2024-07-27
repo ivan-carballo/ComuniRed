@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+	nginx:
+		image: nginx:latest
+		expose:
+			- "80"
+		environment:
+			- VIRTUAL_HOST=comunired.ivancm.info
+			- LETSENCRYPT_HOST=comunired.ivancm.info
+			- LETSENCRYPT_EMAIL=admin@comunired.ivancm.info
+		volumes:
+			- ./:/usr/share/nginx/html:ro
+		networks:
+			- proxy
+		restart: unless-stopped
+		
+networks:
+	proxy:
+		name: nginx-proxy
+		external: true

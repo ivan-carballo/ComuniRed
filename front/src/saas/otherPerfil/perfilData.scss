@@ -1,0 +1,131 @@
+@import '../color.scss';
+
+
+#perfilData-body {
+    background-color: $background;
+    border-bottom: solid 2px green;
+    padding: 5px 0;
+    margin-top: -10px;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+
+    & > #perfilData-data {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 5px;
+
+        & > img {
+            width: 65px;
+            border-radius: 50%;
+            border: 2px solid $background-border;
+        }
+
+        & > #perfilData-p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+
+            & > #perfilData-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                margin-top: -10px;
+                margin-bottom: 5px;
+                width: 100%;
+
+                & > #perfilData-user {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    margin: 0;
+                }
+
+                & > #perfilData-inbox {
+                    font-size: 1.6rem;
+                    cursor: pointer;
+                }
+            }
+
+            & > p {
+                margin: 0;
+            }
+    
+            & > #perfilData-date {
+                margin-bottom: 5px;
+            }
+
+            & > #perfilData-post {
+                font-size: 0.75rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+
+#modal-body{
+    border: $background-border solid 2px;
+    border-radius: 15px;
+    background-color: $background-divs;
+    padding: 10px;
+
+    & > #modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        & > #modal-header-img {
+
+            & > img {
+                width: 75px;
+                border-radius: 50%;
+            }
+        }
+
+        & > #modal-header-data {
+
+            & > h3 {
+                margin: 0;
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 0 10px;
+            }
+        }
+    }
+
+
+    & > #modal-text {
+        margin: 5px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & > #modal-textarea {
+            border-radius: 15px;
+            padding: 3px 10px;
+            resize: none;
+            border: 0;
+        }
+    }
+
+
+    & > #modal-buttons {
+        display: flex;
+        justify-content: space-evenly;
+
+        & > button{
+            border: 0;
+            border-radius: 15px;
+            padding: 3px 10px;
+            font-weight: 600;
+        }
+    }
+}

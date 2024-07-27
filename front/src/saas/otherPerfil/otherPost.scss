@@ -1,0 +1,59 @@
+@import '../color.scss';
+
+
+#otherPost-body {
+    padding-top: 110px;
+}
+
+
+#getPost-div {
+    background-color: $background-divs;
+    border-radius: 25px;
+    margin: 10px 0;
+    padding: 5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > #getPost-date {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 5px 0;
+        width: 95%;
+        text-align: center;
+        border-bottom: solid 2px $background-border;
+        padding-bottom: 3px;
+    }
+
+    & > #getPost-post {
+        margin: 5px 0;
+        text-align: center;
+        background-color: $background-text;
+        border-radius: 25px;
+        padding: 5px 15px;
+        width: 90%;
+        white-space: pre-wrap;
+    }
+
+    & > #getPost-img {
+        border-radius: 25px;
+        width: 100%;
+        margin: 5px;
+        border: 2px solid $background-border;
+    }
+
+    & > #getPost-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 5px 0;
+
+        & .getPost-buttons-input {
+            border-radius: 25px;
+            border: 0;
+            font-weight: 600;
+            padding: 3px 15px;
+            cursor: pointer;
+        }
+    }
+}

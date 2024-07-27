@@ -1,0 +1,64 @@
+@import './color.scss';
+
+#navbar-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $background;
+    border-bottom: 2px solid green;
+    display: flex;
+    justify-content: center;
+
+    & > #navbar-links {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        max-width: 600px;
+        margin-left: 0;
+        margin-right: 0;
+
+        & > .link {
+            color: $navbar-icons;
+            text-decoration: none;
+            font-size: 1.5rem;
+
+            &:hover{
+                color: $navbar-icons-active;
+            } 
+        }
+
+        & > .active {
+            color: $navbar-icons-active;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        
+        & > .notification {
+            color: $background-red;
+            text-decoration: none;
+            font-size: 1.5rem;
+
+            & > :hover {
+                color: red
+            }
+
+        }
+    }
+}
+
+
+@media (max-width: 300px) {
+    #navbar-global {
+    
+        & > #navbar-links {
+
+            & > .link, .notification {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
+        }
+    }
+}

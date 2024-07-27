@@ -1,0 +1,311 @@
+@import '../color.scss';
+
+
+
+#postByUser-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > #postMap-div {
+        background-color: $background-divs;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+        border-radius: 25px;
+        max-width: 800px;
+        width: 95%;
+
+        & > #postMap-date {
+            font-weight: 600;
+            margin: 10px 0;
+            border-bottom: solid 2px $background-border;
+            width: 95%;
+            text-align: center;
+            padding-bottom: 3px;
+        }
+
+        & > #postMap-post {
+            background-color: $background-text;
+            text-align: justify;
+            border-radius: 15px;
+            padding: 5px 10px;
+            width: 85%;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;
+            white-space: pre-wrap;
+        }
+
+        & > #postMap-img {
+            width: 90%;
+            border-radius: 25px;
+            margin-top: 5px;
+            border: 2px solid $background-border;;
+        }
+
+        & > #postMap-buttons {
+            width: 95%;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 10px 0;
+
+            & > input {
+                cursor: pointer;
+                border: 0;
+                font-weight: 600;
+                border-radius: 15px;
+                padding: 3px 10px;
+            }
+
+            & > .deletePost {
+                background-color: $background-red;
+
+                &:hover {
+                    background-color: red;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media (max-width: 260px) {
+    #postMap-buttons {
+        flex-direction: column;
+        align-items: center;
+
+        & > input {
+            margin: 3px 0;
+        }
+    }
+}
+
+
+
+
+#postByUser-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > #responseMap-div {
+        background-color: $background-divs;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0;
+        border-radius: 25px;
+        max-width: 800px;
+        width: 95%;
+
+
+        & > #responseMap-date {
+            font-weight: 600;
+            margin: 10px 0;
+            border-bottom: solid 2px $background-border;
+            width: 95%;
+            text-align: center;
+            padding-bottom: 3px;
+        }
+
+        & > #responseMap-response {
+            background-color: $background-text;
+            text-align: justify;
+            border-radius: 15px;
+            padding: 5px 10px;
+            width: 85%;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;
+            white-space: pre-wrap;
+
+        }
+
+        & > #responseMap-img {
+            border-radius: 25px;
+            width: 90%;
+            margin-top: 5px;
+            border: 2px solid $background-border;
+
+        }
+
+        & > input {
+            border: 0;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 15px;
+            padding: 2px 10px;
+            margin: 10px 0;
+        }
+
+        & > .deletePost {
+            background-color: $background-red;
+
+            &:hover {
+                background-color: red;
+                color: white;
+            }
+        }
+    }
+}
+
+
+
+
+
+#followByUser-body {
+
+    & > #followByUser-buttons {
+        display: flex;
+        justify-content: center;
+        padding: 5px 0;
+        width: 100%;
+
+        & > #followByUser-buttons-responsive {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 5px 0;
+            width: 100%;
+            max-width: 800px;
+            border-top: solid 1px $background-border;
+    
+            & > input {
+                cursor: pointer;
+                border-radius: 15px;
+                padding: 5px 10px;
+                border: 0;
+                font-size: 0.8rem;
+                font-weight: 650;
+            }
+        
+            & > #active {
+                background-color: $button-active;
+                color: beige;
+            }
+        }
+    }
+
+
+
+
+
+    & > #followByUser-data {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        & > #followByUser-data-responsive {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            width: 100%;    
+            max-width: 650px;
+
+            & > #follow-div {
+                border: solid 2px $background-border;
+                border-radius: 15px;
+                background-color: $background-divs;
+                margin: 2px 0;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 10px;
+                min-width: 235px;
+
+                & > img {
+                    width: 50px;
+                    border: solid 2px $background-border;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                }
+
+                & > p {
+                    font-weight: 600;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    margin-right: 8px;
+
+                    &:hover {
+                        letter-spacing: 2px;
+                        font-style: italic;
+                    }
+                }
+
+                & > input {
+                    height: fit-content;
+                    cursor: pointer;
+                    border: 0;
+                    border-radius: 15px;
+                    padding: 3px 8px;
+                }
+
+                & > .deleteFollow {
+                    background-color: $background-red;
+        
+                    &:hover {
+                        background-color: red;
+                        color: white;
+                    }
+                }
+
+                & > .follow {
+                    background-color: $chat-currentUser;
+                    color: black;
+        
+                    &:hover {
+                        background-color: $navbar-icons-active;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@media (min-width: 550px) {
+    #followByUser-body {
+
+        & > #followByUser-data {
+
+            & > #followByUser-data-responsive {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                justify-items: center;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 260px) {
+    #followByUser-body {
+
+        & > #followByUser-data {
+
+            & > #followByUser-data-responsive {
+
+                & > #follow-div {
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 5px 2px;
+                    min-width: 0px;
+
+                    & > img, p, input {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}

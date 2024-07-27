@@ -1,0 +1,13 @@
+@import '../color.scss';
+
+
+#perfil-body {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+
+    & > #perfil-responsive {
+        max-width: 800px;
+        width: 100%;
+    }
+}

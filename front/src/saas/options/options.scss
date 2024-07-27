@@ -1,0 +1,10 @@
+@import '../color.scss';
+
+#options-body {
+    margin-top: 50px;
+
+    & > #rotulo {
+        text-align: center;
+        color: $rotulo
+    }
+}
