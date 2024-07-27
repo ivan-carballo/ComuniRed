@@ -71,17 +71,21 @@ const login = async(req,res)=> {
     res.json({data:token});
 }
 
+
 const update = async(req,res)=>{
     const id = req.params.id;
     const propiedad = await userController.update(id,req.body);
     res.json({data:propiedad})
 }
 
+
 const remove = async(req,res)=>{
     const id = req.params.id;
     const propiedad = await userController.remove(id);
     res.json({data:propiedad})
 }
+
+
 
 export default{
     getAll,

@@ -17,6 +17,7 @@ import followRouter from './followRouter.js'
 import followerRouter from './followerRouter.js'
 import notiFollowRouter from './notiFollowRouter.js'
 import validateRouter from './validateRouter.js'
+import deleteAllRouter from './deleteAllRouter.js'
 
 
 
@@ -30,6 +31,7 @@ router.use("/follow", followRouter);
 router.use("/follower", followerRouter);
 router.use("/notifollow", notiFollowRouter);
 router.use("/validate", validateRouter);
+router.use("/remove", deleteAllRouter);
 
 
 

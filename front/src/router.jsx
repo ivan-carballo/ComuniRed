@@ -10,6 +10,7 @@ import { Search } from './pages/search.jsx'
 import { Inbox } from "./pages/inbox.jsx";
 import { InboxChat } from "./pages/inboxChat.jsx";
 import { Validate } from "./pages/validate.jsx";
+import { UserRemove } from "./pages/userRemove.jsx";
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -72,6 +73,11 @@ const router = createBrowserRouter([
   {
     path: "/validate/:id",
     element: <Validate />
+  },
+
+  {
+    path: "/userRemove",
+    element: <UserRemove />
   }
 
 

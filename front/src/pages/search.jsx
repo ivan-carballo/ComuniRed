@@ -37,13 +37,14 @@ function Search() {
         // Dentro de cada condicion hay una busqueda por propiedad y un metodo map para crear estructura en un useState y mostrarlo en el return
         if (formSelect === 'user') { // Busqueda de usuarios
             const userSearch = await getUserByProperty('username', formInput)
+            const filterUserSearch = userSearch.data.filter(data => data.del === false)
 
-            if (userSearch.data.length > 0) {
-                const userMap = userSearch.data.map((data) => 
-                    <div key={data._id} id="userSearch-div" onClick={async () => navigate(`/user/${data._id}`)}>
-                        <img src={data.img} />
-                        <p>{data.username}</p>
-                    </div>
+            if (filterUserSearch.length > 0) {
+                const userMap = filterUserSearch.map((data) => 
+                            <div key={data._id} id="userSearch-div" onClick={async () => navigate(`/user/${data._id}`)}>
+                                <img src={data.img} />
+                                <p>{data.username}</p>
+                            </div>
                 )
                 setData(userMap)
             }

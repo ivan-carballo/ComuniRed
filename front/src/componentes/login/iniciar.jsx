@@ -35,23 +35,31 @@ function LoginForm() {
 
                 
                 if (userFilter[0].validateEmail) {
-                    Cookies.set('id', userFilter[0]._id, { sameSite: 'Lax', secure: true })
 
-                    const userArrayLogin = {'email':formEmail}
 
-                    const data = {
-                        method: 'POST',
-                        headers: {
-                        'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(userArrayLogin),
-                        };   
-                        
-                        const userLogin = await login(data) 
+                    if(userFilter[0].del === false) {
+                        Cookies.set('id', userFilter[0]._id, { sameSite: 'Lax', secure: true })
 
-                        setTimeout(() => {
-                            navigate('/comuniwall')
-                        }, 300);
+                        const userArrayLogin = {'email':formEmail}
+
+                        const data = {
+                            method: 'POST',
+                            headers: {
+                            'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(userArrayLogin),
+                            };   
+                            
+                            const userLogin = await login(data) 
+
+                            setTimeout(() => {
+                                navigate('/comuniwall')
+                            }, 300);
+                    } else {
+                        setAviso('El usuario al que hace referencia ha sido eliminado y no hay posibilidad de volver a usarlo. Debe crear un usuario nuevo con un username y email distintos.')
+                    }
+                    
+
                 } else {
                     setAviso('Su usuario y/o email aun no ha sido validados')
                 }

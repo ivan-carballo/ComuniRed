@@ -3,8 +3,9 @@ import '../saas/options/options.scss'
 import React from "react";
 import { useState, useEffect } from "react";
 import { Navbar } from '../componentes/navbar'
-import { UserData } from '../componentes/options/userData';
-import { UserModificar } from '../componentes/options/userModificar';
+import { UserData } from '../componentes/options/userData.jsx'
+import { UserModificar } from '../componentes/options/userModificar.jsx'
+import { UserDeleteButton } from '../componentes/options/userDelete.jsx'
 
 
 // Pagina para las opciones del usuario logueado
@@ -19,6 +20,7 @@ function Options() {
                 <h2 id='rotulo'>Opciones de usuario</h2>
                 <UserData />
                 <UserModificar />
+                <UserDeleteButton />
 
             </div>
         

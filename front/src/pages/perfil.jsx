@@ -6,6 +6,7 @@ import { PerfilData } from "../componentes/otherPerfil/perfilData";
 import { OtherPost } from "../componentes/otherPerfil/otherPost";
 import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
+import { getUserByID } from "../api/userAPI";
 
 import '../saas/otherPerfil/perfil.scss'
 
@@ -22,6 +23,15 @@ function Perfil() {
 
         if (userCurrentID === id) {
             navigate('/user')
+        }
+
+        // Comprobar que el usuario no este eliminado
+        userRemove(id)
+        async function userRemove(id) {
+            const getUser = await getUserByID(id)
+            if (getUser.del === true) {
+                navigate('/userRemove')
+            }
         }
 
     }, [])

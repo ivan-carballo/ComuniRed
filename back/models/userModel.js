@@ -26,6 +26,11 @@ const userSchema  = new mongoose.Schema({
         default: 'user'
     },
 
+    del: {
+        type: Boolean,
+        default: 0,
+    },
+
     dateString: {
         type: String,
         required: true,
