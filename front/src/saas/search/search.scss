@@ -25,7 +25,9 @@
             border: 0;
             border-radius: 15px;
             padding: 5px 10px;
-            width: 75%;
+            width: 100%;
+            min-width: 0;
+            max-width: 350px;
             text-align: center;
             margin: 15px 0;
         }

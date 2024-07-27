@@ -92,7 +92,11 @@ function NotificationFollow() {
                 </div>
 
                 <div id="notificationFollow-data">
-                    {data}
+                    
+                    <div id="notificationFollow-responsive">
+                        {data}
+                    </div>
+                        
                 </div>
 
             </div>
