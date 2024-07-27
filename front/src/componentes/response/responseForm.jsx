@@ -8,6 +8,7 @@ import { ImageUpload } from "../../funciones/resizeIMG";
 import { useNavigate } from "react-router-dom";
 import { ContextoCompartido } from "../../funciones/context";
 import Cookies from 'js-cookie'
+import Swal from 'sweetalert2'
 
 import '../../saas/response/responseForm.scss'
 

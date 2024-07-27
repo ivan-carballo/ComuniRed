@@ -29,7 +29,7 @@ function Perfil() {
         userRemove(id)
         async function userRemove(id) {
             const getUser = await getUserByID(id)
-            if (getUser.del === true) {
+            if (getUser.data.del === true) {
                 navigate('/userRemove')
             }
         }

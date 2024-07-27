@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
 import { deleteAllUser } from '../../api/deleteAllAPI.js'
+import { useNavigate } from 'react-router-dom'
 
 import '../../saas/options/userDelete.scss'
 
@@ -11,6 +12,7 @@ import '../../saas/options/userDelete.scss'
 
 function UserDeleteButton() {
     const userCurrentID = Cookies.get('id')
+    const navigate = useNavigate()
 
 
     async function userRemove() {
@@ -34,9 +36,7 @@ function UserDeleteButton() {
                     const passEncrypt = sha256(pass)
                     const arraySend =  {'pass': passEncrypt}
 
-                    const sendDataRemoveUser = await deleteAllUser(userCurrentID, arraySend)
-
-                
+                    const sendDataRemoveUser = await deleteAllUser(userCurrentID, arraySend)              
                 
               } catch (error) {
                 Swal.showValidationMessage(`Request failed: ${error}`);
@@ -47,12 +47,14 @@ function UserDeleteButton() {
           }).then((result) => {
             if (result.isConfirmed) {
               Swal.fire({
-                title: '',
-                html: ''
+                title: 'Usuario eliminado',
+                html: '<p style="text-align:center;">Su usuario se ha eliminado correctamente junto con toda la informacion que hubiera asociada. No se puede recuperar ningun dato o informacion. Tanto el username como el email no se pueden volver a reutilizar, si desea volver a tener un usuario activo debe usar un username y un email diferentes</p>'
               });
             }
-          });
+          })
 
+        
+        navigate('/')
     }
 
 

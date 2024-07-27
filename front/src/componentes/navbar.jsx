@@ -89,7 +89,7 @@ const Navbar = () => {
             async function alertNotification() {
                 const getNotificationByUser = await getNotificationByProperty('userPrincipalID', userCurrentID)
                 const getNotiFollowByUser = await getNotiFollowByProperty('followerID', userCurrentID)
-                getNotificationByUser.data.length > 0 || getNotiFollowByUser.data.length > 0 ? setNotification(true) : setNotification(false)  
+                getNotificationByUser.data.length > 0 || getNotiFollowByUser.data.length > 0 ? setNotification(true) : setNotification(false) 
                 
                 setNumberNoti(getNotificationByUser.data.length + getNotiFollowByUser.data.length)
             }
