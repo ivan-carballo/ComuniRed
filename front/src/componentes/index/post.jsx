@@ -16,6 +16,9 @@ import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
 import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
+import { uploadFile } from '../../funciones/uploadImage.js'
+
+import { API_URL } from '../../api/API.js';
 
 
 
@@ -194,6 +197,8 @@ function Post({  }) {
         const postDate = await dateFormat(Date.now())
         const postResponse = document.getElementById('modalResponse-textarea')
         let postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
+
+        let routeFile = ''
         
 
         // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
@@ -204,10 +209,10 @@ function Post({  }) {
                 // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
                 if (postIMG === undefined) {
                     const arrayResponse = {'postID': postOriginID,
-                        'username': postUser,
-                        'dateString': postDate,
-                        'post': postResponse.value,
-                        'userID': userID}
+                                            'username': postUser,
+                                            'dateString': postDate,
+                                            'post': postResponse.value,
+                                            'userID': userID}
 
                     const sendResponse = await responseCreate(arrayResponse, userName.data.img)
                     setResponse(null)
@@ -216,13 +221,14 @@ function Post({  }) {
 
                     // Condicional para evitar que se carguen archivos que no sean de imagen
                     if (postIMG) {
-                        if (validImageTypes.includes(postIMG.type)) {
+                        if (validImageTypes(postIMG.type)) {
                             // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                             if (postIMG != undefined && postIMG != null) {
-                                postIMG = await ImageUpload(postIMG)
+                                postIMG = await uploadFile(postIMG);
+                                routeFile = `${API_URL}${postIMG.filePath}`
                             }
                         } else {
-                            setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                            setAviso('Solo son validos archivos de imagen')
                             return
                         }
                     }
@@ -232,7 +238,7 @@ function Post({  }) {
                         'username': postUser,
                         'dateString': postDate,
                         'post': postResponse.value,
-                        'img': postIMG,
+                        'img': routeFile,
                         'userID': userID}
 
                     const sendResponse = await responseCreate(arrayResponse, userName.data.img)

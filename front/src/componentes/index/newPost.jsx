@@ -8,6 +8,9 @@ import Cookies from 'js-cookie'
 import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 import Swal from 'sweetalert2'
+import { uploadFile } from '../../funciones/uploadImage.js'
+
+import { API_URL } from '../../api/API.js';
 
 
 
@@ -42,16 +45,19 @@ function NewPost({  }) {
         // Sacar los valores de los inputs
         const postText = e.target.form[0].value
         let postIMG = e.target.form[1].files[0]
+        
+        let routeFile = ''
 
         // Condicional para evitar que se carguen archivos que no sean de imagen
         if (postIMG) {
-            if (validImageTypes.includes(postIMG.type)) {
+            if (validImageTypes(postIMG.type)) {
                 // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                 if (postIMG != undefined && postIMG != null) {
-                    postIMG = await ImageUpload(postIMG)
+                    postIMG = await uploadFile(postIMG);
+                    routeFile = `${API_URL}${postIMG.filePath}`
                 }
             } else {
-              setAlert('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+              setAlert('Solo son validos archivos de imagen')
               return
             }
         }
@@ -62,7 +68,7 @@ function NewPost({  }) {
                             'post': postText,
                             'username': username_data,
                             'dateString': postDate,
-                            'img': postIMG}
+                            'img': routeFile}
 
         // Condicional para obligar a que haya un mensaje o una imagen, al menos uno de ellos debe estar con informacion
         if (postText.length > 0 || postIMG != undefined) {
