@@ -40,6 +40,8 @@ function NewPost({  }) {
     }) 
 
 
+
+
     // Funcion para crear un post nuevo
     async function enviarPost(e) {
         // Sacar los valores de los inputs
@@ -94,7 +96,7 @@ function NewPost({  }) {
 
           setTimeout(() => {
             setValorCompartido(true)
-          }, 1500);
+          }, 500);
         
     }
 

@@ -94,11 +94,6 @@ function Post({  }) {
             async function allPost() {
                 const allPostData = await getPostScroll(skip, 15)
 
-                if (allPostData.data.length < 1) {
-                    return
-                }
-
-
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
                 const allPostMap = allPostData.data.map((data) => 
                     <div id='post-div' key={data._id}>
@@ -172,7 +167,7 @@ function Post({  }) {
         setTimeout(() => {
             setRecarga(true)
             setValorCompartido(true)
-        }, 1500);
+        }, 500);
     }
 
     
