@@ -8,15 +8,16 @@ import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
-import { getPost, getPostScroll } from "../../api/postAPI.js"
+import { getPost, getpostByID, getPostScroll } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { getResponseByProperty, responseDelete, responseCreate } from '../../api/responseAPI.js';
+import { getResponseByProperty, getresponseByID, responseDelete, responseCreate } from '../../api/responseAPI.js';
 import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
 import { Response } from '../../pages/response.jsx';
 import { postRemove } from '../../funciones/postDelete.js';
-import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
+import { validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 import { uploadFile } from '../../funciones/uploadImage.js'
+import { deleteFile } from '../../funciones/deleteImage.js'
 
 import { API_URL } from '../../api/API.js';
 
@@ -47,7 +48,6 @@ function Post({  }) {
             return
         }
 
-        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip + 15);
 
         setValorCompartido(true);
@@ -70,7 +70,6 @@ function Post({  }) {
             return
         } 
 
-        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip - 15);
 
         setValorCompartido(true);
@@ -164,25 +163,17 @@ function Post({  }) {
 
 
 
-    // Funcion para poder eliminar posts por usuario
+    // Funcion para poder eliminar posts por usuario (Funcion externa)
     // Elimina tanto el post original como todas las respuestas asociadas a dicho post
     async function deletePost(e) {
         const postID = e.target.id
-
-        const responsebyPost = await getResponseByProperty('postID', postID)
-        const notificationByPost = await getNotificationByProperty('postPrincipalID', postID)
-
-        for (let i = 0; responsebyPost.data.length > i; i++) {
-            const responseRemoveLoop = await responseDelete(responsebyPost.data[i]._id)
-        }
-
-        for (let i = 0; notificationByPost.data.length > i; i++) {
-            const notificationRemoveLoop = await notificationDelete(notificationByPost.data[i]._id)
-        }
-
         const deletePostAPI = await postRemove(postID)
-        setRecarga(true)
-        setValorCompartido(true)
+
+        setTimeout(() => {
+            setRecarga(true)
+            setValorCompartido(true)
+        }, 1200);
+
     }
 
     

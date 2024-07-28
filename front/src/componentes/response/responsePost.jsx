@@ -4,11 +4,12 @@ import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
 import { useParams } from "react-router-dom";
 import { getpostByID } from "../../api/postAPI";
-import { getResponseByProperty, responseDelete } from "../../api/responseAPI";
+import { getresponseByID, getResponseByProperty, responseDelete } from "../../api/responseAPI";
 import { getUserByID } from "../../api/userAPI";
 import { getNotificationByProperty, notificationDelete } from "../../api/notificationAPI";
 import { useNavigate } from "react-router-dom";
 import { ContextoCompartido } from "../../funciones/context";
+import { deleteFile } from '../../funciones/deleteImage'
 
 import '../../saas/response/response.scss'
 
@@ -127,12 +128,19 @@ function ResponsePost() {
         const responseID = e.target.id
 
         const getNotificationID = await getNotificationByProperty('responseID', responseID)
+        const getResponseID = await getresponseByID(responseID)
 
         if (getNotificationID.data.length > 0) {
             const notificationRemove = await notificationDelete(getNotificationID.data[0]._id)
         }
 
         const responseRemove = await responseDelete(responseID)
+
+        if (getResponseID.data.img != undefined && getResponseID.data.img.length > 0) {
+            const filename = getResponseID.data.img.split('/').pop()
+            const data = await deleteFile(filename)
+        }
+
 
         setReboot(true)
         setValorResponse(true)

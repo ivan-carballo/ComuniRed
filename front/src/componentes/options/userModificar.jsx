@@ -75,13 +75,13 @@ function UserModificar() {
                 
                 // Condicional para evitar que se carguen archivos que no sean de imagen
                 if (newIMG) {
-                    if (validImageTypes.includes(newIMG.type)) {
+                    if (validImageTypes(newIMG.type)) {
                         // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                         if (newIMG != undefined && newIMG != null) {
                             newIMG = await ImageUpload(newIMG)
                         }
                     } else {
-                        setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                        setAviso('Debe seleccionar solo archivos de imagen')
                         return
                     }
 

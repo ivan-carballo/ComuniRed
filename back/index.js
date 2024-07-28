@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import multer from 'multer'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import fs from 'fs'
 
 
 dotenv.config();
@@ -61,6 +62,21 @@ const storage = multer.diskStorage({
     } catch (error) {
       res.status(400).send({ error: 'Error al subir el archivo' });
     }
+  });
+
+
+  // Ruta para eliminar archivos
+  app.delete('/upload/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'uploads', filename);
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error al eliminar el archivo:', err);
+        return res.status(500).send({ error: 'Error al eliminar el archivo' });
+      }
+      res.send({ message: 'Archivo eliminado exitosamente' });
+    });
   });
 
 

@@ -2,11 +2,13 @@ import React, { useSyncExternalStore } from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
-import { getPost, getPostByProperty, postDelete } from '../../api/postAPI.js'
+import { getPost, getpostByID, getPostByProperty, postDelete } from '../../api/postAPI.js'
 import { getResponseByProperty, responseDelete } from "../../api/responseAPI.js"
+import { getNotificationByProperty, notificationDelete } from '../../api/notificationAPI.js'
 import { getUserByID } from '../../api/userAPI.js'
 import { postRemove } from "../../funciones/postDelete.js";
 import Swal from "sweetalert2";
+import { deleteFile } from "../../funciones/deleteImage.js";
 
 import '../../saas/perfil/userPost.scss'
 

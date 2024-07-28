@@ -2,9 +2,10 @@ import React, { useSyncExternalStore } from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
-import { getResponseByProperty, responseDelete } from '../../api/responseAPI.js'
+import { getResponseByProperty, getresponseByID, responseDelete } from '../../api/responseAPI.js'
+import { getNotificationByProperty } from '../../api/notificationAPI.js'
 import { getUserByID } from '../../api/userAPI.js'
-import { UserStadistic } from "./userStadistic.jsx";
+import { deleteFile } from '../../funciones/deleteImage.js'
 
 import '../../saas/perfil/userPost.scss'
 
@@ -78,7 +79,22 @@ function AllResponseByUser () {
     // Funcion para eliminar una respuesta concreta
     async function responseDel(e) {
         const responseID = await e.target.id
+
+        const getNotificationID = await getNotificationByProperty('responseID', responseID)
+        const getResponseID = await getresponseByID(responseID)
+
+        if (getNotificationID.data.length > 0) {
+            const notificationRemove = await notificationDelete(getNotificationID.data[0]._id)
+        }
+
         const responseRemove = await responseDelete(responseID)
+
+        if (getResponseID.data.img.length > 0) {
+            const filename = getResponseID.data.img.split('/').pop()
+            const data = await deleteFile(filename)
+        }
+
+        
         setReboot(true)
     }
 
