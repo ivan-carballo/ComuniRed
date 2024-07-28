@@ -135,6 +135,30 @@ async function getUserByProperty(property, value) {
 
 
 
+  async function userUpdateIMG(id, data) {
+    try {
+      const response = fetch(`${API_URL}/user/updateIMG/${id}`,
+        {
+          method: 'POST',
+          headers: { 
+            'Content-type': 'application/json',
+          },
+            body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        //throw new Error(`Error al actualizar el user (HTTP ${response.status})`);
+      }
+  
+      const result = await response.json();
+      //console.log('user actualizado:', result);
+    } catch (error) {
+      //console.error('Error al actualizar el user:', error);
+    }
+  }
+
+
+
 
   export {
     getUser,
@@ -143,5 +167,6 @@ async function getUserByProperty(property, value) {
     getUserByProperty,
     login,
     userDelete,
+    userUpdateIMG,
     userUpdate
   }

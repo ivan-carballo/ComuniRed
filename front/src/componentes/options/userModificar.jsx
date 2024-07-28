@@ -4,7 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
-import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
+import { getUser, getUserByID, userUpdate, userUpdateIMG } from '../../api/userAPI.js'
 import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import Swal from 'sweetalert2';
 
@@ -86,11 +86,11 @@ function UserModificar() {
                     }
 
                     const newUserData = {'username': newUsername,
-                        'email': newEmail,
-                        'password': sha256(newPassword),
-                        'img': newIMG}
+                                        'email': newEmail,
+                                        'password': sha256(newPassword),
+                                        'img': newIMG}
 
-                        const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+                        const userCurrentUpdate = await userUpdateIMG(userCurrentID, newUserData)
 
                         setAviso('Sus datos han sido modificados correctamente')
 
