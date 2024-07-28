@@ -172,8 +172,7 @@ function Post({  }) {
         setTimeout(() => {
             setRecarga(true)
             setValorCompartido(true)
-        }, 1200);
-
+        }, 1500);
     }
 
     

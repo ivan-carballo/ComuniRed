@@ -16,7 +16,7 @@ async function postRemove(postID) {
 
     const responseMap = getResponseByPost.data.map( async (data) => {
         // Eliminar las imagenes del backend
-        if (data.img.length > 0) {
+        if (data.img != undefined && data.img.length > 0) {
             const filename = data.img.split('/').pop()
             const fileDelete = await deleteFile(filename)
         }

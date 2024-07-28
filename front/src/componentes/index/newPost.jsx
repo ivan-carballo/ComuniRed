@@ -89,12 +89,12 @@ function NewPost({  }) {
             icon: "success",
             title: "Su mensaje ha sido creado",
             showConfirmButton: false,
-            timer: 2000
+            timer: 1500
           });
 
           setTimeout(() => {
             setValorCompartido(true)
-          }, 1250);
+          }, 1500);
         
     }
 

@@ -97,7 +97,10 @@ function AllPostByUser () {
     async function postDel(e) {
         const postID = await e.target.id
         const deletePostResponse = await postRemove(postID)
-        setReboot(true)
+
+        setTimeout(() => {
+            setReboot(true)
+        }, 1500);
     }
 
 
