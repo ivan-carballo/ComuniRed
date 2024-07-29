@@ -5,7 +5,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { dateFormat } from '../../funciones/fecha.js';
 import Cookies from 'js-cookie'
-import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
+import { validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 import Swal from 'sweetalert2'
 import { uploadFile } from '../../funciones/uploadImage.js'

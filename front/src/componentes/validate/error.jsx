@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
 import { validateEmailByProperty } from '../../api/validateAPI.js'
 import { useNavigate } from 'react-router-dom'

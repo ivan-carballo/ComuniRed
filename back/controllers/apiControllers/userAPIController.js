@@ -122,7 +122,7 @@ const remove = async(req,res)=>{
 export default{
     getAll,
     getById,
-    //getByToken,
+    getByToken,
     getByProperty,
     create,
     login,

@@ -10,8 +10,6 @@ import responseController from '../controllers/responseController.js'
 
 
 import { sendEmailUserDelete } from '../../config/emailUserDelete.js'
-import sha256 from 'js-sha256'
-
 
 
 

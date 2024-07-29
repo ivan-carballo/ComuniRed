@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { getNotificationByID, getNotificationByProperty, notificationDelete } from '../../api/notificationAPI.js'
-import { responseUpdate } from '../../api/responseAPI.js'
 
 
 import '../../saas/notification/response.scss'

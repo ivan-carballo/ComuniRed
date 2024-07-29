@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { getUserByID } from "../../api/userAPI";
-import { getFollowByProperty, followUpdate } from '../../api/followAPI'
-import { getFollowerByProperty, followerUpdate } from "../../api/followerAPI";
+import { getFollowByProperty } from '../../api/followAPI'
+import { getFollowerByProperty } from "../../api/followerAPI";
 import { followAdd } from '../../funciones/follow.js'
 import Swal from "sweetalert2";
 

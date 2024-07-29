@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'

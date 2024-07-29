@@ -8,16 +8,13 @@ import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
-import { getPost, getpostByID, getPostScroll } from "../../api/postAPI.js"
+import { getPostScroll } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { getResponseByProperty, getresponseByID, responseDelete, responseCreate } from '../../api/responseAPI.js';
-import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
-import { Response } from '../../pages/response.jsx';
+import { responseCreate } from '../../api/responseAPI.js';
 import { postRemove } from '../../funciones/postDelete.js';
 import { validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
 import { uploadFile } from '../../funciones/uploadImage.js'
-import { deleteFile } from '../../funciones/deleteImage.js'
 
 import { API_URL } from '../../api/API.js';
 

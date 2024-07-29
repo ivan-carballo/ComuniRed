@@ -7,7 +7,6 @@ import Cookies from 'js-cookie'
 import { dateFormat } from '../funciones/fecha.js'
 import { notificationCreate } from "./notificationAPI.js"
 import { getpostByID } from "./postAPI.js"
-import { getUserByID } from './userAPI.js'
 
 
 

@@ -1,15 +1,13 @@
 import React from "react";
 import sha256 from 'js-sha256'
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import { getUser, userCreate } from "../../api/userAPI";
 import { dateFormat } from "../../funciones/fecha.js";
-import { useNavigate } from 'react-router-dom'
 
 
 
 // Componente para registrarse como nuevo usuario
 function RegisterForm() {
-    const navigate = useNavigate()
     const [aviso, setAviso] = useState('')
 
 

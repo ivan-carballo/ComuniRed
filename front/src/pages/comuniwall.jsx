@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Navbar } from "../componentes/navbar.jsx"
 import { NewPost } from "../componentes/index/newPost.jsx"
 import { Post } from "../componentes/index/post.jsx"

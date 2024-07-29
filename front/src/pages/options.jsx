@@ -1,7 +1,6 @@
 import '../saas/options/options.scss'
 
 import React from "react";
-import { useState, useEffect } from "react";
 import { Navbar } from '../componentes/navbar'
 import { UserData } from '../componentes/options/userData.jsx'
 import { UserModificar } from '../componentes/options/userModificar.jsx'

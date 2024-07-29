@@ -4,7 +4,7 @@ import { dateFormat } from "../../funciones/fecha";
 import { getpostByID } from "../../api/postAPI";
 import { getUserByID } from "../../api/userAPI";
 import { responseCreate } from "../../api/responseAPI";
-import { ImageUpload, validImageTypes } from "../../funciones/resizeIMG";
+import { validImageTypes } from "../../funciones/resizeIMG";
 import { useNavigate } from "react-router-dom";
 import { ContextoCompartido } from "../../funciones/context";
 import Cookies from 'js-cookie'
@@ -24,7 +24,6 @@ function ResponseForm({id}) {
     const [reboot, setReboot] = useState(true)
     const [userPost, setUserPost] = useState()
     const [alert, setAlert] = useState()
-    const [file, setFile] = useState(null);
     const { setValorResponse } = useContext(ContextoCompartido);
 
 
