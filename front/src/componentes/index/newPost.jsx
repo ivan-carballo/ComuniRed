@@ -78,6 +78,7 @@ function NewPost({  }) {
             const sendNewPost = await postCreate(arrayNewPost, userIMG)
         } else {
             setAlert('Debe rellenar al menos uno de los campos')
+            return
         }
 
         // Capturar textarea e input de imagen y vaciarlos una vez creado el post

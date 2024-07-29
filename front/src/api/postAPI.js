@@ -6,7 +6,7 @@ import { API_URL } from "./API.js"
 
 
 async function getPost() {
-  let dato = await fetch(`${API_URL}/post`);
+  let dato = await fetch(`${API_URL}/post`)
   dato = await dato.json();
   return (dato)
 }

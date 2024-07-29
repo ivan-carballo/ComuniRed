@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors"
 import { Router } from "express";
+import { isAuthenticated } from "../middleware/auth.js";
 
 const app = express();
 app.use(cors())
@@ -21,17 +22,17 @@ import deleteAllRouter from './deleteAllRouter.js'
 
 
 
-router.use("/user", userRouter);
-router.use("/post", postRouter);
-router.use("/response", responseRouter);
-router.use("/notification", notificationRouter);
-router.use("/inbox", inboxRouter);
-router.use("/notiinbox", notiInboxRouter);
-router.use("/follow", followRouter);
-router.use("/follower", followerRouter);
-router.use("/notifollow", notiFollowRouter);
-router.use("/validate", validateRouter);
-router.use("/remove", deleteAllRouter);
+router.use("/user", isAuthenticated, userRouter);
+router.use("/post", isAuthenticated, postRouter);
+router.use("/response", isAuthenticated, responseRouter);
+router.use("/notification", isAuthenticated, notificationRouter);
+router.use("/inbox", isAuthenticated, inboxRouter);
+router.use("/notiinbox", isAuthenticated, notiInboxRouter);
+router.use("/follow", isAuthenticated, followRouter);
+router.use("/follower", isAuthenticated, followerRouter);
+router.use("/notifollow", isAuthenticated, notiFollowRouter);
+router.use("/validate", isAuthenticated, validateRouter);
+router.use("/remove", isAuthenticated, deleteAllRouter);
 
 
 

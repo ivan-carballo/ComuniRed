@@ -5,6 +5,8 @@ import { API_URL } from "./API.js"
 import { guardarToken, obtenerToken } from "../funciones/token.js";
 
 
+
+
 async function getUser() {
   let dato = await fetch(`${API_URL}/user`);
   dato = await dato.json();
