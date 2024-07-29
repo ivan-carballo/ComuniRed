@@ -94,7 +94,7 @@ function UserModificar() {
 
                         setAviso('Sus datos han sido modificados correctamente')
 
-                        swalAlert()
+                        swalAlert(e)
                 } else {
                     const newUserData = {'username': newUsername,
                                         'email': newEmail,
@@ -104,7 +104,7 @@ function UserModificar() {
 
                     setAviso('Sus datos han sido modificados correctamente')
 
-                    swalAlert()
+                    swalAlert(e)
                 }
             }
         }
@@ -112,7 +112,12 @@ function UserModificar() {
 
 
     // Funcion que muestra un mensaje cuando el usuario se ha cambiado correctamente
-    async function swalAlert() {
+    async function swalAlert(e) {
+
+        e.target.parentElement.childNodes[4].value = ''
+        e.target.parentElement.childNodes[3].value = ''
+        e.target.parentElement.childNodes[2].value = ''
+
         Swal.fire({
             position: "center",
             icon: "success",
