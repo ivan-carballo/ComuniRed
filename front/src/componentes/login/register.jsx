@@ -26,10 +26,15 @@ function RegisterForm() {
         const formRepeatPassword = formRuta[3].value
         const formDate = await dateFormat(Date.now())
 
+        let emailFiltrar = ''
+        let userFiltrar = ''
+
         // Se hace un filtrado de los datos en MongoDB con lo escrito en el formulario para comprobar que el username y el email no estan ya en uso
         const usersAll = await getUser()
-        const emailFiltrar = usersAll.data.filter((data) => data.email === formEmail)
-        const userFiltrar = usersAll.data.filter((data) => data.username === formUsername)
+        if (usersAll.data != undefined) {
+            emailFiltrar = usersAll.data.filter((data) => data.email === formEmail)
+            userFiltrar = usersAll.data.filter((data) => data.username === formUsername)
+        }
 
         // Condicional para poder validar correctamente los datos, usando las expresiones regulares anteriores
         if (formUsername.length < 1 || formEmail.length < 1 || formPassword.length < 1 || formRepeatPassword.length < 1) {
