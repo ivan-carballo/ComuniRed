@@ -11,7 +11,6 @@ import { getNotiInboxByProperty, notiInboxCreate } from '../../api/notiInboxAPI.
 import { FaUserPlus, FaUserMinus } from "react-icons/fa";
 import { getFollowByProperty, followCreate, } from '../../api/followAPI.js'
 import { getFollowerByProperty, followerCreate, } from '../../api/followerAPI.js'
-import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { followAdd } from "../../funciones/follow.js";
 
@@ -21,7 +20,6 @@ import '../../saas/otherPerfil/perfilData.scss'
 
 // Componente para la cabecera del perfil de otro usuario (No el logueado)
 function PerfilData({id}) {
-    const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')
 
     const [reboot, setReboot] = useState(true)

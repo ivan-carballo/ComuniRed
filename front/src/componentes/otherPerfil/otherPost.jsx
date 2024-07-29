@@ -1,10 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Cookies from 'js-cookie'
-import { dateFormat } from '../../funciones/fecha.js'
 import { getPostByProperty } from "../../api/postAPI";
-import { responseCreate } from '../../api/responseAPI.js'
-import { getUserByID } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
 
 import '../../saas/otherPerfil/otherPost.scss'
@@ -15,8 +11,6 @@ function OtherPost({id}) {
     const navigate = useNavigate()
 
     const [data, setData] = useState()
-
-    const userID = Cookies.get('id')
 
 
     // useEffect para traer todos los post del otro usuario y hacer un metodo map para poder meterlo en el return

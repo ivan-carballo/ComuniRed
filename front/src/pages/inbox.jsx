@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { Navbar } from "../componentes/navbar";
 import { getInboxByProperty } from '../api/inboxAPI'
-import { getNotiInboxByProperty, notiInboxDelete } from '../api/notiInboxAPI.js'
+import { getNotiInboxByProperty } from '../api/notiInboxAPI.js'
 import { getUserByID } from '../api/userAPI'
 import { useNavigate } from "react-router-dom";
 

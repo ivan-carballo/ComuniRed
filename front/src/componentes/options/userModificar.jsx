@@ -4,7 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import sha256 from 'js-sha256'
-import { getUser, getUserByID, userUpdate } from '../../api/userAPI.js'
+import { getUser, getUserByID, userUpdate, userUpdateIMG } from '../../api/userAPI.js'
 import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
 import Swal from 'sweetalert2';
 
@@ -75,26 +75,26 @@ function UserModificar() {
                 
                 // Condicional para evitar que se carguen archivos que no sean de imagen
                 if (newIMG) {
-                    if (validImageTypes.includes(newIMG.type)) {
+                    if (validImageTypes(newIMG.type)) {
                         // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                         if (newIMG != undefined && newIMG != null) {
                             newIMG = await ImageUpload(newIMG)
                         }
                     } else {
-                        setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                        setAviso('Debe seleccionar solo archivos de imagen')
                         return
                     }
 
                     const newUserData = {'username': newUsername,
-                        'email': newEmail,
-                        'password': sha256(newPassword),
-                        'img': newIMG}
+                                        'email': newEmail,
+                                        'password': sha256(newPassword),
+                                        'img': newIMG}
 
-                        const userCurrentUpdate = await userUpdate(userCurrentID, newUserData)
+                        const userCurrentUpdate = await userUpdateIMG(userCurrentID, newUserData)
 
                         setAviso('Sus datos han sido modificados correctamente')
 
-                        swalAlert()
+                        swalAlert(e)
                 } else {
                     const newUserData = {'username': newUsername,
                                         'email': newEmail,
@@ -104,7 +104,7 @@ function UserModificar() {
 
                     setAviso('Sus datos han sido modificados correctamente')
 
-                    swalAlert()
+                    swalAlert(e)
                 }
             }
         }
@@ -112,7 +112,12 @@ function UserModificar() {
 
 
     // Funcion que muestra un mensaje cuando el usuario se ha cambiado correctamente
-    async function swalAlert() {
+    async function swalAlert(e) {
+
+        e.target.parentElement.childNodes[4].value = ''
+        e.target.parentElement.childNodes[3].value = ''
+        e.target.parentElement.childNodes[2].value = ''
+
         Swal.fire({
             position: "center",
             icon: "success",

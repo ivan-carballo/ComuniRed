@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
-import { getInbox, getInboxByID, inboxUpdate } from "../api/inboxAPI";
+import { getInboxByID, inboxUpdate } from "../api/inboxAPI";
 import { Header } from "../componentes/inbox/header";
 import { dateFormat } from '../funciones/fecha.js'
 import { getNotiInboxByProperty, notiInboxCreate, notiInboxDelete } from "../api/notiInboxAPI.js";

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
-import { getNotiFollowByProperty, notiFollowDelete } from '../../api/notiFollowAPI'
+import {getNotiFollowByProperty, notiFollowDelete } from '../../api/notiFollowAPI'
 
 
 import '../../saas/notification/notiFollow.scss'
@@ -76,8 +76,11 @@ function NotificationFollow() {
             const followAllDelete = await notiFollowDelete(data._id)
         }))
 
-        setData(null)
-        setReboot(true)
+        setTimeout(() => {
+            setData(null)
+            setReboot(true)   
+        }, 250);
+
     }
 
 

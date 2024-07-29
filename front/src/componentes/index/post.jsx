@@ -8,14 +8,15 @@ import { dateFormat } from '../../funciones/fecha.js';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../modal.jsx'
 import { useState, useEffect, useContext } from "react";
-import { getPost, getPostScroll } from "../../api/postAPI.js"
+import { getPostScroll } from "../../api/postAPI.js"
 import { getUserByID } from '../../api/userAPI.js';
-import { getResponseByProperty, responseDelete, responseCreate } from '../../api/responseAPI.js';
-import { notificationDelete, getNotificationByProperty } from '../../api/notificationAPI.js';
-import { Response } from '../../pages/response.jsx';
+import { responseCreate } from '../../api/responseAPI.js';
 import { postRemove } from '../../funciones/postDelete.js';
-import { ImageUpload, validImageTypes } from '../../funciones/resizeIMG.js';
+import { validImageTypes } from '../../funciones/resizeIMG.js';
 import { ContextoCompartido  } from '../../funciones/context.jsx';
+import { uploadFile } from '../../funciones/uploadImage.js'
+
+import { API_URL } from '../../api/API.js';
 
 
 
@@ -44,7 +45,6 @@ function Post({  }) {
             return
         }
 
-        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip + 15);
 
         setValorCompartido(true);
@@ -67,7 +67,6 @@ function Post({  }) {
             return
         } 
 
-        //setPostList(prevPosts => [...prevPosts, ...(Array.isArray(newPosts.data) ? newPosts.data : [])])
         setSkip(skip - 15);
 
         setValorCompartido(true);
@@ -92,11 +91,6 @@ function Post({  }) {
             async function allPost() {
                 const allPostData = await getPostScroll(skip, 15)
 
-                if (allPostData.data.length < 1) {
-                    return
-                }
-
-
                 // Meter todos los resultados en un metodo map para estructurarlo y poder mostrarlo en pantalla
                 const allPostMap = allPostData.data.map((data) => 
                     <div id='post-div' key={data._id}>
@@ -110,7 +104,7 @@ function Post({  }) {
                         <div id="post-data">
                             {/* Operadores ternarios para evitar que aparezca background-color y border cuando no existe informacion en MongoDB */}
                             { data.post.length > 1 ? <p id='post-post'>{data.post}</p> : <></> }
-                            { data.img != null && data.img != undefined ? <img id='post-img' src={data.img} /> : <></> }
+                            { data.img.length > 1 ? <img id='post-img' src={data.img} /> : <></> }
                         </div>
                         <div id="buttons-post">
                             <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
@@ -161,25 +155,16 @@ function Post({  }) {
 
 
 
-    // Funcion para poder eliminar posts por usuario
+    // Funcion para poder eliminar posts por usuario (Funcion externa)
     // Elimina tanto el post original como todas las respuestas asociadas a dicho post
     async function deletePost(e) {
         const postID = e.target.id
-
-        const responsebyPost = await getResponseByProperty('postID', postID)
-        const notificationByPost = await getNotificationByProperty('postPrincipalID', postID)
-
-        for (let i = 0; responsebyPost.data.length > i; i++) {
-            const responseRemoveLoop = await responseDelete(responsebyPost.data[i]._id)
-        }
-
-        for (let i = 0; notificationByPost.data.length > i; i++) {
-            const notificationRemoveLoop = await notificationDelete(notificationByPost.data[i]._id)
-        }
-
         const deletePostAPI = await postRemove(postID)
-        setRecarga(true)
-        setValorCompartido(true)
+
+        setTimeout(() => {
+            setRecarga(true)
+            setValorCompartido(true)
+        }, 500);
     }
 
     
@@ -194,6 +179,8 @@ function Post({  }) {
         const postDate = await dateFormat(Date.now())
         const postResponse = document.getElementById('modalResponse-textarea')
         let postIMG = e.target.offsetParent.childNodes[0].childNodes[1].childNodes[0].files[0]
+
+        let routeFile = ''
         
 
         // Condicional para que no se pueda enviar una respuesta sin texto o sin imagen
@@ -204,10 +191,10 @@ function Post({  }) {
                 // Para evitar errores con MongoDB y la funcion ImageUpload que es externa
                 if (postIMG === undefined) {
                     const arrayResponse = {'postID': postOriginID,
-                        'username': postUser,
-                        'dateString': postDate,
-                        'post': postResponse.value,
-                        'userID': userID}
+                                            'username': postUser,
+                                            'dateString': postDate,
+                                            'post': postResponse.value,
+                                            'userID': userID}
 
                     const sendResponse = await responseCreate(arrayResponse, userName.data.img)
                     setResponse(null)
@@ -216,13 +203,14 @@ function Post({  }) {
 
                     // Condicional para evitar que se carguen archivos que no sean de imagen
                     if (postIMG) {
-                        if (validImageTypes.includes(postIMG.type)) {
+                        if (validImageTypes(postIMG.type)) {
                             // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                             if (postIMG != undefined && postIMG != null) {
-                                postIMG = await ImageUpload(postIMG)
+                                postIMG = await uploadFile(postIMG);
+                                routeFile = `${API_URL}${postIMG.filePath}`
                             }
                         } else {
-                            setAviso('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                            setAviso('Solo son validos archivos de imagen')
                             return
                         }
                     }
@@ -232,7 +220,7 @@ function Post({  }) {
                         'username': postUser,
                         'dateString': postDate,
                         'post': postResponse.value,
-                        'img': postIMG,
+                        'img': routeFile,
                         'userID': userID}
 
                     const sendResponse = await responseCreate(arrayResponse, userName.data.img)

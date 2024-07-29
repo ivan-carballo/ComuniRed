@@ -78,13 +78,11 @@ const ImageUpload = async (e) => {
 
 
 
-  const validImageTypes = [
-    'image/jpeg', 
-    'image/png', 
-    'image/gif', 
-    'image/bmp', 
-    'image/webp'
-  ]
+
+  function validImageTypes(mimeType) {
+    return mimeType.startsWith('image/') || !mimeType.startsWith('video/');
+  }
+  
 
 
 

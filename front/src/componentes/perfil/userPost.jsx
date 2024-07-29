@@ -1,10 +1,9 @@
-import React, { useSyncExternalStore } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
-import { getPost, getPostByProperty, postDelete } from '../../api/postAPI.js'
-import { getResponseByProperty, responseDelete } from "../../api/responseAPI.js"
-import { getUserByID } from '../../api/userAPI.js'
+import { getPostByProperty } from '../../api/postAPI.js'
+import { getResponseByProperty } from "../../api/responseAPI.js"
 import { postRemove } from "../../funciones/postDelete.js";
 import Swal from "sweetalert2";
 
@@ -95,7 +94,10 @@ function AllPostByUser () {
     async function postDel(e) {
         const postID = await e.target.id
         const deletePostResponse = await postRemove(postID)
-        setReboot(true)
+
+        setTimeout(() => {
+            setReboot(true)
+        }, 1500);
     }
 
 

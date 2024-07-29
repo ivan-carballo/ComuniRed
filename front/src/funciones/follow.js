@@ -1,7 +1,7 @@
 import { getFollowByID, getFollowByProperty, followUpdate } from '../api/followAPI.js'
 import { getFollowerByID, getFollowerByProperty, followerUpdate } from '../api/followerAPI.js'
 import { getNotiFollowByProperty, notiFollowCreate, notiFollowDelete } from '../api/notiFollowAPI.js'
-import { getUser, getUserByID } from '../api/userAPI.js'
+import { getUserByID } from '../api/userAPI.js'
 import { dateFormat } from '../funciones/fecha.js'
 
 

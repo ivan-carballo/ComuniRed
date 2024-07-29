@@ -1,7 +1,7 @@
 import React from "react";
 import { sha256 } from 'js-sha256'
 import Cookies from 'js-cookie'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getUser, login } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
 

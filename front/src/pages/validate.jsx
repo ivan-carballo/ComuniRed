@@ -13,7 +13,6 @@ import '../saas/validate/header.scss'
 
 function Validate() {
     const { id } = useParams()
-
     const [text, setText] = useState('')
 
 

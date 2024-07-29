@@ -3,6 +3,9 @@ import cors from "cors"
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import userController from "../controllers/userController.js"
+import postController from '../controllers/postController.js'
+import responseController from '../controllers/responseController.js'
+import notiFollowController from '../controllers/notiFollowController.js'
 import { sendEmail } from '../../config/emailService.js'
 import sha256 from 'js-sha256'
 
@@ -79,6 +82,50 @@ const update = async(req,res)=>{
 }
 
 
+
+
+
+// Funcion para que cuando un usuario se cambie la foto de perfil, se cambie tambien en los posts y respuestas que lo necesiten
+const updateIMG = async(req,res)=>{
+    const id = req.params.id;
+    const propiedad = await userController.update(id,req.body);
+
+    // Cambiar en Post
+    const updatePost = await postController.getByProperty('userID', id)
+    if (updatePost != undefined && updatePost.length > 0) {
+        const updatePostMap = updatePost.map( async (data) => {
+            const newArrayPost = {'userIMG': req.body.img}
+            const newUpdatePost = await postController.update(data._id, newArrayPost)
+        })
+    }
+
+    // Cambiar en respuestas
+    const updateResponse = await responseController.getByProperty('userID', id)
+    if (updateResponse != undefined && updateResponse.length > 0) {
+        const updateResponseMap = updateResponse.map( async (data) => {
+            const newArrayResponse = {'userIMG': req.body.img}
+            const newUpdateResponse = await responseController.update(data._id, newArrayResponse)
+        })
+    }
+
+    // Cambiar en notiFollows
+    const updateNotiFollow = await notiFollowController.getByProperty('followID', id)
+    if (updateNotiFollow != undefined && updateNotiFollow.length > 0) {
+        const updateNotiFollowMap = updateNotiFollow.map( async (data) => {
+            const newArrayNotiFollow = {'img': req.body.img}
+            const newUpdateNotiFollow = await notiFollowController.update(data._id, newArrayNotiFollow)
+        })
+    }
+
+
+    res.json({data:propiedad})
+}
+
+
+
+
+
+
 const remove = async(req,res)=>{
     const id = req.params.id;
     const propiedad = await userController.remove(id);
@@ -90,10 +137,11 @@ const remove = async(req,res)=>{
 export default{
     getAll,
     getById,
-    //getByToken,
+    getByToken,
     getByProperty,
     create,
     login,
     update,
+    updateIMG,
     remove
 }

@@ -4,13 +4,16 @@ import { dateFormat } from "../../funciones/fecha";
 import { getpostByID } from "../../api/postAPI";
 import { getUserByID } from "../../api/userAPI";
 import { responseCreate } from "../../api/responseAPI";
-import { ImageUpload, validImageTypes } from "../../funciones/resizeIMG";
+import { validImageTypes } from "../../funciones/resizeIMG";
 import { useNavigate } from "react-router-dom";
 import { ContextoCompartido } from "../../funciones/context";
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
+import { uploadFile } from '../../funciones/uploadImage.js'
 
 import '../../saas/response/responseForm.scss'
+
+import { API_URL } from "../../api/API.js";
 
 
 // Componente de un formulario para poder responder a post desde la pagina de detalle de post
@@ -47,19 +50,30 @@ function ResponseForm({id}) {
         // Se meten los datos de los inputs en variables
         const userData = await getUserByID(userCurrentID)
         let postIMG = e.target.parentElement.childNodes[0].files[0]
+        
+        let routeFile = ''
 
-        // Condicional para evitar que se carguen archivos que no sean de imagen
+
+
+        // Condicional para evitar que se carguen archivos que no sean de imagen o video
         if (postIMG) {
-            if (validImageTypes.includes(postIMG.type)) {
+            if (validImageTypes(postIMG.type)) {
+                
                 // Condicional para que cuando no haya cargada una imagen, no ejecute la funcion para evitar errores
                 if (postIMG != undefined && postIMG != null) {
-                    postIMG = await ImageUpload(postIMG)
+                    // Datos de multer para subir el archivo al servidor
+                    postIMG = await uploadFile(postIMG);
+                    routeFile = `${API_URL}${postIMG.filePath}`
+
                 }
             } else {
-                setAlert('Debe cargar un formato de imagen valido (JPG, PNG, GIF, BMP, WEBP)')
+                setAlert('Solo son validos archivos de imagen')
                 return
             }
         }
+
+        
+
 
         const responsePost = document.getElementById('responseForm-textarea')
         const responseIMG = document.getElementById('file')
@@ -72,7 +86,7 @@ function ResponseForm({id}) {
                             'username': userData.data.username,
                             'dateString': await dateFormat(Date.now()),
                             'post': responsePost.value,
-                            'img': postIMG,
+                            'img': routeFile,
                             'userID': userCurrentID}
 
         const responseSend = await responseCreate(responseArray, getUserIMG.data.img)   

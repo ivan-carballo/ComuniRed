@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Navbar } from "../componentes/navbar";
 import Cookies from 'js-cookie'
 import { NotificationResponse } from "../componentes/notification/notificationResponse.jsx";
@@ -16,7 +15,6 @@ import { getNotiFollowByProperty } from "../api/notiFollowAPI.js";
 // Pagina para ver todas las notificaciones de respuestas a post propios y follows
 // Se cargaran desde los componentes
 function Notification() {
-    const navigate = useNavigate()
     const userCurrentID = Cookies.get('id')
 
     const [show, setShow] = useState(<NotificationResponse />)
@@ -24,7 +22,7 @@ function Notification() {
     const [buttonResponse, setButtonResponse] = useState('active')
     const [reboot, setReboot] = useState(true)
 
-
+    
 
     // useEffect para detectar de donde son las notificaciones y poner el boton en rojo
     useEffect(() => {
