@@ -61,7 +61,7 @@ function ResponsePost() {
                 setUserIMG(getUserPrincipal.data.img)
 
                 getPostPrincipal.data.post.length > 0 ? setPostPrincipalLength(true) : setPostPrincipalLength(false)
-                getPostPrincipal.data.img == undefined || getPostPrincipal.data.img == null ? setPostIMGLength(false) : setPostIMGLength(true)
+                getPostPrincipal.data.img.length > 0 ? setPostIMGLength(true) : setPostIMGLength(false)
 
 
                 const userCurrentUsername = await getUserByID(userCurrentID)

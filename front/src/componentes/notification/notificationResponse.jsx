@@ -80,8 +80,10 @@ function NotificationResponse() {
             const notificationRemoveLoop = notificationDelete(notificationRemoveAll.data[i]._id)
         }
 
-        setData(null)
-        setReboot(true)
+        setTimeout(() => {
+            setData(null)
+            setReboot(true)   
+        }, 250);
         
     }
 

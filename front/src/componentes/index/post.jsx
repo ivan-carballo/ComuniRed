@@ -104,7 +104,7 @@ function Post({  }) {
                         <div id="post-data">
                             {/* Operadores ternarios para evitar que aparezca background-color y border cuando no existe informacion en MongoDB */}
                             { data.post.length > 1 ? <p id='post-post'>{data.post}</p> : <></> }
-                            { data.img != null && data.img != undefined ? <img id='post-img' src={data.img} /> : <></> }
+                            { data.img.length > 1 ? <img id='post-img' src={data.img} /> : <></> }
                         </div>
                         <div id="buttons-post">
                             <input type="button" value="Responder" id={data._id} onClick={async ()=>{setResponse(data)}} />
