@@ -36,11 +36,11 @@ async function sendEmail(email, username, url) {
 
             <p>Por favor, haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
 
-            <a href='http://api.comunired.ivancm.info/validate/${url}'>Verificar email</a>
+            <a href='http://comunired.ivancm.info/validate/${url}'>Verificar email</a>
 
             <p>Si el enlace no funciona, copia y pega la siguiente URL en tu navegador:</p>
 
-            <p>http://api.comunired.ivancm.info/validate/${url}</p>
+            <p>http://comunired.ivancm.info/validate/${url}</p>
 
             <p>¡Y eso es todo! Una vez que hayas verificado tu correo, estarás listo para explorar todo lo que ComuniRed tiene para ofrecer.</p>
 
